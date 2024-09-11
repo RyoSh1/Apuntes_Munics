@@ -40,6 +40,23 @@ LSA (Link State Advertisements)
 
 ### 1. Capa de acceso
 
+Proporciona acceso a los usuarios al segmento local de la red(Ethernet o WiFi).
+El switch clasifica los paquetes(p.e etiqueras de prioridad).
+
 ### 2. Capa de distribución
 
+Centraliza la conectividad de red en un edificio, realiza el filtrado de paquetes, transición entre enrutamiento estático y dinámico, aplicació de QoS.
+
 ### 3. Capa núcleo
+
+Parte central de la red, se encarga de conmutar paquetes a alta velocidad., evitar la manipuación de paquetes.
+
+### Implementación tradicional
+
+- Enlaces de capa 2 dentro de *acceso* y entre acceso y distrubución.
+- Enlaces de capa 3 entre distribución y core.
+Distribución es la capa frontera entre capas 2 y 3: - En distribución se lleva a cabo el enrutamiento entre las VLAN y el core.
+- Desventaja: STP necesario para permitir un diseñ con enlaces redundantes en capa 2.
+
+### Capa 3 hasta acceso
+
