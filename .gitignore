@@ -1,1 +1,2 @@
-auto_commit.sh
+# Ignora ejecutables
+*.sh
