@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Update check
-
 # Mensaje predefinido para el commit
 PREDEFINED_MESSAGE="Commit automático: "
 
