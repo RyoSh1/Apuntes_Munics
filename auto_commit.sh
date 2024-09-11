@@ -4,7 +4,7 @@
 PREDEFINED_MESSAGE="Commit automático: "
 
 # Obtener la fecha actual
-DATE=$(date '+%Y-%m-%d')
+DATE=$(date '+%Y-%m-%d %H:%M:%S')
 
 # Combinar el mensaje con la fecha
 COMMIT_MESSAGE="$PREDEFINED_MESSAGE $DATE"
