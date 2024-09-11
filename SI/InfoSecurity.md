@@ -4,10 +4,13 @@
 
 **Proceso de codificación de la información, conseguir que un mensaje sea más dificil de recuperar para un agente externo.**
 
+#### **Shannon**
+
+Un cifrado Shannon es aquel par de funciones que permiten obtener un texto cifrado a partir de una clave y un mensaje, obtener el texto plano a partir de el texto cifrado y la clave y que Encriptación y Decriptación sean invertibles entre sí.
+
 #### **Secreto**
 
 Único origen, único destino; si un intermediario recibe el mensaje cifrado este no debe ser capaz de leerlo correctamente.
-
 
 En una colección de textos cifrados no debe existir ninguna pista de cómo obtener el texto original, además el atacante no debe tener ninguna preferencia por un texto plano en específico.
 
@@ -15,13 +18,15 @@ La probabilidad de obtener el texto cifrado a partir de un texto plano elegido p
 
 #### Ejemplos
 
-**One time pad**:
+**One time pad**: Cifrado simétrico que utiliza una clave aleatoria del mismo tamaño que el mensaje. Cada carácter se combina con la clave mediante XOR.
 
-**Variable-length one time pad**:
+**Variable-length one time pad**: Similar pero la clave no tiene porqué coincidir con la longitud del mensaje.
 
-**Cifrado por sustitución**:
+**Cifrado por sustitución**: Reemplazar cada símbolo por otro distinto.
 
-**One time pad adictivo**:
+**One time pad adictivo**: Variante en la que en lugar de usar XOR se usa adicción de aritmética modular.
+
+~ El variable no es perfectamente seguro porque la clave variable da información sobre la longitud del texto original.
 
 ### 2. Perfect Security
 
@@ -29,14 +34,20 @@ La probabilidad de obtener el texto cifrado a partir de un texto plano elegido p
 
 #### Completamente seguro sí y solo sí:
 
-1. Texto
-2. Texto
-3. Texto
+1. c ⊥⊥ m - plano y cifrado son estadísticamente independientes.
+2. No existe un test estadístico que distinga entre dos mensajes sus textos cifrados.
+3. Información mútua y entropía igual a 0.
+
+El espacio de claves debe ser como mínimo igual de grande que el espacio de mensajes.
 
 ### *Repaso rápido
 
-**Entropía**:
-
+**Entropía**: El desorden asociado a una variable aleatoria o a un conjunto de datos. Mide la información necesaria para predecir un estado.
 
 ### 3. Semantic Security & Computational Cipher
 
+En la práctica insistimos que no debe existir ninguna ventaja en usar uno entre dos textos cifrados distintos.
+
+Es propuesto como un *attack game* aspirante entre adversario.
+
+**Attack game**: protocolo en el que A envía dos textos planos, B elige una clave aleatoria y lo cifra, A intenta obtener el cifrado.
