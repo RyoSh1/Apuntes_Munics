@@ -14,3 +14,5 @@ git add .
 
 # Hacer el commit con el mensaje predefinido y la fecha
 git commit -m "$COMMIT_MESSAGE"
+
+git push

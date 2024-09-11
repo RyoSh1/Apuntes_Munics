@@ -26,13 +26,13 @@ LSA (Link State Advertisements)
 
 ### Modelo OSI
 
-1. **Capa Física**:
-2. **Capa Enlace**:
-3. **Capa Red**:
-4. **Capa Transporte**:
-5. **Capa Sesión**:
-6. **Capa Presentación**:
-7. **Capa Aplicación**:
+1. **Capa Física**: Transmisión de datos en forma de bits en medios físicos como cable o WiFi.
+2. **Capa Enlace**: Transferencia fiable sobre el medio físico, se detectan errores y se crean tramas.
+3. **Capa Red**: Direccionamiento de paquetes.
+4. **Capa Transporte**: Asegura la entrega sin errores, de forma completa y ordenada.
+5. **Capa Sesión**: Gestiona las sesiones entre dispositivos.
+6. **Capa Presentación**: Traducción y formateo de datos para su correcta interpretación.
+7. **Capa Aplicación**: Proporciona interfaces y servicios de red para los usuarios.
 
 ...
 
