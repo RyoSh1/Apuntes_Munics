@@ -16,3 +16,8 @@
 
 #### Independencia estadística
 
+# Tema 1: Privacidad
+
+## Privacidad
+
+## Anonimidad
