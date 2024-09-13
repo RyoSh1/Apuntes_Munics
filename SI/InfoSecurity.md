@@ -51,3 +51,9 @@ En la práctica insistimos que no debe existir ninguna ventaja en usar uno entre
 Es propuesto como un *attack game* aspirante entre adversario.
 
 **Attack game**: protocolo en el que A envía dos textos planos, B elige una clave aleatoria y lo cifra, A intenta obtener el cifrado.
+
+**Semantic security**: Si no existe ninguna diferencia estadística entre los cifrados de los mensajes, *E* es semánticamente segura para cualquier adversario. Debe ser difícil computacionalmente predecir bits y recuperar el mensaje desde el cifrado. EL tiempo de ataque es proporcional a 1/*E*.
+
+**Nested encryption**:
+
+**Onion routing**:
