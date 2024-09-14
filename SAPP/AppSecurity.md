@@ -2,9 +2,31 @@
 
 ## Conceptos básicos
 
-### HTTP
+## HTTP
 
-### Autenticación, autorización y control de acceso
+Protocolo utilizado para intercambiar recursos en Internet, como HTML.
+
+### Peticiones y Respuestas
+
+### HTML
+
+#### Frames
+
+#### JavaScript
+
+#### JSON
+
+#### AJAX
+
+#### CSS
+
+#### XML
+
+#### XPath
+
+
+
+## Autenticación, autorización y control de acceso
 
 - **User&Passwd**: Contraseñas robustas para prevenir ataques de fuerza bruta y deben guardarse en BD cifradas.
 - **Smart Cards**: Autenticación mediante tarjetas con certificado digital (DNI).
