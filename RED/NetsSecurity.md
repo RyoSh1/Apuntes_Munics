@@ -34,13 +34,74 @@ LSA (Link State Advertisements)
 6. **Capa Presentación**: Traducción y formateo de datos para su correcta interpretación.
 7. **Capa Aplicación**: Proporciona interfaces y servicios de red para los usuarios.
 
+### IP
+
+- Clase A:
+10.0.0.0 - 10.255.255.255
+Máscara de red: 255.0.0.0 o /8
+
+- Clase B:
+172.16.0.0 - 172.31.255.255
+Máscara de red: 255.240.0.0 o /12
+
+- Clase C:
+192.168.0.0 - 192.168.255.255
+Máscara de red: 255.255.0.0 o /16
+
+- Multicast Clase D:
+224.0.0.0 - 239.255.255.255
+
+- Clase E (Experimental/Reservado):
+240.0.0.0 - 255.255.255.255
+
+- Rango público:
+1.0.0.0 - 223.255.255.255
+
+- Loopback (localhost):
+127.0.0.0 - 127.255.255.255
+
+- Link-Local:
+169.254.0.0 - 169.254.255.255
+
 ### STP
 
-Spanning tree protocol...
+Spanning tree protocol es un protocolo de red que previene bucles en una red conmutada (switches, capa 2) al asegurar un único camino activo entre la topología de la red.
+
+El problema de la congestión puede surgir debido a una tormenta de broadcasts, multiplicidad de tramas... y provocar el colapso.
+
+STP reacciona a fallos en switches on enlaces reconfigurando la red y activando los caminos redundantes, garantizando conectividad.
+
+#### Proceso STP
+
+1. Root Bridge: Todos los switches envían mensajes BPDU (Bridge Protocol Data Units) intercambiando información sobre sus identificadores y prioridades. El switch con la Bridge ID más baja (Prioridad y MAC)es elegido como Root Bridge (p.d 32768).
+2. Asignación de puertos:
+    - Root Port: Cada switch selecciona un puerto hacia el Root Bridge, es el camino más corto (determinado por coste).
+    - Designated Port: En cada segmento de red se elige el puerto con el mejor camino hacia el Root Bridge, este se mantiene activo para reenviar tramas.
+    - Non-Designated Ports: Cualquier otro puerto será bloqueado para evitar bucles.
+3. Estado de los puertos:
+    - Blocking: Puerto bloqueado.
+    - Listening: Esperando BPDU.
+    - Learning: Learning (MAC).
+    - Forwarding: Reenviando tramas y operativo.
+    - Disabled: Desactivado.
 
 ### NAT
 
-...
+Network Address Translation es una técnica utilizada en redes para modificar la dirección IP en los encabezados de los paquetes mientras viajan a través de un router o firewall, sirve para que múltiples dispositivos de una red local compartan una única dirección IP pública.
+
+¿Cómo se realiza el mapeo? - El router NAT mantiene una tabla de traducción que mapea las direcciones IP privadas y los números de puerto internos a la dirección IP pública y el número de puerto externo. Cuando llega un paquete externo el router NAT recibe la dirección pública con el puerto asignado y lo traduce hacia la dirección privada correspondiente a ese puerto.
+
+El contenido de una tabla NAT normalmente tiene los siguientes campos: IP Privada, Puerto interno, IP pública, puerto externo.
+
+El puerto asignado hacia el exterior es asignado dinámicamente por el router.
+
+### VLAN
+
+Virtual Local Area Network son una forma de segmentar las redes en un mismo switch físico o a través de varios switches, creando redes lógicas independientes.
+
+Para mantener los paquetes de datos separados estos vienen etiquetados con la VLAN a la que pertenecen, esto lo hace el switch desde la interfaz en la que entra el paquete inicial (física o virtual).
+
+Trunking es el tráfico de varias VLAN ya etiquetadas a través de un mismo cable físico hacia otro switch o router.
 
 ## Modelo Jerárquico
 

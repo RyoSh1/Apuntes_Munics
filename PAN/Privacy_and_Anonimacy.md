@@ -4,17 +4,31 @@
 
 #### Probabilidad en masa
 
+La PMF es una función que asigna a cada valor posible de la variable aleatoria discreta una probabilidad, la probabilidad de la que la variable tome ese valor específico.
+
 #### Función de densidad de probabilidad
+
+Esta función describe la densidad de la probabilidad en un rango de valores (integral).
 
 #### Distribución de Laplace
 
+Es una distribución de probabilidad contínua similar a la normal, se usa en situaciones donde es probable observar valores externos con más frecuencia.
+
 #### Operador de esperanza
+
+Se trata del promedio ponderado de todos los valores que puede tomar una variable aleatoria ponderados por sus respectivas probabilidades.
 
 ### Más de una variable aleatoria
 
 #### Bayes
 
+El teorema de Bayes es una fórmula que describe la probabilidad de que un evento ocurra, basado en el conocimiento previo de condiciones relacionadas con el evento.
+
+P(A|B) = P(B|A)*P(A) / P(B)
+
 #### Independencia estadística
+
+Dos variables son independientes si el resultado de una no tiene efecto sobre el resultado de la otra.
 
 # Tema 1: Privacidad
 
