@@ -54,6 +54,8 @@ Es propuesto como un *attack game* aspirante entre adversario.
 
 **Semantic security**: Si no existe ninguna diferencia estadística entre los cifrados de los mensajes, *E* es semánticamente segura para cualquier adversario. Debe ser difícil computacionalmente predecir bits y recuperar el mensaje desde el cifrado. EL tiempo de ataque es proporcional a 1/*E*.
 
-**Nested encryption**:
+**Nested encryption**: Basado en 2 ideas, *collusion*, dos o más intermediarios para que el segundo no conozca la identidad del origen y *mixing, ordenar aleatoriamente los paquetes enviados desde distintos orígenes.
 
-**Onion routing**:
+**Onion routing**: Nested encryption + source routing. A partir de i>=2 ya no se puede saber el origen, *mixing* asegura que haya aleatoriedad. 
+
+**Preguntar a Rrrruby diferencia entre nested y onion y cómo tiene el receptor todas las públicas del camino**

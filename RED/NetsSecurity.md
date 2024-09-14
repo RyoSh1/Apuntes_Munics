@@ -34,6 +34,12 @@ LSA (Link State Advertisements)
 6. **Capa Presentación**: Traducción y formateo de datos para su correcta interpretación.
 7. **Capa Aplicación**: Proporciona interfaces y servicios de red para los usuarios.
 
+### STP
+
+Spanning tree protocol...
+
+### NAT
+
 ...
 
 ## Modelo Jerárquico
