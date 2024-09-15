@@ -196,5 +196,24 @@ Además de la división en zonas y la utilización de dispositivos de seguridad 
 
 # Fortificación de los dispositivos de red
 
+## Arquitectura interna de los dispositivos de red
 
+Los dispositivos de red forman parte del perímetro de seguridad de una red, por lo que están expuestos a un gran número de amenazas. Además estos equipos operan en base a su configuración y a información que reciben de otros routers o switches (Enrutamiento o BPDUs).
+
+Es necesario verificar que la información que llega de otros equipos es auténtica, para evitar envenenamiento de la red.
+
+Dividimos un dispositivo de red en 3 planos:
+- Plano de Gestión: Tráfico recibido para su administración (SSH, Telnet).
+- Plano de Control: Relacionado con la toma de decisiones en los envíos (STP, HSRP...).
+- Plano de Datos: Envío de datos de los usuarios (políticas de seguridad).
+
+### Seguridad en el plano de gestión.
+
+#### Objetivos
+- Permitir el acceso a usuarios autenticados (Contraseñas de línea, Usuarios locales o AAA). Listas de métodos (4 max).
+- Gestión de la identidad (ISE, FREERADIUS...).
+- Proteger la sincronización horaria (importante).
+- Monitorización segura.
+- Proteger el sistema de ficheros (archivos de configuración).
+- Limitar el acceso físico a los dispositivos.
 
