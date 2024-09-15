@@ -123,7 +123,78 @@ Parte central de la red, se encarga de conmutar paquetes a alta velocidad., evit
 - Enlaces de capa 2 dentro de *acceso* y entre acceso y distrubución.
 - Enlaces de capa 3 entre distribución y core.
 Distribución es la capa frontera entre capas 2 y 3: - En distribución se lleva a cabo el enrutamiento entre las VLAN y el core.
-- Desventaja: STP necesario para permitir un diseñ con enlaces redundantes en capa 2.
+- Desventaja: STP necesario para permitir un diseño con enlaces redundantes en capa 2.
+
+#### Per VLAN STP
+
+Un truco para mejorar el balanceo de carga es crear un router virtual entre los dos routers, por ejemplo con HSRP y configurar como switch root ambos routers, es decir creas dos topologías en vez de una única, así los enlaces se siguen usando y en caso de caida de algún enlace se mantienen los procesos de búsqueda por VLAN.
 
 ### Capa 3 hasta acceso
+
+Llevas la capa 3 hasta acceso haciendo que no sea necesario el uso de STP, las VLAN pasan a ser locales a cada switch de capa de acceso y aumenta el coste de instalación.
+
+### Virtual Switches
+
+Los switches se comportan como uno solo, utiliza *Etherchannel* que es una tecnología que permite agrupar enlaces físicos en uno lógico.
+
+### Núcleo colapsado
+
+Se combinan las capas de distribución y núcleo en los mismos dispositivos de red físicos. Utilizado en redes pequeñas, se incluyen dos equipos en capa distribución por redundancia.
+
+### Modelo jerárquico en WAN
+
+Varias opciones: en estrella extendida, en anillo o en malla completa.
+
+## Patrones de Diseño
+
+Permiten crear una arquitectura global de red de forma modular en base a áreas funcionales, podemos dividirlo en: Campus, Centro de Proceso de Datos, Sucursal y Acceso remoto.
+
+### Campus corporativo
+
+Infraestructura de red de la sede principal de la organización, se basa en el Modelo Jerárquico. En las redes actuales incorpora un submódulo adicional que es el Data Center.
+
+En cada edificio de la sede habrá un *Building Block* que está compuesto por: Building Access (conectividad de usuarios) y Building Distribution (Enrutamiento basado en políticas).
+
+El Campus Core interconecta todos los módulos de la red.
+
+### Frontera corporativa
+
+Componentes que interconectan el área de Campus con el exterior, bien con internet o con los módulos remotos.
+
+Consta de los siguientes componentes:
+- E-commerce (servicios, aplicaciones, bases de datos, firewalls y routers...).
+- Definición de la DMZ y control de acceso a internet.
+- Conectividad con otras sedes de la organización(Tecnologías como SD-WAN).
+- Acceso remoto mediante VPNs.
+
+### Módulo frontera de proveedor de servicios
+
+Implementado por los proveedores de servicios de comunicaciones.
+
+### Módulos remotos
+
+- Módulo de sucursal: Infraestructura de red de una oficina pequeña con acceso a la sede principal. WAN para acceder a los servicios corporativos.
+- Módulo CPD Remoto: Puede constituir un centro de respaldo o delegar la actividad de una determinada área geográfica. Requiere infraestructura de red, servicios interactivos y elementos de gestión.
+- Módulo de teletrabajador: Acceso a internet que disponga y VPNs de acceso.
+
+## Aproximaciones de Seguridad Perimetral
+
+### Division por zonas
+
+Reestricción de acceso entre las distintas partes de la red para agrupar lógicamente dispositivos con mismás poíticas y requisitos de seguridad. Las zonas se separan mediante puntos de interfaz.
+
+#### Tipos de zonas:
+- Zona pública: Zona externa que no está bajo control de la organización.
+- DMZ: Alberga los servicios públicos de la empresa, aquí se encuentran los proxies.
+- Zona restringida o privada: Zona interna que contiene los servicios de datos críticos.
+
+Además de la división en zonas y la utilización de dispositivos de seguridad específicos, es necesario usar configuraciones adecuadas y tecnologías de seguridad como:
+- Acceso seguro a la red: Es necesario controlar y proteger los dispositivos finales de los usuarios de la organización.
+- VPN: Facilita la conectividad con la sede principal de la organización a través de una red insegura.
+- Protección de infraestructura: Limitar el acceso a usuarios y dispositivos autorizados.
+- Gestión de Red y Seguridad: Herramientas de gestión centralizada.
+
+# Fortificación de los dispositivos de red
+
+
 

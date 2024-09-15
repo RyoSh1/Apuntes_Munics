@@ -8,23 +8,41 @@ Protocolo utilizado para intercambiar recursos en Internet, como HTML.
 
 ### Peticiones y Respuestas
 
+Las peticiones constan de una línea inicial, un conjunto de cabeceras y en algunos casos un cuerpo.
+
+La respuesta contiene la línea de respuesta, cabeceras, línea en blanco y cuerpo.
+
 ### HTML
+
+Lenguaje de marcado para crear páginas web, en HTML se pueden añadir recursos desde ficheros externos.
 
 #### Frames
 
+Ventanas independientes incrustadas dentro de la ventana general del navegador.
+
 #### JavaScript
+
+Lenguaje interpretado usado tradicionalmente para incluir contenido ejecutable dentro de un documento HTML.
 
 #### JSON
 
+Formato de intercambio de datos basado en JavaScript.
+
 #### AJAX
+
+Asynchronous JavaScript And XML es una técnica que permite ejecutar peticiones HTTP asíncronas en el navegador. Las principales API son XMLHttpRequest y Fetch.
 
 #### CSS
 
+Lenguaje que se utiliza para definir la apariencia de un documento HTML.
+
 #### XML
+
+Metalenguaje que permite definir lenguajes de marcas.
 
 #### XPath
 
-
+Lenguaje que permite construir expresiones que recorren y procesan un documento XML.
 
 ## Autenticación, autorización y control de acceso
 
