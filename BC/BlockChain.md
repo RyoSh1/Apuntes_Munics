@@ -17,3 +17,9 @@
 ### Redes P2P
 
 ### Ventajas
+
+### Desventajas
+
+### Carteras
+
+### Direcciones
