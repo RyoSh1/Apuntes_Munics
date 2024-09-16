@@ -58,4 +58,12 @@ Es propuesto como un *attack game* aspirante entre adversario.
 
 **Onion routing**: Nested encryption + source routing. A partir de i>=2 ya no se puede saber el origen, *mixing* asegura que haya aleatoriedad. 
 
+#### Quantum key distribution
+
+Para la seguridad perfecta, incluso con OTP es necesario compartir una llave. QKD soluciona este problema, no se puede medir el estado cuántico y este no se puede clonar.
+
+
+
+## Secretismo teórico de la información
+
 **Preguntar a Rrrruby diferencia entre nested y onion y cómo tiene el receptor todas las públicas del camino**
