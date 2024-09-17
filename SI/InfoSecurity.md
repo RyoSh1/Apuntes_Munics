@@ -62,7 +62,10 @@ Es propuesto como un *attack game* aspirante entre adversario.
 
 Para la seguridad perfecta, incluso con OTP es necesario compartir una llave. QKD soluciona este problema, no se puede medir el estado cuántico y este no se puede clonar.
 
-
+1. Envío de fotones entrelazados que tienen una propiedad de polarización que está distribuida de manera aleatoria.
+2. Alice y Bob reciben los fotones , pero lo hacen en bases aleatorias e intercambian la información de en qué base midieron los fotones.
+3. Alice y Bob comparan las bases y trazan unos resultados que servirán como clave secreta.
+4. Si alguien intenta interceptar los fotones alterará el estado cuántico.
 
 ## Secretismo teórico de la información
 
