@@ -127,6 +127,9 @@ El algoritmo varía según: Métrica Base (Vector de acceso, Complejidad, Privil
 
 #### CWSS
 
+Common Weakness Scoring System es un mecanismo de clasificación de vulnerabilidades como CVSS, pero desarrollado por el MITRE (sin uso).
 ### OWASP
 
-# 2.2 Inyección de código
+The Open Web Application Security Project es una comunidad abierta dedicada a promover y mantener materiales relacionados con la seguridad (Fundación OWASP).
+
+# 2.2 Vulnerabilidad en el tratamiento de los datos de entrada
