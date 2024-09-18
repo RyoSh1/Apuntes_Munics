@@ -75,3 +75,14 @@ Los ataques de inferencia buscan reconstruir una base de datos curada.
 Responder a una consulta con una respuesta cierta viola la privacidad, por ello la respuesta debe ser una versión con ruido. Pero en orden de preservar la utilidad se debe controlar la distorsión.
 
 ### Ataques de reconstrucción linear
+
+1. Enviar todas las posibles consultas y guardar las respuestas.
+2. Encontrar candidatos válidos.
+3. Propiedades a satisfacer.
+4. Consulta particular.
+5. Desigualdad del triángulo inverso.
+6. Razonamiento inverso.
+7. Diferencias totales.
+
+
+### Ataques de reconstrucción linear probabilisticos
