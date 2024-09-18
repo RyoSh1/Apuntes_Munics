@@ -20,6 +20,6 @@
 
 ### Desventajas
 
-### Carteras
+### Carteras/Wallets
 
 ### Direcciones

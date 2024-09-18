@@ -84,5 +84,6 @@ Responder a una consulta con una respuesta cierta viola la privacidad, por ello 
 6. Razonamiento inverso.
 7. Diferencias totales.
 
-
 ### Ataques de reconstrucción linear probabilisticos
+
+### Aircloak Diffix Challenge
