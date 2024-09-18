@@ -91,7 +91,7 @@ En las aplicaciones tradicionales cuando el usuario envía un formulario esto pr
 
 En las Single Page Application no se produce una recarga completa de la página sino que se modifica un fragmento del árbol DOM, permitiendo así interfaces más interactivas, estas aplicaciones trabajan con JSON y XML.
 
-## Marcos de Referencia
+# 2.1 Marcos de Referencia
 
 ### MITRE
 
@@ -124,3 +124,9 @@ Common Attack Patern Enumeration and Clasification es un catálogo de patrones d
 Common Vulnerability Scoring System es una métrica estándar gestionada por el Forum of Incident Response and Security Teams para determinar la criticidad o impacto de las vulnerabilidades.
 
 El algoritmo varía según: Métrica Base (Vector de acceso, Complejidad, Privilegios necesarios y métricas de impacto), Métrica temporal (Explotabilidad, Estado de la medida correctora) y Métrica de entorno (Métrica Base pero adaptada al entorno que sufre el problema).
+
+#### CWSS
+
+### OWASP
+
+# 2.2 Inyección de código

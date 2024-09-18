@@ -73,12 +73,50 @@ Para la seguridad perfecta, incluso con OTP es necesario compartir una llave. QK
 
 ## Generadores Pseudoaleatorios
 
+Un generador pseudoaleatorio es un algoritmo que genera supuesto número aleatorio, es seguro si distinguir entre un número aleatorio y uno generado es computacionalmente muy difícil.
+
+### PGRs seguros
+
+Un PGRs es seguro si no existe un test estadístico que afirme que un número generado es no aleatorio con una probabilidad no despreciable.
+
 ## Cifrados de flujo
+
+Un cifrado de flujo se basa en la generación de valores aleatorios, es un pad de un solo uso que realiza un XOR con el mensaje caracter a caracter. Si el PRG es seguro entonces el cifrado es semánticamente seguro.
 
 ## Ataques en flujos de cifrado
 
+Un flujo usado más de una vez es inseguro, esto se debe a que los espacios de mensaje de los idiomas comunes tienen la suficiente redundancia como para recuperar m. La clave usada para generar el flujo no debe usarse más de una vez.
+
+Pese a todo existen mensajes que presentan una estructura similar entre sí (delta), ante esto se le puede aplicar un delta para modificar el mensaje.
+
 ## Composición de los PRGs
 
+### Construcción paralela
+
+Si existe un PGR que genera una cadena X , si usamos cada valor como clave para generar otra cadena tenemos una extensión del PGR.Como desventaja G' se degrada linearmente en n paralelismos. Aún así si G es seguro, G' es seguro.
+
+## Construcción secuencial
+
+En la construcción secuencial se elige una semilla inicial y cada paso del PGR genera un valor pseudoaleatorio y una nueva semilla para el siguiente paso. Si G es seguro, G' también.
+
 ## Casos de estudio
+
+### Linear Congruential Generators (LCGs)
+
+Son los disponibles en los SOs y librerías de desarrollo para generar números pseudoaleatorios, estos NO son robustos para criptografía. *as+b mod q*
+
+Las semillas son sencillas de recuperar, w es normalmente potencia de 2, pero esto no significa que sea posible por búsqueda exhaustiva. Veremos que con ri, ri+1 podemos predecir el output ¿?
+
+### Cryptoanálisis
+
+Si un atacante puede recuperar el vector e puede romper la seguridad averiguando s y x, lo que le permitiría predecir el próximo output. El desafío radica en encontrar el punto más cercano a la red *u* lo cual es complejo y es lo que mantiene la seguridad.
+
+### Subconjunto de sumas
+
+La seguridad tiene mucho que ver con la solución de problemas matemáticos, para un PGR existe una funcion f que lo forma.¿?
+
+### RC4
+
+Tiene un generador interno formado por un array de 256 bytes y dos punteros. El problema de RC4 es que su salida tiene un bias, el segundo byte de salida y algunos pares están condicionados previamente.
 
 **Preguntar a Rrrruby diferencia entre nested y onion y cómo tiene el receptor todas las públicas del camino**
