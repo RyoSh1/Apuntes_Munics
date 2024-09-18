@@ -68,5 +68,17 @@ Para la seguridad perfecta, incluso con OTP es necesario compartir una llave. QK
 4. Si alguien intenta interceptar los fotones alterará el estado cuántico.
 
 ## Secretismo teórico de la información
+ 
+# Lectura 2: Cifrados de flujo
+
+## Generadores Pseudoaleatorios
+
+## Cifrados de flujo
+
+## Ataques en flujos de cifrado
+
+## Composición de los PRGs
+
+## Casos de estudio
 
 **Preguntar a Rrrruby diferencia entre nested y onion y cómo tiene el receptor todas las públicas del camino**
