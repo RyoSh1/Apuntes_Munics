@@ -14,3 +14,10 @@ Fecha: 2024-09-18 22:07:43
 ####  SAPP/AppSecurity.md | 5 ++++-
  1 file changed, 4 insertions(+), 1 deletion(-)
 
+
+
+## Fecha: 2024-09-18 22:23:54
+
+#### SAPP/AppSecurity.md | 17 insertions++++++++++++++++
+1 file changed, 17 insertions(+)
+

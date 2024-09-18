@@ -132,4 +132,21 @@ Common Weakness Scoring System es un mecanismo de clasificación de vulnerabilid
 
 The Open Web Application Security Project es una comunidad abierta dedicada a promover y mantener materiales relacionados con la seguridad (Fundación OWASP).
 
+Otros: OWASP Vulnerable Web Applications Directory, OWASP Testing Guide.
+
+#### OWASP Top 10
+
+Informe de los 10 riesgos de seguridad más importantes en aplicaciones web. Desde el último, cada entrada del Top 10 es un conjunto de entradas del CWE.
+
+- Vulnerabilidades en el control de acceso.
+- Problemas criptográficos.
+- Inyección de código.
+- Diseño inseguro.
+- Configuración de seguridad incorrecta.
+- Utilización de componentes obsoletos.
+- Problemas de identificación y autenticación.
+- Problemas de integridad en la aplicación o en los datos.
+- Problemas en el log y en la monitorización.
+- Falsificación de peticiones realizadas por el servidor.
+
 # 2.2 Vulnerabilidad en el tratamiento de los datos de entrada
