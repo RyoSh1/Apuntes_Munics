@@ -69,3 +69,9 @@ La denegación de respuestas puede revelar datos de la propia base, si denegamos
 *Curated: Datos cuidadosamente seleccionados.
 
 Los ataques de inferencia buscan reconstruir una base de datos curada.
+
+### Curar respuestas
+
+Responder a una consulta con una respuesta cierta viola la privacidad, por ello la respuesta debe ser una versión con ruido. Pero en orden de preservar la utilidad se debe controlar la distorsión.
+
+### Ataques de reconstrucción linear
