@@ -59,3 +59,13 @@ A partir de datos es sencillo inferor más datos.
 #### Deanonimizar
 
 - **Data Linking**: Vínculo con datos externos, cuanto más dispersos más sencillo.
+
+# Tema 2: Ataques de reconstrucción de bases de datos
+
+### Consultas de adversario
+
+La denegación de respuestas puede revelar datos de la propia base, si denegamos un dato importante, pero permitimos el siguiente, el atacante sabrá información sobre la BD.
+
+*Curated: Datos cuidadosamente seleccionados.
+
+Los ataques de inferencia buscan reconstruir una base de datos curada.
