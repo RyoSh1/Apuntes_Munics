@@ -1,32 +1,20 @@
 Apuntes Munics 
-## Últimos cambios
+## Cambios
 
-Fecha: 2024-09-18 22:07:43
+### Fecha: 2024-09-18 22:07:43
 
- SAPP/AppSecurity.md | 10 ++++++++--
- SI/InfoSecurity.md  | 38 ++++++++++++++++++++++++++++++++++++++
- 2 files changed, 46 insertions(+), 2 deletions(-)
-
+#### SAPP/AppSecurity.md
+#### SI/InfoSecurity.md 
 
 
-## Fecha: 2024-09-18 22:13:57
+### Fecha: 2024-09-18 22:13:57
 
-####  SAPP/AppSecurity.md | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
-
+####  SAPP/AppSecurity.md
 
 
-## Fecha: 2024-09-18 22:23:54
+### Fecha: 2024-09-18 22:23:54
 
-#### SAPP/AppSecurity.md | 17 insertions++++++++++++++++
-1 file changed, 17 insertions(+)
-
-
-
-### Fecha: 2024-09-18 22:35:35
-
-####  insertions
-
+#### SAPP/AppSecurity.md 
 
 
 ## Fecha: 2024-09-18 22:44:30
@@ -38,4 +26,10 @@ Fecha: 2024-09-18 22:07:43
 ## Fecha: 2024-09-18 23:09:55
 
 #### PAN/Privacy_and_Anonimacy.md
+
+
+
+## Fecha: 2024-09-18 23:10:37
+
+#### 
 
