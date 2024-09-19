@@ -235,6 +235,29 @@ Referencias: Tiene entrada CWE y patrones de ataque.
 
 Lightweight Directory Access Protocolo, es un protocolo que permite el acceso a un servicio de directorio para buscar información en un entorno de red. Un directorio está formado por un conjunto de objetos con atributos organizados de forma jerárquica, para su acceso se usan filtros con sintaxis concreta.
 
+La sintaxis permite expresiones complejas de operadores lógicos. Como en SQL, si los caracteres no se procesan es posible modificar la consulta y ejecutar un ataque.
 
+También es posible ejecutar Blind LDAP Injection a través de filtros booleanos.
+
+Prevención: Escapado de variables de entrada, listas blancas de valores válidos y consulta de permisos LDAP
+
+Referencias: Dos relacionadas.
 
 ## Inyección XML y XPath
+
+Se produce inyección en XML cuando los datos de entrada contienen caracteres reservados en ese lenguaje y genera un documento no esperado.
+
+Si se añaden caracteres reservados el resultado es una modificación del documento, modificando datos sensibles.
+
+XPath es un lenguaje de consulta de documentos XML y es posible inyectar código si no se procesa de forma adecuada.
+
+Si tenemos una BD guardada en XML, podemos introducir datos en el XPath que nos permitiría acceder directamente sin autenticación.
+
+Prevención: Validación adecuada de datos escapando conflictos en función de donde se va a añadir el contenido ( texto, atributos, comentarios...). Además de validar datos un mecanismo más general de validación es a través de XML Schemas o de DTT, pero ahi es necesario tener en cuenta otras vulnerabilidades.
+
+Se pueden establecer tipos de datos, máximos y mínimos y máximo de ocurrencias. Importante procesar de forma adecuada *()='[]:,*/* y el espacio.
+
+Referencias: 2 Entradas.
+
+Conclusiones -> Siempre examen.
+
