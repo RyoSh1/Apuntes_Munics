@@ -17,32 +17,31 @@ Apuntes Munics
 #### SAPP/AppSecurity.md 
 
 
-## Fecha: 2024-09-18 22:44:30
+### Fecha: 2024-09-18 22:44:30
+
+#### PAN/Privacy_and_Anonimacy.md
+
+
+### Fecha: 2024-09-18 23:09:55
 
 #### PAN/Privacy_and_Anonimacy.md
 
 
 
-## Fecha: 2024-09-18 23:09:55
-
-#### PAN/Privacy_and_Anonimacy.md
-
-
-
-## Fecha: 2024-09-18 23:10:37
+### Fecha: 2024-09-18 23:10:37
 
 #### 
 
 
 
-## Fecha: 2024-09-18 23:53:37
+### Fecha: 2024-09-18 23:53:37
 
 #### BC/BlockChain.md
 PAN/Privacy_and_Anonimacy.md
 
 
 
-## Fecha: 2024-09-19 14:18:31
+### Fecha: 2024-09-19 14:18:31
 
  BC/BlockChain.md
 
