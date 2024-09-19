@@ -55,17 +55,6 @@ PAN/Privacy_and_Anonimacy.md
 
 ### Fecha: 2024-09-19
 
- 
-
-
-
-### Fecha: 2024-09-19
-
- 
-
-
-
-### Fecha: 2024-09-19
-
- 
+ README.md
+SAPP/AppSecurity.md
 
