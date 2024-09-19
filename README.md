@@ -40,3 +40,9 @@ Apuntes Munics
 #### BC/BlockChain.md
 PAN/Privacy_and_Anonimacy.md
 
+
+
+## Fecha: 2024-09-19 14:18:31
+
+ BC/BlockChain.md
+
