@@ -150,3 +150,22 @@ Informe de los 10 riesgos de seguridad más importantes en aplicaciones web. Des
 - Falsificación de peticiones realizadas por el servidor.
 
 # 2.2 Vulnerabilidad en el tratamiento de los datos de entrada
+
+Una vulnerabilidad es una debilidad en alguno de los componentes de un sistema informático que puede ser explotada por un atacante. La debilidad más común consiste en validad de forma incorrecta los datos provenientes del usuario.
+
+En este capítulo se ven aquellas vulnerabilidades que explotan debilidades en la validación de datos de entrada.
+
+## Inyección de código
+
+Cuando una aplicación interactúa con otra utiliza algún tipo de lenguaje, formato o protocolo de intercambio de información, esto se combina con datos que provienen del usuario. Las vulnerabilidades de inyección de código utilizan como datos de entrada palabras o tokens reservados en esos lenguajes para intentar cambiar la semántica del mensaje original.
+
+## Inyección de SQL
+
+Se produce SQL Injection cuando los datos de entrada del usuario se utilizan para componer una consulta SQL. Los datos incluyen comillas o punto y coma.
+
+¿Qué se puede hacer con SQL Injection?
+- Introducir una consulta completa en el primer campo y sustituir así la consulta original.
+- Sustituir campos WHERE por búsquedas exhaustivas de información, obteniendo así otras cuentas.
+- Modificaciones en la base de datos como borrados o inserciones.
+- Modificaciones sutiles de datos (dificil detección).
+- SQL(7)
