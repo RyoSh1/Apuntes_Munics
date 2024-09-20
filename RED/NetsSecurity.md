@@ -217,3 +217,12 @@ Dividimos un dispositivo de red en 3 planos:
 - Proteger el sistema de ficheros (archivos de configuración).
 - Limitar el acceso físico a los dispositivos.
 
+#### Buenas prácticas
+- Reforzar directivas de contraseñas.
+- Definir grupos de usuario.
+- Desplegar servicios AAA.
+- Proteger NTP.
+- Redes e IPs diferenciadas para restringir inicios de sesión.
+- Deshabilitar servicios no necesarios.
+
+*Vistas: Un conjunto disjunto de comandos, se asigna un rol a una vista y un rol a X usuarios.
