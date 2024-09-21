@@ -184,6 +184,7 @@ Implementado por los proveedores de servicios de comunicaciones.
 Reestricción de acceso entre las distintas partes de la red para agrupar lógicamente dispositivos con mismás poíticas y requisitos de seguridad. Las zonas se separan mediante puntos de interfaz.
 
 #### Tipos de zonas:
+
 - Zona pública: Zona externa que no está bajo control de la organización.
 - DMZ: Alberga los servicios públicos de la empresa, aquí se encuentran los proxies.
 - Zona restringida o privada: Zona interna que contiene los servicios de datos críticos.
@@ -207,13 +208,13 @@ Dividimos un dispositivo de red en 3 planos:
 - Plano de Control: Relacionado con la toma de decisiones en los envíos (STP, HSRP...).
 - Plano de Datos: Envío de datos de los usuarios (políticas de seguridad).
 
-### Seguridad en el plano de gestión.
+### Introducción: Seguridad en el plano de gestión.
 
 #### Objetivos
 - Permitir el acceso a usuarios autenticados (Contraseñas de línea, Usuarios locales o AAA). Listas de métodos (4 max).
 - Gestión de la identidad (ISE, FREERADIUS...).
 - Proteger la sincronización horaria (importante).
-- Monitorización segura.
+- Monitorización segura (Syslog, SNMPv/v3).
 - Proteger el sistema de ficheros (archivos de configuración).
 - Limitar el acceso físico a los dispositivos.
 
@@ -226,3 +227,79 @@ Dividimos un dispositivo de red en 3 planos:
 - Deshabilitar servicios no necesarios.
 
 *Vistas: Un conjunto disjunto de comandos, se asigna un rol a una vista y un rol a X usuarios.
+
+### Introducción: Seguridad en el plano de control.
+
+#### Objetivos
+
+- Limitar el daño que un atacante podría infringir al enviar tráfico directamente a las IPs del dispositivo.
+
+- Controlar la información relacionada con la toma de decisiones de envío.
+
+#### Buenas Prácticas
+
+- Para proteger la CPU: En router y utilizando mecanismos de caché.
+- Para proteger el "camino de datos": Paquetes relacionados con la toma de decisiones de envío que son recibidos o enviados por los equipos de red.
+
+#### CPPr (Control PLane Protection)
+
+Clasificación detallada del tráfico, utilizando 3 subinterfaces:
+- Host: Maneja el tráfico hacia una interfaz física o lógica del router.
+- Transit: Gestiona el tráfico del plano de datos que necesita intervención de la CPU (opc IP, cifrado).
+- CEF-Exception: Relacionado con el tráfico que procesa CEF en el que se producen excepciones.
+
+Se pueden establecer filtros y limitar el tráfico.
+
+### Introducción: Seguridad en el plano de datos.
+
+#### Objetivos
+
+- Implementar políticas de seguridad que definen que flujos de tráfico de usuarios están permitidos o denegados.
+
+-Se utilizan: ACLs, VLANs, priv VLANs, IPS, Firewalls.
+
+#### Buenas Prácticas
+
+- Implementación de ACLs para filtrar el tráfico.
+- Firewall para control de acceso y control de zonas.
+- IPS en equipos de red o en equipos dedicados.
+- TCP *Intercept*: técnica de detección de sesiones TCP malformadas.
+- Unicast Reverse Path Forwarding: Comprueba la dirección IP de los paquetes entrantes y analiza si concuerda con la interfaz de entrada.
+- Mecanismos de seguridad en capa 2.
+
+## Protección en el Plano de Gestión
+
+Protección de la infraestructura de red, evitar el acceso no autorizado. Para ello es necesario establecer políticas de seguridad, proteger el acceso de gestión, utilizar ssh y ACLs, realizar backups de las configuraciones, monitorizar la red y desactivar servicios no necesarios.
+
+1. Seguir la plítica de acceso al router.
+2. Proteger el acceso físico.
+3. Usar contraseñas fuertes.
+4. Control de acceso al router.
+5. Acceso seguro a la gestión.
+6. Uso de protocolos de gestión segura.
+7. Reforzar la seguridad de las conexiones virtuales.
+8. Implementar sistema de logging.
+9. Copias de seguridad periódicas.
+10. Desactivar servicios no necesarios.
+
+### Política de seguridad en un router
+
+La politica de seguridad en un router debe contestar las siguientes cuestiones:
+
+- Como se cifran contraseñas y su complejidad.
+- Como se configura la autenticación.
+- Como se definen los parámetros de acceso.
+- Cómo se gestionan servicios no necesarios.
+- Filtrado de tráfico.
+- Seguridad en protocolos de enrutamiento.
+- Mantenimiento de configuraciones.
+- Gestión de cambios.
+- Actualizaciones de seguridad.
+
+### Cifrado de contraseñas
+
+-> Cifrado
+
+## Autenticación, Autorización y Auditoría (AAA)
+
+ -> *Can be done later*, Bloque 2 creo
