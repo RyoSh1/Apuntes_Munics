@@ -82,3 +82,52 @@ Conjunto de números y letras que identifican una cartera. Existen distintos tip
 - Empiezan por el por el número 3 para las direcciones multifirma (P2SH, Pay to Script Hash).
 - Empiezan por por bc1q las direcciones de tipo SegWit (bech32).
 - Empiezan por bc1p las direcciones Taproot (P2TR, Pay to Taproot).
+
+# Continuación Tema 1 Bitcoin después de 2008
+
+## Historia
+
+### Fork
+
+En 2013 se produce el primer frok por incompatibilidad de versiones del software que generó desacuerdos entre los mineros.
+
+- Hard Fork: Cambio en el protocolo de la blockchain que genera dos ramas, una que sigue con el anterior y otra con el nuevo.
+- Soft Fork: Actualización del protocolo compatible hacia atrás. Continúa aceptando transacciones creadas por el conjunto de reglas anterior.
+
+Conceptos (forks?):
+- BTC: Bloques de 1MB cada 10 min.
+- Bitcoin Cash (BCH): Bloques de 8MB cada 10 min.
+- Bitcoin Gold (BTG): Bloques de 1MB cada 10 min.
+- Bitcoin Private (BTCP): bloques de 2MB cada 2.5 min.
+
+En 2014 colapsa Mt.Goc, una plataforma de exchanges de Bitcoin. Se declaró en bancarrota y se perdieron 850000 bitcoins, fue un escándalo.
+
+En 2021:
+- Zug (Suiza): Bitcoin como medio de pago de impuestos.
+- El Salvador: Moneda de curso legal.
+- China prohibe transacciones.
+- BlackRock quiere aprobar un fondo cotizado en bolsa de bitcoin al contado.
+
+## Blockchain
+
+Blockchain es un registro, un libro de contabilidad público compartido entre todos los nodos de una red. Se actualiza bajo el consenso de todos los usuarios del sistema y una vez introducida información, esta es permanente.
+
+### Sistemas e infraestructura
+
+#### Permisionada vs no permisionada
+
+#### Configuración
+
+#### Métricas de evaluación
+
+## Ethereum
+
+#### NFT
+
+#### Tipos de cuentas
+
+## Smart contracts
+
+### DApps
+
+### DAOs
