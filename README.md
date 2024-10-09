@@ -96,3 +96,10 @@ SAPP/AppSecurity.md
 RED/NetsSecurity.md
 SI/InfoSecurity.md
 
+
+
+### Fecha: 2024-10-09
+
+ .gitignore
+MW/Malware.md
+
