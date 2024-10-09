@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+
+   <header th:replace="layout/Includes :: #include-fragment"></header>
+
+   <body>
+      <div th:replace="layout/NavBar :: #navbar-fragment"></div>
+      <div class="container error">
+         <div class="row">
+            <div class="col-12">
+               <h2 th:utext="#{error.title}"></h2>
+               <hr>
+            </div>
+         </div>
+         <p th:if="${url}">
+            <b th:utext="#{error.page}"></b> <span th:utext="${url}"></span>
+         </p>
+         <p th:if="${timestamp}" id='created'>
+            <b th:utext="#{error.time}"></b> <span th:utext="${timestamp}"></span>
+         </p>
+         <p th:if="${status}">
+            <b th:utext="#{error.status}"></b> <span th:utext="${status}"></span> <span
+                th:if="${error}" th:utext="'('+${error}+')'"></span>
+         </p>
+         
+         <div th:if="${errorMessage} and ${errorMessage.length() != 0}">
+            <span th:if="${errorMessage} and ${errorMessage.length() != 0}" th:utext="${errorMessage}"></span>
+         </div>
+         
+         <div th:if="${exception}">
+            <div th:if="${exception instanceof T(java.lang.Exception)}" class="text-left">
+               <b th:utext="#{error.cause}"></b>
+               <span th:utext="${exception}"></span>
+               <li th:each="ste : ${exception.stackTrace}" 
+                   th:remove="tag">
+                  <span th:utext="${ste}" th:remove="tag">${ste}</span>
+               </li>               
+            </div>
+            <div th:if="${exception instanceof T(java.lang.String)}">
+               <b th:utext="#{error.cause}"></b>
+               <span th:utext="${exception}"></span>
+            </div>
+         </div>
+         
+         <p th:if="${trace}" class="text-left">
+            <br/>
+            <span th:utext="${trace}"></span>
+         </p>
+         
+      </div>
+      
+      <div th:replace="layout/Footer :: #footer-fragment"></div>
+      
+   </body>
+</html>

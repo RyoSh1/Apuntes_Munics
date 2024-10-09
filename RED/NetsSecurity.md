@@ -303,3 +303,15 @@ La politica de seguridad en un router debe contestar las siguientes cuestiones:
 ## Autenticación, Autorización y Auditoría (AAA)
 
  -> *Can be done later*, Bloque 2 creo
+
+
+## Comandos configuración
+
+AL-SW1(config) #hostname AL-SW1
+AL-SW1(config) #vlan 741
+AL-SW1(config-if) #name CHULI
+AL-SW1# int vlan 741
+AL-SW1(config-if) #ip address 10.2.241.1 255.255.255.0
+AL-SW1# config terminal
+AL-SW1(config) #interface g0/1
+AL-SW1(config-if) #switchport access vlan 741

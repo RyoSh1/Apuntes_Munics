@@ -120,3 +120,109 @@ La seguridad tiene mucho que ver con la solución de problemas matemáticos, par
 Tiene un generador interno formado por un array de 256 bytes y dos punteros. El problema de RC4 es que su salida tiene un bias, el segundo byte de salida y algunos pares están condicionados previamente.
 
 **Preguntar a Rrrruby diferencia entre nested y onion y cómo tiene el receptor todas las públicas del camino**
+
+# Lectura 3: Cifrados de bloque
+
+1. Definición de Cifrados por Bloques
+Un cifrado por bloques es un tipo de cifrado determinista que tiene una función de cifrado 
+𝐸
+E y una de descifrado 
+𝐷
+D, donde los espacios de mensajes y ciphertext (texto cifrado) son iguales. Se cifra un mensaje 
+𝑚
+m de longitud fija y se obtiene un ciphertext 
+𝑐
+=
+𝐸
+(
+𝑘
+,
+𝑚
+)
+c=E(k,m) con la misma longitud, usando una clave 
+𝑘
+k.
+
+Un cifrado se considera seguro si su función de cifrado es indistinguible de una permutación aleatoria sobre el espacio de mensajes.
+Todos los cifrados por bloques son permutaciones en su espacio de mensajes, por lo que se comportan como cifrados de sustitución.
+2. Indistinguibilidad Computacional
+La seguridad de un cifrado por bloques se mide a través de un juego de ataque. En este juego, un adversario debe determinar si la función utilizada es una permutación aleatoria o una función de cifrado real.
+
+El adversario interactúa con un desafiante que puede estar usando una función de cifrado 
+𝐸
+(
+𝑘
+,
+⋅
+)
+E(k,⋅) o una permutación aleatoria.
+El adversario envía consultas y recibe respuestas cifradas para intentar adivinar qué tipo de función se está usando.
+Si la diferencia en la probabilidad de adivinación correcta es negligible, el cifrado es considerado seguro.
+3. Modos de Operación de Cifrados por Bloques
+El modo ECB (Electronic CodeBook) es una forma directa de cifrado por bloques donde cada bloque del mensaje se cifra de manera independiente. Sin embargo, este modo no es seguro desde el punto de vista semántico, ya que un atacante puede distinguir fácilmente entre bloques de mensaje iguales o diferentes al observar los bloques cifrados correspondientes.
+
+4. DES y AES
+DES (Data Encryption Standard)
+DES fue desarrollado por IBM en 1977 y fue uno de los primeros cifrados por bloques ampliamente usados.
+Problema: DES utiliza una clave de 56 bits, lo que lo hace vulnerable a ataques de fuerza bruta.
+DES emplea una estructura Feistel, lo que implica dividir el texto en dos mitades y usar permutaciones y sustituciones controladas por la clave.
+Expansión de claves: DES toma una clave de 56 bits y la expande a 16 subclaves de 48 bits para cada ronda de cifrado.
+AES (Advanced Encryption Standard)
+AES fue estandarizado en 2001 y usa bloques de 128 bits con claves de 128, 192 o 256 bits.
+AES realiza múltiples rondas de permutaciones y sustituciones en una matriz de 4x4 bytes, con operaciones como:
+SubBytes: Aplicación de una permutación fija a cada byte.
+ShiftRows: Desplazamiento cíclico de las filas de la matriz.
+MixColumns: Aplicación de una transformación lineal sobre las columnas de la matriz.
+AES es mucho más seguro que DES debido a su tamaño de clave más grande y estructura más compleja.
+5. Ataques a Cifrados por Bloques
+Existen diferentes tipos de ataques diseñados para comprometer la seguridad de los cifrados por bloques:
+
+Ataques Algorítmicos
+Criptoanálisis lineal: Busca relaciones lineales entre el mensaje, la clave y el ciphertext.
+Criptoanálisis diferencial: Estudia cómo las diferencias en los mensajes afectan las diferencias en los ciphertexts.
+Ataques de Canal Lateral
+Explotan el hecho de que las operaciones de cifrado consumen recursos físicos como tiempo y energía, lo cual puede revelar información sobre la clave. Ejemplos:
+
+Ataques de tiempo: Miden el tiempo que tarda un proceso de cifrado para inferir información.
+Ataques de poder: Analizan el consumo de energía del procesador durante las operaciones de cifrado.
+Ataques Cuánticos
+Los ordenadores cuánticos presentan una amenaza significativa, ya que podrían reducir el tiempo necesario para un ataque de fuerza bruta a 
+𝑂
+(
+∣
+𝐾
+∣
+)
+O( 
+∣K∣
+​
+ ) mediante el algoritmo de Grover. Esto implica que un ataque cuántico a AES podría realizarse en 
+2
+64
+2 
+64
+  evaluaciones, lo que reduce drásticamente la seguridad actual de AES.
+6. Funciones Pseudo-Aleatorias (PRFs)
+Una función pseudo-aleatoria (PRF) es un mapeo determinista que, para un adversario, debería ser indistinguible de una función completamente aleatoria. Los cifrados por bloques pueden verse como PRFs si el espacio de salida es lo suficientemente grande.
+
+El juego de ataque contra una PRF es similar al de un cifrado por bloques. Un adversario intenta distinguir entre una PRF y una función aleatoria basada en sus consultas al desafiante.
+
+7. Relación entre PRGs, PRFs y Cifrados por Bloques
+Los generadores pseudo-aleatorios (PRGs), las PRFs y los cifrados por bloques son los bloques fundamentales de la criptografía. A partir de una PRF, se pueden construir PRGs y viceversa. Además, un cifrado por bloques puede verse como una PRF si el espacio de salida es grande.
+
+Construcciones Criptográficas
+Luby-Rackoff: Permite construir un cifrado por bloques a partir de una PRF.
+Even-Mansour: Es una construcción teórica que aplica una permutación aleatoria con dos claves y se considera segura si las claves son aleatorias.
+8. Seguridad de DES y AES
+DES es vulnerable a ataques de fuerza bruta. En 2007, se rompió DES en menos de 13 días.
+AES es mucho más seguro que DES. Por ejemplo, para romper AES-128 con fuerza bruta se necesitarían 
+2
+72
+2 
+72
+  días, lo que es prácticamente imposible con la tecnología actual.
+Para fortalecer DES, se utiliza Triple DES (3DES), que aplica tres veces el cifrado con claves diferentes, mejorando significativamente su seguridad.
+
+9. Ataques Avanzados
+Ataques con claves relacionadas: Son ataques que explotan relaciones conocidas entre múltiples claves.
+Ataques de inyección de fallos: Inducen errores deliberados en el hardware para obtener información sobre la clave.
