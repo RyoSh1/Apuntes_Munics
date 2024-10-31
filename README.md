@@ -123,6 +123,7 @@ MW/Malware.md
 
 
 
+<<<<<<< HEAD
 ### Fecha: 2024-10-10
 
  MW/Malware.md
@@ -132,4 +133,15 @@ MW/Malware.md
 ### Fecha: 2024-11-01
 
  MW/Malware.md
+=======
+## Fecha: 2024-10-13 23:58:22
+
+ 
+>>>>>>> 749c7bf2818e353017decaefc391a71d86a1e803
+
+
+
+### Fecha: 2024-11-01
+
+ 
 
