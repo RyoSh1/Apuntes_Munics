@@ -298,20 +298,98 @@ La politica de seguridad en un router debe contestar las siguientes cuestiones:
 
 ### Cifrado de contraseñas
 
--> Cifrado
+Existen varios métodos de obtención de contraseñas por parte de un atacante:
+
+- Información personal.
+- Sniffing TFTP.
+- Fuerza bruta.
+- Claves de invitado.
+- Herramientas.
+
+Puertos que requieren claves:
+
+- Puertos consola.
+- Puertos auxiliares.
+- Conexiones de terminal virtual.
+- Acceso al modo privilegiado.
+
+En redes grandes se usa RADIUS. BD local en redes pequeñas. 0 a 15 en privilegios.
 
 ## Autenticación, Autorización y Auditoría (AAA)
 
- -> *Can be done later*, Bloque 2 creo
+En una red corporativa podemos controlar "Quién" se conecta *Autenticación*, "Qué" puede hacer *Autorización* y se implementan sistemas de *Auditoría*.
+
+**AAA** es un framework que controla el acceso de gestión a los dispositivos de una red utilizando los métodos de usuarios nombrados anteriormente.
+
+- Ventajas: Flexibilidad y control de acceso, escalabilidad, backup, autenticación estandarizada.
+
+- Autenticación: Local AAA, Servidor AAA.
+
+#### AAA basada en servidor
+
+- **RADIUS: Remote Dial-in User Services**
+    - Conexión entre router/switch y servidor AAA.
+    - Solo cifra la clave del usuario usando MD5 derivado y clave secreta, resto en plano.
+    - Estándar IETF.
+    - Se usa en los ISP porque permite información de facturación. Los Proxy utilizan RADIUS.
+    - Utiliza UDP, puertos 1645/1812 autenticación.
+
+- Autenticación:
+    1. Habilitar globalmente AAA.
+    2. Especificar servidor.
+    3. Clave de cifrado entre servidor de acceso a red y AAA.
+    4. Lista de métodos de autenticación.
+
+- Autorización:
+    - Objetivo asegurar el acceso al dispositivo.
+    - Permitir o no acceso a los usuarios autenticados a distintas áreas de la red.
+    - RADIUS no separa autenticación de autorización.
+    - Se puede permitir o no la ejecución de determinados comandos.
+
+- Auditoría:
+    - El servicio de Accounting AAA permite rastrear el uso de recursos, recoger información de BDs y producir informes.
+    - El servidor AAA es un repositorio de información de eventos.
+    - Las sesiones se monitorizan y se almacena su información.
+    - Necesario definir listas de métodos.
+
+### Configuración de SSH
+
+SSH proporciona confidencialidad e integridad en las comunicaciones frente a Telnet. Los pasos a seguir son los siguientes:
+
+1. Asegurar una versión IOS compatible.
+2. Nombre de host único.
+3. Nombre de dominio correcto.
+4. Routers configurados con autenticación AAA local.
+
+### Servicios de restauración y backup
+
+El objetivo es realizar copias de seguridad de IOS y de las configuraciones.
+
+Herramientas básicas: Backups de configuración, Backups de software, Inventario de hardware, Herramientas de despliegue (FTP, TFTP, SCP).
+
+#### Servicios no usados
+
+Es importante desactivar los siguientes servicios: DNS, CDP, NTP, BOOTP, DHCP, Proxy ARP, Source routing, IP redirects y HTTP service.
+
+### Protección del plano de control
+
+La protección del plano de control afecta al plano de gestión y al de datos. Si este se corrompe puede llegar a ser imposible recuperar la estabilidad de la red.
+
+Los paquetes del plano de control son generados y recibidos por los propios dispositivos de red y permiten el funcionamiento de la propia infraestructura.
+
+#### Minimizar el tráfico de control
+
+Tipos de paquetes que deben ser procesados por la CPU:
+
+- Tráfico dirigido a la IP del propio equipo de la red.
+
+- Tráfico del plano de datos que requiere procesamiento especial:
+    - Paquetes que coinciden con una ACL y generan un syslog.
+    - Unicast Reverse Path Forwarding.
+    - Opciones IP.
+    - Fragmentación.
+    - Expiración de TTL.
+    - Paquetes que generan "ICMP unreachable".
+    - Tráfico no IP.
 
 
-## Comandos configuración
-
-AL-SW1(config) #hostname AL-SW1
-AL-SW1(config) #vlan 741
-AL-SW1(config-if) #name CHULI
-AL-SW1# int vlan 741
-AL-SW1(config-if) #ip address 10.2.241.1 255.255.255.0
-AL-SW1# config terminal
-AL-SW1(config) #interface g0/1
-AL-SW1(config-if) #switchport access vlan 741
