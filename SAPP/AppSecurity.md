@@ -261,3 +261,399 @@ Referencias: 2 Entradas.
 
 Conclusiones -> Siempre examen.
 
+## Inyección de JavaScript
+
+Es un tipo de ataque de inyección de código que inyecta código JS en el navegador del usuario cuando este está accediendo al sitio web afectado.
+
+### Tipo 1: Reflected XSS
+
+El servidor lee los datos de la petición HTTP y los inserta en la respuesta. Los datos insertados en la respuesta pueden contener código ejecutable. Puede ser propagable en correos.
+
+### Tipo 2: Stored XSS
+
+El atacante consigue insertar texto JS en la base de datos. Esos datos se pueden utilizar más adelante para generar contenido HTML.
+
+### Tipo 0: DOM-based XSS
+
+La inyección de código la realiza el navegador. Esto significa que, al contrario que en los tipos 1 y 2, la respuesta de la petición HTTP no contiene el script que se ha inyectado.
+
+### Cross-Frame Scripting (XFS)
+
+Ataque que combina inyección de código JS utilizando un iframe. El clickjacking es una ataque que consiste en superponer un iframe transparente (invisible) sobre la página que está viendo el usuario.
+
+### Cross-Site History Manipulation (XSHM)
+
+La manipulación del historial entre dominios es un ataque que se basa en el hecho de que el historial del navegador contiene entradas de todos los sitios web que el usuario ha visitado anteriormente. Se utiliza el objeto *history* usando history.length, history.go, etc.
+
+### Prevención
+
+Las reglas de escapado HTML son complicadas por lo que deberían usarse librerías de eficacia contrastada con funciones predefinidas. Reglas:
+
+- Regla 0: Evitar siempre los datos inseguros en etiquetas script, comentarios, atributos, etiquetas y estilos CSS.
+- Regla 1: Escapar contenido insertable.
+- Regla 2: Escapar contenido insertado dentro de los valores de atributos, prevenit que se "rompa" el atributo.
+- Regla 3: Escapado dentro de etiquetas script o de manejadores de eventos. Escapar entrecomillados con \xHH.
+- Regla 4: Se debe escapar dentro de las hojas de estilo CSS utilizando \HH.
+- Regla 5: Escapado de enlaces a URLs. No se recomienda  codificar toda la URL solo encoding de los valores de parámetro.
+
+Se puede enviar la cabecera X-Frame-Options para evitar cargarse dentro de un iframe.
+
+### Content Security Policy
+
+Mecanismo que permite restringir los contenidos que el navegador puede cargar en un sitio web. Su principal funcionalidad es la de detener ataques de inyección de código.
+
+## Inyección de entidades externas en XML
+
+XML External Entities es un ataque que afecta al lenguaje XML y consiste en añadir referencias a elemnetox externos dentro de un documento XML con el objetivo de causar algún daño. Se puede referenciar otros ficheros XML, DTD y XML Schemas.
+
+Blind XXE: Los resultados no se muestran en la salida de la petición. Si consigue acceder a un servicio interno de la organización se produce un Server Side Request Forgery (SSRF).
+
+### Prevención
+
+Los parsers XML ofrecen opciones para deshabilitar total o parcialmente el soporye de entidades externas. 
+
+## Deserialización y carga dinámica
+
+### Deserialización insegura
+
+
+
+### Prevención de la Deserialización insegura
+
+
+
+### Carga dinámica insegura
+
+
+## Desbordamiento de buffer y de pila
+
+
+
+### Prevención
+
+
+
+### Ensamblador x86
+
+
+
+## Validación de datos
+
+
+
+## Vulnerabilidades en la autenticación
+
+
+
+### Hash
+
+
+
+#### PBKDF2
+
+
+
+#### Bcrypt
+
+
+
+### Escenarios
+
+
+
+### Transmisión
+
+
+
+## Manejo de la sesión
+
+
+
+### Secuestro de la sesión
+
+
+
+### Fijación de la sesión
+
+
+
+### Reescritura de URL
+
+
+
+### Política de mismo origen
+
+
+
+### CORS (Intercambio de recursos de orígenes cruzados)
+
+
+
+#### CORS en peticiones simples
+
+
+
+#### CORS en peticiones complejas
+
+
+
+### Cross-Site Request Forgery
+
+
+
+#### CRSF Login
+
+
+
+### Prevención de CSRF
+
+
+
+## Exposición de datos sensibles
+
+
+
+### Ataque de intermediario
+
+
+
+## Control de acceso
+
+
+
+#### Prevención
+
+
+
+### Atravesar directorios
+
+
+
+### Redirecciones
+
+
+
+## Configuración de seguridad incorrecta
+
+
+
+## Log y monitorización insuficiente
+
+
+
+## Vulnerabilidades en las librerías de terceros
+
+
+
+# Ciclos de desarrollo de software seguro
+
+
+
+### Metodología SDL
+
+
+
+### Formación
+
+
+
+#### Análisis
+
+
+
+#### Diseño
+
+
+
+#### Implementación
+
+
+
+### Herramientas SAST
+
+
+
+#### Pruebas
+
+
+
+#### Revisión del código
+
+
+
+### Herramientas DAST
+
+
+
+#### Pentesting
+
+
+
+#### Release
+
+
+
+# Mecanismos de autenticación, autorización y control de acceso
+
+### Autenticación
+
+
+
+### Autorización
+
+
+
+### Control de acceso
+
+
+
+
+## Autenticación en HTTP
+
+
+
+### Basic
+
+
+
+#### Digest
+
+
+
+## JSON Web Token
+
+
+
+### Sesión web ¿?
+
+
+
+### JWT: Formato
+
+
+
+#### base64url
+
+
+
+#### Cuerpo
+
+
+
+#### Firma
+
+
+
+### Algoritmos de firma
+
+
+
+#### JWT cifrados
+
+
+
+### Ejemplo
+
+
+
+## OAuth
+
+OAuth es un estándar de autorización que permite a las aplicaciones cliente obtener acceso limitado a recursos protegidos en nombre de un usuario sin compartir su contraseña. Tras autorizar al cliente en el servicio de autorización se recibe un código que se intercambia por un token de acceso que permite obtener los datos del servidor de recursos.
+
+#### Endpoints del servidor de autenticación
+
+- Authorization (HTML): Formulario.
+- Token (REST/JSON): Token de acceso.
+- Introspection (REST/JSON): Verificación de tokens.
+
+#### Registro de aplicaciones cliente
+
+Usando las herramientas administrativas de la implementación de OAuth se debe registrar cada aplicación cliente.
+
+#### Clientes confidenciales y públicos
+
+- Confidenciales: Pueden guardar de forma segura el client_secret.
+- Públicos: No pueden y no lo generan.
+
+### Flujos
+
+Ejemplo larguísimo.
+
+### PKCE
+
+¿?
+
+### Aplicaciones y servicios corporativos ¿?
+
+- Desktop: La primera vez que un usuario accede a una aplicación usará el flujo authorization code para obtener un token de acceso para el backend, redigiendo al usuaro al formulario de autenticación. Tras la autenticación satisfactoria el servidor de autorización devolverá la cookie en la respuesta.
+- Móvil: Igual que desktop pero el formulario de autenticación en una app nativa se abrirá en un in-app browser tab.
+- Formulario de autenticación: No tiene sentido que un usuario tenga que autorizar a una aplicación de la empresa a hacer uso de un servicio de la empresa.
+- Acceso a la información del usuario: No existe un mecanismo estándar que permita recuperar información sobre el usuario del propietario del token de acceso.
+
+## OpenID Connect
+
+OIDC es un protocolo de autenticación y autorización construido por encima de OAuth complementándolo. Añade un nuevo tipo de token (id_token), estandariza la información acerca de un usuario, añade endpoints y añade el flujo hybrid.
+
+El id_token es un token en formato JWT que contiene info sobre el usuario, en el flujo authorization code la respuesta al POST incluye el id_token.
+
+### Claims y scopes
+
+La información se modela como claims JWT, con independencia del flujo que se use se utilizan una serie de claims.
+
+La petición de autenticación/autorización en los flujos OAuth incluye el parámetro scope que especifica los permisos que solicita la aplicación cliente (scope=read+write separados por blancos).
+
+#### Autenticación y autorización
+
+
+
+## SAML
+
+Es un protocolo de autenticación y autorización que precede a OIDC, con un diseño complejo y antiguo basado en XML.
+
+La mayor parte de los IdPs proporcionan una implementación de SAML además de OAuth/OIDC. Contempla varios escenarios de uso "perfiles", el perfil principal es "Web Browser SSO" y el soporte de los IdPs suele ir muy ligado al uso de LDAP.
+
+#### Aplicaciones nativas
+
+SAML se diseñó antes de la aparición de los dispositivos móviles actuales, no es apto para conseguir SSO en aplicaciones nativas.
+
+## Kerberos y SPNEGO
+
+### Kerberos
+
+Es un protocolo de autenticación y autorización. Usa un protocolo complejo de criptografía simétrica entre cliente y servicio, el usuario se autentica en su máquina (usualmente user/passwd) y las aplicaciones que arrancan pueden solicitar tickets para los servicios que usen.
+
+### SPENEGO
+
+Se usa para utilizar Kerberos en aplicaciones web corporativas. Simple and Protected GSSAPI Negotiation Mechanism es un protocolo para que un cliente y servicio y negocien un sistema de seguridad que ambos soporten.
+
+Uno de los usos más habituales es el equema Negotiate de las cabeceras HTTP Authorization y WWW-Authenticate que se usa para autenticar un navegador con una aplicación web usando Kerberos como esquema de auth y autor.
+
+## Control de Acceso
+
+### Control de acceso basado en Roles
+
+Ek RBAC se basa en restringir la ejecución de una operación a un usuario según los roles que tenga. La aplicación cliente envía junto a la petición algún tipo de token, que es validado por el servicio para ejecutarse.
+
+### Control de acceso basado en atributos
+
+#### Motivación
+
+Con RBAC cada operación que ejecuta el ususario está condicionada por la posesión de un rol o un conjunto de roles, cuando se da de alta un usuario es necesario otorgarle roles según los servicios que vaya a usar.
+
+En entornos con muchos usuarios y mucha variedad de permisos esto se vuelve una tarea árdua.
+
+#### ABAC
+
+En el modelo ABAC se protege la ejecución de una operación con una política en función de los atributos del sujeto, el recurso y el entorno. Sujetos, recursos y entorno tienen atributos (nombre/valor).
+
+Las políticas de control de acceso no están ancladas a las aplicaciones y servicios, pueden cambiar sin tener que actualizar/cambiar las mismas.
+
+#### XACML
+
+Extensible Access Control Markup Language es un estándar de OASIS que define:
+
+- Lenguaje XML para definición de políticas.
+- Arquitectura de control de acceso.
+- Formato de peticiones/respuestas del PEP al PDP.
+- A sus implementaciones (WS02 IS, OpenAM, etc.) también se les llama herramientas de Acces Management.
+- Estas herramientas muchas veces tienen capacidades de SSO, identidad y autorización (Identity and Access Management).

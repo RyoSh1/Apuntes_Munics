@@ -392,4 +392,444 @@ Tipos de paquetes que deben ser procesados por la CPU:
     - Paquetes que generan "ICMP unreachable".
     - Tráfico no IP.
 
+#### Control Plane Policing
+
+Permite identificar el tipo y el ratio de tráfico que puede alcanzar el plano de control.
+
+#### Control Plane Protection
+
+Funcionalidad similar a CoPP que proporciona una mayor granularidad sobre el control de tráfico, dividiendo la interfaz control-plane en tres subinterfaces: Hots, Transit, CEF-Exception.
+
+La configuración es similar pero más compleja.
+
+# Seguridad LAN en entornos Ethernet
+
+### Configuraciones de seguridad básicas
+
+- Contraseñas Seguras.
+- Configuración de banners.
+- Acceso seguro a la consola (físico y lógico).
+- Acceso seguro a través de líneas VTY.
+- Deshabilitar el demon HTTP.
+- Deshabilitar los servicios no necesarios.
+- Utilizar SNMPv3.
+- Asegurar la topología de spanning tree: identificar el Root Bridge, activar el root-guard, utilizar BPDU guard.
+- Reducir al mínimo el uso de CDP/LLDP.
+- Configurar sistema básico de logging.
+
+#### Configuración básica de los switches
+
+- Desactivar la negociación de trunking.
+- Eliminar las VLANs no utilzadas manualmente.
+- Configurar los puertos no utilizados.
+- Enlaces troncales.
+- Seguridad en los puertos de acceso.
+ 
+### Vulnerabilidades mitigables en capa 2
+
+- Análisis Pasivo: Recopilación de información sin inyección de tráfico (Escucha de tráfico en un puerto).
+- Análisis Activo: Inyectar tráfico a nivel de capa 3 en la red.
+
+## Ataques típicos en Redes de Campus
+
+Tipos de ataques: 
+
+- Accesos no autorizados desde dispositivos falsos.
+- Ataques de explotación de la operativa MAC Ethernet.
+- Ataques de suplantación.
+- Ataques dirigidos contra las VLAN.
+
+### Accesos no autorizados desde dispositivos falsos
+
+Conexión de un punto de acceso no autorizado a la infraestructura de la red, se trata de una brecha de seguridad debido a que si se conecta a una red interna se crea un punto de entrada detras del "firewall" de la organización.
+
+Un atacante con acceso físico a la red podría conectar un switch con la intención de alterar el funcionamiento de STP, hacer sniffing, etc.
+
+### MAC flooding o Saturación de la tabla de envío
+
+Ataque que consiste en sobrecargar la tabla CAM de forma que las tramas convencionales se envíen por todos los puertos. Si un atacante introduce en el switch un número muy alto de direcciones MAC inválidas no se podrán aprender las direcciones asignadas a los puertos correctos, debido a esto el tráfico se enviará por todos los puertos excepto por el que entró.
+
+Objetivo: Recibir todo el tráfico o DoS.
+
+###  ARP spoofing attack
+
+La respuesta ARP un dispositivo legítimo contiene la dirección MAC del propio equipo como respuesta a una petición. En el ataque ARP spoofing, un atacante utiliza su dirección MAC para que aparezca como destino de una IP que no es la suya, provocando que este robe la información.
+
+Pueden utilizarse mensajes tipo "gratuituos arp" para envenenar las cachés arp de los dispositivos del dominio de broadcast.
+
+ARP no utiliza autenticación.
+
+### DHCP Spoofing attack
+
+Un atacante puede generar respuestas DHCP como si fuera un servidor válido. Para esto primero agota todas las direcciones IP ofertadas por el servidor mediante peticiones con direcciones MAC falsas (prioridad si el DHCP está en otra VLAN). Después envía a los usuarios las direcciones IP y máscara como respuesta.
+
+Si el atacante define como camino por defecto y como servidor DNS su máquina mantendrá el direccionamiento de la red y capturará todo el tráfico tanto exterior como interior (Man-in-the-middle).
+
+### Ataques de salto VLAN
+
+Ataques que permiten que un sistema final envíe y/o reciba paquetes de una VLAN que no debería ser accesible para este equipo.
+
+**Switch Spoofing**: El atacante configura su equipo para establecer un enlace trunk utilizando el protocolo DTP. Al activarse el puerto como troncal este envía y acepta tráfico desde y hacia cualquier VLAN.
+
+**Double Tagging**: Se generan tramas con dos cabeceras 802.1Q. El primer switch verá que la etiqueta es de la VLAN nativa y tratará el paquete como si fuese de una trama sin etiquetar, al llegar al segundo switch este lee la etiqueta de la segunda VLAN tratandola como si lo fuese.
+
+Las prevenciones se definen en la sección de buenas prácticas.
+
+## Fundamentos de Spanning Tree Protocol
+
+### Introducción a STP
+
+Spanning Tree Protocol es un protocolo que bloquea determinados puertos para crear un árbol lógico mientras existe una estructura de grafo cíclico a nivel físico, es decir, un camino activo entre todos los dispositivos del segmento.
+
+Problemas derivados de la topología redundante: Tormentas de broadcast, Transmisión de tramas múltiple, inestabilidd de las tablas MAC.
+
+STP utiliza Bridge Data Protocol Units para mantener un camino activo para cada segmento de red, restableciendo la conectividad activando rutas previamente inactivas.
+
+### Estándares Spanning Tree
+
+- Versión riginal de STP desarrollada en 1985 y estandarizada en 1990 (802.1D), solo 1 LAN o VLAN.
+
+- Common Spanning Tree: una única instancia de ST y la convergencia de la red es lenta debido a los temporizadores.
+
+- Cisco PVST y PVST+: Es una mejora patentada por Cisco que proporciona una instancia de ST independiente para cada VLAN, admite mejoras de seguridad en puertos.
+
+- Multiple Spanning Tree o 802.1s: Asigna múltiples VLANs que tienen los mismos requisitos de flujo de tráfico en la misma instancia de ST para reducir el número de instancias. La implementación de Cisco permite 16 instancias de RSTP (802.1w).
+
+- Rapid STP: Convergencia más rápida que STP, pero solo tiene una instancia STP.
+
+- Cisco PVRST+: Una mejora de RSTP que proporciona una instancia independiente de 802.1w por VLAN.
+
+### Operación STP
+
+1. Elegir un Root Bridge
+2. Seleccionar el Root Port en todos los no Root Bridges. 
+3. Seleccionar el puerto designado en cada segmento.
+
+- Root Port: Ruta de menor coste desde el puerto no raíz hasta el puente raíz. Reenvian tráfico de datos hacia el Root Bridge, la dirección MAC origen de las tramas puede rellenar la tabla MAC, solo un Root Port por Bridge.
+- Puerto Designado: En los Root Bridge todos son designados, solo hay un designado por segmento, los designados pueden introducir direcciones en la tabla MAC.
+- Puerto NO Designado: No reenvía tramas de datos y no rellena la tabla MAC.
+- Disabled Port: Deshabilitado.
+
+### Bridge Protocol Data Units
+
+Son los paquetes que intercambian información, se envían cada 2 segundos, la MAC origen es la del puerto que envía y la MAC destino es 01-80-C2-00-00-00 (multicast).
+
+Dos tipos: 
+
+- BPDUs de configuración: Utilizados para calcular y mantener el árbol STP.
+- TCN: Se utilizan para informar a todo el segmento de red o VLAN de un cambio de la topología.
+
+Campos: Prot ID, Version, msg type, Flags, RB ID, RP Cost, Sender Bridge ID, Port ID, Msg Age, Max Age, Hello time, Forward Delay.
+
+#### Elección del Root Bridge
+
+Cada switch tiene un Bridge ID único (Bridge Priority, Dirección MAC), se selecciona como Root el switch con el BID inferior. Cuando se arranca todos son raíz y envían BPDUs por todos los puertos, cuando reciben BPDUs deciden si estos tienen BID mejor.
+
+#### Elección del Root Port
+
+Se determina el coste del camino sumando todos los enlaces entre switch local a Root Bridge. (10 Gbps - 1, 1Gb - 4, 100 Mb - 19, 10 Mb - 100)
+
+Cuando dos puertos tienen el mismo coste se selecciona el menor Port ID (Prio + número). Esta información es la que recibe en las BPDUs.
+
+#### Elección de los Designated Ports
+
+Después de elegir el Root Bridge y los Root Ports es necesario determinar los puertos designados de cada enlace, se elige en base al Path Cost del switch, en caso de empate menor BID y menor PID.
+
+### Estados de los puertos
+
+Cuando un puerto está "shutdown" está en estado desactivado, cuando se activa pasa a estado bloqueo y después puede evolucionar a los otros.
+
+- Blocking: Puerto no designado y no participa en el reenvío de tramas. Recibe BDPUs para determinar la ubicación y el ID del switch raíz y que roles de puerto debe asumir cada switch en la topología.
+- Listening: El puerto puede participar en el reenvío de tramas según las BPDUs recibidas. El puerto no solo recibe sino que también transmite sus propias BPDUs e informa a los switches adyacentes que el puerto del switch se prepara para participar en la topología activa.
+- Learning: Se prepara para participar en el reenvío de tramas, rellena la tabla CAM.
+- Forwarding: Se considera parte de la topología activa, envía y recibe BPDUs.
+- Disabled: Desactivado, no participa en nada.
+
+### Per-VLAN STP Plus
+
+PVST+ es una implementación de Cisco que propociona una instancia STP separada para cada VLAN. En el campo prioridad se transporta el VLAN ID (VID).
+
+### Vulnerabilidades de STP
+
+- Es un protocolo no autenticado.
+- Los switches emiten y aceptan BPDUs por todos sus puertos.
+- Si el atacante es capaz de establecer un enlace troncal se convierte en el raíz de todas las VLANs.
+- Solución: Utilizar los mecanismos de defensa.
+
+## Medidas de Seguridad
+
+### Ataques de capa 2 y contramedidas
+
+- MAC Address Flooding.
+- VLAN Hopping.
+- Ataques entre dispositivos de la misma VLAN.
+- DHCP Starvation y Spoofing
+- Spanning-tree.
+- MAC Spoofing.
+- ARP Spoofing.
+- Manipulación de CDP.
+- Ataques a SSH y Telnet.
+
+### Port Security
+
+
+
+### DHCP Snooping
+
+
+
+### Dynamic ARP Inspection
+
+
+
+### Protección de STP
+
+
+
+#### BPDU guard
+
+
+
+#### BPDU Filtering
+
+
+
+#### Root guard
+
+# Tema 4 Firewalls
+
+
+
+## Tecnologías Firewall
+
+### Filtrado estático de paquetes
+
+
+
+### Filtrado dinámico de paquetes o Stateful Packet Filtering
+
+
+
+#### Conclusiones sobre los Firewall de filtrado de paquetes
+
+
+
+#### Buenas prácticas en Firewalls de filtrado de paquetes
+
+
+
+#### Limitaciones en Firewalls de filtrado de paquetes
+
+
+
+## Firewall de Capa de aplicación
+
+### Filtrado de Capa de Aplicación
+
+
+
+#### Ventajas
+
+
+
+#### Limitaciones
+
+
+
+#### En dispositivos basados en IOS
+
+
+
+## Zone-Based Firewall (ZBFW)
+
+
+#### Zonas especiales: Self & Default
+
+
+
+### Configuración
+
+
+
+## Traducción de direcciones
+
+### Network Address Translation (NAT)
+
+
+
+# Tema 5 Servidores Proxy
+
+## Conceptos
+
+### Servidores Proxy
+
+
+
+#### Características
+
+
+
+#### Limitaciones
+
+
+
+## Topologías
+
+#### Directrices
+
+
+
+#### Topología 1: Proxy HTTP Directo
+
+
+
+#### Topología 2: Proxy Transparente
+
+
+
+#### Topología 3: Proxy inverso
+
+
+
+# Tema 6 IDS / IPS
+
+## Introducción
+
+
+
+#### Definiciones
+
+
+
+### IDS
+
+
+
+### IPS
+
+
+
+### IDPS
+
+
+
+#### Tipos de IDPS
+
+
+
+### Arquitectura de Red
+
+
+
+#### IDPS distribuidos
+
+
+
+### Métodos de detección de firmas
+
+
+
+#### Detección basada en firmas
+
+
+
+#### Detección basada en anomalías
+
+
+
+#### Ventajas de los IDPS
+
+
+
+#### Limitaciones de los IDPS
+
+
+
+## Network-Based IDPS
+
+
+
+## Host-Based IDPS
+
+
+
+# Tema 7 Monitorización
+
+
+
+## Network Time protocols
+
+
+
+### Configuración manual del reloj del sistema
+
+
+
+### Network Time Protocols
+
+
+
+### Modos NTP
+
+
+
+#### Otras configuraciones
+
+
+
+### Principios de Diseño NTP
+
+
+
+### Protección de NTP
+
+
+
+#### Versiones de NTP
+
+
+
+## Syslog
+
+
+
+#### Niveles de severidad de Syslog
+
+
+
+#### Syslog Facilities
+
+
+
+#### Formato de mensajes Syslog
+
+
+
+### Configuración 
+
+
+
+## SNMP
+
+
+
+### Versiones SNMP
+
+#### SNMP v1
+
+
+
+#### SNMP v2
+
+
+
+#### SNMP v3
+
+
+
+#### Recomendaciones SNMP
+
+
+
+#### Configuración SNMPv3
 
