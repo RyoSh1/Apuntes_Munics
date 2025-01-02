@@ -316,14 +316,22 @@ Los parsers XML ofrecen opciones para deshabilitar total o parcialmente el sopor
 
 ### Deserialización insegura
 
+La serialización es un proceso que transforma un objeto de un lenguaje concreto en un flujo de texto o binario. Se produce deserialización insegura cuando no se valida si el flujo de datos de entrada va a crear objetos del tipo esperado.
 
+Java permite utilizar los métodos XMLEncoder y XMLDecoder, sin las validaciones adecuadas este mecanismo puede ser muy peligroso porque podría llegar a permitir la ejecución de cualquier método de cualquier clase Java. 
 
 ### Prevención de la Deserialización insegura
 
+Se pueden utilizar las siguientes técnicas:
 
+- Validaciones de integridad a los objetos serializados.
+- Listas blancas de objetos válidos.
+- Aislar el cósigo que realiza la deserialización para permitir permisos mínimos.
+- Monitorización de los procesos de deserialización.
 
 ### Carga dinámica insegura
 
+El API reflection permite cerar objetos a partir de su nombre, esto permite cargar cualquier clase con tal de que su nombre termine de la forma adecuada.
 
 ## Desbordamiento de buffer y de pila
 
@@ -335,115 +343,189 @@ Los parsers XML ofrecen opciones para deshabilitar total o parcialmente el sopor
 
 ### Ensamblador x86
 
-
+- El comando push coloca el operando en el principio de la pila.
+- El comando pop elimina el elemento situado al principio de la pila.
+- mov copia el dato referenciado en el segundo en la localización del primero.
+- sub almacena en el primero el resultado de restarle el segundo.
+- jmp transfiere el control a la direccion de memoria indicada.
+- ret obtiene la dirección del stack y devuelve el control a esa dirección (pop + jmp).
 
 ## Validación de datos
 
+Validar los datos a nivel seguridad siempre debe realizarse en el servidor, en java tenemos el paquete de javax validation (API de validación de clases y anotaciones).
 
+Es posible crear nuevas personalizadas.
 
 ## Vulnerabilidades en la autenticación
 
+Las vulnerabilidades en los mecanismos de autenticación permiten a un atacante obtener las credenciales de los usuarios de la aplicación.
 
+Es importante no revelar si usuario o contraseña son incorrectos para no indicar parcialmente información.
+
+Otra opción es utilizar autenticación multifactor, para completar con éxito el proceso de autenticación.
+
+También es importante almacenar en la base de datos las contraseñas con su debida protección.
 
 ### Hash
 
+Para no almacenar contraseñas en claro una técnica muy utilizada es Hash and Salt. Un hash es un algoritmo matemático que transforma un bloque de datos en una nueva serie de caracteres de longitud fija de forma unidireccional y no reversible. Las técnicas de hash enfocadas a guardar contraseñas deben ser lentas y evitar colisiones.
 
+El proceso es el siguiente, a la hora de guardar la contraseña se utiliza el salt y se genera su hash, después se guarda salt y hash en la base de datos. Al verificar la contraseña se obtiene de la base de datos el salt y se utiliza con la contraseña proporcionada, si los hashes son iguales es correcta.
 
 #### PBKDF2
 
-
+Un algoritmo de hash muy utilizada, permite especificar un salt y el número de iteraciones que realizará para calcular el hash final.
 
 #### Bcrypt
 
-
+Bcrypt es una de las funciones más utilizadas, está diseñada para ralentizar ataques de fuerza bruta. En su diseño añade un factor de trabajo llamado rondas para ralentizar el hash y la mayoría de implementaciones utiliza un salt aleatorio en cada invocación.
 
 ### Escenarios
 
-
+- Almacenamiento en texto plano.
+- Almacenar un hash de la contraseña con SHA o MD5: Muy rápido por lo que vulnerable a Rainbow Tables.
+- Concatenación de bytes fijos antes de la función de hash: Vulnerable si un atacante consigue obtener el salt.
+- Salt diferente para cada uno de los usuarios: El atacante tendría que generar un diccionario diferente para cada salt.
+- Usar Bcrypt y el factor de trabajo.
 
 ### Transmisión
 
+La información de autenticación no debería transmitirse mediante un medio inseguro, como HTTP que se transmite en plano. Otros métodos de codificación sencillos como Base64 son también vulnerables.
 
+Solución: HTTPS añade una capa de cifrado sobre TCP.
 
 ## Manejo de la sesión
 
-
-
 ### Secuestro de la sesión
 
+Un atacante logra obtener una cookie de sesión valida de un usuario, por lo que es posible ejecutar acciones en su nombre. 
 
+Para mitigarlo se puede usar HTTPS, no permitir acceso JS a las cookies o implementar caducidad de la sesión.
 
 ### Fijación de la sesión
 
+Variante de secuestro de la sesión en la que la víctima se autentica usando un identificador de sesión que el propio atacante ha generado.
 
+El atacante envía el identificador de sesión y URL a la víctima y es esta la que accede de forma voluntaria y se autentica.
+
+Prevención: Generación de cookie de sesión cada vez que el usuario se autentica.
 
 ### Reescritura de URL
 
-
+Si un atacante es capaz de  redirigir a la víctima hasta un sitio web que él controla puede capturar la URL origen a través de la cabecera HTTP Referer. Esto es susceptible a robo de sesión en navegadores que no soporten cookies.
 
 ### Política de mismo origen
 
+La Same-origin Policy define una serie de reglas para restringir cómo un documento o sus scripts pueden interactuar con recursos de dominios diferentes.
 
+Esto afecta a escrituras entre dominios, incrustación de elementos, acceso a document o window, interacciones entre objetos, etc.
+
+También impone restricciones sobre las cabeceras HTTP, por defecto solo se pueden hacer peticiones AJAX al mismo dominio.
+
+El almacenamiento del navegador y las cookies estan separadas por dominio y se pueden establecer límites de subdominio y rutas.
+
+JSONP (con padding) es una técnica utilizada en JS para realizar llamadas asíncronas a dominios diferentes y acceder a servicios web que devuelven JSON pero consiguiendo devolver contenido JavaScript y no un objeto JSON.
 
 ### CORS (Intercambio de recursos de orígenes cruzados)
 
-
+El intercambio de recursos de orígenes cruzados es un mecanismo que pemrite al navegador web solicitar recursos a dominios diferentes. Envía cabeceras HTTP adicionales para aceptar o denegar la solicitud, permite modificar el comportamiento por defecto de la política del mismo origen.
 
 #### CORS en peticiones simples
 
-
+HEAD, GET o POST y utilizan cabeceras HTTP estándar. El navegador envía la cabecera Origin y el servidor envía en la respuesta las cabeceras que empiezan con Access-Control-*.
 
 #### CORS en peticiones complejas
 
+Se consideran complejos los métodos PUT y DELETE y las peticiones con cabeceras no simples (Content-Type...).
 
+La respuesta del servidor contiene Access-Control-Allow-Origin/Methods/Headers.
 
 ### Cross-Site Request Forgery
 
+XRSF es una vulnerabilidad en la que el atacante utiliza el navegador web de la víctima para ejecutar una petición maliciosa en su nombre.
 
+El ataque utiliza de manera automática la cookie con el identificador de sesión de la víctima, por lo que no es posible diferenciar cuando es la propia víctima la que ejecuta voluntariamente o no la acción. Explota la confianza de un sitio web en sus usuarios.
+
+Este ataque explota el hecho de que las peticiones HTTP sean repetibles, mediante mecanismos como las cookies persistentes.
 
 #### CRSF Login
 
-
+Se trata de una variación de XRSF en la que el atacante abre una sesión en una cuenta diferente a la de la víctima y hace que esta opere sin percibir que no es la suya.
 
 ### Prevención de CSRF
 
+Exiten dos tipos de defensas:
 
+- Comprobar las cabeceras HTTP: La cabecera Origin incluye el nombre del dominio origen, la cabecera Referer apunta a la página de la que proviene el usuario y la cabecera Host establece el navegador con el nombre de dominio al que se envía una petición (puede ser modificada por un proxy).
+- Añadir un token a las peticiones (CRSF Token): Un token único por sesión de valor aleatorio generado por un algoritmo criptográfico que se compara con el de la petición y en caso de no coincidencia, aborta la solicitud. 
+- Otra opción al token es usar Double Submit Cookie: el servidor envía una cookie adicional con el token y espera recibir el token en la cookie y por otro medio como pueda ser un POST para compararlos.
+- La política de mismo origen puede usarse para añadir en servidores con peticiones AJAX una cabecera personalizada y comprobar que las peticiones la incluyen.
+- Cookies Samesite.
+- Requerir información extra antes de realizar acciones importantes (Doble autenticación, CaptCha, móvil).
 
 ## Exposición de datos sensibles
 
+Se trata de una vulnerabilidad con un amplio espectro de ataques, cualquier tipo de captura de información sin cifrar mientras esta transita por la red.
 
+Vulnerabilidades explotadas: Información a través de comunicaciones sin cifrar, Algoritmos de encriptación débiles e Información expuesta por la aplicación como mensajes de error.
+
+Información sensible expuesta: Trazas de errores, librerías, Sistema operativo, Sistema de ficheros, Código fuente.
 
 ### Ataque de intermediario
 
+En un MITM el atacante es capaz de interferir en las comunicaciones entre cliente y servidor escuchando los mensajes del canal de comunicación e inyectando mensajes modificados.
 
+Métodos de secuestro: Sniffing, SideJacking y EvilTwin.
 
 ## Control de acceso
 
+Las directivas de control de acceso tienen como misión garantizar que los usuarios solo puedan acceder a aquellas funcionalidades a las que tienen autorización. Debe seguir el principio de menor privilegio o POLP, que consiste en limitar los permisos a los mínimos imprescindibles.
 
+Cuando el control de acceso no existe un atacante podría acceder a zonas de la aplicación a las que no debería. Otro problema es si los roles de usuario se encuentran en una cookie o un token JWT y estos no están validados, en este caso el atacante podría realizar modificaciones en los datos y los roles.
 
 #### Prevención
 
-
+Por defecto la política debe ser la denegación de acceso, los controles de acceso deben implementarse en el servidor, se debe imponer la propiedad de "dueño" para que un usuario solo acceda a "sus registros" y se deberían incluir las pruebas de control de acceso como un elemento más.
 
 ### Atravesar directorios
 
+Es una vulnerabilidad que permite a un atacante acceder a ficheros y directorios que no debería, comumente se utiliza a través de concatenación de cadenas y el uso de "../". Depende de como el servicio acceda al contenido del fichero.
 
+Para evitarlo se deberían validar rutas y caracteres codificados, además de utilizar listas de rutas válidas.
 
 ### Redirecciones
 
+Una redirección se produce cuando el servidor en la respuesta incluye un código 3XX y una cabecera location con la URL, es incontrolada cuando la redirección es un parámetro de entrada de la aplicación y la redirección es a una URL sin validar.
 
+Se puede usar el parámetro "redir" para redireccionar de forma maliciosa a una víctima a través del sistema de autenticación de una aplicación web real.
+
+Los forwards son similares a las redirecciones.
+
+Para evitarlas: Evitar redirecciones, Validar URLs, no utilizar un parámetro sino una clave interna, utilizar una página intermedia que necesite autenticación.
 
 ## Configuración de seguridad incorrecta
 
+Se considera configuración de seguridad incorrecta los siguientes elementos:
 
+- Funcionalidades innecesarias habilitadas.
+- Cuentas o páginas de error por defecto.
+- Permitir llamadas desde métodos HTTP no controlados.
+- Limitar el número de sesiones.
+- Cerrar sesión por inactividad o bloquear tras un tiempo de uso.
+- Limitar el número de registros de una consulta.
+- Separar aplicaciones de usuario y gestión.
 
 ## Log y monitorización insuficiente
 
+El registro de eventos en el log se utiliza para reproducir de forma fiel la causa de un error en una aplicación, por ello es necesario almacenar todos los pasos para permitir la detección y corrección del problema.
 
+Deberían mantenerse en los registros de log los eventos relacionados con el inicio de sesión, con el control de acceso y las transacciones relevantes.
+
+También es importante mantener una monitorización de recursos tanto físicos como lógicos en todo momento.
 
 ## Vulnerabilidades en las librerías de terceros
 
-
+Es muy frecuente el uso de librerías de terceros para implementar funcionalidades que son comunes y repetibles en aplicaciones, por ello es necesario revisar de forma periódica las vulnerabilidades de estas librerías.
 
 # Ciclos de desarrollo de software seguro
 

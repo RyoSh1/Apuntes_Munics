@@ -791,45 +791,79 @@ PVST+ es una implementación de Cisco que propociona una instancia STP separada 
 
 ## Syslog
 
-
+System Message Logging es un proceso que permite a un dispositivo informar de mensajes de error y notificación importantes. Los mensajes permiten identificar el tipo y la gravedad de un problema o notificar de cambios en la configuración, utiliza el puerto UDP 514.
 
 #### Niveles de severidad de Syslog
 
-
+0 -> Emergency, 1 -> Alert, 2 -> Critical, 3 -> Error, 4 -> Warning, 5 -> Notice, 6 -> Informational, 7 -> Debugging.
 
 #### Syslog Facilities
 
-
+Son identificadores de servicio que permiten especificar los datos del estado del sistem apara la notificación de mensajes de evento y error.
 
 #### Formato de mensajes Syslog
 
+Los mensajes comienzan con un "%" y se componen de:
 
+- Facility - Severity - Mnemonic - Message-text.
 
 ### Configuración 
 
-
+Para configurar el servidor de syslog se utiliza el comando logging y para determinar el nivel de gravedad logging trap...
 
 ## SNMP
 
+Es un protocolo estándar de gestión de red. Consta de dos elementos: una aplicación de gestión de red y los agentes SNMP.
 
+SNMP define como se intercambia la información de gestión entre las aplicaciones de gestión de red y los agentes de administración (Objetos de la base de datos = MIB).
+
+La aplicación de gestion de red (Network Management System) sondea periódicamente los agentes SNMP y utiliza UDP como mecanismo para recuperar y enviar la información de gestión.
+
+Los agentes SNMP residen en los equippos gestionados y responden a las peticiones SNMP y generan "traps" para informar al administrador de los determinados eventos. El agente recopila datos y los almacena localmente en la MIB.
 
 ### Versiones SNMP
 
 #### SNMP v1
 
+Se utilizan 5 mensajes básicos para transferir datos entre el agente y la estación administradora: 
 
+- Get Request: Valor de una variable MIB.
+- Get Next Request: Recupera la siguiente instancia de objeto de una tabla o lista.
+- Set Request: Configurar una variable.
+- Get Response: Usada por un agente para responder a los Get desde el NMS.
+- Trap: Utilizado por los agentes para transmitir una alarma no solicitada al NMS. 
 
 #### SNMP v2
 
+Introduce dos nuevos tipos de mensaje:
 
+- Get Bulk Request: Reduce las peticiones y respuestas repetitivas al recuperar grandes cantidades de datos.
+- Inform Request: Alerta NMS de situaciones especícificas, respondido con un Inform Response.
+
+Detalles: Ni v1 ni v2 ofrecen características de seguridad como autenticación de origen o cifrado. En SNMPv2 hay 2 implementaciones, la primera no fue aprobada por el IETF.
 
 #### SNMP v3
 
-
+- Agrega métodos para garantizar la transmisión segura de los datos críticos.
+- Presenta tres niveles de sguridad:
+    - noAuthNoPriv: No se requiere autenticación y no se proporciona confidencialidad.
+    - authNoPriv: Autenticación basada en firmas pero sin cifrados.
+    - authPriv: Autentica el paquete mediante HMAC y cifra usando CBD-DES.
+- Los niveles de seguridad determinan a que objetos SNMP se puede tener acceso.
+- En Cisco v > IOS 12.0
 
 #### Recomendaciones SNMP
 
-
+- Configuración en modo read-only para los NMS, se deben separar las cominidades y credenciales de los sistemas que necesiten escritura.
+- Se deben utilizar vistas: *setup snmp view* permite controlar a qué MIBs y a qué parte puede acceder un usuario.
+- Controlar acceso mediante ACLs.
+- SNMPv3 siempre que sea posible, sino cuidado con los nombres de comunidad en v1/v2.
 
 #### Configuración SNMPv3
 
+1. Configurar listas de acceso SNMP.
+2. Configurar las vistas SNMPv3 para limitar el acceso a MIBs específicas.
+3. Configurar grupos de seguridad.
+4. Configurar usuarios.
+5. Configurar receptores de traps.
+6. Configurar la persistencia de ifindex para evitar los cambios del mismo.
