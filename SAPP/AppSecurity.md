@@ -447,114 +447,151 @@ Los parsers XML ofrecen opciones para deshabilitar total o parcialmente el sopor
 
 # Ciclos de desarrollo de software seguro
 
-
+Para minimizar que se produzcan vulnerabilidades en el código se deben abordar desde las primeras fases del ciclo de desarrollo todos los aspectos relacionados con la seguridad.
 
 ### Metodología SDL
 
+Secure Development Lifecycle es un proceso de desarrollo seguro de Microsoft. Define una fase previa al inicio del proyecto dedicada a formación y aprendicaje, una serie de tareas para las fases de desarrollo tradicionales y contramedidas cuando se produce alguna incidencia.
 
+Existe una versión ágil que define los elementos que deben ejecutarse en cada sprint o iteración, los elementos que se deberían ejecutar periódicamente y aquellos que deberían ejecutarse una vez durante el desarrollo del proyecto.
+
+![SDL](./images/SDL.png)
 
 ### Formación
 
+Inicialmente debería impartirse formación específica en seguridad a todos los miembros del equipo, esta fonrmación debería ser continuada y periódica en el tiempo.
 
+Los aspectos más susceptibles de formación son:
+
+- Principios de diseño seguro.
+- Modelado de amenazas.
+- Codificación segura.
+- Pruebas.
+- Privacidad en datos confidenciales.
 
 #### Análisis
 
-
+Definición de los requisitos de seguridad, los umbrales de calidad que se espera obtener de la aplicación, modelado de casos de uso relacionados con la seguridad y evaluación de riesgos.
 
 #### Diseño
 
-
+Establecimiento de los requerimientos de diseño, Análisis de las superficies de ataque (puntos de ataque), Definición de las restricciones de acceso y modelado de amenaza.
 
 #### Implementación
 
-
+Se define un documento de buenas práctcias de implementación relacionado con aspectos de seguridad, se determina qué herramientas se utilizarán para analizar el código y ejecución de análisis estáticos periódicos con herramientas SAST.
 
 ### Herramientas SAST
 
+Las herramientas SAST están diseñadas para analizar el código fuente o compilado con el objetivo de encontrar problemas de seguridad. Son útiles para detectar problemas como inyección de SQL o desbordamiento de buffer, indican las líneas exactas y se integran con los IDEs.
 
+Su principal inconveniente es que no son capaces de detectar muchos tipos de vulnerabilidades y detectan un alto número de falsos positivos.
+
+La herramienta SonarQube es una herramienta desarrollada para java e integrada con Maven que se utiliza para localizar problemas de código en general y que permite desarrollar políticas de calidad del código fuente.
+
+Find Security Bug es un proyecto de software libre que permite encontrar vulnerabilidades en aplicaciones Java, se integra con SonarQube, Maven, etc. Los patrones de bugs que localiza los referencia con CWE y OWASP Top-10.
 
 #### Pruebas
 
+Durante la fase de pruebas y verificación se lleva a cabo:
 
+- Revisión del código por otros miembros.
+- Pruebas de caja negra.
+- Análisis dinámico y fuzz testing utilizando herramientas de Dynamic Application Security Testing.
+- Reevaluación de las superficies de ataque.
 
 #### Revisión del código
 
-
+Proceso de auditoría del código fuente, se aplica a todo el código general y no solo a las funcionalidades relacionadas con la seguridad, se lleva a cabo por otros miembros del equipo de desarrollo.
 
 ### Herramientas DAST
 
+Son programas qeu realizan pruebas automáticas de caja negra sobre una aplicación. 
 
+Simulan las acciones de un atacante, se ejecuta sobre cualquier lenguaje y proporcionan informes bastante detallados.
 
 #### Pentesting
 
-
+Tests de penetración manuales sobre el software simulando los ataques de una hacker. Pueden ser de caja blanca (info sobre la implementación) o de caja negra (sin información).
 
 #### Release
 
-
+Cuando el software está preparado para poner en funcionamiento se debe hacer una revisión final y elaborar un plan de contingencia.
 
 # Mecanismos de autenticación, autorización y control de acceso
 
 ### Autenticación
 
-
+Muchas funcionalidades que expone el servicio requieren que el usuario de la aplicación cliente se autentique, normalmente un punto de acceso.
 
 ### Autorización
 
-
+El punto de acceso de autenticación podría devolver un token que autoriza a esa aplicación cliente a hacer peticiones al servicio en nombre del usuario. Se enviará ese token como parte de cada petición.
 
 ### Control de acceso
 
-
-
+Comprobación que las peticiones se pueden ejecutar con el token de acceso. Es necesario validar el token de acceso y validar que ese usuario tiene permitido hacer esa petición.
 
 ## Autenticación en HTTP
 
-
+Existen cabeceras estándares Authorization (petición) y WWW-Authenticate (respuesta) que se utilizan para autenticación y/o autorización.
 
 ### Basic
 
-
+Cuando el servicio recibe la petición solo tiene que decodificar la cadena que sigue a Basic para obtener username/password (en claro, necesario HTTPS).
 
 #### Digest
 
-
+Digest define un esquema más complejo que permite no enviar la contraseña en cada petición. No es muy usado por ineficiencia.
 
 ## JSON Web Token
 
 
 
-### Sesión web ¿?
+### Sesión web 
 
 
 
 ### JWT: Formato
 
+Formato en JSON que contiene:
 
+- Cabecera: Tipo de token y algoritmo de firma.
+- Cuerpo: Claims sobre una entidad.
+- Firma: Algoritmo de firma y resultado codificado.
 
 #### base64url
 
-
+Como la cabecera y el cuerpo pueden contener caracteres no ASCII y los algoritmos de firma generan datos binarios, se utiliza base64url que es base64 sustitullendo "+/=".
 
 #### Cuerpo
 
+Tipos de campos (claims) en el objeto JSON:
 
+- Registrados: Estandarizados.
+- Públicos: Cualquiera puede definirlos, hay roles definidos y el resto URIs.
+- Privados: Cualquiera puede definirlos, contexto local.
 
 #### Firma
 
-
+Un JWT se puede firmar de forma simétrica o asimétrica. Con un algoritmo simétrico la "firma" es un MAC, garantiza integridad y autenticidad. Con un algoritmo asimétrico es una firma digital, adicionalmente garantiza no repudio.
 
 ### Algoritmos de firma
 
-
+- Algoritmos simétricos: HMAC con distintos hash, Generación de firma, verificación de la firma.
+- Algoritmos asimétricos: RSASSA con distintas funciones hash, variantes de ECDSA con distintas funciones hash y verificación de la firma con la pk o sk.
 
 #### JWT cifrados
 
-
+Si los datos del JWT son confidenciales los tokens se deben cifrar, el formato son 5 partes separadas por "." en base64url.
 
 ### Ejemplo
 
+En la práctica el usuario envía user/passwd y si es correcto recupera sus roles, genera la cabecera, el cuerpo, los codifica y firma el "token de acceso".
 
+Cuando se requiere autorización se envía una cabecera Authorization que contiene "Bearer" y el token de acceso.
+
+EL token se guarda en memoria en una aplicación nativa y en la sesión web en una aplicación web.
 
 ## OAuth
 
