@@ -402,7 +402,7 @@ Funcionalidad similar a CoPP que proporciona una mayor granularidad sobre el con
 
 La configuración es similar pero más compleja.
 
-# Seguridad LAN en entornos Ethernet
+# Tema 3 Seguridad LAN en entornos Ethernet
 
 ### Configuraciones de seguridad básicas
 
@@ -755,39 +755,69 @@ PVST+ es una implementación de Cisco que propociona una instancia STP separada 
 
 # Tema 7 Monitorización
 
-
+La monitorización es la disciplica que controla el rendimiento y el correcto funcionamiento de la red. Se encarga de verificar el comportamiento previsto, caracterizar el rendimiento, identificar la cantidad de tráfico y su circulación y la resolución de problemas.
 
 ## Network Time protocols
 
+Mantener una configuración de tiempo consistente es clave para aspectos relacionados con seguridad o resolución de problemas. El reloj de un sistema se arranca en el momento que este se inicia, pero puede ser configurado desde distintos orígenes.
 
+El reloj interno marca la hora en base a UTC, pero se adapta al contexto. El reloj también puede saber si la hora se ha aprendido desde una fuente autoritativa.
 
 ### Configuración manual del reloj del sistema
 
+Si se está utilizando NTP el calendario se actualiza periódicamente compensando la desviación horaria. Si el sistema no tiene batería la hora es constante dependiendo de su fabricación. En caso de no tener NTP se recomienda usar el comando calendar en equipos Cisco.
 
+### Network Time Protocol
 
-### Network Time Protocols
+NTP es un protocolo de capa de aplicación diseñado para sincronizar la hora en una infraestructura de red completa. Encapsula sus mensajes UDP y utiliza el puerto 123, sigue el paradigma cliente-servidor (con masters).
 
+Arquitectura: Existe una fuente de información de hora autoritativa que se conecta a un servidor principal (esta es la hora que se distribuye).
 
+Las asociaciones se configuran de forma estática, cada dispositivo tiene el resto de IP para asociarse, entre ellos intercambian mensajes NTP para mantener la precisión. En una LAN se pueden enviar broadcast.
+
+Se utiliza el concepto de Stratum para indicar el número de saltos que hay desde una máquina hasta la fuente autoritativa.
+
+NTP funciona bien sobre rutas no determinísticas porque hace estimaciones basadas en la relación entre cliente y servidor mediante 3 variables: Retardo de red, dispersión de tiempo entre el intercambio de paquetes y el clock offset (corrección). Para evitar errores de sincronización NTP compara información de varias fuentes y no sincroniza con máquinas cuya hora no esté sincronizada consigo misma.
 
 ### Modos NTP
 
+Un dispositivo puede desempeñar más de un rol simultáneamente (normalmente cliente y servidor). Los roles son:
 
+- Server: Proporciona información de tiempo precisa a los clientes.
+- Client: Se sincroniza con un servidos, modo habitual cuando no se quiere (en pricipio) proporcionar información.
+- Peers: Solamente intercambian información de sincronización temporal.
+- Broadcast/multicast: Modo especial de server que envía las actualizaciones de sincronización mediante inundacion en la LAN.
 
-#### Otras configuraciones
+Operativa cliente-servidor: El cliente envía un mensaje NTP a uno o más servidores y procesa sus respuestas. El servidor intercambia direcciones y puertos, sobrescribe campos del mensaje, recalcula el checksum y devuelve el mensaje. La informaciónd el mensaje permite determinar la hora del servidor respecto a la local y facilita el cálculo de la precisión y la fiabilidad.
 
+- **Peer mode**: Se basa en la configuración de un grupo de peers de bajo nivel de stratum que funcionan como backups. Cada peer opera con una o más fuentes de información, si pierde sus referencias los otros peers lo reconfigurarán. Se conoce como push-pull operation.
+- **Broadcast/Multicast Mode**: Se aplica en entornos donde las necesidades de precisión son modestas. No se necesita especificar la IP del servidor, se encuentran en la misma subred, se configuran cliente y servidor con la IP de broadcast.
+#### Otras opciones de configuración
 
+NTP se activa en todas las interfaces una vez que está configurado, es posible desactivar por interfaz. También se puede limitar el número de asociaciones o establecerse como una fuente autoritativa de un determinado nivel (solo si no existe otra fiable).
 
 ### Principios de Diseño NTP
 
-
+- Estructura plana: Todos los routers son peer de los demás routers. Cada router actúa como cliente y servidor, 2 o 3 deberían estar sincronizados con una fuente externa. 
+    - Ventaja: Modelo estable.
+    - Desventajas: Administración pesada, convergencia lenta y poca estabilidad. No recomendado en redes de campus.
+- Diseño Jerárquico de NTP: Utilizado en los ISPs, cada ISP tiene múltiples servidores de stratum 1 que se sincronizan con otros dispositivos del ISP y sincronizan a sus clientes.
+    - Consecuencias: Menor carga y menor tiempo de convergencia.
+    - Válido para organizaciones de gran tamaño.
 
 ### Protección de NTP
 
+NTP es un protocolo fácil de comprometer, es un objetivo habitual por su relación con certificados digitales o Kerberos (Hora). Se puede mejorar la seguridad con ACLs para filtrar peticiones validas.
 
+Configuración de autenticación: Claves, autenticación NTP, claves válidas y servidores.
+
+No todos los clientes deben ser autenticados, NTP solamente autentica orígenes, además debe contestar a dispositivos no autenticados así que es necesario ACLs.
 
 #### Versiones de NTP
 
+Actualmente se utilizan las versiones 3/4 o propietarias, pero los clientes antiguos se pueden comunicar y sincronizar con servidores nuevos.
 
+La versión 4 es una extensión que soporta IPv4/IPv6 y proporciona seguridad completa mediante criptografía de clave pública y certificados digitales.
 
 ## Syslog
 
