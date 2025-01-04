@@ -344,8 +344,6 @@ Permiten la creación de zonas complejas de decisión para separar datos de dist
 
 ### Redes de neuronas artificiales
 
-
-
 Las neuronas se organizan en una serie de capas que define la arquitectura de la red. El entrenamiento se basa en encontrar los pesos óptimos a través de funciones de error como MSE o Cross-entropy. Métodos de gradiente descendiente se utilizan para minimizar la función de error.
 
 #### Back propagation
@@ -461,30 +459,82 @@ El aprendizaje automático preservando la privacidad (PPML) busca proteger los d
 
 ## Tipos de ataques
 
+- Inferencia sobre miembros de la población
+    - Revelación estadística
+    - Inversión de modelos
+    - Inferencia de representantes de clase
+- Inferencia sobre los miembros del conjunto de datos
+    - Inferencia de pertenencia
+    - Inferencia de propiedades
+- Inferencia sobre parámetros del modelo
+    - Extracción del modelo (precisión de tarea)
+    - Robo de funcionalidades
 
+### Ataque de inferencia de membresía
 
-### Ataques de inferencia
+El objetivo es determinar si una entrada ha sido usado en el entrenamiento basandose en el comportamiento del modelo.
 
+- Caja negra: asume conocimiento sobre la predición de salida.
+- Caja blanca: tiene acceso a parámetros y gradientes.
+- Contra generativos: Obtiene información sobre los datos de entrenamiento usando conocimiento sobre los componentes de generación de datos.
+- Contra Federados: Deducir si un registro específico forma parte de cualquier participante.
 
+- Es necesario cuantificar la fuga de información de miembros a través de los resultados de predicción del modelo.
+    - Dado un modelo y un registro determinar si se utilizó.
+    - Investigar dado el entorno más dificil -> Caja negra.
+- Un problema de inferencia de membresía es un problema de clasificación.
+    - Entrenar un modelo para distinguir el comportamiento entre entrenamiento y no.
+    - Usar Shadow Training: Shadow models que imitan el comportamiento del modelo objetivo.
+    - Entrenar el modelo de ataque en las entradas y salidas etiquetadas de los Shadow.
 
-#### Inferencia de membresía
+#### Generar datos para los modelos Shadow
 
+- Síntesis de modelo: El atacante no tiene ni datos ni estadísticas, por lo que genera datos usando el modelo víctima, los datos generados con gran confianza deberían ser similares a los de entrenamiento.
+- Síntesis estadística: El atacante puede tener infomación estadística sobre la población de entrenamiento, cada muestra tiene su propia distribución marginal.
+- Datos reales ruidosos: El atacante debe tener acceso a datos similares a los usados en el entrenamiento de la víctima.
 
+#### Entrenar el modelo de ataque
 
-#### Reconstrucción de modelos
+Para el entrenamiento se hacen consultas a los modelos shadow usando un set de entrenamiento/test disjunto, se etiquetan las salidas como in/out respectivamente, se crean particiones por cada etiqueta diferente (diferentes modelos de ataque) y el resultado es una clasificación binaria
 
+#### Resultados del ataque de membresía
 
+Los ataques son robustos incluso si las suposiciones de distribución de entrenamiento del atacante no son precisas, para la mayor parte de los ataques es posible entrenarse solo con conocimiento de caja negra.
+
+Para modelos del mismo tipo el sobreentrenamiento hace que sea más vulnerable, otros problemas pueden ser la estructura, la generalización y la diversidad de los datos de entrenamiento.
+
+### Ataques de reconstrucción
+
+Los ataques de reconstrucción intentan recrear muestras de entrenamiento o sus etiquetas, puede ser parcial o completa y los datos creados pueden ser los ratos originales o representativos de las propiedades sensibles.
+
+#### Inversión de modelos
+
+Una alta generalización puede producir una alta probabildidad de inferir atributos de los datos, un gran poder de predicción es más susceptible a los ataques de reconstrucción.
+
+- M. Fredrikson contra LR: El adversario no tiene acceso al modelo ni conocimiento sobre características. Utiliza estimación de probabilidad máxima a posteriori (MAP) para inferir los valores de las características sensibles, maximizadno la probabilidad de observar parámetros conocidos.
+- S.Hidano sobre LR: No se asumen conocimientos, se basa en la posibilidad de realizar un ataque de envenenamiento durante el entrenamiento para influir en las predicciones.
+- M. Fredrikson contra MLP/Autoencoders: Formulado como un problema de optimización, el objetivo es usar el gradiente descendiente para recuperar datos de entrada que coincidan con las salidas observadas.
 
 #### Inferencia de propiedades
 
+Estos ataques buscan extraer propiedades del conjunto de datos de entrenamiento que no están explícitamente codificadas como características ni están relacionadas con la tarea principal del modelo. Permiten identificar vulnerabilidades en el sistema y posibilitan la creación de modelos similares al objetivo.
 
+Perspectiva del adversario: Las propiedades inferidas pueden ser generales o específicas, este tipo de ataques puede ocurrir incluso en modelos bien generalizados.
 
 ### Ataques de extracción de modelo
 
-Construcción de un modelo sustituto que imita al original a través de la extracción de información.
+El objetivo es potencialmente la construcción de un modelo sustituto que imita al original a través de la extracción de información. Principalmente el objetivo de los modelos de sustitución es la extración de la precisión para igualar la del modelo original en los test y extracción de la fidelidad, igualar un conjunto de puntos de entrada no relacionados y crear una imitación.
 
+No es estrictamente necesario conocer la arquitectura del modelo víctima mientras el sustituto tenga la misma o mayor complejidad, el objetivo es robar hiperparámetros y propiedades de la arquitectura.
 
+Causas: El subentrenamiento aumenta el éxito del ataque, los modelos con mayor generalización o mayor número de clases son más dificiles de atacar.
 
+- Extracción de precisión de tarea: inferir parámetros del modelo, 
+    - Elegir entradas útiles: Elegir entradas sintéticas cerca del límite de decisión del modelo objetivo. Otras estrategias sería no utilizar datos sintéticos de otros dominios, tecnicas semisupervisadas o generar entradas aleatorias.
+
+- Extracción de funcionalidad:
+    - T.Orekondy: Basado en pares entrada/salida observados en consultas MLaaS, interactua con CNN de caja negra proveyendo imagenes de entrada y obteniendo predicciones, estas predicciones se utilizan para entrenar el modelo de imitación.
+    - N.Papernot: La víctima es un DNN, los inpues los genera un adversario y se etiquetan por el DNN.
 
 # PPML Parte 2
 
@@ -508,7 +558,7 @@ Mecanismos LDP:
 ### Generación de datos sintéticos para preservar la privacidad
 
 - Necesidad de datos en ML: Los algoritmos de aprendizaje automático requieren grandes volúmenes de datos para alcanzar su máximo rendimiento. A menudo no es factible recopilar y compartir datos reales en cantidades suficientes debido a restricciones legales.
-- Datos Sintéticos como Solución: Los datos sintéticos son generados artificialmente mediante algoritmos que imitan la distribución y las propiedades de los datos originales. Conservan características críticas de los datos reales y permiten resultados similares, incluso en escenarios raros o poco comunes. Garantizan la protección de la privacidad mientras se mantiene la utilidad de los datos para aplicaciones específicas
+- Datos Sintéticos como Solución: Los datos sintéticos son generados artificialmente mediante algoritmos que imitan la distribución y las propiedades de los datos originales. Conservan características críticas de los datos reales y permiten resultados similares, incluso en escenarios raros o poco comunes. Garantizan la protección de la privacidad mientras se mantiene la utilidad de los datos para aplicaciones específicas. El objetivo es inferir las etiquetas a partir de los registros y las salidas.
 
 #### Métodos de generación y preservación de privacidad
 
