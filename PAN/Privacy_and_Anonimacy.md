@@ -54,14 +54,39 @@ Seguridad como medio de privacidad.
 
 ### Ataques de inferencia
 
-A partir de datos es sencillo inferor más datos.
+A partir de datos es sencillo inferir más datos, debido a que somos predecibles.
+
+## Ejemplo de Facebook
+
+Estudio realizado en 2013 por Michal Kosinski que se centra en como los likes de facebook se pueden usar para inferir información sensible y rasgos de personalidad de los usuarios. El modelo predijo a partir de datos que parecían inofensivos características como orientación sexual, rasgos de personalidad, afinidad política y religión; 10 likes eran suficientes para hacer inferencias precisas.
+
+Conclusiones: La privacidad no depende solo de lo que compartimos explícitamente sino de como los datos pueden combinarse y analizarse.
+
+## Cambridge Analytica
+
+Este caso expuso como datos masivos de usuarios fueron recolectados y utilizados sin consentimiento para influir en decisiones políticas. El propósito de este caso fue obtener perfiles psicológicos detallados de millones de votantes, identificar preferencias políticas, miedos y vulnerabilidades y usar todos estos datos para diseñar campañas de publicidad política personalizada para influir en elecciones y referendos clave.
 
 #### Deanonimizar
 
 - **Data Linking**: Vínculo con datos externos, cuanto más dispersos más sencillo.
 
+## Ejemplo Deanonimización Netflix
+
+Este se trata de un famoso ejempo de como los dato supuestamente anónimos pueden vincularse a individuos usando información externa.
+
+En 2006 Netflix lanzó un desafío público para mejorar su algoritmo de recomendaciones y publicaron un conjunto de datos que contenía valoraciones de películas, fechas e IDs y se encontraban anonimizados (ni nombres ni identificadores directos).
+
+A través de datos auxiliares como valoraciones públicas en IMDb los atacantes descubrieron patrones coincidentes entre las valoraciones y las fechas, logrando reidentificar personas con pocas valoraciones públicas incluso con discrepancia en las fechas. Los usuarios que calificaban películas sensibles quedaron expuestos sin su conocimiento.
+
 #### Principios de GPDR
 
+- Licitud, imparcialidad y transparencia para el interesado.
+- Limiticación de la finalidad: tratar los datos con los fines especificados explícitamente.
+- Minimización de los datos: Solo procesar los datos absolutamente necesarios.
+- Exactitud
+- Limitación de almacenamiento: Solo el tiempo necesario para el fin especificado.
+- Integridad y confidencialidad: Garantizada la seguridad, etc de los datos.
+- Rendicion de cuentas: El responsable debe poder demostrar el cumplimiento con el GDPR.
 
 # Tema 2: Ataques de reconstrucción de bases de datos
 
@@ -76,6 +101,16 @@ Los ataques de inferencia buscan reconstruir una base de datos curada.
 ### Curar respuestas
 
 Responder a una consulta con una respuesta cierta viola la privacidad, por ello la respuesta debe ser una versión con ruido. Pero en orden de preservar la utilidad se debe controlar la distorsión.
+
+## Caso Ficticio US Census Bureau Data
+
+Caso presentado en 2018 por Simson Grafinkel que ilustra como los datos anonimizados del censo de los EEUU pueden ser reidentificados utilizando técnicas estadísticas modernas y datos auxiliares (en este caso se usaron datos ficticios).
+
+Los censos recopilan información sensible de la población como edad, género, ingresos, nivel educativo,etc. Estos datos pueden es explotados si se identifica a individuos. Para proteger la privacidad estos datos se publican de forma anonimizado eliminando identificadores directos como nombres o direcciones.
+
+Los investigadores utilizaron datos auxiliares para realizar ataque de reidentificación, correlacionando atributos como edad, género, código postal, etc. Estas combinaciones pueden ser únicas para un individuo en áreas rurales o pequeñas.
+
+Se demostró que incluso con datos anonimizados si estos presentan combinaciones únicas, se pueden utilizar cálculos como la media sobre poblaciones de datos pequñas para extraer información de individuos.
 
 ### Ataques de reconstrucción linear
 
@@ -92,6 +127,10 @@ Corolario: A menos que haya un límite en las consultas de la base de datos es p
 ### Ataques de reconstrucción linear probabilisticos
 
 ### Aircloak Diffix Challenge
+
+Caso diseñado para evaluar la robustez de un sistema de anonimización basado en la privacidad diferencial llamado Diffix.
+
+La solución se basó en introducir consultas bajo la condición de O(/n), para realizar un ataque cuya respuesta tendría un nivel bajo de ruido.
 
 # Introducción a la Privacidad diferencial
 
