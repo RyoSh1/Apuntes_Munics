@@ -340,100 +340,149 @@ Caso extremo de K-fold donde se realizan N experimentos con N datos, dejando sie
 
 ## Modelos no lineales de aprendizaje supervisado
 
-
+Permiten la creación de zonas complejas de decisión para separar datos de distintas clases (suelen funcionar mejor que los lineales).
 
 ### Redes de neuronas artificiales
 
 
 
+Las neuronas se organizan en una serie de capas que define la arquitectura de la red. El entrenamiento se basa en encontrar los pesos óptimos a través de funciones de error como MSE o Cross-entropy. Métodos de gradiente descendiente se utilizan para minimizar la función de error.
+
 #### Back propagation
 
+La back-propagation de error es un método eficiente de calcular el gradiente necesario para optimizar los pesos es una red multicapa.
 
+1. Con un bloque de datos de entrenamiento propaga la salida hacia delante para calcular el error.
+2. Propaga hacia atrás el error para obtener el gradiente en cada peso.
+3. Usa los gradientes para actualizar los pesos. 
 
 #### Algoritmos avanzados
 
-
+Adam, RMSprop, AdaGrad, Momentum.
 
 #### Decisión de región
 
-
+Si la red no tiene capas ocultas la región es un hiperplano, si tiene 1 capa oculta es convexa, con 2 capas se convierte en una combinación de regiones convexas
 
 #### Capacidad representacional
 
-
+Según el teorema de aproximación universal de G.Cybenko una red de una capa puede representar cualquier función continua, una sola capa puede ser masiva para adaptarse a los datos. Pero lo normal es que la arquitectura sea más profunda.
 
 ### Redes neuronales convolucionales
 
+Un modelo de red profundo es capaz de capturar de forma correcta las dependencias temporales y espaciales de una imagen aplicando filtros. Esta arquitectura es más adecuada para imagenes debido a la reducción de parámetros usados y reuso de pesos.
 
 #### Capa convolucional
 
+Es una capa con una serie de filtros (kernels) que se aplican en la imagen y se pueden aprender, estos filtros se activan cuando se detecta una característica visual como bordes o colores, el objetivo es extraer características relevantes de la imagen. Esencialmente realiza el producto escalar entre filtros y regiones locales de la imagen.
 
+Normalmente tiene más de una capa convolucional, la primera es la responsable de capturar características de bajo nivel y el resto de alto.
 
 #### Capa RELU
 
-
+Normalmente usada tras una capa convolucional para transformar la operación lineal que esta realiza, es una función de activación definida como max(0,x).
 
 #### Capa de Pooling
 
+Se encarga de reducir el tamaño de la salida de la capa convolucional. Esto ayuda a reducir el núemero de parámetros y controlar así el sobreentrenamiento. Lo normal es colocar esta capa entre capas convolucionales sucesivas.
 
+Tipos de pooling:
+    - Máximos: Devuelve el valor máximo de la parte cubierta por el filtro.
+    - Media: Devuelve la media de todos los valores parte de la imagen cubierta por el filtro.
 
 #### Capa completamente conectada
 
-
+Esta capa permite aprender combinaciones no lineales de características de alto nivel dadas por la capa convolucional. La entrada a esta capa es transformada en plano a un vector columna, durante el proceso de entrenamiento es capaz de distinguir características dominantes y clasificarlas usando softmas.
 
 #### Recomendaciones para un buen entrenamiento
 
+- Normalizar los datos (desviación estándar por píxel).
+- Aumentar los datos (rotando imágenes).
+- Usar datos balanceados en todas las clases.
+- Aleatorizar el orden de entrada en entrenamiento.
+- Inicializar los pesos aleatoriamente.
+- Usar un set de validación para evitar sobreentrenamiento.
 
+# Aprendizaje federado
+
+El aprendizaje federado es un enfoque colaborativo y distribuido para entrenar modelos de aprendizaje automático sin necesidad de compartir los datos originales de los usuarios.
+
+#### Características principales
+
+Los datos permanecen en los dispositivos locales, lo que mitiga riesgos de filtración o uso indebido. Es especialmente útil en situaciones donde los datos están dispersos o no pueden centralizarse debido a restricciones legales.
+
+#### Diferencias con enfoques tradicionales
+
+En lugar de recopilar datos en una plataforma centralizada, los nodos locales realizan el entrenamiento parcial del modelo. Los parámetros actualizados se comparten con un servidor central que coordina el entrenamiento y construye un modelo global.
+
+### Descripción del método
+
+- Flujo de trabajo: 
+    1. El servidor coordina la inicialización del modelo y distribuye los parámetros a los nodos. 
+    2. Cada nodo entrena el modelo con sus datos locales y envía actualizaciones al servidor. 
+    3. El servidor agrega estas actualizaciones para mejorar el modelo global.
+- Datos no uniformes: Los datos en los nodos pueden estar distribuidos de manera desigual, lo que presenta desafios en términos de convergencia y precisión del modelo.
+- Algoritmos optimizados: Equilibran eficiencia y precisión, aunque pueden ser menos efectivos en comparación con enfoques centralizados.
+
+
+### Problemas de privacidad y Modelos de ataque
+
+- Ataques de inferencia:
+    - Ataques de inversión del modelo: Recuperar datos de entrenamiento a partir del modelo.
+    - Ataques de inferencia de membresía: Determinar si un registro específico está en el conjunto de datos de entrenamiento.
+- Ataques de envenenamiento:
+    - Los adversarios manipulan actualizaciones del modelo para desviarlo hacia una solución subóptima o inyectar modelos con puertas traseras.
+- Participantes maliciosos: Un nodo puede intentar recopilar información sensible a través de las actualizaciones del modelo global.
+
+### Mecanismos de Preservación de la privacidad
+
+- Prevención de ataques de inferencia:
+    - Cifrado homomórfico que permite entrenar modelos sobre datos cifrados.
+    - Agregación segura usando computación multipartida para combinar actualizaciones sin exponer datos individuales.
+    - Privacidad diferencial añadiendo ruido a los datos o modelos.
+- Prevención de ataques de envenenamiento:
+    - Técnicas de detección de anomalías en modelos.
+    - Inspección de datos y actualizaciones enviadas por los participantes.
 
 # Privacy Preserving Machine Learning
 
+Privacy Enhancing Tools (PET) con el enfoque en aprencizaje automático.
 
+El aprendizaje automático preservando la privacidad (PPML) busca proteger los datos sensibles durante el entrenamiento y uso de modelos. Sin embargo, estos sistemas varias amenazas que comprometen tanto los datos como los modelos.
 
 ## Modelos de amenazas
 
-
+- Actores implicados: Propietarios de datos sensibles, Propietarios y consumidores del modelo y Adversarios interesados en explotar vulnerabilidades.
+- Superficies de ataque: 
+    - Durante el entrenamiento cuando el modelo se construye.
+    - Durante la inferencia el uso del modelo entrenado.
+    - Comportamiento del atacante: Pasivo (observador), Activo (Manipula el proceso de entrenamiento o inferencia).
+- Tipos de ataques: Basados en conocimiento limitado o completo del modelo y datos.
 
 ## Tipos de ataques
 
 
 
-### Inferencia sobre miembros de la población
+### Ataques de inferencia
 
 
 
-####
+#### Inferencia de membresía
 
 
 
-####
+#### Reconstrucción de modelos
 
 
 
-####
+#### Inferencia de propiedades
 
 
 
-### Inferencia sobre los miembros del dataset de entrenamiento
+### Ataques de extracción de modelo
 
+Construcción de un modelo sustituto que imita al original a través de la extracción de información.
 
-
-####
-
-
-
-####
-
-
-
-### Inferencia sobre los parámetros del modelo
-
-
-
-####
-
-
-
-####
 
 
 
@@ -441,19 +490,37 @@ Caso extremo de K-fold donde se realizan N experimentos con N datos, dejando sie
 
 ## Privacidad diferencial
 
+Las técnicas de privacidad diferencial resisten los ataques de inferencia de membresía añadiendo ruido aleatorio a los datos de entrada, a la iteraciones del algoritmo de machine learning y a las salidas del algoritmo.
 
+- Input: Se añade en la entrada, tras el entrenamiendo de machine learning la salida será diferancialmente privada. Requiere añadir más ruido al input porque los datos tienen mayor sensibilidad.
+- Perturbación de algoritmo: Aplicado a modelos que utilizan varias iteraciones, requiere un diseño distinto para cada algoritmo. Tiene menos sensitividad en los datos e introduce menos ruido.
+- Perturbación objetiva:
+- Perturbación de salida:
 
 ### Privacidad diferencial local
 
+Los individuos envían sus datos al agregador tras privatizar los datos con las perturbaciones.
 
+Mecanismos LDP: 
+    - Una dimensión: Respuesta aleatoria y estimación de frecuencia.
+    - Multidimensional: Laplace, Duchi, Piecewise.
 
 ### Generación de datos sintéticos para preservar la privacidad
 
+- Necesidad de datos en ML: Los algoritmos de aprendizaje automático requieren grandes volúmenes de datos para alcanzar su máximo rendimiento. A menudo no es factible recopilar y compartir datos reales en cantidades suficientes debido a restricciones legales.
+- Datos Sintéticos como Solución: Los datos sintéticos son generados artificialmente mediante algoritmos que imitan la distribución y las propiedades de los datos originales. Conservan características críticas de los datos reales y permiten resultados similares, incluso en escenarios raros o poco comunes. Garantizan la protección de la privacidad mientras se mantiene la utilidad de los datos para aplicaciones específicas
 
+#### Métodos de generación y preservación de privacidad
+
+- Anonimización de datos: K-Anonimidad protege contra reidentificación y L-Diversidad evita problemas con la homogeneidad de datos sensibles en los grupos
+- Privacidad diferencial: Introduce ruido aleatorio para proteger la información sensible mientras se genera: Histogramas sintéticos, Datos tabulares sintéticos (tablas completas) y Datos multimarginales (distribuciones complejas con privacidad garantizada).
 
 ### Técnicas de minado de datos para preservar la privacidad
 
+Minado de datos: Herramientas y técnicas que se pueden usar cada vez que la información recogida es procesada y analizada para extraer conocimiento.
 
+- Modelos descriptivos: Identificar relaciones entre datos y descripciones reconocibles por humanos.
+- Modelos prescriptivos: Usados para predecir el futuro basandose en el pasado.
 
 # Comunicaciones anónimas
 
