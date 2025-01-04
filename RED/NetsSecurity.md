@@ -572,29 +572,43 @@ PVST+ es una implementación de Cisco que propociona una instancia STP separada 
 
 ### Port Security
 
+Es una característica de los Switches Cisco que permite restringir en un puerto las direcciones MAC a aprender en lista o en número. Sticky learning es una característica que convierte dinámicamente las direcciones aprendidas en direcciones "seguras".
 
+Port Security supone una protección ante MAC Flooding y MAC Spoofing.
 
 ### DHCP Snooping
 
+Para evitar los ataques de DHCP Spoofing existe la funcionalidad DHCP Snooping. Esta permite definir qué puertos del switch pueden responder a peticiones DHCP, identificandose como fiables o no fiables.
 
+Los puertos fiables permiten enviar todo tipo de mensajes DHCP y los no fiables solo peticiones, si un dispositivo intenta enviar respuestas DHCP por un puerto no fiable este se deshabilita.
+
+Para cada puerto no fiable se construye una Binding Table, estas tienen una entrada por cada dispositivo configurado por el servidor DHCP.
 
 ### Dynamic ARP Inspection
 
+Es una técnica que previene el ataque de ARP Spoofing, asegurando que solamente se enviarán respuestas ARP válidas. Se verifican la dirección MAC e IP asociada entes de enviarse al equipo destino, sino se descartan.
 
+DAI determina la validez de una respuesta ARP en función de los vínculos almacenados en las tablas de DHCP Snooping.
+
+DAI: Envía los paquetes ARP recibidos por interfaces fiables sin hacer comprobaciones y comprueba los de las interfaces no fiables.
 
 ### Protección de STP
 
-
-
 #### BPDU guard
 
+Se utiliza para proteger una red conmutada de los posibles problemas generados de la recepción de BPDUs por puertos que no deberían (al añadirse un switch a la red).
 
+BPDU Guard pone una interfaz para STP PortFast en el estado err-disable tras recibir una BPDU. Desactiva las interfaces como medida preventiva para evitar bucles. EL administrador debe reactivar manualmente la interfaz después de reparar la configuración no valida.
 
 #### BPDU Filtering
 
+BPDU Filtering impide que un switch envíen BPDUs en interfaces con PortFast habilitado. Cuando está aplicado globalmente hace que todos los puertos con PortFast al recibir BPDUs se desactivan perdiendo el estatus PortFast y funcionando como cualquier otro puerto STP. 
 
+BPDU Guard no tiene efecto si está activado Filtering.
 
 #### Root guard
+
+Root Guard es útil para evitar bucles de capa 2 durante los cambios topológicos o fallos en la red. Esta característica fuerza a una interfaz a convertirse en un puerto designado, si el bridge recibe BPDUs superiores por un puerto con Root Guard activado, este cambiará a root-inconsistent, equivalente al listening, por lo que no reenviará tráfico por ahí.
 
 # Tema 4 Firewalls
 
