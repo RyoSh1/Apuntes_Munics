@@ -60,6 +60,9 @@ A partir de datos es sencillo inferor más datos.
 
 - **Data Linking**: Vínculo con datos externos, cuanto más dispersos más sencillo.
 
+#### Principios de GPDR
+
+
 # Tema 2: Ataques de reconstrucción de bases de datos
 
 ### Consultas de adversario
@@ -84,16 +87,130 @@ Responder a una consulta con una respuesta cierta viola la privacidad, por ello 
 6. Razonamiento inverso.
 7. Diferencias totales.
 
+Corolario: A menos que haya un límite en las consultas de la base de datos es posible realizar una reconstrucción casi perfecta en 4E entradas. E es el máximo error que introduces en la respuesta. Reduciendo la precisión es estadísticamente posible reconstruir el vector secreto con muchas menos consultas.
+
 ### Ataques de reconstrucción linear probabilisticos
 
 ### Aircloak Diffix Challenge
 
+# Introducción a la Privacidad diferencial
 
+Escenario inicial: Un dataset D contiene una fila por cada usuario y un curador produce una salida R a partir de aplicar un mecanismo M al dataset.
 
+A través de un estudio de los datos e información externa un atacante puede encontrar correlaciones entre los datos y obtener información sensible. La privacidad diferencial se encarga de proteger los datos , de tal forma que observar R no debe proporcionar más conocimiento del que se tiene previamente.
 
+### Encontrar Diferencias
+
+El mecanismo M debe ser capaz de producir un R de dos bases de datos (una le falta una fila) que sean indistinguibles. El diseño del mecanismo debe ser probabilístico.
+
+Las distribuciones de ambas salidas deben ser similares, esto debe mantenerse para todos los posibles datasets vecinos (1 fila diferente).
+
+Distribuciones similares: Introducimos un parámetro p como umbral de diferencia para valorar la privacidad...
+
+## Configuración de la privacidad diferencial
+
+Dependiendo de donde se ejecuta el mecanismo, existen dos modelos de privacidad diferencial:
+
+- Central: Hay un agregador centralizado.
+- Local: Cada usuario ejecuta el mecanismo por si solo.
+
+La definición es idéntica, pero la local se tiene en cuenta como si los datasets tuvieran solo una fila.
+
+DP limitado: Los conjuntos de datos vecinos tienen el mismo número de registros y difieren en el valor de una fila. Se usa cuando todos están presentes en ambos conjuntos.
+
+DP No-Limitado: Los conjuntos vecinos difieren en la inclusión o exclusión de una fila. Se usa cuando alguno individuos no estan presentes en alguno de los conjuntos.
+
+## Mis propios apuntes de explicación
+
+PR() representa la probabilidad de que un evento específico ocurra. Pr[M(D) ∈ S] es la probabilidad de que el mecanismo M, aplicado al conjunto de datos D, produzca un resultado que esté dentro del conjunto de resultados S.
+
+#### Ejemplo práctico de la privacidad
+
+Si e=1 y el valor real es 50 (enfermos), entonces M(x) puede ser cualquier numero cercano a 50, pero con menos probabilidad confirme se aleja de este valor. 
+
+Si el ruido generado sigue una distribución Laplaciana con media 0 y escala b = 1/e = 1, entonces:
+
+La probabilidad de que M(x) = 51 es:
+
+1/2b exp(-|51 - 50| / b) = 1/2 exp(-1) == 0.184
+
+La probabilidad de x = 50 es 0.5
+
+Perr >= 1 / (1 + e^e) = 0.26
+
+### Parametro epsilon
+
+Es un parámetro que controla el nivel de privacidad en un mecanismo de DP. Valores pequeños = Mayor privacidad (menos info a la salida), Valores grandes = Menos privacidad (expone más información).
+
+Un mecanismo M satisface ε-DP si para cada conjunto de salidas S y cualquier par de conjuntos de datos vecinos D y D', se cumple que Pr1/Pr2 =< e^e
+
+e^(epsilon) es una cota superior multiplicativa que relaciona las distribuciones de las salidas se un mecanismo sobre dos conjuntos de datos vecinos.
+
+Ejemplo: Si epsilon = 1 , e = 2.718, o que significa que la probabilidad de unsa salida no cambi#a más de un factor de ~2.7, independientemente de la presencia o ausencia de un individuo.
+
+#### DP como un juego estadístico
+
+Si un adversario intenta distinguir dos conjuntos de datos vecinos utilizando las salidas del mecanismo M, epsilon proporciona un límite sobre la capacidad del adversario para tomar decisiones correctas.
+
+Una e-DP pequeña asegura que la probabilidad de error del adversario es alta, lo que equivale a más privacidad.
+
+### Problemas con e-DP
+
+Garantizar e-DP estricta puede ser complicado debido al ruido necesario para preservar la privacidad, para ello se utilizan mecanismos aproximados como (ε,δ)-DP que permiten una pequeña probabilidad δ de fallar en cumplir ε-DP.
+
+## Mecanismos de privacidad diferencial
+
+#### Mecanismo de Laplace
+
+Añade ruido Laplaciano proporcional a la sensibilidad de la función f.
+
+Fórmula: M(x) = f(x) + Lap(Δf/ε)
+
+Donde Δf es la sensibilidad de f, es decir, el cambio máximo en la salida al modificar una sola fila en el conjunto de datos.
+
+Ejemplo: Calculamos la sensibilidad ( max1 - max2) y dividimos eso entre nuestro valor de e. Por ejemplo para sensibilidad de 180 y e=0.1 -> Lap(1800).
+
+#### Mecanismo de Respuesta aleatoria
+
+Ideal para entradas binarias, responde con la verdad con probabilidad p y miente con probabilidad 1-p. Garantiza ε-DP ajustando p adecuadamente.
+
+#### Mecanismo Exponencial
+
+Diseñado para seleccionar entre resultados discretos basándose en una función de utilidad. La probabilidad de elegir un resultado está ponderada exponencialmente por su utilidad.
+
+u es la utilidad y Δu es su sensibilidad.
+
+#### Mecanismo Gaussiano
+
+Similar al de Laplace, pero añade ruido Gaussiano. Útil para aproximaciones de DP ((𝜀,𝛿)-DP).
+
+## Propiedades de DP
+
+### Robustez al Post-procesamiento
+
+Si un mecanismo M satisface e-DP, cualquier función derivada o transformación basada en su salida también lo satisface. Esto implica que la privacidad no se reduce al realizar cálculos adicionales, por lo que un adversario no puede revertir el ruido agragado.
+
+### Privacidad de grupo
+
+Si un mecanismo satisface e-DP para conjuntos de datos que difieren en una sola fila, garantiza k-e-DP para conjuntos que difieren en k filas.
+
+Proporciona una cota sobre la pérdida de privacidad para grupos de individuos en lugar de 1.
+
+### Composición Secuencial
+
+Si se ejecutan múltiples mecanismos independientes, el mismo conjunto de datos, la privacidad combinada es la suma de e. Cada consulta disminuye la privacidad, por lo que es importante limitarlo.
+
+### Composición Paralela
+
+Si diferentes mecanismos operan sobre peticiones disjuntas de los datos, la privacidad combinada es igual a la mayor e de ellos.
+
+Permite realizar múltiples operaciones en paralelo sin afectar significativamente la privacidad.
+
+# Cifrado Homomórfico
+
+Revisar la práctica y lo de Garabato
 
 # Salto Parte 2
-
 
 # Técnicas de anonimidad
 
