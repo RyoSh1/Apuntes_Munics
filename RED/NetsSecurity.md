@@ -709,27 +709,42 @@ Root Guard es útil para evitar bucles de capa 2 durante los cambios topológico
 
 ## Introducción
 
+Un sistema de seguridad de red debe estar preparado para mitigar amenazas de malware de manera inmediata, esto es algo que se escapa del alcance de los firewall.
 
+Esto incluye a los ataques Zero Day, ataques que explotan vulnerabilidades desconocidas y que aún no han sido parcheadas. Una opción sería tener un administrador supervisando continuamente la red.
 
 #### Definiciones
 
+Detección de intrusiones: Proceso de monitorización de los evento ocurridos en un sistema o red, buscando signos de posibles violaciones de las políticas de seguridad.
 
+Intrusion Detection System: Sistema que automatiza el proceso de detección de intrusiones.
+
+Inrtusion Prevention System: IDS con la capacidad de bloquear incidencias.
 
 ### IDS
 
+Los IDS se diseñaron para analizar el tráfico de forma pasiva, lo que analiza es una copia del tráfico original. Compara el flujo de tráfico capturado con firmas conocidas de códigos maliciosos u otros tipos de ataques. Los IDS offline utilizan conexiones en modo promiscuo.
 
+Ventaja: No afectan al tráfico al ser una copia. Desventaja: No detiene paquetes maliciosos.
+
+Cuando detecta el ataque envía una alarma a la consola de gestión.
 
 ### IPS
 
+Los IPS se basan en los IDS pero se colocan inline, no permiten entrar los paquetes sin ser analizados y es capaz de detectar y abortar ataques de inmediato.
 
+Lo malo es que afecta al rendimiento de la red, puede introducir latencia y jitter.
 
 ### IDPS
 
+Los IDPS detectan y evitan las intrusiones, recogen eventos de red o sistema y los analizan en busca de indicios de intrusión. Analizan y monitorizan la información de capas 3 y 4, el contenido de los paquetes y ataques sofisticados.
 
+Cuando detectan una intrusión... De forma pasiva registran la información de los problemas detectados y lanza notificaciones y alarmas. De forma activa recopila información adicional y evita el éxito del ataque bloqueandolo, cambiando el entorno de seguridad (FW) o cambiando el contenido de los paquetes.
 
 #### Tipos de IDPS
 
-
+- Basados en Red.
+- Basados en equipos.
 
 ### Arquitectura de Red
 

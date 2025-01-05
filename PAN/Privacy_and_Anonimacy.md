@@ -700,16 +700,16 @@ Las técnicas de privacidad diferencial resisten los ataques de inferencia de me
 
 - Input: Se añade en la entrada, tras el entrenamiendo de machine learning la salida será diferancialmente privada. Requiere añadir más ruido al input porque los datos tienen mayor sensibilidad.
 - Perturbación de algoritmo: Aplicado a modelos que utilizan varias iteraciones, requiere un diseño distinto para cada algoritmo. Tiene menos sensitividad en los datos e introduce menos ruido.
-- Perturbación objetiva:
-- Perturbación de salida:
+- Perturbación objetiva: Modificar la función objetiva de aprendizaje.
+- Perturbación de salida: Usar un algoritmo de aprendizaje no privado y añadir ruido al modelo generado.
 
 ### Privacidad diferencial local
 
 Los individuos envían sus datos al agregador tras privatizar los datos con las perturbaciones.
 
 Mecanismos LDP: 
-    - Una dimensión: Respuesta aleatoria y estimación de frecuencia.
-    - Multidimensional: Laplace, Duchi, Piecewise.
+- Una dimensión: Respuesta aleatoria y estimación de frecuencia.
+- Multidimensional: Laplace, Duchi, Piecewise.
 
 ### Generación de datos sintéticos para preservar la privacidad
 
@@ -738,7 +738,7 @@ Niveles de anonimato: Privacidad total (nadie identifica a nadie), Privacidad pa
 
 Conceptos clave según Pfitzmann y Hansen:
 
-- Anonimato: Estado en el que un individuo puede ser identificado dentro de un grupo.
+- Anonimato: Estado en el que un individuo no puede ser identificado dentro de un grupo. Requiere que haya sujetos con atributos iguales.
 - No vinculación: Imposibilidad de relacionar múltiples usos de un servicio por un mismo usuario.
 - No observabilidad: Los mensajes son indistinguibles del ruido aleatorio.
 - Pseudoanonimato: Uso de un pseudónimo como identificador único, pero vinculado al usuario.
@@ -812,10 +812,10 @@ Tor es una mejora de Onion Routing, los usuarios se conectan a través de una ap
 
 Limitaciones: Vulnerable a ataques extremos si el atacante controla los nodos finales, identificando remitente, receptor y contenido. No oculta la identidad del remitente a nivel aplicación.
 
-Construcción: Siempre se usan 3 nodos(in, mid, out), el de entrada es confiable y elegido por su estabilidad, los circuitos rotan periódicamente y se usan claves a corto y largo plazo para negociar cifrados y proteger datos.
+Construcción: Siempre se usan 3 nodos(in, mid, out), el de entrada es confiable y elegido por su estabilidad, los circuitos rotan periódicamente y se usan claves a corto y largo plazo para negociar cifrados y proteger datos. La clave a largo plazo se usa como identificador y la de corto plazo como clave onion.
 
 Transferencia de datos: Los mensajes se dividen en paquetes fijos de 512B, los routers desencriptan una capa en cada salto y en las respuestas se hace el proceso inverso.
 
 Servicios ocultos: 
-    - Permite que usuario y servidor no conozcan sus direcciones IP mutuas, el servidor selecciona nodos cebolla como "puntos de introducción" y publica un descriptor en una tabla hash distribuida (pk y direcciones de los puntos).
-    - El usuario elige un punto de introducción y un "punto de encuentro" aleatorio, se solicita a ese punto que introduzca cliente y servidor y si el servidor acepta se crea un circuito para conectarse de forma segura.
+- Permite que usuario y servidor no conozcan sus direcciones IP mutuas, el servidor selecciona nodos cebolla como "puntos de introducción" y publica un descriptor en una tabla hash distribuida (pk y direcciones de los puntos).
+- El usuario elige un punto de introducción y un "punto de encuentro" aleatorio, se solicita a ese punto que introduzca cliente y servidor y si el servidor acepta se crea un circuito para conectarse de forma segura.
