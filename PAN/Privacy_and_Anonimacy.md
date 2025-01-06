@@ -247,7 +247,62 @@ Permite realizar múltiples operaciones en paralelo sin afectar significativamen
 
 # Cifrado Homomórfico
 
-Revisar la práctica y lo de Garabato
+### Cifrado homomórfico
+
+Hacer ejemplo
+
+### Lattices
+
+Una lattice n-dimensional es una combinación de enteros de n vectores base.
+
+### Problema de aprendizaje con errores
+
+
+
+#### Nota respecto a la reducción modular
+
+Las transformaciones en módulo q seguirán la siguiente distribución de intervalos:
+- Para números impares: [-(q-1)/2, (q-1)/2]
+- Para números pares: [-q/2, q/2-1]
+
+#### Búsqueda LWE < Decisión LWE
+
+- Búsqueda: Dado poly(n) pares (ai,bi), buscar el vector s.
+- Decisión: Dado poly(n) pares (ai,bi), decidir:
+    - Han sido generados como (ai,bi = S(T) ai + ei mod q)...
+    - Han sino generados como (ai,bi) donde a es muestra uniforme de Z(n,q) y b es muestra de Zq
+
+Resolver decisión implica resolver búsqueda.
+
+### Error
+
+
+
+### Cifrado simétrico usando LWE
+
+
+
+### Añadir dos mensajes
+
+
+
+### Suma o resta desde una constante
+
+
+
+### Multiplicación
+
+
+
+### Descomposición Gadget
+
+
+
+### Cambio de claves
+
+
+
+
 
 # Salto Parte 2
 
@@ -691,6 +746,15 @@ Causas: El subentrenamiento aumenta el éxito del ataque, los modelos con mayor 
 - Extracción de funcionalidad:
     - T.Orekondy: Basado en pares entrada/salida observados en consultas MLaaS, interactua con CNN de caja negra proveyendo imagenes de entrada y obteniendo predicciones, estas predicciones se utilizan para entrenar el modelo de imitación.
     - N.Papernot: La víctima es un DNN, los inpues los genera un adversario y se etiquetan por el DNN.
+
+## Resumen de los ataques GPT
+
+| Ataque   | Objetivo Principal | Ventaja | Desventaja |
+|----------|----------|----------|----------|
+| Ataque de inferencia de Membresía  | Determinar si un dato específico fue parte del entrenamiento.En clasificación usar Shadow Models.  | Detecta vulnerabilidades en términos de privacidad   | Solo indica si un dato estuvo en el entrenamiento, no qué datos |
+| Inversión de modelo    | Recuperar datos sensibles o privados a partir del modelo | Revela vulnerabilidades en cuanto a datos sensibles  | Requiere un modelo accesible y puede no ser fácil de ejecutar |
+| Inferencia de propiedades  | Inferir características estadísticas del conjunto de datos  | Detecta patrones generales en el modelo entrenado | Menos preciso que otros ataques y puede no revelar datos específicos |
+|  Extracción de modelo  | Obtener una aproximación del modelo entrenado | Permite replicar el modelo o usarlo sin acceso directo | La precisión depende de la cantidad de consultas y puede no replicar completamente el modelo |
 
 # PPML Parte 2
 
