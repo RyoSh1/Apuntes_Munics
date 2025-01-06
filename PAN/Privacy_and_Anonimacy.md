@@ -68,7 +68,7 @@ Este caso expuso como datos masivos de usuarios fueron recolectados y utilizados
 
 #### Deanonimizar
 
-- **Data Linking**: Vínculo con datos externos, cuanto más dispersos más sencillo.
+- **Data Linking**: Vínculo con datos externos, cuanto más dispersos (cantidad de atributos) más sencillo de vincular.
 
 ## Ejemplo Deanonimización Netflix
 
@@ -94,7 +94,7 @@ A través de datos auxiliares como valoraciones públicas en IMDb los atacantes 
 
 La denegación de respuestas puede revelar datos de la propia base, si denegamos un dato importante, pero permitimos el siguiente, el atacante sabrá información sobre la BD.
 
-*Curated: Datos cuidadosamente seleccionados.
+*Curated: Datos cuidadosamente seleccionados y con ruido añadido.
 
 Los ataques de inferencia buscan reconstruir una base de datos curada.
 
@@ -106,7 +106,7 @@ Responder a una consulta con una respuesta cierta viola la privacidad, por ello 
 
 Caso presentado en 2018 por Simson Grafinkel que ilustra como los datos anonimizados del censo de los EEUU pueden ser reidentificados utilizando técnicas estadísticas modernas y datos auxiliares (en este caso se usaron datos ficticios).
 
-Los censos recopilan información sensible de la población como edad, género, ingresos, nivel educativo,etc. Estos datos pueden es explotados si se identifica a individuos. Para proteger la privacidad estos datos se publican de forma anonimizado eliminando identificadores directos como nombres o direcciones.
+Los censos recopilan información sensible de la población como edad, género, ingresos, nivel educativo,etc. Estos datos pueden ser explotados si se identifica a individuos. Para proteger la privacidad estos datos se publican de forma anonimizada eliminando identificadores directos como nombres o direcciones.
 
 Los investigadores utilizaron datos auxiliares para realizar ataque de reidentificación, correlacionando atributos como edad, género, código postal, etc. Estas combinaciones pueden ser únicas para un individuo en áreas rurales o pequeñas.
 
@@ -124,7 +124,24 @@ Se demostró que incluso con datos anonimizados si estos presentan combinaciones
 
 Corolario: A menos que haya un límite en las consultas de la base de datos es posible realizar una reconstrucción casi perfecta en 4E entradas. E es el máximo error que introduces en la respuesta. Reduciendo la precisión es estadísticamente posible reconstruir el vector secreto con muchas menos consultas.
 
+#### Explicación Personal 
+
+s - Query
+a(s) - Respuesta de s
+r(s) - Versión con ruido de a(s)
+Para mantener utilidad |r(s) - a(s)| =< E
+E - Es el límite
+d - Vector secreto
+c - Candidatos a vectores secretos
+c^(k^t) - Un candidato que cumple que el error el menor que E (definitivo).
+
+Teorema: Si un analista hace 2^n queries, podrá reconstruir la BD en todo menos 4E posiciones.
+
+Como funciona: Tu tienes 2^n queries y 2^n candidatos de ser el vector secreto, por cada candidato compruebas todas las queries, si cumple todas, tienes el vector secreto d. Lo que consigues es una columna secreta, donde cada fila cumple o no cumple con tu query [1,0,0,1 ,1,1...]. 
+
 ### Ataques de reconstrucción linear probabilisticos
+
+Consideran la distribución del ruido al evaluar candidatos, rechazando si respuestas asociadas tienen baja probabilidad bajo las distribuciones asumidas.
 
 ### Aircloak Diffix Challenge
 
@@ -185,7 +202,7 @@ Un mecanismo M satisface ε-DP si para cada conjunto de salidas S y cualquier pa
 
 e^(epsilon) es una cota superior multiplicativa que relaciona las distribuciones de las salidas se un mecanismo sobre dos conjuntos de datos vecinos.
 
-Ejemplo: Si epsilon = 1 , e = 2.718, o que significa que la probabilidad de unsa salida no cambi#a más de un factor de ~2.7, independientemente de la presencia o ausencia de un individuo.
+Ejemplo: Si epsilon = 1 , e = 2.718, lo que significa que la probabilidad de una salida no cambia más de un factor de ~2.7, independientemente de la presencia o ausencia de un individuo.
 
 #### DP como un juego estadístico
 
@@ -195,13 +212,13 @@ Una e-DP pequeña asegura que la probabilidad de error del adversario es alta, l
 
 ### Problemas con e-DP
 
-Garantizar e-DP estricta puede ser complicado debido al ruido necesario para preservar la privacidad, para ello se utilizan mecanismos aproximados como (ε,δ)-DP que permiten una pequeña probabilidad δ de fallar en cumplir ε-DP.
+Garantizar e-DP estricta puede ser complicado debido al ruido necesario para preservar la privacidad, para ello se utilizan mecanismos aproximados (relajación) como (ε,δ)-DP que permiten una pequeña probabilidad δ de fallar en cumplir ε-DP.
 
 ## Mecanismos de privacidad diferencial
 
 #### Mecanismo de Laplace
 
-Añade ruido Laplaciano proporcional a la sensibilidad de la función f.
+Añade ruido Laplaciano proporcional a la sensibilidad de la función f y el parámetro de privacidad epsilon. La l-sesibilidad es el máximo cambio que puede haber a la salida al cambiar D por D'.
 
 Fórmula: M(x) = f(x) + Lap(Δf/ε)
 
@@ -222,6 +239,18 @@ u es la utilidad y Δu es su sensibilidad.
 #### Mecanismo Gaussiano
 
 Similar al de Laplace, pero añade ruido Gaussiano. Útil para aproximaciones de DP ((𝜀,𝛿)-DP).
+
+## Resumen Mecanismos
+
+
+| Ataque   | Descripción | Ventaja | Desventaja |
+|----------|----------|----------|----------|
+| Mecanismo Laplaciano | Añade ruido Laplaciano (distribución de Laplace) proporcional a la sensibilidad de la query y el parámetro epsilon | Sencillo, eficiente en consultas con baja sensibilidad y no requieren grandes ajusts de ruido y garantiza epsilon-DP | Menos efectivo contra datos de alta dimensión, si la sensibilidad es alta puede degradar la calidad de los resultados |
+| Mecanismo de respuesta aleatoria | Los usuarios introducen ruido directamente en sus respuestas antes de enviar datos al recolector, encuestas sensibles | Privacidad descentralizada, Adaptable y ligero de implementar  | Puede presentar ruido muy alto, escalabilidad limitada |
+| Mecanismo exponencial  | Selecciona un elemnto de un conjunto de opciones con probabilidad proporcional a su utilidad, añadiendo ruido a través de la distribución exponencial | Optimizado para elecciones discretas y permite priorizar resultados más útiles mientras mantiene privacidad | Limitación en queries continuas y requiere una sensibilidad compleja |
+| Mecanismo Gaussiano | Añade ruido Gaussiano (distribución normal) proporcional a la sensibilidad de la query y al parámetro de privacidad | Escalabilida, flexible y adaptado a la privacidad aproximada (δ) | No garantiza la privacidad diferencial estricta sino aproximada, el ajuste de ruido puede ser más complejo |
+
+IMPORTANTE VER LOS EJEMPLOS
 
 ## Propiedades de DP
 
@@ -253,11 +282,15 @@ Hacer ejemplo
 
 ### Lattices
 
-Una lattice n-dimensional es una combinación de enteros de n vectores base.
+Una lattice n-dimensional es una combinación de enteros de n vectores base. Se usan en sistemas criptográficos resistentes contra computadoras cuánticas.
+
+### Problemas difíciles en lattices
+
+Problema del vector más corto (Encontrar la normal del vector más corto en la lattice), aproximación α de SVP y el problema de SVP independientes.
 
 ### Problema de aprendizaje con errores
 
-
+Es un problema matemático de la teoría de lattices que es fundamental en sistemas resistentes a los ataques de computadoras cuánticas, se utiliza para diseñar esquemas criptográficos como el cifrado, las firmas digitales y el cifrado homomórfico.
 
 #### Nota respecto a la reducción modular
 
@@ -276,11 +309,15 @@ Resolver decisión implica resolver búsqueda.
 
 ### Error
 
-
+El cigrado homomórfico y los problemas LWE tienen un rango de contención del error, dependiendo de como sea la constante en operaciones como multiplicación, es necesario mantener el error controlado para que la salida del descifrado no quede corrupta.
 
 ### Cifrado simétrico usando LWE
 
 
+
+### Cifrado homomórfico
+
+Es una técnica criptográfica que permite realizar cálculos directamente sobre datos cifrados, sin necesidad de descifrarlos primero. Los resultados cuando se descifran son los mismos que si se hubieran realizado sobre los datos originales. Los cifrados pueden ser Parcialmente Homomórficos, Levemente homomórficos o Totalmente homomórficos.
 
 ### Añadir dos mensajes
 
@@ -321,7 +358,7 @@ Elementos que deben ser anonimizados:
 
 Enfoques comunes para la anonimización:
 
-- Enmascaramiento de datos: Los datos se ocultan o alteran para evitar que los originales sean reconstruidos (cifrado, mezcla, sustitución, caracteres). Cambio estático (al replicar BD) o dinámico (al consultar).
+- Enmascaramiento de datos: Los datos se ocultan o alteran para evitar que los originales sean reconstruidos (cifrado, mezcla, sustitución, caracteres). Se puede realizar cambio estático (al replicar BD) o dinámico (al consultar).
 - Pseudoanonimización: Sustituir identifiacores con pseudonimos artificiales, se mantiene un vínculo interno para revertir.
 - Generalización: Reemplaza valores específicos con rangos o categorías, se necesita volumen de datos para garantizar ambigüedad sin perder utilidad.
 - Intercambio: Permutaciones o mezcla entre filas de una misma columna.
@@ -404,7 +441,7 @@ El objetivo específico es desarrollar un sistema que es capaz de solucionar un 
 
 ## Machine Learning
 
-Rama de la IA cuyo objetivo es desarrollar algoritmos de aprendizaje para máquinas, desarrolla modelos comutacionales capaces de aprender a solucionar problemas complejos mediante ejemplos. 
+Rama de la IA cuyo objetivo es desarrollar algoritmos de aprendizaje para máquinas, desarrolla modelos computacionales capaces de aprender a solucionar problemas complejos mediante ejemplos. 
 
 Es adecuado cuando no sabes como montar un algoritmo que solucione un problema, pero si tienes ejemplos de la solución.
 
@@ -532,7 +569,7 @@ Realizar K experimentos usando diferentes subsets de los datos, cada subset se e
 
 ### K-fold cross-validation
 
-Se divide el dataset en K subsets disjuntos de aproximadamente el mismo tamaño, con ellos se realizan K experimento usando cada subset como test y el resto como entrenamiento. El error de validación es calculado como la media de cada E.
+Se divide el dataset en K subsets disjuntos de aproximadamente el mismo tamaño, con ellos se realizan K experimentos usando cada subset como test y el resto como entrenamiento. El error de validación es calculado como la media de cada E.
 
 #### Stratified K-fold cross-validation
 
@@ -579,7 +616,7 @@ Según el teorema de aproximación universal de G.Cybenko una red de una capa pu
 
 ### Redes neuronales convolucionales
 
-Un modelo de red profundo es capaz de capturar de forma correcta las dependencias temporales y espaciales de una imagen aplicando filtros. Esta arquitectura es más adecuada para imagenes debido a la reducción de parámetros usados y reuso de pesos.
+Un modelo de red profundo que es capaz de capturar de forma correcta las dependencias temporales y espaciales de una imagen aplicando filtros. Esta arquitectura es más adecuada para imágenes debido a la reducción del número parámetros usados y reuso de pesos. Adecuada para el tipo rejilla.
 
 #### Capa convolucional
 
@@ -722,7 +759,7 @@ Los ataques de reconstrucción intentan recrear muestras de entrenamiento o sus 
 
 Una alta generalización puede producir una alta probabildidad de inferir atributos de los datos, un gran poder de predicción es más susceptible a los ataques de reconstrucción.
 
-- M. Fredrikson contra LR: El adversario no tiene acceso al modelo ni conocimiento sobre características. Utiliza estimación de probabilidad máxima a posteriori (MAP) para inferir los valores de las características sensibles, maximizadno la probabilidad de observar parámetros conocidos.
+- M. Fredrikson contra LR: El adversario no tiene acceso al modelo ni conocimiento sobre características. Utiliza estimación de probabilidad máxima a posteriori (MAP) para inferir los valores de las características sensibles, maximizando la probabilidad de observar parámetros conocidos.
 - S.Hidano sobre LR: No se asumen conocimientos, se basa en la posibilidad de realizar un ataque de envenenamiento durante el entrenamiento para influir en las predicciones.
 - M. Fredrikson contra MLP/Autoencoders: Formulado como un problema de optimización, el objetivo es usar el gradiente descendiente para recuperar datos de entrada que coincidan con las salidas observadas.
 
@@ -762,10 +799,10 @@ Causas: El subentrenamiento aumenta el éxito del ataque, los modelos con mayor 
 
 Las técnicas de privacidad diferencial resisten los ataques de inferencia de membresía añadiendo ruido aleatorio a los datos de entrada, a la iteraciones del algoritmo de machine learning y a las salidas del algoritmo.
 
-- Input: Se añade en la entrada, tras el entrenamiendo de machine learning la salida será diferancialmente privada. Requiere añadir más ruido al input porque los datos tienen mayor sensibilidad.
-- Perturbación de algoritmo: Aplicado a modelos que utilizan varias iteraciones, requiere un diseño distinto para cada algoritmo. Tiene menos sensitividad en los datos e introduce menos ruido.
-- Perturbación objetiva: Modificar la función objetiva de aprendizaje.
-- Perturbación de salida: Usar un algoritmo de aprendizaje no privado y añadir ruido al modelo generado.
+- Input: Se añade en la entrada del modelo, tras el entrenamiendo de machine learning la salida será diferancialmente privada. Requiere añadir más ruido al input porque los datos tienen mayor sensibilidad.
+- Perturbación de algoritmo: Aplicado a modelos que utilizan varias iteraciones, se añade ruido en los cálculos internos del algoritmo, requiere un diseño distinto para cada algoritmo. Tiene menos sensitividad en los datos e introduce menos ruido.
+- Perturbación objetiva: Modificar la función objetiva de aprendizaje, esto cambia el problema de optimización dificultando la extracción de información.
+- Perturbación de salida: Usar un algoritmo de aprendizaje no privado y añadir ruido al modelo generado, antes de ser compartido o utilizado.
 
 ### Privacidad diferencial local
 
