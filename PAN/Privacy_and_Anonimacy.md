@@ -147,7 +147,7 @@ Consideran la distribución del ruido al evaluar candidatos, rechazando si respu
 
 Caso diseñado para evaluar la robustez de un sistema de anonimización basado en la privacidad diferencial llamado Diffix.
 
-La solución se basó en introducir consultas bajo la condición de O(/n), para realizar un ataque cuya respuesta tendría un nivel bajo de ruido.
+La solución se basó en introducir consultas "aleatorias" mientras que llevaban a cabo pocas condiciones, por ejemplo con 3 condiciones el ruido estaba bajo O(/n), esto garantizaba un ataque exitoso bajo la condición de O(n) ganando el premio.
 
 # Introducción a la Privacidad diferencial
 
@@ -161,7 +161,7 @@ El mecanismo M debe ser capaz de producir un R de dos bases de datos (una le fal
 
 Las distribuciones de ambas salidas deben ser similares, esto debe mantenerse para todos los posibles datasets vecinos (1 fila diferente).
 
-Distribuciones similares: Introducimos un parámetro p como umbral de diferencia para valorar la privacidad...
+Distribuciones similares: Introducimos un parámetro p como umbral de diferencia para valorar la privacidad, este parámetro se transforma en e elevado a epsilon para mejorar los cálculos.
 
 ## Configuración de la privacidad diferencial
 
@@ -247,7 +247,7 @@ Similar al de Laplace, pero añade ruido Gaussiano. Útil para aproximaciones de
 |----------|----------|----------|----------|
 | Mecanismo Laplaciano | Añade ruido Laplaciano (distribución de Laplace) proporcional a la sensibilidad de la query y el parámetro epsilon | Sencillo, eficiente en consultas con baja sensibilidad y no requieren grandes ajusts de ruido y garantiza epsilon-DP | Menos efectivo contra datos de alta dimensión, si la sensibilidad es alta puede degradar la calidad de los resultados |
 | Mecanismo de respuesta aleatoria | Los usuarios introducen ruido directamente en sus respuestas antes de enviar datos al recolector, encuestas sensibles | Privacidad descentralizada, Adaptable y ligero de implementar  | Puede presentar ruido muy alto, escalabilidad limitada |
-| Mecanismo exponencial  | Selecciona un elemnto de un conjunto de opciones con probabilidad proporcional a su utilidad, añadiendo ruido a través de la distribución exponencial | Optimizado para elecciones discretas y permite priorizar resultados más útiles mientras mantiene privacidad | Limitación en queries continuas y requiere una sensibilidad compleja |
+| Mecanismo exponencial  | Selecciona un elemento de un conjunto de opciones con probabilidad proporcional a su utilidad, añadiendo ruido a través de la distribución exponencial | Optimizado para elecciones discretas y permite priorizar resultados más útiles mientras mantiene privacidad | Limitación en queries continuas y requiere una sensibilidad compleja |
 | Mecanismo Gaussiano | Añade ruido Gaussiano (distribución normal) proporcional a la sensibilidad de la query y al parámetro de privacidad | Escalabilida, flexible y adaptado a la privacidad aproximada (δ) | No garantiza la privacidad diferencial estricta sino aproximada, el ajuste de ruido puede ser más complejo |
 
 IMPORTANTE VER LOS EJEMPLOS
@@ -402,8 +402,8 @@ Por cada región:
 
 La geolocalización es un tema clave debido al auge de los servicios basados en ubicación (LBS), pero estos aunque útiles generan riesgos de privacidad: Revelar actividades o hábitos personales, es necesario implementar mecanismos de privacidad para minimizar riesgos.
 
-- Datos de localización: Características que distinguen a una persona, Información espacial (coordenadas, nombres de lugares o proximidad física) e Información temporal (timestamps para rastrear movimiento).
-- Desafíos: Correlaciones entre datos de posición, trayectoria y tiempo pueden comprometer la privacidad. Los datos en tiempo real exigen procesamiento inmediato. 
+- Datos de localización: Características que distinguen a una persona (identidad), Información espacial (coordenadas, nombres de lugares o proximidad física) e Información temporal (timestamps para rastrear movimiento).
+- Desafíos: Correlaciones entre datos de posición, trayectoria y tiempo pueden comprometer la privacidad. Los datos en tiempo real son muchos y exigen procesamiento inmediato. 
 
 Ataques y riesgos: 
 
@@ -437,11 +437,11 @@ Métodos de Preservación:
 
 La inteligencia artificial tiene como objetivo desarrollar sistema que demuestren la flexibilidad y versatilidad de la inteligencia humana para resolver un amplio abanico de problemas complejos (general).
 
-El objetivo específico es desarrollar un sistema que es capaz de solucionar un sistema para el cual ha sido diseñado.
+El objetivo específico es desarrollar un sistema que es capaz de solucionar un problema para el cual ha sido diseñado.
 
 ## Machine Learning
 
-Rama de la IA cuyo objetivo es desarrollar algoritmos de aprendizaje para máquinas, desarrolla modelos computacionales capaces de aprender a solucionar problemas complejos mediante ejemplos. 
+Rama de la IA cuyo objetivo es desarrollar algoritmos de aprendizaje para máquinas, desarrolla modelos computacionales capaces de aprender a solucionar problemas complejos a partir de ejemplos. 
 
 Es adecuado cuando no sabes como montar un algoritmo que solucione un problema, pero si tienes ejemplos de la solución.
 
@@ -453,13 +453,17 @@ Dentro del aprendizaje supervisado tenemos problemas de clasificación (etiqueta
 
 #### Generalización y sobreentrenamiento
 
-La generalización es el termino usado para describir la capacidad de un objeto de predecir o clasificar nuevos datos.
+La generalización es el término usado para describir la capacidad de un modelo de predecir o clasificar nuevos datos.
 
 Sobreentrenamiento define un modelo que ha sido entrenado demasiado bien, provocando que memorice los datos de entrenamiento, pero no sea capaz de predecir nuevos datos.
 
 #### Preparación de datos
 
-Antes de usar datos para entrenar un modelo es necesario prepararlos y "limpiarlos": Normalización, Recodificación de valores no numéricos, Eliminación de ruido e imputación de datos.
+Antes de usar datos para entrenar un modelo es necesario prepararlos y "limpiarlos": 
+- Normalización.
+- Recodificación de valores no numéricos.
+- Eliminación de ruido.
+- Imputación de datos.
 
 ## Modelos lineales de aprendizaje supervisado
 
@@ -469,17 +473,17 @@ Escalares (*x,y*), Vectores (**x,y**), Matrices (**X,Y**), Productos, Normales d
 
 ### Métodos de regresión lineal
 
-El mecanismo de regresión se basa en predecir el valor de variables continuas dado el valor de un conjunto de variables explicativas representadas por un vector m-dimensional.
+El mecanismo de regresión se basa en predecir el valor de una o varias variables continuas dado el valor de un conjunto de variables explicativas representadas por un vector m-dimensional.
 
 - Elementos:
     - Variables explicativas: Parámetros de entrada del modelo.
-    - Ejemplos de entrenamiento: Set de n datos de las variables explicativas cuya predicción ya se sabe.
-    - Modelo: Función parametrizada que representa la relación entre x y t.
+    - Ejemplos de entrenamiento: Set de n datos de las variables explicativas cuya predicción es conocida.
+    - Modelo: Función parametrizada que representa la relación entre x y t (w).
     - Objetivo (error o coste): Función que indica como de bien se aproximan los datos entrenados.
     - Método de optimización que encuentra los parámetros óptimos minimizando la función objetivo.
 
 - Proceso de entrenamiento:
-    - El objetivo es construit un modelo que encuentre los parámetros óptimos **w** para predecir el valor **t** de un nuevo valor **x**.
+    - El objetivo es construir un modelo que encuentre los parámetros óptimos **w** para predecir el valor **t** de un nuevo valor **x**.
     - Esto requiere un set de datos de entrenamiento con n observaciones y valores predecibles.
 
 #### Regresión linear
@@ -557,7 +561,7 @@ En el caso de multiclases la precisión se calcula sobre el resultado global y e
 
 ## Metodologías para el análisis de resultados
 
-Como podemos evaluar de forma realista las métricas, el objetivo es generalizar el error del modelo. Para ello tenemos varios métodos de estimación del error.
+Como podemos evaluar de forma realista las métricas, el objetivo es la generalización del error del modelo. Para ello tenemos varios métodos de estimación del error.
 
 ### Partición simple
 
@@ -596,7 +600,7 @@ Las neuronas se organizan en una serie de capas que define la arquitectura de la
 
 #### Back propagation
 
-La back-propagation de error es un método eficiente de calcular el gradiente necesario para optimizar los pesos es una red multicapa.
+La back-propagation de error es un método eficiente de calcular el gradiente necesario para optimizar los pesos en una red multicapa.
 
 1. Con un bloque de datos de entrenamiento propaga la salida hacia delante para calcular el error.
 2. Propaga hacia atrás el error para obtener el gradiente en cada peso.
@@ -620,7 +624,7 @@ Un modelo de red profundo que es capaz de capturar de forma correcta las depende
 
 #### Capa convolucional
 
-Es una capa con una serie de filtros (kernels) que se aplican en la imagen y se pueden aprender, estos filtros se activan cuando se detecta una característica visual como bordes o colores, el objetivo es extraer características relevantes de la imagen. Esencialmente realiza el producto escalar entre filtros y regiones locales de la imagen.
+Es una capa con una serie de filtros (kernels) que se aplican en la imagen y se pueden aprender. Estos filtros se activan cuando se detecta una característica visual como bordes o colores, el objetivo es extraer características relevantes de la imagen. Esencialmente realiza el producto escalar entre filtros y regiones locales de la imagen.
 
 Normalmente tiene más de una capa convolucional, la primera es la responsable de capturar características de bajo nivel y el resto de alto.
 
@@ -665,8 +669,12 @@ En lugar de recopilar datos en una plataforma centralizada, los nodos locales re
 
 - Flujo de trabajo: 
     1. El servidor coordina la inicialización del modelo y distribuye los parámetros a los nodos. 
-    2. Cada nodo entrena el modelo con sus datos locales y envía actualizaciones al servidor. 
-    3. El servidor agrega estas actualizaciones para mejorar el modelo global.
+    2. Los nodos son seleccionados para una ronda de entrenamiento y el modelo es compartido por el coordinador.
+    3. Cada nodo entrena el modelo con sus datos locales y envía actualizaciones al servidor. 
+    4. El coordinador recibe actualizaciones entrenadas y las agrega para mejorar el modelo global.
+    5. Esto genera una nueva versión actualizada del modelo que repite los pasos anteriores.
+    6. Si el modelo cumple un criterio de rendimiento se termina y se produce el modelo final.
+
 - Datos no uniformes: Los datos en los nodos pueden estar distribuidos de manera desigual, lo que presenta desafios en términos de convergencia y precisión del modelo.
 - Algoritmos optimizados: Equilibran eficiencia y precisión, aunque pueden ser menos efectivos en comparación con enfoques centralizados.
 
@@ -675,10 +683,10 @@ En lugar de recopilar datos en una plataforma centralizada, los nodos locales re
 
 - Ataques de inferencia:
     - Ataques de inversión del modelo: Recuperar datos de entrenamiento a partir del modelo.
-    - Ataques de inferencia de membresía: Determinar si un registro específico está en el conjunto de datos de entrenamiento.
+    - Ataques de inferencia de membresía: Determinar si un registro específico está en el conjunto de datos de entrenamiento o de alguno de los nodos.
+- Tipos de ataque: Desde el cliente comprobando las versiones del modelo o desde el servidor comprobando las actualizaciones enviadas.
 - Ataques de envenenamiento:
     - Los adversarios manipulan actualizaciones del modelo para desviarlo hacia una solución subóptima o inyectar modelos con puertas traseras.
-- Participantes maliciosos: Un nodo puede intentar recopilar información sensible a través de las actualizaciones del modelo global.
 
 ### Mecanismos de Preservación de la privacidad
 
@@ -694,14 +702,17 @@ En lugar de recopilar datos en una plataforma centralizada, los nodos locales re
 
 Privacy Enhancing Tools (PET) con el enfoque en aprencizaje automático.
 
-El aprendizaje automático preservando la privacidad (PPML) busca proteger los datos sensibles durante el entrenamiento y uso de modelos. Sin embargo, estos sistemas varias amenazas que comprometen tanto los datos como los modelos.
+El aprendizaje automático preservando la privacidad (PPML) busca proteger los datos sensibles durante el entrenamiento y uso de modelos. Sin embargo, estos sistemas tienen varias amenazas que comprometen tanto los datos como los modelos.
 
 ## Modelos de amenazas
 
-- Actores implicados: Propietarios de datos sensibles, Propietarios y consumidores del modelo y Adversarios interesados en explotar vulnerabilidades.
+- Actores implicados: 
+    - Propietarios de datos sensibles.
+    - Propietarios y consumidores del modelo.
+    -  Adversarios interesados en explotar vulnerabilidades.
 - Superficies de ataque: 
     - Durante el entrenamiento cuando el modelo se construye.
-    - Durante la inferencia el uso del modelo entrenado.
+    - Durante la inferencia, uso del modelo entrenado.
     - Comportamiento del atacante: Pasivo (observador), Activo (Manipula el proceso de entrenamiento o inferencia).
 - Tipos de ataques: Basados en conocimiento limitado o completo del modelo y datos.
 
@@ -711,16 +722,16 @@ El aprendizaje automático preservando la privacidad (PPML) busca proteger los d
     - Revelación estadística
     - Inversión de modelos
     - Inferencia de representantes de clase
-- Inferencia sobre los miembros del conjunto de datos
-    - Inferencia de pertenencia
-    - Inferencia de propiedades
-- Inferencia sobre parámetros del modelo
-    - Extracción del modelo (precisión de tarea)
-    - Robo de funcionalidades
+- Inferencia sobre los miembros del conjunto de datos de entrenamiento.
+    - Inferencia de membresía.
+    - Inferencia de propiedades.
+- Inferencia sobre parámetros del modelo.
+    - Extracción del modelo (precisión de tarea).
+    - Robo de funcionalidades.
 
 ### Ataque de inferencia de membresía
 
-El objetivo es determinar si una entrada ha sido usado en el entrenamiento basandose en el comportamiento del modelo.
+El objetivo es determinar si una entrada ha sido usado en el entrenamiento basandose en el comportamiento del modelo sobre datos no conocidos o datos de entrenamiento.
 
 - Caja negra: asume conocimiento sobre la predición de salida.
 - Caja blanca: tiene acceso a parámetros y gradientes.
@@ -771,7 +782,9 @@ Perspectiva del adversario: Las propiedades inferidas pueden ser generales o esp
 
 ### Ataques de extracción de modelo
 
-El objetivo es potencialmente la construcción de un modelo sustituto que imita al original a través de la extracción de información. Principalmente el objetivo de los modelos de sustitución es la extración de la precisión para igualar la del modelo original en los test y extracción de la fidelidad, igualar un conjunto de puntos de entrada no relacionados y crear una imitación.
+El objetivo es potencialmente la construcción de un modelo sustituto que imita al original a través de la extracción de información. Principalmente el objetivo de los modelos de sustitución es:
+- Extracción de la precisión para igualar la del modelo original en los test.
+- Extracción de la fidelidad: igualar un conjunto de puntos de entrada no relacionados y crear una imitación.
 
 No es estrictamente necesario conocer la arquitectura del modelo víctima mientras el sustituto tenga la misma o mayor complejidad, el objetivo es robar hiperparámetros y propiedades de la arquitectura.
 
@@ -820,7 +833,10 @@ Mecanismos LDP:
 #### Métodos de generación y preservación de privacidad
 
 - Anonimización de datos: K-Anonimidad protege contra reidentificación y L-Diversidad evita problemas con la homogeneidad de datos sensibles en los grupos
-- Privacidad diferencial: Introduce ruido aleatorio para proteger la información sensible mientras se genera: Histogramas sintéticos, Datos tabulares sintéticos (tablas completas) y Datos multimarginales (distribuciones complejas con privacidad garantizada).
+- Privacidad diferencial: Introduce ruido aleatorio para proteger la información sensible mientras se generan: 
+    - Histogramas sintéticos. 
+    - Datos tabulares sintéticos (tablas completas)
+    - Datos multimarginales (distribuciones complejas con privacidad garantizada).
 
 ### Técnicas de minado de datos para preservar la privacidad
 
