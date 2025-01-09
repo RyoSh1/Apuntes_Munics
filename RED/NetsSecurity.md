@@ -677,33 +677,45 @@ Root Guard es útil para evitar bucles de capa 2 durante los cambios topológico
 
 ### Servidores Proxy
 
+Un proxy es un dispositivo o software que actúa como intermediario entre un dispositivo final y otro cliente o servidor que proporciona o solicita un servicio. Puede ser independiente o estar integrado en el firewall.
 
+Se crearon para proporcionar servicio de caché, pero también ayudan a realizar tareas de log registrando las actividades. Hoy en día se utilizan para seguridad (Filtrado de contenidos en capa 7 y aplicación de políticas de acceso a internet).
+
+No funcionan como routers, se debe establecer una conexión con el proxy y este con el servidor remoto, es un complemento a los firewall y es resistente a ataques capa 3.
 
 #### Características
 
-
+- Son específicos para cada tipo de protocolo de capa de aplicación.
+- Es necesario un agente/servidor proxy para cada tipo de aplicación.
+- Facilitan el proceso de autenticación de usuarios (obligación de autenticación, filtro de contenido, gran capacidad de logging).
+- Cuando se utiliza un proxy para controlar las peticiones desde internet a un servidor en la DMZ se usa un proxy inverso.
 
 #### Limitaciones
 
-
+- Requiere una configuración desde el software del cliente.
+- Proporcionan menor rendimiento: Introducen latencia y requieren más recursos (optimizable con appliances específicos).
+- Problemas con protocolos de capa 7 cifrados (instalación de una PKI para proporcionar certificados a los clientes).
+- Soporte limitado de protocolos de capa de aplicación.
 
 ## Topologías
 
 #### Directrices
 
-
+- Los proxys solo filtran el tráfico de ciertas aplicaciones (suelen colocarse detrás de un firewall). Proxy directo es aquel que filtra las redes internas hacia internet.
+- Suele aplicarse a tráfico que no presenta restricciones temporales.
+- Objetivos: Reducir la carga del Firewall. Análisis y bloqueo de contenidos no autorizados y prevención frente a malware.
 
 #### Topología 1: Proxy HTTP Directo
 
-
+El firewall solamente permite HTTP desde el proxy, el resto de peticiones las deniega. Es obligatorio que el tráfico pase a través del proxy (filtro de contenidos).
 
 #### Topología 2: Proxy Transparente
 
-
+El firewall enruta todo el tráfico de los PCs al servidor proxy, que filtra las conexiones y enruta los paquetes hacia el CPE. Los clientes no son conscientes del análisis.
 
 #### Topología 3: Proxy inverso
 
-
+Las peticiones al servidor y las respuestas son filtradas a través de un proxy inverso, los usuarios no son conscientes de que la petición es analizada.
 
 # Tema 6 IDS / IPS
 
