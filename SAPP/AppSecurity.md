@@ -527,13 +527,54 @@ También es importante mantener una monitorización de recursos tanto físicos c
 
 Es muy frecuente el uso de librerías de terceros para implementar funcionalidades que son comunes y repetibles en aplicaciones, por ello es necesario revisar de forma periódica las vulnerabilidades de estas librerías.
 
+# Tabla resumen de los ataques
+
+| Nombre | Descripción | Prevención |
+|----------|----------|----------|
+| Inyección SQL | Algo | Algo |
+| Inyección en Logs | Algo | Algo |
+| Inyección en cabeceras HTTP | Algo | Algo |
+| Inyección en SMTP | Algo | Algo |
+| Inyección de CMD | Algo | Algo |
+| Inyección en LDAP | Algo | Algo |
+| Inyección en XML | Algo | Algo |
+| Inyección en XPath | Algo | Algo |
+| I de JS: Reflected XSS | Algo | Algo |
+| I de JS: Stored XSS | Algo | Algo |
+| I de JS: DOM-based XSS | Algo | Algo |
+| I de JS: XFS y Clickjacking | Algo | Algo |
+| I de JS: XSHM | Algo | Algo |
+| I de JS: En Logs | Algo | Algo |
+| I de entidades externas en XML | Algo | Algo |
+| Deserialización insegura | Algo | Algo |
+| Carga dinámica insegura | Algo | Algo |
+| Desbordamiento de buffer y pila | Algo | Algo |
+| Ensamblador x86 | Algo | Algo |
+| Validación de datos | Algo | Algo |
+| Vulnerabilidades en la autenticación | Algo | Algo |
+| Secuestro de la sesión | Algo | Algo |
+| Fijación de la sesión | Algo | Algo |
+| Reescritura de URL | Algo | Algo |
+| Política del mismo origen | Algo | Algo |
+| CORS | Algo | Algo |
+| Cross-site Request Forgery | Algo | Algo |
+| Exposición de datos sensibles | Algo | Algo |
+| Man-In-The-Middle | Algo | Algo |
+| Control de Acceso | Algo | Algo |
+| CA: Atravesar directorios | Algo | Algo |
+| CA: Redirecciones | Algo | Algo |
+| Configuración incorrecta | Algo | Algo |
+| Log y monitorización insuficiente | Algo | Algo |
+| Librerías de terceros | Algo | Algo |
+
+
 # Ciclos de desarrollo de software seguro
 
 Para minimizar que se produzcan vulnerabilidades en el código se deben abordar desde las primeras fases del ciclo de desarrollo todos los aspectos relacionados con la seguridad.
 
 ### Metodología SDL
 
-Secure Development Lifecycle es un proceso de desarrollo seguro de Microsoft. Define una fase previa al inicio del proyecto dedicada a formación y aprendicaje, una serie de tareas para las fases de desarrollo tradicionales y contramedidas cuando se produce alguna incidencia.
+Secure Development Lifecycle es un proceso de desarrollo seguro diseñado por Microsoft. Define una fase previa al inicio del proyecto dedicada a formación y aprendizaje, una serie de tareas para las fases de desarrollo tradicionales y contramedidas cuando se produce alguna incidencia.
 
 Existe una versión ágil que define los elementos que deben ejecutarse en cada sprint o iteración, los elementos que se deberían ejecutar periódicamente y aquellos que deberían ejecutarse una vez durante el desarrollo del proyecto.
 
@@ -541,12 +582,12 @@ Existe una versión ágil que define los elementos que deben ejecutarse en cada 
 
 ### Formación
 
-Inicialmente debería impartirse formación específica en seguridad a todos los miembros del equipo, esta fonrmación debería ser continuada y periódica en el tiempo.
+Inicialmente debería impartirse formación específica en seguridad a todos los miembros del equipo, esta formación debería ser continuada y periódica en el tiempo.
 
 Los aspectos más susceptibles de formación son:
 
 - Principios de diseño seguro.
-- Modelado de amenazas.
+- Modelado de amenazas: Proceso de identificación, priorización y documentación de ataques (+ medidas para contrarrestar o mitigar).
 - Codificación segura.
 - Pruebas.
 - Privacidad en datos confidenciales.
@@ -557,38 +598,38 @@ Definición de los requisitos de seguridad, los umbrales de calidad que se esper
 
 #### Diseño
 
-Establecimiento de los requerimientos de diseño, Análisis de las superficies de ataque (puntos de ataque), Definición de las restricciones de acceso y modelado de amenaza.
+Establecimiento de los requerimientos de diseño, Análisis de las superficies de ataque (puntos de ataque), Definición de las restricciones de acceso y modelado de amenazas.
 
 #### Implementación
 
-Se define un documento de buenas práctcias de implementación relacionado con aspectos de seguridad, se determina qué herramientas se utilizarán para analizar el código y ejecución de análisis estáticos periódicos con herramientas SAST.
+Se define un documento de buenas prácticas de implementación relacionado con aspectos de seguridad, se determina qué herramientas se utilizarán para analizar el código y ejecución de análisis estáticos periódicos con herramientas SAST.
 
 ### Herramientas SAST
 
-Las herramientas SAST están diseñadas para analizar el código fuente o compilado con el objetivo de encontrar problemas de seguridad. Son útiles para detectar problemas como inyección de SQL o desbordamiento de buffer, indican las líneas exactas y se integran con los IDEs.
+Las herramientas SAST están diseñadas para analizar el código fuente o compilado con el objetivo de encontrar problemas de seguridad. Son útiles para detectar problemas como inyección de SQL o desbordamiento de buffer, indican las líneas exactas en el código y se integran con los IDEs.
 
 Su principal inconveniente es que no son capaces de detectar muchos tipos de vulnerabilidades y detectan un alto número de falsos positivos.
 
-La herramienta SonarQube es una herramienta desarrollada para java e integrada con Maven que se utiliza para localizar problemas de código en general y que permite desarrollar políticas de calidad del código fuente.
+La herramienta SonarQube es una herramienta desarrollada para java e integrada con Maven que se utiliza para localizar problemas de código en general y que permite desarrollar políticas de calidad del código fuente según los errores que detecta (Bugs, Vulnerabilidades y Code Smells).
 
 Find Security Bug es un proyecto de software libre que permite encontrar vulnerabilidades en aplicaciones Java, se integra con SonarQube, Maven, etc. Los patrones de bugs que localiza los referencia con CWE y OWASP Top-10.
 
-#### Pruebas
+### Pruebas
 
 Durante la fase de pruebas y verificación se lleva a cabo:
 
 - Revisión del código por otros miembros.
 - Pruebas de caja negra.
-- Análisis dinámico y fuzz testing utilizando herramientas de Dynamic Application Security Testing.
+- Análisis dinámico y fuzz testing utilizando herramientas DAST, se introducen datos inválidos, inesperados o aleatorios.
 - Reevaluación de las superficies de ataque.
 
 #### Revisión del código
 
-Proceso de auditoría del código fuente, se aplica a todo el código general y no solo a las funcionalidades relacionadas con la seguridad, se lleva a cabo por otros miembros del equipo de desarrollo.
+Proceso de auditoría del código fuente, se aplica a todo el código general y no solo a las funcionalidades relacionadas con la seguridad, se suele llevar a cabo por otros miembros del equipo de desarrollo.
 
 ### Herramientas DAST
 
-Son programas qeu realizan pruebas automáticas de caja negra sobre una aplicación. 
+Las Dynamic Application Security Testing son programas que realizan pruebas automáticas de caja negra sobre una aplicación. 
 
 Simulan las acciones de un atacante, se ejecuta sobre cualquier lenguaje y proporcionan informes bastante detallados.
 
@@ -598,21 +639,21 @@ Tests de penetración manuales sobre el software simulando los ataques de una ha
 
 #### Release
 
-Cuando el software está preparado para poner en funcionamiento se debe hacer una revisión final y elaborar un plan de contingencia.
+Cuando el software está preparado para poner en funcionamiento, se debe hacer una revisión final y elaborar un plan de contingencia (en caso de alertas de seguridad).
 
 # Mecanismos de autenticación, autorización y control de acceso
 
 ### Autenticación
 
-Muchas funcionalidades que expone el servicio requieren que el usuario de la aplicación cliente se autentique, normalmente un punto de acceso.
+Muchas funcionalidades que expone el servicio requieren que el usuario de la aplicación cliente se autentique, normalmente se utiliza un punto de acceso.
 
 ### Autorización
 
-El punto de acceso de autenticación podría devolver un token que autoriza a esa aplicación cliente a hacer peticiones al servicio en nombre del usuario. Se enviará ese token como parte de cada petición.
+El punto de acceso de autenticación podría devolver un token que autoriza a esa aplicación cliente a hacer peticiones al servicio en nombre del usuario. Se enviará ese token como parte de cada petición. Debe ser seguro (no generable por otra persona).
 
 ### Control de acceso
 
-Comprobación que las peticiones se pueden ejecutar con el token de acceso. Es necesario validar el token de acceso y validar que ese usuario tiene permitido hacer esa petición.
+Comprobación que las peticiones se pueden ejecutar con el token de acceso. Es necesario validar el token de acceso y validar que ese usuario tiene permitido hacer esa petición (Rol).
 
 ## Autenticación en HTTP
 
@@ -620,7 +661,7 @@ Existen cabeceras estándares Authorization (petición) y WWW-Authenticate (resp
 
 ### Basic
 
-Cuando el servicio recibe la petición solo tiene que decodificar la cadena que sigue a Basic para obtener username/password (en claro, necesario HTTPS).
+Cuando el servicio recibe la petición solo tiene que decodificar la cadena que sigue a Basic para obtener username/password (en claro, necesario HTTPS-TLS). Si no es correcto devuelve 401 y la cabecera WWW-Authenticate.
 
 #### Digest
 
@@ -628,11 +669,9 @@ Digest define un esquema más complejo que permite no enviar la contraseña en c
 
 ## JSON Web Token
 
-
-
 ### Sesión web 
 
-
+Concepto que se puede usar para las aplicaciones web del lado servidor que requieren autenticación. El servicio tiene que ofrecer un punto de acceso y si usuario y contraseña son correctos, se crea la sesión y se devuelve una cookie de sesión (auth) que el cliente tiene que pasar en cada petición.
 
 ### JWT: Formato
 
@@ -687,24 +726,48 @@ OAuth es un estándar de autorización que permite a las aplicaciones cliente ob
 
 #### Registro de aplicaciones cliente
 
-Usando las herramientas administrativas de la implementación de OAuth se debe registrar cada aplicación cliente.
+Usando las herramientas administrativas de la implementación de OAuth se debe registrar en cada aplicación cliente: Datos de entrada (información básica y redirect_uri) y datos de salida.
 
 #### Clientes confidenciales y públicos
 
 - Confidenciales: Pueden guardar de forma segura el client_secret.
 - Públicos: No pueden y no lo generan.
 
-### Flujos
+## Flujos "Authorization code"
 
 Ejemplo larguísimo.
 
+### Aplicación web del lado servidor
+
+Resumen rápido: 
+
+1. Un usuario intenta lanzar un evento y se le redirecciona a authe/autho. [1, 2]
+2. Se hace una petición GET y el servidor devuelve un formulario. [3, 4]
+3. Se envía la respuesta al formulario y el cliente devuelve un "code". [5, 6]
+4. Se envía un GET a la aplicación con "code", la aplicación con él realiza un POST para solicitar el access_token y el servidor se lo devuelve. [7, 8, 9]
+5. Se realiza la petición original (con access_token en la cabecera), en el servicio verifica el token, se completa la petición y se devuelve al navegador. [10, 11, 12, 13, 14]
+
+#### Verificación de Token
+
+Para verificar el token se utiliza criptografía asimétrica, el token está firmado con la privada del servidor de autenticación y se valida con la pública en el servidor de recursos. Si se usase criptografía simétrica tendría que compartirse previamente.
+
 ### PKCE
 
-¿?
+No sé que son las siglas PKCE, pero pone dos ejemplos, uno donde hace un robo de sesión mediante un correo y el otro que roba un código con privilegios y lo pega en su cabecera code.
 
-### Aplicaciones y servicios corporativos ¿?
+PKCE es algo de seguridad que alade un verificador para el código de autorización (code_verifier), se añade en sus propias cabeceras añadiendo un "code_challenge" y code_challenge_method para comprobar si es correcto.
 
-- Desktop: La primera vez que un usuario accede a una aplicación usará el flujo authorization code para obtener un token de acceso para el backend, redigiendo al usuaro al formulario de autenticación. Tras la autenticación satisfactoria el servidor de autorización devolverá la cookie en la respuesta.
+### Aplicación web SPA
+
+Similar al anterior, pero al ser un cliente público no se pasa la cabecera Authorization y se incluye el client_id. El code_verifier se guarda en la sessionStorage.
+
+### Aplicación nativa
+
+El formulario de aut/auth se visualiza en una subventana segura.
+
+### Aplicaciones y servicios corporativos 
+
+- Desktop: La primera vez que un usuario accede a una aplicación usará el flujo authorization code para obtener un token de acceso para el backend, redigiendo al usuaro al formulario de autenticación. Tras la autenticación satisfactoria el servidor de autorización devolverá la cookie de autenticación en la respuesta. La siguiente apolicación que lance el usuario realiza el mismo proceso y accede si la cookie no ha caducado.
 - Móvil: Igual que desktop pero el formulario de autenticación en una app nativa se abrirá en un in-app browser tab.
 - Formulario de autenticación: No tiene sentido que un usuario tenga que autorizar a una aplicación de la empresa a hacer uso de un servicio de la empresa.
 - Acceso a la información del usuario: No existe un mecanismo estándar que permita recuperar información sobre el usuario del propietario del token de acceso.
@@ -713,17 +776,19 @@ Ejemplo larguísimo.
 
 OIDC es un protocolo de autenticación y autorización construido por encima de OAuth complementándolo. Añade un nuevo tipo de token (id_token), estandariza la información acerca de un usuario, añade endpoints y añade el flujo hybrid.
 
-El id_token es un token en formato JWT que contiene info sobre el usuario, en el flujo authorization code la respuesta al POST incluye el id_token.
+El id_token es un token en formato JWT que contiene info sobre el usuario, en el flujo "authorization code" la respuesta al POST incluye el id_token.
 
 ### Claims y scopes
 
-La información se modela como claims JWT, con independencia del flujo que se use se utilizan una serie de claims.
+La información se modela como claims JWT, con independencia del flujo que se use, se utilizan una serie de claims (iss,sub,aud,exp,iat...).
 
 La petición de autenticación/autorización en los flujos OAuth incluye el parámetro scope que especifica los permisos que solicita la aplicación cliente (scope=read+write separados por blancos).
 
 #### Autenticación y autorización
 
+OAuth es un protocolo principalmente de autorización y OIDC de autenticación y autorización, esto se debe a que el soporte de autenticación de OIDC es mucho más completo, ya que estandariza la información acerca de un usuario, se define id_token y el endpoint UserInfo.
 
+A los protocolos como OIDC se les llama IdPs(Identity Providers).
 
 ## SAML
 
@@ -745,13 +810,13 @@ Es un protocolo de autenticación y autorización. Usa un protocolo complejo de 
 
 Se usa para utilizar Kerberos en aplicaciones web corporativas. Simple and Protected GSSAPI Negotiation Mechanism es un protocolo para que un cliente y servicio y negocien un sistema de seguridad que ambos soporten.
 
-Uno de los usos más habituales es el equema Negotiate de las cabeceras HTTP Authorization y WWW-Authenticate que se usa para autenticar un navegador con una aplicación web usando Kerberos como esquema de auth y autor.
+Uno de los usos más habituales es el esquema Negotiate de las cabeceras HTTP Authorization y WWW-Authenticate que se usa para autenticar un navegador con una aplicación web usando Kerberos como esquema de WWW-Authenticate y autorización.
 
 ## Control de Acceso
 
 ### Control de acceso basado en Roles
 
-Ek RBAC se basa en restringir la ejecución de una operación a un usuario según los roles que tenga. La aplicación cliente envía junto a la petición algún tipo de token, que es validado por el servicio para ejecutarse.
+El RBAC se basa en restringir la ejecución de una operación a un usuario según los roles que tenga. La aplicación cliente envía junto a la petición algún tipo de token, que es validado por el servicio (se averiguan y se comprueban los roles) para ejecutarse.
 
 ### Control de acceso basado en atributos
 
@@ -759,7 +824,7 @@ Ek RBAC se basa en restringir la ejecución de una operación a un usuario segú
 
 Con RBAC cada operación que ejecuta el ususario está condicionada por la posesión de un rol o un conjunto de roles, cuando se da de alta un usuario es necesario otorgarle roles según los servicios que vaya a usar.
 
-En entornos con muchos usuarios y mucha variedad de permisos esto se vuelve una tarea árdua.
+En entornos con muchos usuarios y mucha variedad de permisos esto se vuelve una tarea árdua. Además RBAC es bastante estático y hay situaciones donde no podemos expresar las reglas de acceso adecuadamente.
 
 #### ABAC
 
@@ -774,5 +839,5 @@ Extensible Access Control Markup Language es un estándar de OASIS que define:
 - Lenguaje XML para definición de políticas.
 - Arquitectura de control de acceso.
 - Formato de peticiones/respuestas del PEP al PDP.
-- A sus implementaciones (WS02 IS, OpenAM, etc.) también se les llama herramientas de Acces Management.
+- A sus implementaciones (WS02 IS, OpenAM, etc.) también se les llama Herramientas de Access Management.
 - Estas herramientas muchas veces tienen capacidades de SSO, identidad y autorización (Identity and Access Management).
