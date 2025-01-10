@@ -161,7 +161,7 @@ Cuando una aplicación interactúa con otra utiliza algún tipo de lenguaje, for
 
 ## Inyección de SQL
 
-Se produce SQL Injection cuando los datos de entrada del usuario se utilizan para componer una consulta SQL. Los datos incluyen comillas o punto y coma.
+Se produce SQL Injection cuando los datos de entrada del usuario se utilizan para componer una consulta SQL. Los datos incluyen comillas o punto y coma (palabras especiales).
 
 ¿Qué se puede hacer con SQL Injection?
 - Introducir una consulta completa en el primer campo y sustituir así la consulta original.
@@ -531,19 +531,20 @@ Es muy frecuente el uso de librerías de terceros para implementar funcionalidad
 
 | Nombre | Descripción | Prevención |
 |----------|----------|----------|
-| Inyección SQL | Algo | Algo |
-| Inyección en Logs | Algo | Algo |
-| Inyección en cabeceras HTTP | Algo | Algo |
-| Inyección en SMTP | Algo | Algo |
-| Inyección de CMD | Algo | Algo |
-| Inyección en LDAP | Algo | Algo |
-| Inyección en XML | Algo | Algo |
-| Inyección en XPath | Algo | Algo |
-| I de JS: Reflected XSS | Algo | Algo |
-| I de JS: Stored XSS | Algo | Algo |
-| I de JS: DOM-based XSS | Algo | Algo |
-| I de JS: XFS y Clickjacking | Algo | Algo |
-| I de JS: XSHM | Algo | Algo |
+| Inyección SQL | Los datos de entrada proporcionados por el usuario se utilizan para consultar una base de datos, al incluir un token especial de SQL, como la coma o el punto, se cambia la semántica inicial y se produce el ataque | Consultas parametrizadas (PreparedStatements o JPA): Se encargan de formatear los datos de entrada escapando de las palabras y caracteres reservados. En caso de no poder usarlas se pueden usar listas blancas de valores válidos o escapado manual  |
+| Inyección en Logs | Se produce cuando se escriben en los registros de log, mensajes generados a partir de entradas de usuario que no han sido correctamente validadas. Como consecuencias se puede enmascarar otro ataque o inyectar código ejecutable a posteriori | Procesar y escapar todas las entradas que proceden del usuario, es importante específicar detalles como localización del fichero de logs, tamaño máximo y formato de las entradas |
+| Inyección en cabeceras HTTP | Se origina cuando se utilizan entradas de usuario mal escapadas para añadir cabeceras HTTP de forma dinámica. Destacamos el HTTP Response Splitting que inyecta saltos de línea para partir la cabecera e insertar contenido adicional | Escapar caracteres problemáticos en las entradas de los usuarios o validar un subconjunto de caracteres seguros (Listas blancas) |
+| Inyección en SMTP | Inserción de cabeceras adicionales u otros elementos dentro de un correo electrónico a través de entradas de usuario. Es posibla añadir cabeceras adicionales | Escapado de caracteres reservados en el protocolo SMTP y listas blancas de valores válidos (conjunto de direcciones conocidas) |
+| Inyección de CMD | Ejecución de comandos en el sistema en el que se ejecuta la aplicación | Evitar a toda costa las llamadas al SO, en caso de ser necesario utilizar scripts externos o comandos parametrizados |
+| Inyección en LDAP | Acceso a un servicio de directorios (LDAP), las consultas y el ataque son similares a SQL | Escapado de variables de entrada, listas blancas de valores válidos y validar los permisos imprescindibles para realizar las consultas |
+| Inyección en XML | Se produce cuando al escapar los caracteres especiales de XML se genera un documento que no es el esperado | Validación adecuada de los datos introducidos por el usuario para evitar conflictos, múltiples reglas según donde se añade el contenido |
+| Inyección en XPath | Similar a SQL, escapando caracteres para realizar consultas modificadas, XPath es un lenguaje que realiza consultas sobre documentos XML | Otra opción por encima del escapado de caracteres es realizar validaciones mediantes esquemas XML o DTD |
+| I de JS: Reflected XSS | **XSS**:Ataque que inyecta código de usuario cuando éste está accediendo al sitio web afectado, provocando sustracción de información, credenciales o secuestro de sesión.
+**Reflected**: El servidor lee los datos de la petición HTTP y los inserta en la respuesta, estos datos insertados pueden tener código ejecutable. Puede producirse al introducir código JS en una URL compartida mediante correo electrónico | Algo |
+| I de JS: Stored XSS | El atacante consigue introducir código dentro de un registro de la base de datos, este se ejecutará cuando otro usuario acceda a ese registro. | Algo |
+| I de JS: DOM-based XSS | El atacante consigue introducir código JS en el propio contenido del HTLM (DOM), escribiendo sobre él. | Algo |
+| I de JS: XFS y Clickjacking | Carga de una web legítima sobre el componente HTML "iframe", visualmente la víctima observa la página legítima, pero en segundo plano (o superpuesto) se ejecutan acciones maliciosas | Algo |
+| I de JS: XSHM | Acceso al objeto history del navegador, el cual permite, además de robar información, obtener la página actual del historial y cargarla en un iframe en una página maliciosa | Algo |
 | I de JS: En Logs | Algo | Algo |
 | I de entidades externas en XML | Algo | Algo |
 | Deserialización insegura | Algo | Algo |
