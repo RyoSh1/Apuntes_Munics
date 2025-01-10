@@ -335,11 +335,30 @@ El API reflection permite cerar objetos a partir de su nombre, esto permite carg
 
 ## Desbordamiento de buffer y de pila
 
+Se produce un desbordamiento de buffer cuando un programa permite la escritura más allá del buffer que tiene asignado.
 
+Estructura de memoria de un programa en C:
+
+- Segmento de texto: Segmento de código que contiene instrucciones ejecutables, situado bajo el heap y stack para prevenir ataques overflow. Es frecuente que solo haya una copia en memoria para los programas más ejecutados y que sea solo de lectura.
+- Segmento de datos no inicializados: Contiene variables globales y estáticas inicializadas a 0 o que no tienen código de inicialización explícito.
+- Segmento de datos inicializados: Variables globales y estáticas inicializadas explícitamente. Es un segmento de R/W porque las variables son modificables dinámicamente en ejecución.
+- Segmento de stack: Estructura LIFO situada en las zonas altas de memoria, los elementos que se añaden a la pila se conocen con el nombre de stack frames (variables locales, parámetros y dirección de retorno).
+- Segmento de heap: Comienza al terminar el BSS, crece hacia direcciones altas y contiene la memoria dinámica con el almacenamiento a largo plazo. El heap es común a todas las librerías compartidas y módulos cargados dinámicamente.
+
+Punteros:
+
+- EIP: Apunta a la siguiente instrucción.
+- EBP: Apunta al comienzo del stack.
+- ESP: Apunta al principio de la pila.
+
+Al comienzo de la llamada a una función se ejecuta la "secuencia de entrada" que guarda en la pila el puntero al frame actual. Al terminar se ejecuta la "secuencia de salida" que libera el espacio asignado a variables globales, restaura el EBP y devuelve el control a la dirección de retorno.
+
+Escribir fuera del stack puede permitir modificar la dirección de retorno a una conocida, recuperar valores de posiciones de memoria no accesibles, etc.
 
 ### Prevención
 
-
+- Address Space Layout Randomization: Técnica que permite distribuir de forma aleatoria los espacios de direcciones de memoria, evitando que se transfiera el control a una dirección de memoria conocida.
+- Stack canaries: Técnica de detección de stack overflows que consiste en añadir a la pila diferentes valores numéricos elegidos de forma aleatoria cuando se arranca el programa. Si se modifican estos valores es un síntoma de desbordamiento.
 
 ### Ensamblador x86
 
@@ -548,7 +567,7 @@ Es muy frecuente el uso de librerías de terceros para implementar funcionalidad
 | I de entidades externas en XML | Algo | Algo |
 | Deserialización insegura | Algo | Algo |
 | Carga dinámica insegura | Algo | Algo |
-| Desbordamiento de buffer y pila | Algo | Algo |
+| Desbordamiento de buffer y pila | Se produce cuando un programa permite la escritura de datos más allá del buffer asignado. A través del desbordamiento se puede modificar la dirección de retorno de las funciones, permitiendo acceder a direcciones conocidas | Address Space Layour Randomization y Stack canaries |
 | Ensamblador x86 | Algo | Algo |
 | Validación de datos | Algo | Algo |
 | Vulnerabilidades en la autenticación | Algo | Algo |
