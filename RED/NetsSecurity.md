@@ -760,39 +760,144 @@ Cuando detectan una intrusión... De forma pasiva registran la información de l
 
 ### Arquitectura de Red
 
+Localización del IDPS de red:
 
+- Delante del firewall interno: Detección y documentación de ataques que se sufren desde el exterior.
+- Detrás del firewall externo: Ataques que han penetrado el firewall externo, ataques contra servidores públicos o desde servidores públicos comprometidos.
+- En subredes críticas: Ataques contra sistemas críticos. Permiten perfilar la monitorización específicamente.
+- En subredes internas principales: Monitorización de gran cantidad de tráfico y actividad sospechosa desde el interior.
 
 #### IDPS distribuidos
 
+Componentes de la arquitectura distribuida:
 
+- Sensor/Agente: Monitorizan y analizan la actividad.
+- Servidor de gestión: Centraliza la información procedente de los sensores, realiza análisis de más complejidad y correlaciona eventos.
+- Base de datos: Almacena los eventos registrados.
+- Consola: Interfaz para usuarios y administradores.
 
-### Métodos de detección de firmas
+## Métodos de detección de intrusiones
 
+### Detección basada en firmas
 
+Compara los eventos observados con patrones correspondientes a ataques conocidos. 
 
-#### Detección basada en firmas
+- El IDS incorpora estos patrones en forma de reglas, que pueden ser elaboradas por el fabricante o el creador del sistema y deben mantenerse actualizadas.
+- Suelen agruparse en base al servicio, tipo de ataque, objetivo, etc.
 
+#### Tipos
 
+- Pattern Matching: Busca secuencias que coincidan con ataques conocidos, pueden realizarse con o sin estado.
+- Análisis de protocolo: Comprueba si se siguen las reglas y normas de un protocolo.
+- Heurístico: Detectan comportamientos más complejos que suponen un ataque.
 
-#### Detección basada en anomalías
+#### Ventajas
 
+- Sistema sencillo.
+- Efectivo contra ataques conocidos.
+- Bajo número de falsos positivos.
+- La detección puede incluir información útil del tipo de ataque y bloqueo.
 
+#### Problemas
+
+- Ineficaz contra nuevos ataques
+- Necesario actualizaciones constantes.
+- Problemas contra ataques de eventos múltiples que por separado no supongan una amenaza.
+
+### Detección basada en anomalías
+
+Detecta eventos que se desvían de la actividad normal, es decir, mantiene perfiles de actividad normal por usuario, aplicación, etc. Pero necesita de un período de entrenamiento. Puede ser estático o dinámico.
+
+Existen varias técnicas: Estadísticas, detección de umbrales o redes de neuronas.
+
+#### Ventajas
+
+- Detectan técnicas de ataque no conocidas, puede usarse para aprender firmas de nuevos ataques.
+- Especialmente eficaces contra ataques desde el interior y APTs.
+
+#### Inconvenientes
+
+- Ratio de falsos positivos elevado.
+- Requiere periodo de aprendizaje.
+- Las alarmas son complejas de entender.
 
 #### Ventajas de los IDPS
 
-
+- Detectan problemas que no han podido ser evitados por otras medidas de seguridad.
+- Identifica y bloquea la actividad de reconocimiento previa a un ataque.
+- Documenta posibles amenazas.
+- Identifica problemas en la política de seguridad.
+- Disuade a los usuarios de violar las políticas de seguridad.
 
 #### Limitaciones de los IDPS
 
-
+- No son totalmente precisos (FP / FN).
+- La respuesta no es inmediata.
+- Problemas con nuevos ataques o variantes, ataques expertos o ataques diseñados para evadir IDS.
+- Configuración y ajuste complejo.
+- Complementan, no reemplazan otras medidas de seguridad.
 
 ## Network-Based IDPS
 
+Monitoriza el tráfico de red y analiza los distintos protocolos. Como sensores utiliza tarjetas de red en modo promiscuo. Appliance vs Software.
 
+Arquitecturas de red:
+
+- In-line: Todo el tráfico pasa a través de él, situado entre conexiones de redes, puede bloquear conexiones. Puede ir detrás o antes del firewall o en dispositivos híbridos.
+- Pasivos o IDS: Monitorizan una copia del tráfico, facilita la detección de intrusiones, pero no permite la prevención. SPAN es un modo de puerto switch que reenvia el tráfico del resto de puertos y Network TAP es una conexión directa entre el sensor y la red física.
+
+Tipos de eventos detectados: 
+
+- Ataques a capa de aplicación (buffer, contraseñas, malware, etc.).
+- Ataques a la capa de transporte (escaneo de puertos).
+- Ataques a capa de red.
+- Uso de servicios no esperados.
+- Violaciones a la política de seguridad.
+
+Capacidades de prevención:
+
+- Sensores inline (firewalling, limitación de ancho de banda anti-DoS, modificación de contenido malicioso).
+- Sensores pasivos (finalización de conexiones).
+- Ambos: Reconfiguración de otros dispositivos o ejecución de programas predefinidos.
+
+#### Limitaciones
+
+- No detectan ataques cifrados.
+- Capacidad de análisis limitada si el volumen de tráfico es elevado.
+- Problemas en redes conmutadas (SPAN).
+- Muchas veces no se sabe si el ataque ha tenido éxito o no.
+- Ataques contra el propio IDPS: DDOS o Blinding.
 
 ## Host-Based IDPS
 
+Monitoriza los eventos que ocurren en un host, buscando actividades sospechosas (Tráfico, procesos, carga, accesos al sistema, etc.)
 
+Los agentes se situan en el host monitorizando los evento y envían información a los servidores de gestión.
+
+Tipos de eventos detectados:
+
+- Análisis de código ejecutado.
+- Tráfico de red.
+- Actividad sospechosa en el sistema de archivos (integridad en archivos de configuración, permisos o accesos ilegales).
+- Usos indebidos del sistema.
+- Cambios en la configuración de red.
+
+Capacidades de prevención:
+
+- Evitar la ejecución de malware.
+- Controlar y bloquear tráfico de red.
+- Bloquear acceso, ejecución, modificación o borrado de archivos.
+- Control de procesos.
+
+#### Problemas
+
+- Consume recursos.
+- Retardos en alertas (análisis periódicos).
+- Si el host es comprometido se puede desactivar.
+- Escaneos de red y otros ataques pasan desapercibidos.
+- Conflictos con otras tecnicas de protección en los host.
+- Problemas con cambios de configuración legítimos.
+- Problemas con la actualización del agente.
 
 # Tema 7 Monitorización
 

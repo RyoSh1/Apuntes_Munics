@@ -80,13 +80,13 @@ A través de datos auxiliares como valoraciones públicas en IMDb los atacantes 
 
 #### Principios de GPDR
 
-- Licitud, imparcialidad y transparencia para el interesado.
-- Limiticación de la finalidad: tratar los datos con los fines especificados explícitamente.
-- Minimización de los datos: Solo procesar los datos absolutamente necesarios.
-- Exactitud
-- Limitación de almacenamiento: Solo el tiempo necesario para el fin especificado.
-- Integridad y confidencialidad: Garantizada la seguridad, etc de los datos.
-- Rendicion de cuentas: El responsable debe poder demostrar el cumplimiento con el GDPR.
+- **Licitud, imparcialidad y transparencia** para el interesado.
+- **Limiticación de la finalidad**: tratar los datos con los fines especificados explícitamente.
+- **Minimización de los datos**: Solo procesar los datos absolutamente necesarios.
+- **Exactitud**
+- **Limitación de almacenamiento**: Solo el tiempo necesario para el fin especificado.
+- **Integridad y confidencialidad**: Garantizada la seguridad, etc de los datos.
+- **Rendicion de cuentas**: El responsable debe poder demostrar el cumplimiento con el GDPR.
 
 # Tema 2: Ataques de reconstrucción de bases de datos
 
@@ -135,13 +135,13 @@ d - Vector secreto
 c - Candidatos a vectores secretos
 c^(k^t) - Un candidato que cumple que el error el menor que E (definitivo).
 
-Teorema: Si un analista hace 2^n queries, podrá reconstruir la BD en todo menos 4E posiciones.
+Teorema: Si un analista hace 2^n queries, podrá reconstruir la d en todo menos 4E posiciones.
 
 Como funciona: Tu tienes 2^n queries y 2^n candidatos de ser el vector secreto, por cada candidato compruebas todas las queries, si cumple todas, tienes el vector secreto d. Lo que consigues es una columna secreta, donde cada fila cumple o no cumple con tu query [1,0,0,1 ,1,1...]. 
 
 ### Ataques de reconstrucción linear probabilisticos
 
-Consideran la distribución del ruido al evaluar candidatos, rechazando si respuestas asociadas tienen baja probabilidad bajo las distribuciones asumidas.
+Consideran la distribución del ruido al evaluar candidatos, rechazándolos si las respuestas asociadas tienen baja probabilidad bajo las distribuciones asumidas.
 
 ### Aircloak Diffix Challenge
 
@@ -153,7 +153,7 @@ La solución se basó en introducir consultas "aleatorias" mientras que llevaban
 
 Escenario inicial: Un dataset D contiene una fila por cada usuario y un curador produce una salida R a partir de aplicar un mecanismo M al dataset.
 
-A través de un estudio de los datos e información externa un atacante puede encontrar correlaciones entre los datos y obtener información sensible. La privacidad diferencial se encarga de proteger los datos , de tal forma que observar R no debe proporcionar más conocimiento del que se tiene previamente.
+A través de un estudio de los datos e información externa un atacante puede encontrar correlaciones entre los datos y obtener información sensible. La privacidad diferencial se encarga de proteger los datos , de tal forma que observar R **no debe proporcionar más conocimiento** del que se tiene previamente.
 
 ### Encontrar Diferencias
 
@@ -167,14 +167,14 @@ Distribuciones similares: Introducimos un parámetro p como umbral de diferencia
 
 Dependiendo de donde se ejecuta el mecanismo, existen dos modelos de privacidad diferencial:
 
-- Central: Hay un agregador centralizado.
-- Local: Cada usuario ejecuta el mecanismo por si solo.
+- **Central**: Hay un agregador centralizado.
+- **Local**: Cada usuario ejecuta el mecanismo por si solo.
 
 La definición es idéntica, pero la local se tiene en cuenta como si los datasets tuvieran solo una fila.
 
-DP limitado: Los conjuntos de datos vecinos tienen el mismo número de registros y difieren en el valor de una fila. Se usa cuando todos están presentes en ambos conjuntos.
+**DP limitado**: Los conjuntos de datos vecinos tienen el mismo número de registros y difieren en el valor de una fila. Se usa cuando todos están presentes en ambos conjuntos.
 
-DP No-Limitado: Los conjuntos vecinos difieren en la inclusión o exclusión de una fila. Se usa cuando alguno individuos no estan presentes en alguno de los conjuntos.
+**DP No-Limitado**: Los conjuntos vecinos difieren en la inclusión o exclusión de una fila. Se usa cuando alguno individuos no estan presentes en alguno de los conjuntos.
 
 ## Mis propios apuntes de explicación
 
@@ -196,7 +196,7 @@ Perr >= 1 / (1 + e^e) = 0.26
 
 ### Parametro epsilon
 
-Es un parámetro que controla el nivel de privacidad en un mecanismo de DP. Valores pequeños = Mayor privacidad (menos info a la salida), Valores grandes = Menos privacidad (expone más información).
+Es un parámetro que controla el nivel de privacidad en un mecanismo de DP. **Valores pequeños = Mayor privacidad** (menos info a la salida), **Valores grandes = Menos privacidad** (expone más información).
 
 Un mecanismo M satisface ε-DP si para cada conjunto de salidas S y cualquier par de conjuntos de datos vecinos D y D', se cumple que Pr1/Pr2 =< e^e
 
@@ -282,7 +282,7 @@ Hacer ejemplo
 
 ### Lattices
 
-Una lattice n-dimensional es una combinación de enteros de n vectores base. Se usan en sistemas criptográficos resistentes contra computadoras cuánticas.
+Una lattice n-dimensional es una **combinación de enteros de n vectores base**. Se usan en sistemas criptográficos resistentes contra computadoras cuánticas.
 
 ### Problemas difíciles en lattices
 
@@ -347,27 +347,27 @@ Es una técnica criptográfica que permite realizar cálculos directamente sobre
 
 ## Introducción
 
-La anonimización de datos es un mecanismo utilizado para sanitizar información con el objetivo de proteger la privacidad de las personas referenciadas en los datos. Esto implica tratar la información de identificación personal (PII) de manera que se evite su divulgación evitando riesgo de fugas de información al compartir datos con terceros o al hacerlos públicos. Existen regulaciones como GPDR o HIPAA que exigen estos procedimientos para proteger datos personales.
+La anonimización de datos es un mecanismo utilizado para **sanitizar información** con el objetivo de proteger la privacidad de las personas referenciadas en los datos. Esto implica tratar la información de identificación personal (PII) de manera que se evite su divulgación evitando riesgo de fugas de información al compartir datos con terceros o al hacerlos públicos. Existen regulaciones como GPDR o HIPAA que exigen estos procedimientos para proteger datos personales.
 
 Elementos que deben ser anonimizados: 
 
-- Identificadores: Atributos que identifican de forma única individuos.
-- Cuasi-identificadores: Atributos que combinados pueden identificar individuos.
-- Atributos sensibles: No deben vincularse con una persona.
-- No sensibles: Irrelevantes en el análisis.
+- **Identificadores**: Atributos que identifican de forma única individuos.
+- **Cuasi-identificadores**: Atributos que combinados pueden identificar individuos.
+- **Atributos sensibles**: No deben vincularse con una persona.
+- **No sensibles**: Irrelevantes en el análisis.
 
 Enfoques comunes para la anonimización:
 
-- Enmascaramiento de datos: Los datos se ocultan o alteran para evitar que los originales sean reconstruidos (cifrado, mezcla, sustitución, caracteres). Se puede realizar cambio estático (al replicar BD) o dinámico (al consultar).
-- Pseudoanonimización: Sustituir identifiacores con pseudonimos artificiales, se mantiene un vínculo interno para revertir.
-- Generalización: Reemplaza valores específicos con rangos o categorías, se necesita volumen de datos para garantizar ambigüedad sin perder utilidad.
-- Intercambio: Permutaciones o mezcla entre filas de una misma columna.
-- Perturbación de datos: Introducción de ruido o redondeo que cambia los datos, pero mantiene estadísticas.
-- Datos sintéticos: En lugar de compartir datos reales se genera a través de modelos generativos datos sintéticos que imita los originales.
+- **Enmascaramiento de datos**: Los datos se ocultan o alteran para evitar que los originales sean reconstruidos (cifrado, mezcla, sustitución, caracteres). Se puede realizar cambio estático (al replicar BD) o dinámico (al consultar).
+- **Pseudoanonimización**: Sustituir identifiacores con pseudonimos artificiales, se mantiene un vínculo interno para revertir.
+- **Generalización**: Reemplaza valores específicos con rangos o categorías, se necesita volumen de datos para garantizar ambigüedad sin perder utilidad.
+- **Intercambio**: Permutaciones o mezcla entre filas de una misma columna.
+- **Perturbación de datos**: Introducción de ruido o redondeo que cambia los datos, pero mantiene estadísticas.
+- **Datos sintéticos**: En lugar de compartir datos reales se genera a través de modelos generativos datos sintéticos que imita los originales.
 
 ### K-Anonimidad
 
-Un dataset es K-anonimo cuando existen K registros con el mismo cuasi-identificador (set de atributos), el valor de k determina la utilidad de los datos, a mayor k más generalización de datos.
+Un dataset es K-anonimo cuando existen **K registros con el mismo cuasi-identificador** (set de atributos), el valor de k determina la utilidad de los datos, **a mayor k más generalización** de datos.
 
 Consideraciones:
 
@@ -379,7 +379,7 @@ Ejemplo: Grupo [edad, código Postal] debe aparecer idéntico en K filas diferen
 
 ### L-Diversidad
 
-Extensión de K que determina que un grupo k-anonimo debe tener L distintos registros sensibles para hacerlo más robusto en privacidad. Puede no ser eficaz si un valor dominante representa la mayoría.
+Extensión de K que determina que un grupo k-anonimo debe tener **L distintos registros sensibles** para hacerlo más robusto en privacidad. Puede no ser eficaz si un valor dominante representa la mayoría.
 
 Ejemplo: grupo [edad, código Postal], atributo sensible enfermedad debe tener L valores.
 
@@ -402,8 +402,8 @@ Por cada región:
 
 La geolocalización es un tema clave debido al auge de los servicios basados en ubicación (LBS), pero estos aunque útiles generan riesgos de privacidad: Revelar actividades o hábitos personales, es necesario implementar mecanismos de privacidad para minimizar riesgos.
 
-- Datos de localización: Características que distinguen a una persona (identidad), Información espacial (coordenadas, nombres de lugares o proximidad física) e Información temporal (timestamps para rastrear movimiento).
-- Desafíos: Correlaciones entre datos de posición, trayectoria y tiempo pueden comprometer la privacidad. Los datos en tiempo real son muchos y exigen procesamiento inmediato. 
+- Datos de localización: **Características que distinguen a una persona** (identidad), **Información espacial** (coordenadas, nombres de lugares o proximidad física) e **Información temporal** (timestamps para rastrear movimiento).
+- Desafíos: **Correlaciones** entre datos de posición, trayectoria y tiempo pueden comprometer la privacidad. Los datos en tiempo real son muchos y exigen **procesamiento inmediato**. 
 
 Ataques y riesgos: 
 
@@ -420,13 +420,13 @@ Ataques y riesgos:
 
 Métodos de Preservación:
 
-1. Criptografía:
+1. **Criptografía**:
     - Claves compartidas para cifrar datos.
     - Servicios federados para distribuir la información.
-2. Anonimización:
+2. **Anonimización**:
     - Técnicas como K-anonimidad, L o T para evitar identificar individuos específicos.
     - Uso de zonas mixtas, áreas donde los pseudónimos cambian para evitar rastreos.
-3. Obfuscación:
+3. **Obfuscación**:
     - Introducir ubicaciones falsas (dummies).
     - Representación de áreas en vez de coordenadas exactas.
     - Uso de ruido aleatorio para alterar ubicaciones.
@@ -435,7 +435,7 @@ Métodos de Preservación:
 
 ### Inteligencia Artificial
 
-La inteligencia artificial tiene como objetivo desarrollar sistema que demuestren la flexibilidad y versatilidad de la inteligencia humana para resolver un amplio abanico de problemas complejos (general).
+La inteligencia artificial tiene como objetivo desarrollar sistemas que demuestren la flexibilidad y versatilidad de la inteligencia humana para resolver un amplio abanico de problemas complejos (general).
 
 El objetivo específico es desarrollar un sistema que es capaz de solucionar un problema para el cual ha sido diseñado.
 
@@ -453,9 +453,9 @@ Dentro del aprendizaje supervisado tenemos problemas de clasificación (etiqueta
 
 #### Generalización y sobreentrenamiento
 
-La generalización es el término usado para describir la capacidad de un modelo de predecir o clasificar nuevos datos.
+La **generalización** es el término usado para describir la capacidad de un modelo de predecir o clasificar nuevos datos.
 
-Sobreentrenamiento define un modelo que ha sido entrenado demasiado bien, provocando que memorice los datos de entrenamiento, pero no sea capaz de predecir nuevos datos.
+**Sobreentrenamiento** define un modelo que ha sido entrenado demasiado bien, provocando que memorice los datos de entrenamiento, pero no sea capaz de predecir nuevos datos.
 
 #### Preparación de datos
 
@@ -476,11 +476,11 @@ Escalares (*x,y*), Vectores (**x,y**), Matrices (**X,Y**), Productos, Normales d
 El mecanismo de regresión se basa en predecir el valor de una o varias variables continuas dado el valor de un conjunto de variables explicativas representadas por un vector m-dimensional.
 
 - Elementos:
-    - Variables explicativas: Parámetros de entrada del modelo.
-    - Ejemplos de entrenamiento: Set de n datos de las variables explicativas cuya predicción es conocida.
-    - Modelo: Función parametrizada que representa la relación entre x y t (w).
-    - Objetivo (error o coste): Función que indica como de bien se aproximan los datos entrenados.
-    - Método de optimización que encuentra los parámetros óptimos minimizando la función objetivo.
+    - **Variables explicativas**: Parámetros de entrada del modelo.
+    - **Ejemplos de entrenamiento**: Set de n datos de las variables explicativas cuya predicción es conocida.
+    - **Modelo**: Función parametrizada que representa la relación entre x y t (w).
+    - **Objetivo (error o coste)**: Función que indica como de bien se aproximan los datos entrenados.
+    - **Método de optimización** que encuentra los parámetros óptimos minimizando la función objetivo.
 
 - Proceso de entrenamiento:
     - El objetivo es construir un modelo que encuentre los parámetros óptimos **w** para predecir el valor **t** de un nuevo valor **x**.
@@ -512,14 +512,14 @@ Tipos de problemas: Separables linearmente, No separables linearmente y Datos no
 
 #### Decisión de regiones
 
-- Métodos de aprendizaje lineal: Las superficies de decisión que generan son funciones lineales (hiperplanos).
-- Métodos de aprendizaje no lineal: Las superficies que generan son funciones no lineales.
+- **Métodos de aprendizaje lineal**: Las superficies de decisión que generan son funciones lineales (hiperplanos).
+- **Métodos de aprendizaje no lineal**: Las superficies que generan son funciones no lineales.
 
 #### Regresión logística
 
-Para resolver el problema del método de mínimos cuadrados, la regresión logística propone el uso de una función logística o sigmoidea. Esto obliga a que la salida esté acotada en el intervalo (0,1), lo que también permite que pueda interpretarse como una probabilidad.
+Para resolver el problema del método de mínimos cuadrados, la regresión logística propone el uso de una **función logística o sigmoidea**. Esto obliga a que la salida esté acotada en el intervalo (0,1), lo que también permite que pueda interpretarse como una probabilidad.
 
-Para obtener el mínimo del error es necesario utilizar métodos iterativos basados en el gradiente descendiente.
+Para obtener el mínimo del error es necesario utilizar **métodos iterativos basados en el gradiente descendiente**.
 
 #### Conclusiones
 
@@ -533,31 +533,31 @@ Regresión logística es el método más robusto.
 
 ### Métricas para regresión
 
-- Mínimos cuadrados (MSE): Otorga mayor peso a errores grandes al usar el cuadrado.
-- Raíz de los mínimos cuadrados(RMSE): Facilita la interpretación porque el error obtenido es relativo a las unidades de los datos.
-- Media del error absoluto(MAE): Trata todos los errores por igual, pero no es adecuada si quieres prestar más atención a errores potencialmente grandes.
-- Media porcentual del error absoluto(MAPE):
+- **Media de los errores cuadrados** (MSE): Otorga mayor peso a errores grandes al usar el cuadrado.
+- **Raíz de la media de errores cuadrados**(RMSE): Facilita la interpretación porque el error obtenido es relativo a las unidades de los datos.
+- **Media del error absoluto**(MAE): Trata todos los errores por igual, pero no es adecuada si quieres prestar más atención a errores potencialmente grandes.
+- **Media porcentual del error absoluto**(MAPE):
     - Interpretación clara e independiente de la escala de los datos, resistente al error atípico.
     - Problemas con la división en valores iguales a 0 o generación de números muy grandes si los valores reales son excepcionalmente pequeños. Sesgado a predicciones menores a los valores reales.
-- Media porcentual simétrica del error absoluto(SMAPE):
+- **Media porcentual simétrica del error absoluto**(SMAPE):
     - Simétrica respecto a valores grandes o pequeños y soluciona el problema de MAPE porque genera valores entre 0% y 100%.
     - Mantiene los problemas de dividir entre 0 y no trata simétricamente las sobre- y sub- predicciones.
 
 ### Métricas para clasificación supervisada
 
-- Precisión: Tasa de acierto global del sistema.
-- Sensibilidad: Tasa de acierto de los positivos.
-- Especificación: Tasa de acierto de los negativos.
-- Exactitud: Tasa de acierto de positivos sobre todos los clasificados como positivos.
-- F1-score: Media armónica entre precisión y sensibilidad.
-- ROC curve: Representa gráficamente la sensibilidad frente el ratio de falsos positivos.
-- Area bajo ROC curve (AUC): La AUC indica como de bien están separadas las posibilidades de clases positivas y negativas.
+- **Accuracy**: Tasa de acierto global del sistema.
+- **Sensibilidad**: Tasa de acierto de los positivos.
+- **Especificación**: Tasa de acierto de los negativos.
+- **Precision**: Tasa de acierto de positivos sobre todos los clasificados como positivos.
+- **F1-score**: Media armónica entre precisión y sensibilidad.
+- **ROC curve**: Representa gráficamente la sensibilidad frente el ratio de falsos positivos.
+- **Area bajo ROC curve** (AUC): La AUC indica como de bien están separadas las posibilidades de clases positivas y negativas.
 
 En el caso de multiclases la precisión se calcula sobre el resultado global y el resto en el contexto de la propia clase.
 
-- Macro-media: Media de la métrica sobre todas las clases.
-- Media ponderada: Media de la métrica pero ponderada por el número de casos por clase.
-- Micro-media: Por cada métrica los casos individuales de verdaderos positivos y falsos negativos y positivos se acumulan para cada clase.
+- **Macro-media**: Media de la métrica sobre todas las clases.
+- **Media ponderada**: Media de la métrica pero ponderada por el número de casos por clase.
+- **Micro-media**: Por cada métrica los casos individuales de verdaderos positivos y falsos negativos y positivos se acumulan para cada clase.
 
 ## Metodologías para el análisis de resultados
 
@@ -642,7 +642,7 @@ Tipos de pooling:
 
 #### Capa completamente conectada
 
-Esta capa permite aprender combinaciones no lineales de características de alto nivel dadas por la capa convolucional. La entrada a esta capa es transformada en plano a un vector columna, durante el proceso de entrenamiento es capaz de distinguir características dominantes y clasificarlas usando softmas.
+Esta capa permite **aprender combinaciones no lineales de características de alto nivel** dadas por la capa convolucional. La entrada a esta capa es **transformada en plano a un vector columna**, durante el proceso de entrenamiento es capaz de distinguir características dominantes y clasificarlas usando softmax.
 
 #### Recomendaciones para un buen entrenamiento
 
@@ -653,7 +653,7 @@ Esta capa permite aprender combinaciones no lineales de características de alto
 - Inicializar los pesos aleatoriamente.
 - Usar un set de validación para evitar sobreentrenamiento.
 
-# Aprendizaje federado
+# Aprendizaje Federado
 
 El aprendizaje federado es un enfoque colaborativo y distribuido para entrenar modelos de aprendizaje automático sin necesidad de compartir los datos originales de los usuarios.
 
@@ -668,22 +668,22 @@ En lugar de recopilar datos en una plataforma centralizada, los nodos locales re
 ### Descripción del método
 
 - Flujo de trabajo: 
-    1. El servidor coordina la inicialización del modelo y distribuye los parámetros a los nodos. 
-    2. Los nodos son seleccionados para una ronda de entrenamiento y el modelo es compartido por el coordinador.
-    3. Cada nodo entrena el modelo con sus datos locales y envía actualizaciones al servidor. 
-    4. El coordinador recibe actualizaciones entrenadas y las agrega para mejorar el modelo global.
-    5. Esto genera una nueva versión actualizada del modelo que repite los pasos anteriores.
-    6. Si el modelo cumple un criterio de rendimiento se termina y se produce el modelo final.
+    1. El servidor coordina la **inicialización** del modelo y distribuye los parámetros a los nodos. 
+    2. Los nodos son **seleccionados** para una ronda de entrenamiento y el modelo es compartido por el coordinador.
+    3. Cada nodo entrena el modelo con sus datos **locales** y envía actualizaciones al servidor. 
+    4. El coordinador recibe **actualizaciones** entrenadas y las agrega para mejorar el modelo global.
+    5. Esto genera una nueva **versión actualizada** del modelo que repite los pasos anteriores.
+    6. Si el modelo cumple un criterio de rendimiento se termina y se produce el **modelo final**.
 
-- Datos no uniformes: Los datos en los nodos pueden estar distribuidos de manera desigual, lo que presenta desafios en términos de convergencia y precisión del modelo.
-- Algoritmos optimizados: Equilibran eficiencia y precisión, aunque pueden ser menos efectivos en comparación con enfoques centralizados.
+- **Datos no uniformes**: Los datos en los nodos pueden estar distribuidos de manera desigual, lo que presenta desafios en términos de convergencia y precisión del modelo.
+- **Algoritmos optimizados**: Equilibran eficiencia y precisión, aunque pueden ser menos efectivos en comparación con enfoques centralizados.
 
 
 ### Problemas de privacidad y Modelos de ataque
 
 - Ataques de inferencia:
     - Ataques de inversión del modelo: Recuperar datos de entrenamiento a partir del modelo.
-    - Ataques de inferencia de membresía: Determinar si un registro específico está en el conjunto de datos de entrenamiento o de alguno de los nodos.
+    - Ataques de inferencia de membresía: Determinar si un registro específico está en el conjunto de datos de entrenamiento de alguno de los nodos.
 - Tipos de ataque: Desde el cliente comprobando las versiones del modelo o desde el servidor comprobando las actualizaciones enviadas.
 - Ataques de envenenamiento:
     - Los adversarios manipulan actualizaciones del modelo para desviarlo hacia una solución subóptima o inyectar modelos con puertas traseras.
@@ -691,12 +691,12 @@ En lugar de recopilar datos en una plataforma centralizada, los nodos locales re
 ### Mecanismos de Preservación de la privacidad
 
 - Prevención de ataques de inferencia:
-    - Cifrado homomórfico que permite entrenar modelos sobre datos cifrados.
-    - Agregación segura usando computación multipartida para combinar actualizaciones sin exponer datos individuales.
-    - Privacidad diferencial añadiendo ruido a los datos o modelos.
+    - Cifrado **homomórfico** que permite entrenar modelos sobre datos cifrados.
+    - Agregación segura usando **computación multipartida** para combinar actualizaciones sin exponer datos individuales.
+    - **Privacidad diferencial** añadiendo ruido a los datos o modelos.
 - Prevención de ataques de envenenamiento:
-    - Técnicas de detección de anomalías en modelos.
-    - Inspección de datos y actualizaciones enviadas por los participantes.
+    - Técnicas de **detección de anomalías** en modelos.
+    - **Inspección** de datos y actualizaciones enviadas por los participantes.
 
 # Privacy Preserving Machine Learning
 
@@ -733,24 +733,24 @@ El aprendizaje automático preservando la privacidad (PPML) busca proteger los d
 
 El objetivo es determinar si una entrada ha sido usado en el entrenamiento basandose en el comportamiento del modelo sobre datos no conocidos o datos de entrenamiento.
 
-- Caja negra: asume conocimiento sobre la predición de salida.
-- Caja blanca: tiene acceso a parámetros y gradientes.
-- Contra generativos: Obtiene información sobre los datos de entrenamiento usando conocimiento sobre los componentes de generación de datos.
-- Contra Federados: Deducir si un registro específico forma parte de cualquier participante.
+- **Caja negra**: asume conocimiento sobre la predición de salida.
+- **Caja blanca**: tiene acceso a parámetros y gradientes.
+- **Contra generativos**: Obtiene información sobre los datos de entrenamiento usando conocimiento sobre los componentes de generación de datos.
+- **Contra Federados**: Deducir si un registro específico forma parte de cualquier participante.
 
 - Es necesario cuantificar la fuga de información de miembros a través de los resultados de predicción del modelo.
     - Dado un modelo y un registro determinar si se utilizó.
     - Investigar dado el entorno más dificil -> Caja negra.
-- Un problema de inferencia de membresía es un problema de clasificación.
+- Un problema de inferencia de membresía **es un problema de clasificación**.
     - Entrenar un modelo para distinguir el comportamiento entre entrenamiento y no.
-    - Usar Shadow Training: Shadow models que imitan el comportamiento del modelo objetivo.
+    - Usar **Shadow Training**: Shadow models que imitan el comportamiento del modelo objetivo.
     - Entrenar el modelo de ataque en las entradas y salidas etiquetadas de los Shadow.
 
 #### Generar datos para los modelos Shadow
 
-- Síntesis de modelo: El atacante no tiene ni datos ni estadísticas, por lo que genera datos usando el modelo víctima, los datos generados con gran confianza deberían ser similares a los de entrenamiento.
-- Síntesis estadística: El atacante puede tener infomación estadística sobre la población de entrenamiento, cada muestra tiene su propia distribución marginal.
-- Datos reales ruidosos: El atacante debe tener acceso a datos similares a los usados en el entrenamiento de la víctima.
+- **Síntesis de modelo**: El atacante no tiene ni datos ni estadísticas, por lo que genera datos usando el modelo víctima, los datos generados con gran confianza deberían ser similares a los de entrenamiento.
+- **Síntesis estadística**: El atacante puede tener infomación estadística sobre la población de entrenamiento, cada muestra tiene su propia distribución marginal.
+- **Datos reales ruidosos**: El atacante debe tener acceso a datos similares a los usados en el entrenamiento de la víctima.
 
 #### Entrenar el modelo de ataque
 
@@ -782,16 +782,16 @@ Perspectiva del adversario: Las propiedades inferidas pueden ser generales o esp
 
 ### Ataques de extracción de modelo
 
-El objetivo es potencialmente la construcción de un modelo sustituto que imita al original a través de la extracción de información. Principalmente el objetivo de los modelos de sustitución es:
-- Extracción de la precisión para igualar la del modelo original en los test.
-- Extracción de la fidelidad: igualar un conjunto de puntos de entrada no relacionados y crear una imitación.
+El objetivo es potencialmente la construcción de un modelo sustituto que imita al original a través de la extracción de información. Principalmente el **objetivo de los modelos de sustitución** es:
+- **Extracción de la precisión** para igualar la del modelo original en los test.
+- **Extracción de la fidelidad**: igualar un conjunto de puntos de entrada no relacionados y crear una imitación.
 
 No es estrictamente necesario conocer la arquitectura del modelo víctima mientras el sustituto tenga la misma o mayor complejidad, el objetivo es robar hiperparámetros y propiedades de la arquitectura.
 
 Causas: El subentrenamiento aumenta el éxito del ataque, los modelos con mayor generalización o mayor número de clases son más dificiles de atacar.
 
 - Extracción de precisión de tarea: inferir parámetros del modelo, 
-    - Elegir entradas útiles: Elegir entradas sintéticas cerca del límite de decisión del modelo objetivo. Otras estrategias sería no utilizar datos sintéticos de otros dominios, tecnicas semisupervisadas o generar entradas aleatorias.
+    - Elegir entradas útiles: Elegir **entradas sintéticas cerca del límite de decisión** del modelo objetivo. Otras estrategias sería no utilizar datos sintéticos de otros dominios, tecnicas semisupervisadas o generar entradas aleatorias.
 
 - Extracción de funcionalidad:
     - T.Orekondy: Basado en pares entrada/salida observados en consultas MLaaS, interactua con CNN de caja negra proveyendo imagenes de entrada y obteniendo predicciones, estas predicciones se utilizan para entrenar el modelo de imitación.
@@ -812,10 +812,10 @@ Causas: El subentrenamiento aumenta el éxito del ataque, los modelos con mayor 
 
 Las técnicas de privacidad diferencial resisten los ataques de inferencia de membresía añadiendo ruido aleatorio a los datos de entrada, a la iteraciones del algoritmo de machine learning y a las salidas del algoritmo.
 
-- Input: Se añade en la entrada del modelo, tras el entrenamiendo de machine learning la salida será diferancialmente privada. Requiere añadir más ruido al input porque los datos tienen mayor sensibilidad.
-- Perturbación de algoritmo: Aplicado a modelos que utilizan varias iteraciones, se añade ruido en los cálculos internos del algoritmo, requiere un diseño distinto para cada algoritmo. Tiene menos sensitividad en los datos e introduce menos ruido.
-- Perturbación objetiva: Modificar la función objetiva de aprendizaje, esto cambia el problema de optimización dificultando la extracción de información.
-- Perturbación de salida: Usar un algoritmo de aprendizaje no privado y añadir ruido al modelo generado, antes de ser compartido o utilizado.
+- **Input**: Se añade en la entrada del modelo, tras el entrenamiendo de machine learning la salida será diferancialmente privada. Requiere añadir más ruido al input porque los datos tienen mayor sensibilidad.
+- **Perturbación de algoritmo**: Aplicado a modelos que utilizan varias iteraciones, se añade ruido en los cálculos internos del algoritmo, requiere un diseño distinto para cada algoritmo. Tiene menos sensitividad en los datos e introduce menos ruido.
+- **Perturbación objetiva**: Modificar la función objetiva de aprendizaje, esto cambia el problema de optimización dificultando la extracción de información.
+- **Perturbación de salida**: Usar un algoritmo de aprendizaje no privado y añadir ruido al modelo generado, antes de ser compartido o utilizado.
 
 ### Privacidad diferencial local
 
@@ -827,23 +827,24 @@ Mecanismos LDP:
 
 ### Generación de datos sintéticos para preservar la privacidad
 
-- Necesidad de datos en ML: Los algoritmos de aprendizaje automático requieren grandes volúmenes de datos para alcanzar su máximo rendimiento. A menudo no es factible recopilar y compartir datos reales en cantidades suficientes debido a restricciones legales.
-- Datos Sintéticos como Solución: Los datos sintéticos son generados artificialmente mediante algoritmos que imitan la distribución y las propiedades de los datos originales. Conservan características críticas de los datos reales y permiten resultados similares, incluso en escenarios raros o poco comunes. Garantizan la protección de la privacidad mientras se mantiene la utilidad de los datos para aplicaciones específicas. El objetivo es inferir las etiquetas a partir de los registros y las salidas.
+Los algoritmos de aprendizaje automático requieren grandes volúmenes de datos para alcanzar su máximo rendimiento. A menudo no es factible recopilar y compartir datos reales en cantidades suficientes debido a restricciones legales.
+
+- **Datos Sintéticos como Solución**: Los datos sintéticos son generados artificialmente mediante algoritmos que imitan la distribución y las propiedades de los datos originales. Conservan características críticas de los datos reales y permiten resultados similares, incluso en escenarios raros o poco comunes. Garantizan la protección de la privacidad mientras se mantiene la utilidad de los datos para aplicaciones específicas. El objetivo es inferir las etiquetas a partir de los registros y las salidas.
 
 #### Métodos de generación y preservación de privacidad
 
-- Anonimización de datos: K-Anonimidad protege contra reidentificación y L-Diversidad evita problemas con la homogeneidad de datos sensibles en los grupos
-- Privacidad diferencial: Introduce ruido aleatorio para proteger la información sensible mientras se generan: 
+- **Anonimización de datos**: K-Anonimidad protege contra reidentificación y L-Diversidad evita problemas con la homogeneidad de datos sensibles en los grupos
+- **Privacidad diferencial**: Introduce ruido aleatorio para proteger la información sensible mientras se generan: 
     - Histogramas sintéticos. 
     - Datos tabulares sintéticos (tablas completas)
     - Datos multimarginales (distribuciones complejas con privacidad garantizada).
 
 ### Técnicas de minado de datos para preservar la privacidad
 
-Minado de datos: Herramientas y técnicas que se pueden usar cada vez que la información recogida es procesada y analizada para extraer conocimiento.
+- **Minado de datos**: Herramientas y técnicas que se pueden usar cada vez que la información recogida es procesada y analizada para extraer conocimiento.
 
-- Modelos descriptivos: Identificar relaciones entre datos y descripciones reconocibles por humanos.
-- Modelos prescriptivos: Usados para predecir el futuro basandose en el pasado.
+- **Modelos descriptivos**: Identificar relaciones entre datos y descripciones reconocibles por humanos.
+- **Modelos prescriptivos**: Usados para predecir el futuro basandose en el pasado.
 
 # Comunicaciones anónimas
 
@@ -855,10 +856,10 @@ Niveles de anonimato: Privacidad total (nadie identifica a nadie), Privacidad pa
 
 Conceptos clave según Pfitzmann y Hansen:
 
-- Anonimato: Estado en el que un individuo no puede ser identificado dentro de un grupo. Requiere que haya sujetos con atributos iguales.
-- No vinculación: Imposibilidad de relacionar múltiples usos de un servicio por un mismo usuario.
-- No observabilidad: Los mensajes son indistinguibles del ruido aleatorio.
-- Pseudoanonimato: Uso de un pseudónimo como identificador único, pero vinculado al usuario.
+- **Anonimato**: Estado en el que un individuo no puede ser identificado dentro de un grupo. Requiere que haya sujetos con atributos iguales.
+- **No vinculación**: Imposibilidad de relacionar múltiples usos de un servicio por un mismo usuario.
+- **No observabilidad**: Los mensajes son indistinguibles del ruido aleatorio.
+- **Pseudoanonimato**: Uso de un pseudónimo como identificador único, pero vinculado al usuario.
 
 Modelos de ataque en redes:
 
@@ -868,9 +869,9 @@ Modelos de ataque en redes:
 
 Requisitos para el anonimato en redes:
 
-- Tráfico de cobertura: Añadir tráfico adicional para ocultar transmisiones reales. Si el atacante controla este tráfico, el anonimato queda comprometido.
-- Tráfico embebido: Los mensajes de los usuarios deben integrarse silenciosamente en el tráfico de cobertura. Requiere una tercera parte confiable que combine mensajes reales y falsos.
-- Efectividad: Definida como la proporción de mensajes reales respecto al total, requiere coordinar suficientes usuarios y mensajes para minimizar retrasos y maximizar la eficiencia.
+- **Tráfico de cobertura**: Añadir tráfico adicional para ocultar transmisiones reales. Si el atacante controla este tráfico, el anonimato queda comprometido.
+- **Tráfico embebido**: Los mensajes de los usuarios deben integrarse silenciosamente en el tráfico de cobertura. Requiere una tercera parte confiable que combine mensajes reales y falsos.
+- **Efectividad**: Definida como la proporción de mensajes reales respecto al total, requiere coordinar suficientes usuarios y mensajes para minimizar retrasos y maximizar la eficiencia.
 
 ## Redes Mixtas
 
@@ -880,25 +881,29 @@ Una red mixta debe funcionar aun en el supuesto de que un nodo falle o se vea co
 
 ### Modos de procesamiento
 
-Cadena de descifrado: Cada mensaje es cifrado secuencialmente utilizando la clave pública de cada nodo, concatenando Address || Bloque || Random string. 
+#### Cadena de descifrado
 
-Desencriptación parcial: Cada nodo utiliza su clave privada para quitar una capa de encriptación del mensaje recibido, que luego se reordena de manera aleatoria antes de enviarse a la siguiente etapa.
+Cada mensaje es cifrado secuencialmente utilizando la clave pública de cada nodo, concatenando Address || Bloque || Random string. 
 
-Permutación: Los mensajes parcialmente desencriptados se mezclan en un orden aleatorio y se transmiten como un lote al siguiente nodo, asegurando que no se pueda rastrear la relación entre entrada y salida.
+**Desencriptación parcial**: Cada nodo utiliza su clave privada para quitar una capa de encriptación del mensaje recibido, que luego se reordena de manera aleatoria antes de enviarse a la siguiente etapa.
+
+**Permutación**: Los mensajes parcialmente desencriptados se mezclan en un orden aleatorio y se transmiten como un lote al siguiente nodo, asegurando que no se pueda rastrear la relación entre entrada y salida.
 
 Para garantizar la comunicación bidireccional anónima se incluye información de ruta de retorno (RPI) y claves compartidas simétricas con el mensaje original. Cada nodo desencripta una capa de esta información revelando la siguiente direccion y clave.
 
-Cadena de reencriptación: En este modelo los nodos no desencriptan los mensajes sino que los reencriptan usando cadenas aleatorias para cambiar su apariencia antes de enviarlos. Al final de todo se realiza una fase de desencriptación conjunta usando un esquema de claves compartidas.
+#### Cadena de Re-Encriptación
+
+En este modelo los nodos no desencriptan los mensajes sino que los reencriptan usando cadenas aleatorias para cambiar su apariencia antes de enviarlos. Al final de todo se realiza una fase de desencriptación conjunta usando un esquema de claves compartidas.
 
 Existen variaciones de estas redes utilizando esquemas híbridos que combinan claves simétricas y asimétricas.
 
 ### Topologías
 
-- Cascada: 
-    - Consiste en una secuencia fija de etapas, común para todos los remitentes y receptores. El primero nodo inicial la mezcla de mensajes en lotes de tamaño l, procesandolos de forma asíncrona. 
-    - Desventajas: Una etapa defectuosa puede comprometer toda la red, es posible rastrear mensajes mediante análisis de tráfico (pasivo), Controlar varias etapas o inyectar tráfico (ataque activo).
-- Enrutamiento libre: 
-    - Las etapas estan interconectadas pero no dependen unas de otras. Un nodo puede recibir remitentes y enviar salidas directamente a otros nodos, la operación es asíncronas, pueden esperar a formar lotes o ser enviados más rápido según su ruta.
+- **Cascada**: 
+    - Consiste en una **secuencia fija** de etapas, común para todos los remitentes y receptores. El primero nodo inicial la mezcla de mensajes en lotes de tamaño l, procesandolos de forma asíncrona. 
+    - **Desventajas**: Una etapa defectuosa puede comprometer toda la red, es posible rastrear mensajes mediante análisis de tráfico (pasivo), Controlar varias etapas o inyectar tráfico (ataque activo).
+- **Enrutamiento libre**: 
+    - Las etapas estan interconectadas pero no dependen unas de otras. Un nodo puede recibir remitentes y enviar salidas directamente a otros nodos, la operación es asíncrona, pueden esperar a formar lotes o ser enviados más rápido según su ruta.
     - los mensajes pueden rastrearse debido al tráfico no uniforme y al tamaño decreciente de las "capas" de cifrado (pasivo), inundar la red con tráfico puede aislar mensajes objetivo (activo).
 
 ### Esquemas de verificación
@@ -908,10 +913,10 @@ Existen variaciones de estas redes utilizando esquemas híbridos que combinan cl
 
 Esquemas específicos de verificación:
 
-- Red mixta verificable por el remitente: Detecta mensajes corruptos solo en la salida de la red, el remitente incluye un checksum cifrado con su clave privada. Cualquiera puede verificar la integridad desencriptando con la clave pública del remitente.
+- **Red mixta verificable por el remitente**: Detecta mensajes corruptos solo en la salida de la red, el remitente incluye un **checksum cifrado** con su clave privada. Cualquiera puede verificar la integridad desencriptando con la clave pública del remitente.
 No detecta mensajes añadidos, detecta mensajes eliminados solo si el remitente verifica la presencia de su mensaje y no identifica etapas comprometidas.
-- Red mixta verificable por etapas: Cada etapa verifica sus salidas usando subprotocolos adicionales.
-Métodos: Crear copias del lote de entrada o repetir el proceso de mezcla, Pruebas de conocimiento cero o revelación controlada de secretos para validad operaciones, Mecanismos de recuperación para reiniciar operaciones si se detecta un comportamiento anómalo.
+- **Red mixta verificable por etapas**: Cada etapa verifica sus salidas usando **subprotocolos adicionales**.
+Métodos: Crear copias del lote de entrada o repetir el proceso de mezcla, Pruebas de conocimiento cero o revelación controlada de secretos para validar operaciones, Mecanismos de recuperación para reiniciar operaciones si se detecta un comportamiento anómalo.
 
 ## Onion Routing
 
@@ -919,7 +924,9 @@ El Onion Routing se basa en el enrutamiento multinodo y cifrado en múltiples ca
 
 Funcionamiento: No mezcla ni reordena como las redes mixtas, el orden de entrada/salida no es relevante.
 
-- Entidades: Cliente, Onion Proxy (determina la ruta y construye la cebolla), Nodos intermedios y Nodos finales.
+- Entidades: Cliente, Onion Proxy (determina la ruta y construye la cebolla), Routers intermedios y Routers finales (conectados directamente al emisor y al receptor).
+
+Similar a la cadena de descifrado, pero los mensajes enviados no tienen un camino y orden fijo.
 
 Respuesta: Los nodos añaden capas de cifrado en sentido inverso para enviar una respuesta al remitente.
 
@@ -929,10 +936,10 @@ Tor es una mejora de Onion Routing, los usuarios se conectan a través de una ap
 
 Limitaciones: Vulnerable a ataques extremos si el atacante controla los nodos finales, identificando remitente, receptor y contenido. No oculta la identidad del remitente a nivel aplicación.
 
-Construcción: Siempre se usan 3 nodos(in, mid, out), el de entrada es confiable y elegido por su estabilidad, los circuitos rotan periódicamente y se usan claves a corto y largo plazo para negociar cifrados y proteger datos. La clave a largo plazo se usa como identificador y la de corto plazo como clave onion.
+Construcción: Siempre se usan 3 nodos(in, mid, out), el de entrada es confiable y elegido por su estabilidad, los circuitos rotan periódicamente y se usan claves a corto y largo plazo para negociar cifrados y proteger datos. La clave a largo plazo se usa como identificador de cifrado TLS y la de corto plazo como clave onion para negociar claves de cifrado/descifrado.
 
-Transferencia de datos: Los mensajes se dividen en paquetes fijos de 512B, los routers desencriptan una capa en cada salto y en las respuestas se hace el proceso inverso.
+Transferencia de datos: Los mensajes se dividen en paquetes fijos de 512B con cabecera y payload, los routers desencriptan una capa en cada salto y enviandolo a través del circtuito, en las respuestas se hace el proceso inverso.
 
 Servicios ocultos: 
-- Permite que usuario y servidor no conozcan sus direcciones IP mutuas, el servidor selecciona nodos cebolla como "puntos de introducción" y publica un descriptor en una tabla hash distribuida (pk y direcciones de los puntos).
+- Permite que usuario y servidor no conozcan sus direcciones IP mutuas, el servidor selecciona nodos cebolla como "puntos de introducción" y publica un descriptor en una **tabla hash distribuida** (pk y direcciones de los puntos).
 - El usuario elige un punto de introducción y un "punto de encuentro" aleatorio, se solicita a ese punto que introduzca cliente y servidor y si el servidor acepta se crea un circuito para conectarse de forma segura.
