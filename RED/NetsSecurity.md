@@ -612,64 +612,132 @@ Root Guard es útil para evitar bucles de capa 2 durante los cambios topológico
 
 # Tema 4 Firewalls
 
+Los Firewall son dispositivos que filtran el tráfico entre redes, permiten establecer requisitos de seguridad en cada red; analizar, registrar y bloquear tráfico y actuar en distintas capas OSI.
 
+Aportaciones: 
+
+- Ayuda a implementar políticas de control de acceso.
+- Es la primera línea de defensa.
+- Minimiza problemas de vulnerabilidades conocidas de protocolos al limitar la conectividad entre redes.
+- Ayuda a implementar las políticas de seguridad.
+- Permiten guardar log del tráfico de red.
+
+Limitaciones:
+
+- Ineficaces ante bugs en aplicaciones o servicios.
+- No protege contra ataques mediante conexiones autorizadas.
+- Solo protege contra conexiones que lo atraviesan.
+- Pueden ser molestos para los usuarios.
+- Deben configurarse, administrarse y monitorizarse adecuadamente.
 
 ## Tecnologías Firewall
 
 ### Filtrado estático de paquetes
 
+Operan normalmente en la capa 3 y 4, filtran en base a características del paquete sin guardar información de contexto.
 
+- Dirección IP origen.
+- Dirección IP destino.
+- Tipo de tráfico (UDP, TCP, etc.)
+- Características de capa 4 (TCP flags, ICMP command)
+- Interfaz por la que llega o se recibe.
+
+Están dirigidos por un conjunto de reglas que se ejecutan en orden:
+
+- Parte de matching con la que deben coincidir paquete y regla.
+- Acción a realizar(Aceptar, Denegar, Descartar, etc.)
 
 ### Filtrado dinámico de paquetes o Stateful Packet Filtering
 
+El firewall no analiza los paquetes individualmente, sino en su contexto. Se filtran conexiones no paquetes y añaden conocimiento de sesión.
 
+Operativa:
+
+- Mantienen una tabla con el estado de las conexiones salientes, que utilizan para validar los paquetes entrantes (más adecuado para TCP, con UDP es impreciso).
+- Mayor carga.
+- Permiten paquetes de entrada solo si están relacionados con una conexión existente previamente autorizada: Conexiones TCP, Respuestas a UDP, Errores y respuestas ICMP .
 
 #### Conclusiones sobre los Firewall de filtrado de paquetes
 
-
+- Permiten el control de la mayor parte de protocolos empleados actualmente y son eficientes, solo examinan ciertos campos del paquete.
+- Controlan el tráfico de red: Bloqueo/Autorización de servicios y reducción de la carga en la red interna.
+- Protección frente a múltiples ataques que aprovechan vulnerabilidades de TCP/IP.
 
 #### Buenas prácticas en Firewalls de filtrado de paquetes
 
+Se recomienda bloquear:
 
+- Tráfico hacia el propio firewall de orígenes no autenticados.
+- Tráfico ICMP.
+- Tráfico con direcciones no válidas: Tráfico entrante desde una IP interna, tráfico entrante con dirección privada, tráfico de entrada o salida con dirección broadcast y direcciones marcianas.
+- Paquetes especiales.
+- En general todo el tráfico, salvo aquel necesario (política restrictiva).
 
 #### Limitaciones en Firewalls de filtrado de paquetes
 
-
+- Problemas al gestionar cierto tipo de protocolos.
+- No impiden ataques que aprovechan vulnerabilidades a nivel de aplicación.
+- Capacidad de logging limitada.
+- No soportan autenticación de usuarios.
 
 ## Firewall de Capa de aplicación
 
 ### Filtrado de Capa de Aplicación
 
-
+El filtrado a nivel aplicación examina el contenido del paquete no solo las cabeceras IP y de capa 4, tiene una mayor capacidad de análisis (Mejor gestión de conexiones, escaneo de malware, bloqueo de ataques a nivel de aplicación, bloqueo de contenidos y bloqueo de comandos). También utiliza información de capas inferiores.
 
 #### Ventajas
 
-
+- Mejor control de las conexiones para ciertos protocolos: Es habitual que firewall de filtrado de paquetes incorporen conocimiento a nivel de aplicación para ciertos protocolos.
+- Identificación de ataques a nivel de aplicación.
+- Mayor capacidad de logging.
+- Identificación de protocolos a nivel aplicación.
 
 #### Limitaciones
 
-
+- Soporte limitado de aplicaciones y protocolos: El filtrado de capa 7 es complejo, normalmente solo hay para ciertos protocolos y existen problemas con protocolos nuevos o propietarios.
+- Menor rendimiento porque deben analizar el contenido del paquete, esto supone un problema con aplicaciones en tiempo real.
+- Siguen sin solucionar el problema de autenticación a nivel de usuario.
 
 #### En dispositivos basados en IOS
 
+Los routers basados en IOS pueden llevar tareas que van más allá del filtrado de paquetes convencional, como **stateful inspection** que incluye parámetros que van desde capa 3 a capa 7.
 
+Context-Based Access Control es la funcionalidad que implementa stateful inspection:
+
+- Analiza diferentes parámetros de distintos protocolos de capa 7.
+- También implementa un modo de operación sencillo, basado en el análisis de la información de protocolos de capa 3 y 4: TCP/UDP generic stateful inspection (equivalentes al comportamiento del filtrado dinámico de paquetes).
 
 ## Zone-Based Firewall (ZBFW)
 
+La configuración de firewalls basada en zonas de seguridad es la aproximación más habitual en la mayor parte de fabricantes de estos dispositivos. Es una tecnología que permite la configuración de un router siguiendo la misma filosofía que un firewall hardware, estableciendo zonas de seguridad, el router funciona como frontera y define que tráfico se puede enviar entre zonas.
+
+Por defecto las interfaces que pertenecen a la misma zona se pueden comunicar entre ellas y las que pertenecen a diferentes zonas no pueden intercambiar paquetes.
 
 #### Zonas especiales: Self & Default
 
-
+- La Self-zone es una zona que incluye todas las IPs de los routers. El tráfico desde y hacia esta zona se permite para dar soporte a Gestión y Plano de control. Después de aplicar una política a un par self--otra la comunicación debe definirse explícitamente.
+- La default-zone es una zona de seguridad que incluye todas las interfaces que no son miembros de otra zona de seguridad de forma explícita. Se pueden aplicar políticas en pares que la incluyan.
 
 ### Configuración
 
-
+1. Creación de zonas.
+2. Definición de un método de clasificación de tráfico (class map).
+3. Definición de la política de inspección.
+4. Aplicación de la política a los flujos de tráfico entre zonas.
+5. Asociar las interfaces de red a las zonas.
 
 ## Traducción de direcciones
 
 ### Network Address Translation (NAT)
 
+Separa direcciones IP internas de externas, esto permite ahorrar direcciones IP, garantizar el control del firewall sobre las conexiones con el interior, ocultar el esquema de direccionamiento interno y ayuda a restringir el tráfico entrante.
 
+Tipos:
+
+- NAT estático: Cada IP privada tiene asociada una IP pública.
+- NAT dinámico: Conexiones basadas en un "pool" de direcciones.
+- Port Address Translation (PAT o NAT con sobrecarga): Se utiliza una IP pública única y se realiza el mapeo basandose en el número de puerto.
 
 # Tema 5 Servidores Proxy
 
