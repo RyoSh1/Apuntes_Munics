@@ -568,22 +568,23 @@ Es muy frecuente el uso de librerías de terceros para implementar funcionalidad
 | Deserialización insegura | Se produce deserialización cuando no se valida si el flujo de datos de entrada va a crear objetos del tipo deseado. | Añadir validaciones de integridad a los objetos serializados, validar si el tipo de ejemplo pertenece a una lista blanca de valores, mínimos privilegios y monitorización de procesos de deserialización  |
 | Carga dinámica insegura | La API reflection de algunos lenguajes permite crear objetos a partir de su nombre | Lista blanca de valores válidos |
 | Desbordamiento de buffer y pila | Se produce cuando un programa permite la escritura de datos más allá del buffer asignado. A través del desbordamiento se puede modificar la dirección de retorno de las funciones, permitiendo acceder a direcciones conocidas | Address Space Layour Randomization y Stack canaries |
-| Validación de datos | Es necesario comprobar que los datos proporcionados por el usuario son válidos en el servidor (javax validation) | ? |
-| Vulnerabilidades en la autenticación | Algo | Algo |
-| Secuestro de la sesión | Algo | Algo |
-| Fijación de la sesión | Algo | Algo |
-| Reescritura de URL | Algo | Algo |
-| Política del mismo origen | Algo | Algo |
-| CORS | Algo | Algo |
-| Cross-site Request Forgery | Algo | Algo |
-| Exposición de datos sensibles | Algo | Algo |
-| Man-In-The-Middle | Algo | Algo |
-| Control de Acceso | Algo | Algo |
-| CA: Atravesar directorios | Algo | Algo |
-| CA: Redirecciones | Algo | Algo |
-| Configuración incorrecta | Algo | Algo |
-| Log y monitorización insuficiente | Algo | Algo |
-| Librerías de terceros | Algo | Algo |
+| Validación de datos | Es necesario comprobar que los datos proporcionados por el usuario son válidos en el servidor (javax validation) |  |
+| Vulnerabilidades en la autenticación | Si una contraseña es poco seguro es posible realizar un ataque de diccionario para averiguarla. Otro problema es la transmisión de la información de autenticación, transmitir las contraseñas por HTTP envía los datos sin ningún tipo de cifrado | Longitud y complejidad mínima en la contraseña. Autenticación multifactor. Uso de protocolos seguros como HTTPS. |
+| Vulnerabilidades en la autenticación: Hash | Otro punto vulnerable es la extracción de la información de autenticación a través de la BD. Es recomentable almacenar la contraseña mediante la técnica de Hash and Salt | PBKDF2, Bcrypt |
+| Secuestro de la sesión | Un atacante logra obtener una cookie de sesión válida de un usuario y por lo tanto ejecutar acciones en su nombre. Se logra explotando alguna vulnerabilidad, como transmisión en medios inseguros, fijación de la sesión o inyección de JavaScript | Utilizar un medio seguro de transmisión, No permitir acceso a las cookies desde JS e implementar mecanismos de caducidad de la sesión. |
+| Fijación de la sesión | Variante de secuestro de sesión en la que el atacante consigue que la víctima se autentique con un identificador generado por el atacante. | Generar cookies nuevas cada vez que el usuario se autentica. |
+| Reescritura de URL | Cuando un navegador no soporta cookies, muchos servidores envían el identificador de sesión en la URL. Vulnerable a ataques sobre la cabecera Referer | Tratar los identificadores de sesión como contraseñas. |
+| Política del mismo origen | Son una serie de reglas para restringir cómo un documeto o sus scripts pueden interacturar con recursos de otros dominios (protocolo, nombre de dominio y puerto) | Aplica restricciones sobre el DOM, la window, el almacenamiento del navegador, las cookies, el history, etc. Mención a JSONP. |
+| CORS | Mecanismos que permite al navegador web solicitar recursos a dominios diferentes a través de cabeceras HTTP adicionales (Para fetch y XmlHttpRequest) | Access-Control-Allow-Origin, Access-Control-Expose-Headers, Access-Control-Allow-Credentials |
+| Cross-site Request Forgery | Se produce cuando un atacante utiliza el navegador web de la víctima para ejecutar una acción maliciosa. El usuario tiene que estar autenticado previamente, el atacante consigue que se ejecute alguna acción automática (link o JS) y el navegador de la víctima ejecuta la acción | Comprobación de las cabeceras HTTP (Origin, Referer y Host) y añadir el CRSF Token en las peticiones. Mención a las cookies SameSite. |
+| Exposición de datos sensibles | Vulnerabilidad amplia que abarca desde el robo de credenciales, ejecución de MITM y cualquier otro tipo de captura de información | Tener cuidado |
+| Man-In-The-Middle | Un atacante interfiere las comunicaciones entre cliente y servidor, capturando e inyectando mensajes en el canal de comunicación |  |
+| Control de Acceso | Si las políticas de control de acceso son deficientes un atacante puede acceder a recursos no autorizados solo conociendo la url pertinente o modificando un token válido | Por defecto la política debe ser denegar el acceso, los controles deben implementarse en el servidor y se debe imponer la propiedad de "dueño" para solo acceder a los propios registros de usuario |
+| CA: Atravesar directorios | Vulnerabilidad que permite a un atacante acceder a ficheros y directorios que no debería. Se explota mediante la concatenación de cadenas y el uso del string "../". | Listas blancas de valores válidos y validar correctamente todas las entradas que proceden del usuario o del entorno |
+| CA: Redirecciones | Se produce una redirección incontrolada cuando la redirección es un parámetro de entrada de la aplicación o el servidor no valida si la URL a redirigir es legítima (parámetro redir) | Evitar en la medida de lo posible redirecciones o que estas no utilicen entradas de usuario. Para validar las URL usar lista blanca de valores válidos |
+| Configuración incorrecta | La configuración de seguridad incorrecta engloba elementos como: Funcionalidades innecesarias habilitadas (puertos, servicios, ect.), Cuentas por defecto habilitadas, páginas de error por defecto o control de acceso con llamadas HTTP no controladas. | Limitar el número de sesiones por usuario, cerrar sesión por inactividad, bloquear sesión tras un tiempo de uso, limitar los registros devueltos por consulta, separar aplicaciones de usuario de las aplicaciones de gestión... |
+| Log y monitorización insuficiente | EL registro de eventos en el log se utiliza para anotar la cause de errores en una aplicación y la monitorización permite determinar en todo momento el uso de recursos. La falta de registros o si estos son poco claros pueden producir que se desconozcan las causas de un ataque o los problemas de seguridad, además de dificultar la detección y correción de los mismos. | Deberían almacenarse en los registros de log: Los eventos relacionados con el inicio de sesión, los eventos relacionados con el control de acceso y las transacciones relevantes. |
+| Librerías de terceros | Es muy frecuente el uso de librerías de terceros para implementar funcionalidades comunes y repetibles. | Revisar de forma periódica las vulnerabilidades de todas las librerías de terceros para mantenerlas actualizadas |
 
 
 # Ciclos de desarrollo de software seguro
