@@ -132,3 +132,310 @@ Blockchain es un registro, un libro de contabilidad público compartido entre to
 ### DApps
 
 ### DAOs
+
+# Contenidos Examen Final
+
+# Tema 1
+
+## Problema del doble gasto
+
+
+
+## Características de un buen libro mayor
+
+
+
+## Problema del general bizantino
+
+
+
+## Historia del Bitcoin, trabajos previos relevantes
+
+
+
+## Cronología del Bitcoin
+
+
+
+## ¿Como se realiza una transacción en Bitcoin?
+
+
+
+## Definición de funciones Hash
+
+
+
+## Definición Criptografía asimétrica
+
+
+
+## Ventajas y desventajas Bitcoin
+
+
+
+## Definición de wallets. Tipos y principales características
+
+
+
+# Tema 2
+
+## Forks en Bitcoin. Diferencias entre hard y soft fork
+
+
+
+## Historia reciente de Bitcoin
+
+
+
+## Definición exploradores de bloques y faucets
+
+
+
+## Definición blockchain y propiedades
+
+
+
+## Subsistemas e infraestructura blockchain
+
+
+
+## Resumen de distintos tipos de blockchain
+
+
+
+## Aspectos de diseño de una blockchain
+
+
+
+## Definición de DLT
+
+
+
+## Ethereum: Definición, Tokens, NFTs, Bitcoin vs Ethereum, ether y tipos de cuentas
+
+
+
+## Definición de smart contracts. Uso del gas en ethereum. Limitaciones smart contracts
+
+
+
+## Herramientas de desarrollo. Ejemplo de arquitectura con Ethereum
+
+
+
+## Definición de DApps
+
+
+
+## Definición de DAO
+
+
+
+# Tema 3
+
+
+
+## Capas de blockchain/DLTs, modelo de referencia y procesos
+
+
+
+## Trilema blockchain
+
+
+
+## PoW
+
+
+
+## PoS
+
+
+
+## DPoS
+
+
+
+## PoA
+
+
+
+## PBFT
+
+
+
+## PoB
+
+
+
+## PoET
+
+
+
+## PoH
+
+
+
+## PoI
+
+
+
+## PoA
+
+
+
+## PoC
+
+
+
+## Principales ataques a los protocolos de consenso
+
+
+
+
+# Tema 5
+
+## Definición de árbol de Merkle
+
+
+
+## Funciones Hash. Protocolo SHA y uso en bitcoin
+
+
+
+## Definición de criptografía de clave pública
+
+
+
+## Definición de firma digital
+
+
+
+## Definición de nivel de seguridad de bit
+
+
+
+## Definición de algoritmo de Shor
+
+
+
+## Definición de algoritmo de Grover
+
+
+
+# Tema 6
+
+## Definición de red P2P y Overlay P2P. Ventajas
+
+
+
+## Definición DHT. Kademlia
+
+
+
+## Deinición, funcionamiento, ventajas y limitaciones IPFS
+
+
+
+## Definición OrbitDB
+
+
+
+## Retos redes P2P
+
+
+
+## Retos blockchain/DLTs
+
+
+
+## Soluciones capa 1
+
+
+
+## Sharding
+
+
+
+## Soluciones capa 2: side chains, state channels y rollups
+
+
+
+## Bridging L1 a L2
+
+
+
+# Tema 7
+
+## Ethereum
+
+
+
+# Tema 8
+
+## Tipos de blockchain/DLTs
+
+
+
+## Hyperledger
+
+
+
+## Quorum
+
+
+
+## Polkadot
+
+
+
+## IOTA
+
+
+
+## Corda
+
+
+
+## HEDERA
+
+
+
+## Metodología para determinar el uso de una blockchain/DLT 
+
+# Tema 9
+
+## Aspectos legales. Blockchain/DLTs y GDPR 
+
+# Tema 10
+
+## Motivación y definición Green blockchain/DLT
+
+
+
+## Componentes sw Green blockchain/DLT 
+
+# Tema 11
+
+## Beneficios y retos del uso de blockchain/DLT con tecnologías de la industria 4.0/5.0 
+
+# Tema 12
+
+
+## Elementos de la pila blockchain/DLT más susceptibles a ataques
+
+
+
+## Honeypots, vectores de ataque nodos blockchain/DLT
+
+
+
+## Vectores de ataque de una DApp
+
+
+
+## Ataques smart contracts
+
+
+
+## Ejemplos de ataques relevantes
+
