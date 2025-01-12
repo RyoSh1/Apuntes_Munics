@@ -481,15 +481,46 @@ Limitaciones:
 
 ## Definición OrbitDB
 
+OrbitDB es una base de datos descentralizad, sin servidor y de código abierto que se construye sobre IPFS, permitiendo el almacenamiento distribuido en DApps.
 
+Características:
+
+- Elimina servidores centralizados, sincronizadno datos entre nodos distribuidos.
+- Interfaz amigable similar a BD tradicionales.
+- Admite consultas, búsqueda de datos específicos y control de versiones mediante hashes únicos.
+
+Funcionamiento:
+
+- Usa IPFS como capa de almacenamiento y estructuras de datos como registros y mapas.
+- Los nodos se sincronizan automáticamente para mantener coherencia en los datos.
+- Casos de uso: Aplicaciones de contenido, mensajería descentralizada y sistemas de identidad.
 
 ## Retos redes P2P
 
-
+- Escalabilidad: Propagar información en múltiples nodos sin comprometer el rendimiento.
+- Sincronización: Mantener un estado consistente en redes dinámicas donde nodos pueden unirse o salir.
+- Seguridad: Autenticación, encriptación y prevención de ataques son esenciales para proteger contra nodos maliciosos.
+- Privacidad: Garantizar control de datos personales.
+- Eficiencia: Optimizar enrutamiento, almacenamiento y transmisión de datos en redes distribuidas.
 
 ## Retos blockchain/DLTs
 
+Es necesario alcanzar un trade-off entre seguridad, rendimiento y descentralización.
 
+Escalabilidad:
+
+- Almacenamiento: Las cadenas grandes pueden reducir la descentralización al exigir nodos más potentes.
+- Rendimiento: Altas transacciones por segundo (TPS) y baja latencia son desafíos clave.
+
+Bajo rendimiento:
+
+- Bloques llenos en momentos de alta demanda aumentan tarifas y tiempos de espera, afectando la experiencia del usuario.
+
+Enfoques de solución:
+
+- Capa 1: Cambios en protocolos -> mecanismos de consenso y fragmentación de cadenas.
+- Capa 2: Soluciones off-chain más centralizadas con mayor rendimiento. Algunas heredan la seguridad de la capa base (L1).
+- Actualizaciones: Hard-forks o soft-forks pueden resolver problemas, aunque con riesgos de divisiones en la comunidad y periodos de incertidumbre.
 
 ## Soluciones capa 1
 
@@ -497,15 +528,30 @@ Limitaciones:
 
 ## Sharding
 
-
+- Dividir una cadena en partes más pequeñas (Shards): Dividir la carga de trabajo transaccional para mejorar el rendimiento de las transacciones. Aumento lineal del rendimiento con el número de shards.División del conjunto de validadores. 
+- Data sharding: Escalado potencial de rendimiento.
+- Desafíos: Dificil diseño y aplicación, Riesgo de centralización, Consenso entre cadenas de fragmentos y Riesgo de seguridad (fragmento comprometido).
 
 ## Soluciones capa 2: side chains, state channels y rollups
 
+Protocolos o infraestructuras construidas sobre una blockchain existente para mejorar su rendimiento y capacidades, buscan abordar los desafíos de escalabilidad y velocidad moviendo la carga de trabajo fuera de L1.
 
+- Sidechains: Blockchains paralelas conectadas a L1 que permiten procesar transacciones, están diseñadas para abordar desafíos específicos o implementar características adicionales, se conectan mediante mecansimos de transferencia de archivos, lo que permite el intercambio bidireccional.
+- State Channels: Canales laterales sobre L1 que permiten realizar transacciones entre usuarios, heredando la seguridad de L1. Se abren al realizar una transacción y se deben cerrar para registrar en la blockchain principal el pago.
+- Plasma Chains: Cadenas hijas que heredan algunos datos de L1 pero no publican todas las transacciones en L1. Enfocadas en transferencias simples.
+- Rollups: Verdaderas soluciones L2, con seguridad heredada de L1 y soporte completo de contratos inteligentes. Tipos:
+    - Optimistic Rollups: Uso de pruebas de fraude para validar transacciones.
+    - Zero-Knowledge Rollups: Validan transacciones mediante pruebas criptográficas sin necesidad de impugnaciones.
+
+Retos:
+
+- Asegurar la integridad y seguridad de las soluciones de capa 2 es crucial para evitar ataques y pérdidas de fondos.
+- Complejidad técnica en la integración con L1.
+- Gobernanza e implementación de actualizaciones en L2 puede ser un reto.
 
 ## Bridging L1 a L2
 
-
+El bridging entre una capa 1 (L1) y una capa 2 (L2) consiste en establecer conexiones que permitan transferir activos y datos entre una blockchain principal (L1) y una solución de escalabilidad (L2). Estos puentes aseguran que los activos y datos en L2 estén respaldados por la seguridad y estado de L1, manteniendo coherencia y garantizando la posibilidad de volver a L1 cuando sea necesario.
 
 # Tema 7
 
