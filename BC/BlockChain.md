@@ -343,96 +343,141 @@ Se trata de un desafío que describe la dificultad de balancear:
 
 ## PoW
 
+Es el protocolo de consenso de Bitcoin, establece una competición criptográfica de resolución de puzzles entre nodos validadores o mineros.
 
+Resolver el puzzle consiste en determinar un rango de entrada que da como resultado un objetivo predefinido. El nonce es la entrada que los mineros compiten por encontrar, el que lo encuentra recibe una recompensa.
+
+La escalabilidad de Bitcoin se limita a validar 1MB de datos de transacción cada 10 min, en teoría es adecuada para establecer consenso, pero en la práctica los equipos de minería han provocado que esté centralizada de facto.
 
 ## PoS
 
-
+Los validadores (no mineros) son seleccionados para crear bloques y validar transacciones según la cantidad de tokens que tienen en "stake" (bloqueadas como garantía). Cuanto mayor sea su participación, mayores serán sus probabilidades de ser seleccionados (lotería). Los nuevos bloques son "forjados" en vez de minados.
 
 ## DPoS
 
-
+Versión de PoS donde los usuarios votan delegados que se encargan de validar transacciones y crear bloques en su nombre. Es más rápido y eficiente, pero menos descentralizado.
 
 ## PoA
 
-
+Los validadores son entidades autorizadas y confiables que deben verificar las transacciones. Es eficiente y rápido, pero depende de la confianza en los validadores seleccionados, lo que lo hace menos descentralizado.
 
 ## PBFT
 
-
+Los nodos se comunican entre sí para nombrar un lider y llegar a un consenso incluso si algunos son maliciosos o fallan (1/3). Es adecuado para redes pequeñas como empresas y permite alta velocidad y tolerancia a fallos. Se utiliza un round robin para modificar el lider.
 
 ## PoB
 
-
+Los participantes "queman" (destruyen) una cantidad de criptomonedas enviándolas a una dirección no recuperable. Esto les da derecho a validar bloques, incentivando la inversión a largo plazo.
 
 ## PoET
 
-
+Sistema de lotería transaparente que genera u8n tiempo de espera en cada nodo, estos esperan un período de tiempo aleatorio y el primero en terminar ese tiempo gana el derecho a minar el bloque. Usa hardware seguro para garantizar tiempos justos. Consume menos energía porque permite que los equipos hagan otras tareas mientras "duermen".
 
 ## PoH
 
-
+Propuesto por Solana para mejorar la velocidad y el rendimiento. Introduce una forma verificable de registrar el tiempo en la blockchain, creando un historial cronológico de eventos. 
 
 ## PoI
 
-
+Usado por NEM, mide la importancia de los nodos en función de su actividad económica, su participación en la red y otros factores. Los nodos con mayor importancia tienen más probabilidad de validar bloques.
 
 ## PoA
 
-
+Es un híbrido entre Proof of Work (PoW) y Proof of Stake (PoS). Los mineros en PoW compiten por resolver un problema matemático para iniciar la creación de un bloque. Sin embargo, después de encontrar el bloque inicial, un grupo de validadores (elegidos según su stake) completa el proceso verificando las transacciones. Combina la seguridad de PoW con la eficiencia de PoS.
 
 ## PoC
 
-
+Los participantes utilizan el espacio en disco para almacenar posibles soluciones de minería. Cuanto más almacenamiento tenga un nodo, mayores son sus probabilidades de minar bloques. Los mineros generan una lista de los posibles hashes en un proceso llamado plotting que se encapsulan en scoops. Estos ‘plots’ se almacenan en el disco duro.
 
 ## Principales ataques a los protocolos de consenso
 
-
-
+- Ataques del 51% (o 33.3%): Se producen cuando un actor o grupo controla más del 51% del poder computacional o la participación en la red, permitiéndoles manipular la blockchain para realizar acciones maliciosas, como reescribir el historial de transacciones o ejecutar un doble gasto.
+- Ataques Sybil: Un atacante crea múltiples nodos o identidades falsas para obtener influencia desproporcionada en la red, lo que puede usarse para sobrecargarla, manipular procesos de consenso o influir en votaciones. 
+- Ataques Eclipse: El atacante aísla un nodo específico al controlar todos los nodos con los que puede comunicarse, manipulando su percepción del estado de la blockchain y facilitando acciones maliciosas como el doble gasto.
+- Ataques de Jamming: Consisten en saturar la red con tráfico malicioso para dificultar o impedir la comunicación legítima entre nodos, lo que puede ralentizar la red o incluso paralizarla.
+- Ataques de desconexión: Buscan interrumpir la comunicación entre nodos, haciendo que la red no pueda alcanzar consenso ni procesar transacciones, lo que provoca una interrupción en su funcionamiento. 
+- Ataques de rollback: Implican minar una cadena alternativa más pesada que la actual para revertir el historial de transacciones, permitiendo realizar acciones como el doble gasto.
+- Ataques de Stake Grinding: En este ataque, un participante intenta manipular el proceso de selección del próximo validador de bloques, comprometiendo la aleatoriedad y la equidad del consenso.
+- Ataques de validador malicioso: Ocurren cuando uno o más validadores en un sistema autorizado (como PoA) actúan de forma maliciosa o en colusión para manipular transacciones o perjudicar a la red. 
 
 # Tema 5
 
 ## Definición de árbol de Merkle
 
-
+Estructura basada en hashes en forma de árbol, cuyos nodos contienen información sobre los niveles inferiores y al intentar modificarlos cambiará la estructura entera. Se trata de un medio eficiente para generar una estructura de datos distribuida con alta seguridad y resistencia a alteraciones, tiene un alto nivel de transmisión de datos, son computacionalmente eficientes y poco costosos y permiten diseccionar en componentes para realizar búsquedas de verificación más rápidas.
 
 ## Funciones Hash. Protocolo SHA y uso en bitcoin
 
+Una función hash es un algoritmo que convierte una entrada en una cadena fija de bits de forma eficiente, determinista, no reversible y uniforme, actuando como un identificador único y difícilmente corruptible.
 
+El SHA (Secure Hash Algorithm), desarrollado por el NIST, incluye variantes como SHA-1 y SHA-2 (con tamaños de 224 a 512 bits), y utiliza operaciones como suma, XOR y desplazamientos para generar hashes seguros.
+
+En Bitcoin, las funciones hash (principalmente SHA-256) se emplean para:
+
+- Direcciones: Crear direcciones más cortas y seguras a partir de claves públicas, usando hashes múltiples y checksums.
+- Minería (PoW): Validar bloques mediante el cálculo repetido de hashes hasta encontrar uno que cumpla un patrón específico, combinando el hash del bloque previo, las transacciones (Árbol de Merkle) y un nonce. Los nodos verifican estos cálculos con un hash único.
 
 ## Definición de criptografía de clave pública
 
-
+Es un método criptográfico que utiliza un par de claves: una clave pública para cifrar datos o verificar firmas y una clave privada para descifrar datos o generar firmas. Es fundamental para la seguridad en redes como las blockchains, ya que permite comunicaciones seguras sin necesidad de compartir previamente una clave secreta.
 
 ## Definición de firma digital
 
-
+Es un mecanismo criptográfico que garantiza la autenticidad e integridad de un mensaje o documento. Utiliza criptografía de clave pública: el emisor genera una firma con su clave privada, y los receptores pueden verificarla usando la clave pública del emisor.
 
 ## Definición de nivel de seguridad de bit
 
-
+Es una medida que indica la resistencia de un sistema criptográfico frente a ataques. Representa el nivel de seguridad que un atacante necesitaría romper para comprometer la el sistema (fuerza bruta).
 
 ## Definición de algoritmo de Shor
 
-
+Es un algoritmo cuántico que permite factorizar números enteros grandes y calcular logaritmos discretos de manera eficiente (en tiempo polinómico). Esto lo hace una amenaza para los sistemas criptográficos tradicionales como RSA y ECC, que dependen de la dificultad de estos problemas.
 
 ## Definición de algoritmo de Grover
 
-
+Es un algoritmo cuántico diseñado para buscar en una base de datos no estructurada con una velocidad cuadráticamente más rápida que los métodos clásicos. Reduce el esfuerzo de búsqueda de N operaciones raíz de N, impactando en la seguridad de algunos esquemas de cifrado simétrico.
 
 # Tema 6
 
 ## Definición de red P2P y Overlay P2P. Ventajas
 
+Sistemas descentralizados en los que los nodos se comunican directamente sin depender de un servidor central, los nodos actúan como clientes y servidores, compartiendo recursos entre ellos. Puede ser peer-to-peer o superpuesta.
 
+Overlay es una red virtual superpuesta a una o más redes subyacentes que conecta nodos de forma lógica en un sistema P2P. Puede ser estructurada (organizada según protocolos específicos para facilitar búsquedas) o no estructurada (conexiones aleatorias). Estas redes mejoran la eficiencia, escalabilidad y búsqueda en sistemas P2P mediante el uso de algoritmos como las tablas hash distribuidas (DHT).
+
+Ventajas: Mayor resistencia a la censura y a los ataques dirigidos a un punto, al no disponer de un servidor central desaparecen los costes de mantenimiento y la dependencia en una entidad central y la carga de trabajo se distribuye en los nodos, lo que resulta en una mayor escalabilidad y capacidad de manejo de tráfico.
 
 ## Definición DHT. Kademlia
 
+Es una estructura descentralizada que asigna datos y recursos a nodos de una red P2P utilizando una función hash. Los nodos almacenan información de claves y recursos, y las búsquedas se realizan mediante algoritmos de enrutamiento eficientes. Beneficios clave incluyen redundancia, resistencia a la censura y búsquedas rápidas sin servidores centralizados.
 
+Es un protocolo DHT que asigna IDs únicos a nodos y recursos mediante funciones hash. Utiliza tablas de enrutamiento divididas en buckets, organizadas por distancia de clave, para buscar recursos. El algoritmo de búsqueda XOR permite localizar eficientemente nodos cercanos a una clave, con redundancia y estabilidad que garantizan resistencia a fallos y cambios en la red.
 
-## Deinición, funcionamiento, ventajas y limitaciones IPFS
+## Definición, funcionamiento, ventajas y limitaciones IPFS
 
+IPFS es un sistema de archivos distribuido y descentralizado basado en tecnología P2P que facilita el intercambio y almacenamiento eficiente de archivos en la web. Utiliza identificadores basados en el contenido (hashes) en lugar de ubicaciones físicas, lo que mejora la resistencia a la censura, la integridad de los datos y la eficiencia en la distribución.
 
+Funcionamiento de IPFS:
+
+- División en bloques: Los archivos se dividen en bloques, cada uno con un hash único.
+- Almacenamiento con DHT: Los bloques se asignan a nodos en la red usando una Tabla Hash Distribuida (DHT). Los hashes actúan como claves para localizar el contenido.
+- MerkleDAG: Utiliza una estructura basada en MerkleDAG, donde los bloques están conectados mediante enlaces que organizan y aseguran los datos.
+- Resolución de nombres: Los archivos tienen un hash único para su acceso directo, y nombres legibles pueden asignarse mediante IPNS, facilitando actualizaciones sin cambiar el hash.
+
+Ventajas IPFS:
+
+- Descentralización: Elimina la dependencia de servidores centralizados, mejorando la resistencia a fallos y censura.
+- Eficiencia: Optimiza el almacenamiento con deduplicación de datos y permite entrega rápida al utilizar múltiples fuentes.
+- Integridad y versionado: Cada archivo es identificable por un hash único, y se puede acceder a versiones anteriores.
+- Seguridad: Facilita auditorías de integridad, intercambio seguro de archivos y distribución confiable de actualizaciones.
+- Blockchain/DLT: IPFS complementa blockchains al almacenar grandes cantidades de datos off-chain, reduciendo costes y congestionamientos.
+
+Limitaciones:
+
+- Escalabilidad: Gestionar grandes volúmenes de datos requiere planificación y no está diseñado para operaciones complejas como consultas en bases de datos.
+- Redundancia: Aunque implementa deduplicación, puede haber redundancia si múltiples nodos almacenan el mismo archivo.
+- Seguridad: Es crucial garantizar que los archivos sean auténticos y no maliciosos.
+- Acceso a versiones antiguas: La gestión de versiones anteriores puede complicar el acceso eficiente y el almacenamiento.
 
 ## Definición OrbitDB
 
