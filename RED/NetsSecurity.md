@@ -112,11 +112,11 @@ El switch clasifica los paquetes(p.e etiqueras de prioridad).
 
 ### 2. Capa de distribución
 
-Centraliza la conectividad de red en un edificio, realiza el filtrado de paquetes, transición entre enrutamiento estático y dinámico, aplicació de QoS.
+Centraliza la conectividad de red en un edificio, realiza el filtrado de paquetes, transición entre enrutamiento estático y dinámico, aplicación de QoS.
 
 ### 3. Capa núcleo
 
-Parte central de la red, se encarga de conmutar paquetes a alta velocidad., evitar la manipuación de paquetes.
+Parte central de la red, se encarga de conmutar paquetes a alta velocidad. Se debe evitar la manipulación de paquetes.
 
 ### Implementación tradicional
 

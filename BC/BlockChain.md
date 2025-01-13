@@ -557,6 +557,44 @@ El bridging entre una capa 1 (L1) y una capa 2 (L2) consiste en establecer conex
 
 ## Ethereum
 
+Descrito en el whitepaper de Vitalik Buterin (2013). Fundación en Suiza (2013-2014). Red pública lanzada en 2015.
+
+Gobernanza off-chain basada en el consenso social entre stakeholders (poseedores de ETH, desarrolladores, operadores de nodos, validadores, etc.).
+
+Código fuente abierto, proceso de consenso lento para actualizaciones y nadie controla la red centralmente.
+
+### Arquitectura de red
+
+Arquitectura modular: Uso de sharding para dividir funciones y rollups para escalado.
+
+Capas funcionales:
+
+- Ejecución: Procesa transacciones en L1 (mainnet) y L2 (rollups), en L2 un componente llamado Sequencer actúa como árbitro y coordinador.
+- Settlement: Verifica transacciones y resuelve disputas en L1.
+- Consenso: Orden y validez de transacciones.
+- Disponibilidad de datos: Garantiza que los datos estén disponibles para los nodos.
+
+### EVM
+
+Máquina virtual de Ethereum, opera como una estructura de datos que contiene información de las cuentas y un estado de la máquina. El estado de la máquina cambia con los nuevos bloques de acuerdo con unas reglas. 
+
+El EVM es el entorno encargado de la ejecución de instrucciones/transacciones. La red se compone de nosods que ejecutan copias sincronizadas de la EVM, mediante PoS.
+
+### Mecanismo de consenso
+
+Proof of Stake: Los validadores son seleccionados al azar cada 12 segundos (slot) con stake mínimo de 32 ETH, exiten penalizaciones por comportamiento deshonesto, destruyendo el stake de un validador (slashing).
+
+Seguridad: Uso de checkpoints y votaciones para evitar ataques.
+
+### Generación de bloques
+
+El tiempo de producción de bloques se divide en slots (12 seg) y epochs (32 slots), se propone y valida un bloque por slot.
+
+El tamaño de los bloques está limitado: Se vitan bloques demasiado grandes, el tamaño se mide en unidades de gas por bloque, el objetivo es de 15M de gas, el tamaño varía en funcion de la demanda de la red.
+
+Las transacciones queman una cantidad de ETH. Esto se consigue mediante el uso de checkpoints, votar por la validez, si un par de checkpoints consiguen votos que representen 2/3 del ETH staked, se actualizan los checkpoints, el más reciente pasa a justificado y el anterior a finalizado.
+
+Medide de seguridad: Cuando la cadena falla en finalizar bloques 4+ epoch (por ataque 1/3) se queman lentamente el stake de los validadores que votan en contra.
 
 
 # Tema 8
