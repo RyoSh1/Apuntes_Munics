@@ -594,8 +594,27 @@ El tamaño de los bloques está limitado: Se vitan bloques demasiado grandes, el
 
 Las transacciones queman una cantidad de ETH. Esto se consigue mediante el uso de checkpoints, votar por la validez, si un par de checkpoints consiguen votos que representen 2/3 del ETH staked, se actualizan los checkpoints, el más reciente pasa a justificado y el anterior a finalizado.
 
-Medide de seguridad: Cuando la cadena falla en finalizar bloques 4+ epoch (por ataque 1/3) se queman lentamente el stake de los validadores que votan en contra.
+Medida de seguridad: Cuando la cadena falla en finalizar bloques 4+ epoch (por ataque 1/3) se queman lentamente el stake de los validadores que votan en contra.
 
+### Tipos de cuentas
+
+- Cuenta de propiedad externa (cualquier persona con claves privadas): No tiene coste, puede iniciar transacciones y entre EOAs solo transferencias.
+- Cuenta de contrato: Contrato inteligente desplegado en la red, controlado por el código. Creación cuesta gas, solo puede enviar transacciones en respuesta y puede ejecutar acciones.
+- Abstracción de cuentas: Busca convertir los monederos de usuarios en monederos de contratos inteligentes. Mejoraría experiencia y seguridad.
+
+### Datos y privacidad de las cuentas
+
+No hay privacidad de datos nativa, para lograrla hay que cifrar los datos antes de publicarlos.
+
+Buenas prácticas: Ejecutar nodo propio. Cambiar dirección regularmente. Utilizar dApps de privacidad. Utilizar rollups que preserven privacidad.
+
+### Almacenamiento distribuido
+
+- Transición enfoque monolítico a modular.
+- Enfoque monolítico: La cadena principal de Ethereum se encarga de la ejecución, liquidación, consenso y disponibilidad de los datos. Efecto sobre el almacenamiento: Cada nodo almacena todos los datos, gran tamaño de datos de la cadena.
+- Enfoque modular: Externalizar funciones fuera de L1. Dividir funciones en cadenas especializadas. Introducción de fragmentos de datos.
+
+###
 
 # Tema 8
 
