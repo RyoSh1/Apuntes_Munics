@@ -614,43 +614,199 @@ Buenas prácticas: Ejecutar nodo propio. Cambiar dirección regularmente. Utiliz
 - Enfoque monolítico: La cadena principal de Ethereum se encarga de la ejecución, liquidación, consenso y disponibilidad de los datos. Efecto sobre el almacenamiento: Cada nodo almacena todos los datos, gran tamaño de datos de la cadena.
 - Enfoque modular: Externalizar funciones fuera de L1. Dividir funciones en cadenas especializadas. Introducción de fragmentos de datos.
 
-###
+### Tasas por transacción
+
+El **Gas** es la unidad que representa el esfuerzo computacional para la ejecución de una operación.
+
+El límite de gas es la cantidad máxima de gas que un usuario está dispuesto a gastar, si es inferior se devuelve la diferencia.
+
+Precio base: Precio mínimo por unidad de gas para la inclusión en bloques. Precio prioritario: Se utiliza para añadir una propina para incentivar a los validadores a incluir una transacción.
+
+### Oráculos
+
+Los oráculos son fuentes de datos que conectan recursos off-chain a los contratos. Ethereum no tiene nativos.
+
+- De entrada: Permiten la ejecución de contratos inteligentes basados en datos del mundo real.
+- De salida: Permiten a los contratos inteligentes enviar órdenes a sistemas off-chain.
+- Cross-chain: Leen y escriben información entre blockchain.
+- Compute-enabled: Permiten hacer cálculos off-chain.
+
+### Smart contracts
+
+Lenguajes compatibles: Solidity, Viper, Yul, Fe. Rollups pueden soportar otros lenguajes.
+
+### dApps
+
+- Código backend: Contratos inteligentes que se ejecutan en una red descentralizada (el código no puede ser retirado, no tiene inactividad, resistencia a censura, integridad total de los datos y comportamiento verificable.).
+- Código front-end: Las interfaces se ejecutan en servidores centralizados (AWS), pero pueden ejecutarse en alternativas descentralizadas como IPFS.
+- Las dApps en Ethereum también tienen pagos incorporados en forma de tokens.
+
+### Redes de producción y desarrollo
+
+Listo para la producción:– L1 (red principal Ethereum)– L2 (mainnet de rollups)
+
+- Desarrollo:– Redes de prueba L1 y L2– Entornos virtuales locales
+- El software de código abierto (clientes) permite crear redes privadas o públicas con ventajas añadidas (diferentes algoritmos de consenso, etc.).
+
+### Nivel de descentralización
+
+Red pública con gran descentralización y seguridad.
+
+Ventajas: Alta descentralización de comudidad, alta distribución de moneda, múltiples implementaciones de nodos cliente y elevado número de nodos. Inconveniente la alta dependencia de proveedores de infraestructura.
+
+### Escalabilidad
+
+L1: Data sharding, los nodos no necesitan almacenar todos los datos para los rollups.
+
+L2: Escalado centrado en rollups.
+
+### Interoperabilidad
+
+La verdadera interoperabilidad permite que distintas L1 intercambien datos y fondos, pero no suele ser compatible de forma nativa. L1-L1 = Menor seguridad, L1-L2 Seguridad, L2-L2 menor seguridad , más seguro pasar por L1.
+
+### Procedimiento de actualización
+
+Ethreum Improvement Proposals (EIPs): Normas que especifican posibles mejoras para la red. El proceso es: Proponer EIP, presentar EIP a los desarrolladores, iterar con cambios técnicos hacia una propuesta final, Incluir en la actualización de la red y actualizar la red activada.
+
+El despliegue de EIP puede llevar mucho tiempo. Los desacuerdos se tratan con discusiones, si no se resuelven es posible una ruptura de la cadena.
 
 # Tema 8
 
 ## Tipos de blockchain/DLTs
 
-
+Existen diversas blockchain y DLTs diseñadas para cumplir con requisitos específicos, como identificar a los participantes, acceso permisionado a la red, baja latencia, altas tasas de transacción, confidencialidad en transacciones y contratos inteligentes, y restricciones según las necesidades del entorno empresarial.
 
 ## Hyperledger
 
+Hyperledger, liderado por la Linux Foundation y gestionado por la Hyperledger Foundation, promueve el desarrollo de soluciones blockchain empresariales. Desde su inicio, ha evolucionado como un marco modular que abarca diversas herramientas y bibliotecas, disponibles para consulta en recursos como el Project Matrix.
 
+Hyperledger Fabric es una DLT empresarial open-source, altamente activa y diseñada para redes de consorcio. Ofrece privacidad, rendimiento optimizado, ausencia de criptomonedas, y herramientas adaptadas a sectores como logística, IoT e identidad, resolviendo preocupaciones empresariales clave.
+
+### Arquitectura
+
+Con una arquitectura modular, incluye servicios de membresía, ordenamiento, validación, y diseminación de bloques. Este diseño flexible soporta diversas necesidades, destacando su modelo de transacción “Ejecutar-Ordenar-Validar”, que mejora el rendimiento al permitir lenguajes de propósito general.
+
+### Protocolos de consenso
+
+Fabric utiliza el protocolo RAFT, un enfoque Crash Fault Tolerant (CFT) más eficiente que los sistemas Byzantine Fault Tolerant (BFT). Esto reduce costes, consumo energético, riesgos de ciberseguridad y mejora el rendimiento transaccional.
+
+### Privacidad de datos
+
+La privacidad está garantizada mediante el uso de canales, subredes donde los datos y contratos inteligentes son accesibles solo a participantes autorizados, asegurando confidencialidad dentro de la red permisionada.
+
+### Componentes de Hyperledger Fabric
+
+Incluye nodos con roles específicos (peer, committing, anchor, endorsing, orderer, leader) para la gestión de red, certificados de identidad, y proveedores de servicios de afiliación que abstraen la complejidad criptográfica.
+
+### Procedimiento de actualización de red
+
+Las actualizaciones se gestionan mediante gobernanza abierta por un comité técnico y decisiones de los consorcios, incluyendo políticas de aprobación, configuración de nodos y canales, asegurando un despliegue adaptado a las necesidades empresariales.
+
+### Smart Contracts y DApps
+
+Los chaincodes implementan la lógica de negocio y se ejecutan fuera de la cadena, limitándose a un canal específico. Esto reduce costes y complejidad, mientras que las aplicaciones cliente interactúan a través de SDKs o REST APIs.
+
+### Escalabilidad
+
+La modularidad permite una escalabilidad eficiente, mejorando el rendimiento gracias a un consenso simplificado, validación optimizada, redes compactas y velocidades transaccionales de hasta 10,000 tps.
 
 ## Quorum
 
-
+Quorum, desarrollado por JP Morgan y adquirido por Consensys en 2020, es un fork de Ethereum diseñado para redes privadas permisionadas. Su enfoque está en la privacidad, la escalabilidad, y la reducción de tiempo y costes de transacción. Compatible con Solidity para contratos inteligentes, permite elegir entre protocolos de consenso como RAFT e IBFT y admite integraciones como Hyperledger Besu.
 
 ## Polkadot
 
-
+Polkadot, una blockchain híbrida desarrollada por Parity Technologies bajo la Web3 Foundation, se destaca por su gobernanza transparente, escalabilidad y capacidad de actualización. Su arquitectura se basa en una Relay Chain para la seguridad y consenso, y parachains interoperables diseñadas con el SDK Substrate. Utiliza el protocolo Nominated Proof-of-Stake (NPoS) y ofrece velocidades de hasta 1 millón de tps en escenarios avanzados.
 
 ## IOTA
 
-
+Fundada en 2015, IOTA es una DLT pública centrada en microtransacciones para el IoT. Su tecnología principal, el Tangle (un DAG), elimina las tasas de transacción y garantiza escalabilidad y soporte para contratos inteligentes. La fundación IOTA lidera su ecosistema, mientras que el proyecto avanza hacia la descentralización total con IOTA 2.0 (Coordicide).
 
 ## Corda
 
-
+Corda es una plataforma DLT privada y permisionada con capacidades de programación para el acceso a datos. Ofrece herramientas avanzadas como Corda Modelling Notation y Corda Settler, además de soportar extensiones como Cordite para crear DAOs. Aunque altamente escalable y flexible, su rendimiento transaccional no iguala al de otras plataformas líderes.
 
 ## HEDERA
 
-
+Hedera Hashgraph utiliza un protocolo basado en gossip y eventos en lugar de bloques tradicionales. Con aBFT (Asynchronous Byzantine Fault Tolerance), garantiza transacciones rápidas, seguras y eficientes. Su diseño innovador incluye timestamps y un enfoque en la comunicación descentralizada entre nodos para mantener la integridad de la red.
 
 ## Metodología para determinar el uso de una blockchain/DLT 
+
+La elección de una blockchain o DLT debe basarse en un análisis de requisitos específicos, comparando características clave como público/privado, permisionado/no permisionado, y casos de uso destacados. Es fundamental evaluar la comunidad, contribuciones al ecosistema, licencias, soporte, dApps disponibles, y enfoques tecnológicos únicos, asegurando que la solución elegida se alinee con las necesidades del proyecto.
 
 # Tema 9
 
 ## Aspectos legales. Blockchain/DLTs y GDPR 
+
+- Reglamento de la UE 2016/679, aplicado desde mayo de 2018.
+- Extraterritorial: se aplica globalmente.
+- Protege datos personales: identificativos, financieros, de salud, vida digital, imágenes, etc.
+- Aplica a procesos manuales y automatizados (Big Data, estadísticas).
+
+### Roles Clave
+1. Sujeto:
+    - Persona física cuyos datos son tratados.
+    - Derechos: consentimiento informado, acceso, rectificación, supresión, entre otros.
+2. Data Controller:
+    - Responsable del diseño y control del tratamiento de datos.
+    - Obligado a garantizar el cumplimiento legal.
+3. Data Processor:
+    - Procesa datos bajo instrucciones del controlador.
+    - Responsable de implementar medidas de seguridad.
+4. Data Protection Officer (DPO):
+    - Responsable de supervisar la seguridad y conformidad con el GDPR.
+
+### Principios Fundamentales
+
+- Lícito, justo y transparente: Solo recolectar y usar datos necesarios para un fin específico.
+- Minimización: Evitar el almacenamiento de datos innecesarios.
+- Limitación temporal: Archivar datos solo si es necesario.
+- Exactitud: Permitir actualizaciones.
+- Integridad y Confidencialidad: Protección contra accesos no autorizados.
+
+### Obligaciones de los Controladores
+
+- Obtener consentimiento claro y explícito (doble opt-in).
+- Informar al sujeto sobre el uso y propósito de los datos.
+- Notificar incidentes de seguridad en 72 horas.
+- Designar un DPO.
+
+### Derechos de los Sujetos
+
+- Acceso: A todos sus datos (explícitos o recogidos automáticamente).
+- Supresión: Derecho al olvido.
+- Portabilidad: Recuperar datos en formato interoperable.
+- Recurso/Apelación: Simplificación de procesos legales.
+
+### Desafíos en Blockchain/DLT
+
+- Compatibilidad: Blockchain es inmutable, lo que dificulta el cumplimiento del "derecho al olvido".
+- Roles difusos:
+    - Validadores y desarrolladores: generalmente neutrales.
+    - Miembros en la capa de servicio: pueden actuar como controladores.
+- Privacidad vs transparencia:
+    - Pseudoanonimato basado en claves.
+    - Necesidad de definir responsables del tratamiento.
+
+### Blockchain como Facilitador
+
+- Gestión del consentimiento:
+    - Almacenamiento inmutable de consentimientos con marcas de tiempo.
+    - Hash de datos en lugar de datos personales completos.
+- Derecho de acceso:
+    - Smart contracts para gestionar tokens de acceso a datos.
+    - Uso controlado mediante condiciones precisas.
+- Seguridad:
+    - Cifrado de datos.
+    - Destrucción de claves como mecanismo de "borrado".
+
+### Conclusiones
+
+- El GDPR establece un marco legal robusto, pero enfrenta desafíos como:
+    - Falta de experiencia en extraterritorialidad.
+    - Identificación de responsables en entornos descentralizados.
+    - Garantizar la integridad y confidencialidad en sistemas blockchain.
+- Blockchain tiene potencial como soporte del GDPR mediante la gestión del consentimiento y acceso controlado.
 
 # Tema 10
 
