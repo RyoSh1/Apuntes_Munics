@@ -913,22 +913,29 @@ El Internet Industrial de las Cosas (IIoT) conecta sensores y máquinas para opt
 
 # Tema 12
 
-
 ## Elementos de la pila blockchain/DLT más susceptibles a ataques
 
-
+Los nodos blockchain/DLT son críticos, pues implementan la lógica para comunicación, consenso y ejecución de smart contracts. Son vulnerables a ataques DoS, sobrecarga de CPU, insuficiencia de RAM o espacio en disco, y desconexiones de red. Además, las APIs que exponen pueden ser explotadas mediante fuzzing o ataques a claves privadas mal gestionadas y configuraciones de autenticación deficientes.
 
 ## Honeypots, vectores de ataque nodos blockchain/DLT
 
-
+Los honeypots son sistemas señuelo diseñados para engañar a atacantes y analizar sus acciones, protegiendo sistemas reales. Pueden implementarse con baja o alta interacción y ofrecen recursos como información, servicios o capacidad computacional. En nodos blockchain/DLT, los honeypots deben ser accesibles, convincentes y monitorear respuestas basadas en reglas o nodos modificados. Herramientas como Shodan facilitan su localización.
 
 ## Vectores de ataque de una DApp
 
-
+Las DApps suelen ser desarrolladas con menor experiencia y pruebas, dejando huecos de seguridad que pueden ser explotados mediante ataques a APIs, SQL injection, acceso no autorizado a servidores, ataques DoS o vulnerabilidades de Cross-Site Scripting (XSS). Requieren estrategias específicas de mitigación y honeypots para proteger sus componentes.
 
 ## Ataques smart contracts
 
-
+Los smart contracts son objetivos frecuentes por su inmutabilidad y la posibilidad de monetizar ataques exitosos. Existen herramientas de escaneo para identificar contratos vulnerables, que pueden contener trampas (honeypots) engañosas. Casos como el reentrancy attack en DAO muestran cómo errores de diseño pueden ser explotados, mientras que problemas de compilación o límites de ejecución en EVM representan riesgos adicionales.
 
 ## Ejemplos de ataques relevantes
+
+- DAO (2016): Ataque de reentrada que robó 3.6 millones de ETH. Evitable con mejores prácticas de codificación.
+- Parity (2017): Bug en cartera multi-firma que permitió sustraer 150,000 ETH. El error surgió tras una revisión de código.
+- Wormhole (2021): Explotación en la interacción Ethereum-Solana para acuñar 120,000 ETH. Requería pruebas más exhaustivas.
+- Ronin (2022): Robo de 610 millones USD debido al compromiso de claves privadas de validadores. La gestión deficiente de claves fue clave.
+- Poly Network (2021, 2023): Vulnerabilidades en llamadas del protocolo resultaron en el robo de 610 millones USD en criptomonedas.
+- PlayDapp (2024): Compromiso del contrato permitió acuñar 200 millones de tokens PLA.
+- DEXX (2024): Fuga de claves privadas afectó 8,620 wallets en Solana con pérdidas de 30 millones USD.
 
