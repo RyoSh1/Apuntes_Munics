@@ -614,74 +614,328 @@ Buenas prácticas: Ejecutar nodo propio. Cambiar dirección regularmente. Utiliz
 - Enfoque monolítico: La cadena principal de Ethereum se encarga de la ejecución, liquidación, consenso y disponibilidad de los datos. Efecto sobre el almacenamiento: Cada nodo almacena todos los datos, gran tamaño de datos de la cadena.
 - Enfoque modular: Externalizar funciones fuera de L1. Dividir funciones en cadenas especializadas. Introducción de fragmentos de datos.
 
-###
+### Tasas por transacción
+
+El **Gas** es la unidad que representa el esfuerzo computacional para la ejecución de una operación.
+
+El límite de gas es la cantidad máxima de gas que un usuario está dispuesto a gastar, si es inferior se devuelve la diferencia.
+
+Precio base: Precio mínimo por unidad de gas para la inclusión en bloques. Precio prioritario: Se utiliza para añadir una propina para incentivar a los validadores a incluir una transacción.
+
+### Oráculos
+
+Los oráculos son fuentes de datos que conectan recursos off-chain a los contratos. Ethereum no tiene nativos.
+
+- De entrada: Permiten la ejecución de contratos inteligentes basados en datos del mundo real.
+- De salida: Permiten a los contratos inteligentes enviar órdenes a sistemas off-chain.
+- Cross-chain: Leen y escriben información entre blockchain.
+- Compute-enabled: Permiten hacer cálculos off-chain.
+
+### Smart contracts
+
+Lenguajes compatibles: Solidity, Viper, Yul, Fe. Rollups pueden soportar otros lenguajes.
+
+### dApps
+
+- Código backend: Contratos inteligentes que se ejecutan en una red descentralizada (el código no puede ser retirado, no tiene inactividad, resistencia a censura, integridad total de los datos y comportamiento verificable.).
+- Código front-end: Las interfaces se ejecutan en servidores centralizados (AWS), pero pueden ejecutarse en alternativas descentralizadas como IPFS.
+- Las dApps en Ethereum también tienen pagos incorporados en forma de tokens.
+
+### Redes de producción y desarrollo
+
+Listo para la producción:– L1 (red principal Ethereum)– L2 (mainnet de rollups)
+
+- Desarrollo:– Redes de prueba L1 y L2– Entornos virtuales locales
+- El software de código abierto (clientes) permite crear redes privadas o públicas con ventajas añadidas (diferentes algoritmos de consenso, etc.).
+
+### Nivel de descentralización
+
+Red pública con gran descentralización y seguridad.
+
+Ventajas: Alta descentralización de comudidad, alta distribución de moneda, múltiples implementaciones de nodos cliente y elevado número de nodos. Inconveniente la alta dependencia de proveedores de infraestructura.
+
+### Escalabilidad
+
+L1: Data sharding, los nodos no necesitan almacenar todos los datos para los rollups.
+
+L2: Escalado centrado en rollups.
+
+### Interoperabilidad
+
+La verdadera interoperabilidad permite que distintas L1 intercambien datos y fondos, pero no suele ser compatible de forma nativa. L1-L1 = Menor seguridad, L1-L2 Seguridad, L2-L2 menor seguridad , más seguro pasar por L1.
+
+### Procedimiento de actualización
+
+Ethreum Improvement Proposals (EIPs): Normas que especifican posibles mejoras para la red. El proceso es: Proponer EIP, presentar EIP a los desarrolladores, iterar con cambios técnicos hacia una propuesta final, Incluir en la actualización de la red y actualizar la red activada.
+
+El despliegue de EIP puede llevar mucho tiempo. Los desacuerdos se tratan con discusiones, si no se resuelven es posible una ruptura de la cadena.
 
 # Tema 8
 
 ## Tipos de blockchain/DLTs
 
-
+Existen diversas blockchain y DLTs diseñadas para cumplir con requisitos específicos, como identificar a los participantes, acceso permisionado a la red, baja latencia, altas tasas de transacción, confidencialidad en transacciones y contratos inteligentes, y restricciones según las necesidades del entorno empresarial.
 
 ## Hyperledger
 
+Hyperledger, liderado por la Linux Foundation y gestionado por la Hyperledger Foundation, promueve el desarrollo de soluciones blockchain empresariales. Desde su inicio, ha evolucionado como un marco modular que abarca diversas herramientas y bibliotecas, disponibles para consulta en recursos como el Project Matrix.
 
+Hyperledger Fabric es una DLT empresarial open-source, altamente activa y diseñada para redes de consorcio. Ofrece privacidad, rendimiento optimizado, ausencia de criptomonedas, y herramientas adaptadas a sectores como logística, IoT e identidad, resolviendo preocupaciones empresariales clave.
+
+### Arquitectura
+
+Con una arquitectura modular, incluye servicios de membresía, ordenamiento, validación, y diseminación de bloques. Este diseño flexible soporta diversas necesidades, destacando su modelo de transacción “Ejecutar-Ordenar-Validar”, que mejora el rendimiento al permitir lenguajes de propósito general.
+
+### Protocolos de consenso
+
+Fabric utiliza el protocolo RAFT, un enfoque Crash Fault Tolerant (CFT) más eficiente que los sistemas Byzantine Fault Tolerant (BFT). Esto reduce costes, consumo energético, riesgos de ciberseguridad y mejora el rendimiento transaccional.
+
+### Privacidad de datos
+
+La privacidad está garantizada mediante el uso de canales, subredes donde los datos y contratos inteligentes son accesibles solo a participantes autorizados, asegurando confidencialidad dentro de la red permisionada.
+
+### Componentes de Hyperledger Fabric
+
+Incluye nodos con roles específicos (peer, committing, anchor, endorsing, orderer, leader) para la gestión de red, certificados de identidad, y proveedores de servicios de afiliación que abstraen la complejidad criptográfica.
+
+### Procedimiento de actualización de red
+
+Las actualizaciones se gestionan mediante gobernanza abierta por un comité técnico y decisiones de los consorcios, incluyendo políticas de aprobación, configuración de nodos y canales, asegurando un despliegue adaptado a las necesidades empresariales.
+
+### Smart Contracts y DApps
+
+Los chaincodes implementan la lógica de negocio y se ejecutan fuera de la cadena, limitándose a un canal específico. Esto reduce costes y complejidad, mientras que las aplicaciones cliente interactúan a través de SDKs o REST APIs.
+
+### Escalabilidad
+
+La modularidad permite una escalabilidad eficiente, mejorando el rendimiento gracias a un consenso simplificado, validación optimizada, redes compactas y velocidades transaccionales de hasta 10,000 tps.
 
 ## Quorum
 
-
+Quorum, desarrollado por JP Morgan y adquirido por Consensys en 2020, es un fork de Ethereum diseñado para redes privadas permisionadas. Su enfoque está en la privacidad, la escalabilidad, y la reducción de tiempo y costes de transacción. Compatible con Solidity para contratos inteligentes, permite elegir entre protocolos de consenso como RAFT e IBFT y admite integraciones como Hyperledger Besu.
 
 ## Polkadot
 
-
+Polkadot, una blockchain híbrida desarrollada por Parity Technologies bajo la Web3 Foundation, se destaca por su gobernanza transparente, escalabilidad y capacidad de actualización. Su arquitectura se basa en una Relay Chain para la seguridad y consenso, y parachains interoperables diseñadas con el SDK Substrate. Utiliza el protocolo Nominated Proof-of-Stake (NPoS) y ofrece velocidades de hasta 1 millón de tps en escenarios avanzados.
 
 ## IOTA
 
-
+Fundada en 2015, IOTA es una DLT pública centrada en microtransacciones para el IoT. Su tecnología principal, el Tangle (un DAG), elimina las tasas de transacción y garantiza escalabilidad y soporte para contratos inteligentes. La fundación IOTA lidera su ecosistema, mientras que el proyecto avanza hacia la descentralización total con IOTA 2.0 (Coordicide).
 
 ## Corda
 
-
+Corda es una plataforma DLT privada y permisionada con capacidades de programación para el acceso a datos. Ofrece herramientas avanzadas como Corda Modelling Notation y Corda Settler, además de soportar extensiones como Cordite para crear DAOs. Aunque altamente escalable y flexible, su rendimiento transaccional no iguala al de otras plataformas líderes.
 
 ## HEDERA
 
-
+Hedera Hashgraph utiliza un protocolo basado en gossip y eventos en lugar de bloques tradicionales. Con aBFT (Asynchronous Byzantine Fault Tolerance), garantiza transacciones rápidas, seguras y eficientes. Su diseño innovador incluye timestamps y un enfoque en la comunicación descentralizada entre nodos para mantener la integridad de la red.
 
 ## Metodología para determinar el uso de una blockchain/DLT 
+
+La elección de una blockchain o DLT debe basarse en un análisis de requisitos específicos, comparando características clave como público/privado, permisionado/no permisionado, y casos de uso destacados. Es fundamental evaluar la comunidad, contribuciones al ecosistema, licencias, soporte, dApps disponibles, y enfoques tecnológicos únicos, asegurando que la solución elegida se alinee con las necesidades del proyecto.
 
 # Tema 9
 
 ## Aspectos legales. Blockchain/DLTs y GDPR 
 
+- Reglamento de la UE 2016/679, aplicado desde mayo de 2018.
+- Extraterritorial: se aplica globalmente.
+- Protege datos personales: identificativos, financieros, de salud, vida digital, imágenes, etc.
+- Aplica a procesos manuales y automatizados (Big Data, estadísticas).
+
+### Roles Clave
+1. Sujeto:
+    - Persona física cuyos datos son tratados.
+    - Derechos: consentimiento informado, acceso, rectificación, supresión, entre otros.
+2. Data Controller:
+    - Responsable del diseño y control del tratamiento de datos.
+    - Obligado a garantizar el cumplimiento legal.
+3. Data Processor:
+    - Procesa datos bajo instrucciones del controlador.
+    - Responsable de implementar medidas de seguridad.
+4. Data Protection Officer (DPO):
+    - Responsable de supervisar la seguridad y conformidad con el GDPR.
+
+### Principios Fundamentales
+
+- Lícito, justo y transparente: Solo recolectar y usar datos necesarios para un fin específico.
+- Minimización: Evitar el almacenamiento de datos innecesarios.
+- Limitación temporal: Archivar datos solo si es necesario.
+- Exactitud: Permitir actualizaciones.
+- Integridad y Confidencialidad: Protección contra accesos no autorizados.
+
+### Obligaciones de los Controladores
+
+- Obtener consentimiento claro y explícito (doble opt-in).
+- Informar al sujeto sobre el uso y propósito de los datos.
+- Notificar incidentes de seguridad en 72 horas.
+- Designar un DPO.
+
+### Derechos de los Sujetos
+
+- Acceso: A todos sus datos (explícitos o recogidos automáticamente).
+- Supresión: Derecho al olvido.
+- Portabilidad: Recuperar datos en formato interoperable.
+- Recurso/Apelación: Simplificación de procesos legales.
+
+### Desafíos en Blockchain/DLT
+
+- Compatibilidad: Blockchain es inmutable, lo que dificulta el cumplimiento del "derecho al olvido".
+- Roles difusos:
+    - Validadores y desarrolladores: generalmente neutrales.
+    - Miembros en la capa de servicio: pueden actuar como controladores.
+- Privacidad vs transparencia:
+    - Pseudoanonimato basado en claves.
+    - Necesidad de definir responsables del tratamiento.
+
+### Blockchain como Facilitador
+
+- Gestión del consentimiento:
+    - Almacenamiento inmutable de consentimientos con marcas de tiempo.
+    - Hash de datos en lugar de datos personales completos.
+- Derecho de acceso:
+    - Smart contracts para gestionar tokens de acceso a datos.
+    - Uso controlado mediante condiciones precisas.
+- Seguridad:
+    - Cifrado de datos.
+    - Destrucción de claves como mecanismo de "borrado".
+
+### Conclusiones
+
+- El GDPR establece un marco legal robusto, pero enfrenta desafíos como:
+    - Falta de experiencia en extraterritorialidad.
+    - Identificación de responsables en entornos descentralizados.
+    - Garantizar la integridad y confidencialidad en sistemas blockchain.
+- Blockchain tiene potencial como soporte del GDPR mediante la gestión del consentimiento y acceso controlado.
+
 # Tema 10
 
 ## Motivación y definición Green blockchain/DLT
 
+Una Green Blockchain o DLT es una tecnología de libro mayor distribuido diseñada para minimizar su impacto ambiental mediante la reducción de su consumo energético y emisiones de carbono, sin comprometer los beneficios fundamentales de la descentralización, transparencia y seguridad. A diferencia de las blockchains tradicionales, estas se enfocan en lograr eficiencia energética y sostenibilidad mientras contribuyen a los Objetivos de Desarrollo Sostenible (ODS).
 
+Motivación e Impacto Medioambiental
+El desarrollo de Green Blockchain surge como respuesta al alto impacto ambiental de las blockchains tradicionales, que contribuyen al cambio climático a través de sus elevadas emisiones de carbono y consumo energético. Las mejoras en eficiencia energética reducen costos operativos, fomentan la escalabilidad y aumentan la adopción en múltiples sectores, promoviendo la responsabilidad social corporativa y una innovación ética con impacto positivo en la sociedad.
 
 ## Componentes sw Green blockchain/DLT 
+
+### Componentes Software
+
+El software de Green Blockchain incluye elementos intensivos en consumo, como el ledger, bloques, transacciones y mecanismos de consenso. Cada componente, desde la estructura de la red hasta la validación de datos, influye en el balance entre consumo energético, escalabilidad y seguridad. Soluciones como podas, archivado de datos, y compresión de transacciones optimizan el rendimiento y reducen la sobrecarga computacional.
+
+### Tamaño de Bloque
+
+El tamaño de los bloques es crucial para equilibrar consumo energético, seguridad y latencia. Bloques grandes demandan más recursos para su validación, excluyen a pequeños mineros y aumentan riesgos de centralización, mientras que bloques pequeños facilitan ataques Sybil. Un diseño eficiente busca optimizar este equilibrio sin sacrificar la descentralización o la seguridad.
+
+### Mecanismos y Protocolos de Consenso
+
+Los mecanismos de consenso son grandes consumidores de energía, pero recientes innovaciones como el Green-PoW reducen el consumo ajustando dinámicamente la dificultad minera. Alternativas más sostenibles incluyen Pure-Proof-of-Stake (ALGORAND), Nominated-PoS (Polkadot), y Liquid-PoS (Tezos), que minimizan la necesidad de recursos computacionales intensivos y fomentan un modelo más inclusivo y eficiente.
+
+### Arquitectura de Red
+
+La optimización de redes P2P en Green Blockchain se centra en reducir latencia, optimizar protocolos de enrutado (como gossip protocol), implementar sharding y minimizar transacciones on-chain con soluciones off-chain (sidechains, state channels). Técnicas como compresión de datos y redes de entrega de contenido (CDN) reducen el ancho de banda y el consumo energético en la transmisión de información.
+
+### Almacenamiento de Datos
+
+El almacenamiento eficiente incluye técnicas como compresión de datos (gzip), poda de información no esencial y uso de árboles de Merkle para validación rápida. También se exploran soluciones descentralizadas y off-chain, que sincronizan nodos solo cuando es necesario, reduciendo así el consumo energético asociado al mantenimiento de grandes volúmenes de datos.
+
+### Validación y Verificación de Datos
+
+La validación de datos requiere operaciones criptográficas continuas que consumen energía significativa. Técnicas como pruebas de conocimiento cero (ZKPs) reducen la carga computacional al validar datos sin procesar toda la información. Algoritmos como SHA-256 y ECDSA proporcionan alta seguridad, mientras que estrategias post-cuánticas buscan incrementar la eficiencia futura.
+
+### Contratos Inteligentes
+
+La optimización de contratos inteligentes reduce el consumo energético mediante un uso eficiente de recursos, minimización de operaciones de almacenamiento y lenguajes optimizados como Rust o Solidity. Estas estrategias no solo disminuyen el desperdicio de gas, sino que también promueven la sostenibilidad de aplicaciones descentralizadas al requerir menos recursos computacionales.
+
+### Componentes Hardware
+
+El hardware de nodos, desde CPU y GPU hasta ASICs, debe ser elegido según las necesidades de cada red. Las soluciones más sostenibles combinan tecnologías avanzadas como FPGA y dispositivos de enrutado optimizados para reducir el consumo energético. La especialización de hardware, aunque más eficiente, presenta retos en términos de accesibilidad y flexibilidad.
+
+### Minado con Energías Renovables y Reutilización
+
+El minado sostenible emplea fuentes renovables como energía hidroeléctrica y solar, y reutiliza subproductos como el calor generado. Innovaciones como el "bread pudding protocol" aprovechan el minado para entrenar modelos de IA o investigación científica, mientras que la reutilización de hashes y el merge mining permiten optimizar el uso de recursos sin duplicar esfuerzos.
+
+### Análisis de Eficiencia Energética
+
+La evaluación de Green Blockchain se basa en métricas como kWh por transacción y escalabilidad. La adopción de técnicas eficientes, nodos de baja potencia y ajustes dinámicos de tamaño de bloque contribuyen a minimizar el impacto ambiental y a mantener un equilibrio entre rendimiento, seguridad y sostenibilidad.
+
+### Mejores Prácticas y Retos
+
+Las mejores prácticas incluyen elegir mecanismos de consenso sostenibles, optimizar continuamente el diseño y fomentar la colaboración entre actores. Sin embargo, retos como el soporte regulatorio, la interoperabilidad, la educación y la necesidad de nuevos paradigmas tecnológicos (computación reversible o ternaria) plantean desafíos para lograr una implementación más amplia y sostenible.
 
 # Tema 11
 
 ## Beneficios y retos del uso de blockchain/DLT con tecnologías de la industria 4.0/5.0 
 
-# Tema 12
+### Industria 4.0/5.0: Problemas Actuales
 
+La evolución hacia la Industria 4.0/5.0 enfrenta desafíos como la dependencia de servidores centralizados, la necesidad de intermediarios y actualizaciones inadecuadas de firmware, especialmente en dispositivos IoT. Además, garantizar la autenticidad de los datos, proteger el intercambio con terceros y superar las limitaciones del código cerrado son obstáculos críticos. Estos problemas afectan la eficiencia operativa y reducen la competitividad, destacando la necesidad de soluciones innovadoras para el avance industrial.
+
+### Industria 4.0/5.0: Ciberseguridad
+
+La ciberseguridad en la Industria 4.0/5.0 es crucial para proteger sistemas críticos y aplicaciones conectadas de ciberataques. Blockchain contribuye mediante criptografía avanzada, acceso restringido en redes privadas y disponibilidad de datos distribuidos. Sin embargo, enfrenta desafíos como ataques Sybil y boicots de mineros, que pueden comprometer la integridad de las transacciones, especialmente en redes pequeñas.
+
+### Industria 4.0/5.0: Integración Horizontal y Vertical
+
+La integración horizontal y vertical son fundamentales para la automatización y comunicación en la Industria 4.0. Blockchain facilita la colaboración industrial mediante la descentralización de datos, trazabilidad y transparencia en cadenas de suministro. Ejemplos incluyen sistemas como E-Chain y el desarrollo colaborativo en sectores de manufactura. Sin embargo, su adopción enfrenta retos relacionados con los costos y la curva de aprendizaje en industrias tradicionales.
+
+### Industria 4.0/5.0: Big Data
+
+La Industria 4.0 genera grandes cantidades de datos que requieren técnicas avanzadas de análisis. Blockchain potencia Big Data al abordar la recolección, fiabilidad y circulación automatizada de datos, garantizando su integridad y transparencia mediante contratos inteligentes. Estas soluciones fortalecen la capacidad predictiva y la toma de decisiones en tiempo real en entornos industriales.
+
+### Industria 4.0/5.0: ICPS
+
+Los Sistemas de Producción Ciberfísicos (ICPS) conectan y controlan procesos físicos mediante datos descentralizados. Blockchain refuerza estos sistemas al proporcionar coordinación en tiempo real y redundancia de datos, aunque enfrenta limitaciones en escalabilidad, consumo energético y capacidades de los dispositivos IIoT, fundamentales para su funcionamiento.
+
+### Industria 4.0/5.0: Software de Simulación
+
+El software de simulación modela procesos industriales para optimización y predicción. Blockchain mejora la recopilación y autenticidad de datos, divide tareas computacionales entre nodos y permite simulaciones distribuidas más rápidas. Estas innovaciones aumentan la precisión y calidad de las predicciones, favoreciendo la toma de decisiones informadas.
+
+### Industria 4.0/5.0: Fabricación Aditiva
+
+La impresión 3D es clave en la Industria 4.0, aportando flexibilidad y personalización. Blockchain optimiza la cadena de suministro descentralizada, protege la propiedad intelectual y mejora la confianza entre actores. Además, permite rastrear versiones de archivos y distribuir cálculos para acelerar procesos, fomentando la transparencia y seguridad.
+
+### Industria 4.0/5.0: Cloud y Edge Computing
+
+Cloud y Edge Computing son esenciales para la Industria 4.0, pero enfrentan limitaciones como dependencia de servidores centrales y latencia. Blockchain complementa estas tecnologías con almacenamiento descentralizado y gestión eficiente de recursos. En combinación con Edge Computing, permite optimizar tareas IoT con mayor seguridad y menor latencia.
+
+### Industria 4.0/5.0: Robots Autónomos y Vehículos
+
+La automatización industrial incluye robots, vehículos autónomos y drones, que mejoran la eficiencia operativa. Blockchain facilita la interacción y transacciones entre estos dispositivos mediante contratos inteligentes, promoviendo la colaboración autónoma y segura. Ejemplos incluyen la gestión de rutas, inventarios y servicios para vehículos inteligentes.
+
+### Industria 4.0/5.0: Realidad Aumentada, Mixta y Virtual
+
+La AR/VR industrial potencia la productividad, diseño y mantenimiento. Blockchain mejora la gestión y seguridad de datos, descentraliza el almacenamiento y facilita la colaboración en entornos digitales. Además, permite ecosistemas de aplicaciones descentralizadas y transacciones financieras seguras, aunque enfrenta desafíos como limitaciones de hardware.
+
+### Industria 4.0/5.0: IIoT
+
+El Internet Industrial de las Cosas (IIoT) conecta sensores y máquinas para optimizar procesos. Blockchain asegura la autenticidad y transparencia de los datos, facilita la interacción automatizada entre entidades y mejora la resiliencia del sistema. Sin embargo, enfrenta retos en privacidad, eficiencia energética y limitaciones de dispositivos IoT.
+
+# Tema 12
 
 ## Elementos de la pila blockchain/DLT más susceptibles a ataques
 
-
+Los nodos blockchain/DLT son críticos, pues implementan la lógica para comunicación, consenso y ejecución de smart contracts. Son vulnerables a ataques DoS, sobrecarga de CPU, insuficiencia de RAM o espacio en disco, y desconexiones de red. Además, las APIs que exponen pueden ser explotadas mediante fuzzing o ataques a claves privadas mal gestionadas y configuraciones de autenticación deficientes.
 
 ## Honeypots, vectores de ataque nodos blockchain/DLT
 
-
+Los honeypots son sistemas señuelo diseñados para engañar a atacantes y analizar sus acciones, protegiendo sistemas reales. Pueden implementarse con baja o alta interacción y ofrecen recursos como información, servicios o capacidad computacional. En nodos blockchain/DLT, los honeypots deben ser accesibles, convincentes y monitorear respuestas basadas en reglas o nodos modificados. Herramientas como Shodan facilitan su localización.
 
 ## Vectores de ataque de una DApp
 
-
+Las DApps suelen ser desarrolladas con menor experiencia y pruebas, dejando huecos de seguridad que pueden ser explotados mediante ataques a APIs, SQL injection, acceso no autorizado a servidores, ataques DoS o vulnerabilidades de Cross-Site Scripting (XSS). Requieren estrategias específicas de mitigación y honeypots para proteger sus componentes.
 
 ## Ataques smart contracts
 
-
+Los smart contracts son objetivos frecuentes por su inmutabilidad y la posibilidad de monetizar ataques exitosos. Existen herramientas de escaneo para identificar contratos vulnerables, que pueden contener trampas (honeypots) engañosas. Casos como el reentrancy attack en DAO muestran cómo errores de diseño pueden ser explotados, mientras que problemas de compilación o límites de ejecución en EVM representan riesgos adicionales.
 
 ## Ejemplos de ataques relevantes
+
+- DAO (2016): Ataque de reentrada que robó 3.6 millones de ETH. Evitable con mejores prácticas de codificación.
+- Parity (2017): Bug en cartera multi-firma que permitió sustraer 150,000 ETH. El error surgió tras una revisión de código.
+- Wormhole (2021): Explotación en la interacción Ethereum-Solana para acuñar 120,000 ETH. Requería pruebas más exhaustivas.
+- Ronin (2022): Robo de 610 millones USD debido al compromiso de claves privadas de validadores. La gestión deficiente de claves fue clave.
+- Poly Network (2021, 2023): Vulnerabilidades en llamadas del protocolo resultaron en el robo de 610 millones USD en criptomonedas.
+- PlayDapp (2024): Compromiso del contrato permitió acuñar 200 millones de tokens PLA.
+- DEXX (2024): Fuga de claves privadas afectó 8,620 wallets en Solana con pérdidas de 30 millones USD.
 
