@@ -127,4 +127,56 @@ Introduce mejoras en el proceso de handshake, eliminando redundancias y mejorand
 Principales diferencias:
 - Menos mensajes en el handshake (pasa de 4 a 3 rondas), 5 mensajes (CH + Key_share, SH + KeyShare, SCert, Fin, Fin).
 - Elimina el uso de claves RSA estáticas, obligando a usar Diffie-Hellman Ephemeral (DHE) o Pre-Shared Keys (PSK) lo que mejora la seguridad.
-- 
+
+### Tipo 2: Reanudación de sesión
+
+TLS permite reducir el tiempo de establecimiento de una conexión si cliente y servidor ya han tenido una sesión previamente.
+
+El cliente envía un ID de sesión en el "Client Hello", el servidor lo devuelven y se realiza un nuevo set de claves para reanudar el cifrado.
+
+Existe una alternativa en la que en lugar de almacenar sesiones en el servidor, este envía un ticket cifrado al cliente, con este el cliente puede recuperar la sesión en una reconexión.
+
+### Intercambio de claves
+
+Dos técnicas:
+
+- RSA: Se genera un premaster secret aleatorio y se cifra con la *pk* del servidor. No ofrece forward secrecy, si la *sk* del servidor se compromete, se pueden descifrar las sesiones derivadas.
+- Diffie-Hellman Ephemeral (DHE) y Elliptic Curve DHE: Permiten generar una clave compartida en canales inseguros mientras haya autenticación, ofrecen forward secrecy. DHE es estático, la clave compartida es siempre la misma, por otra parte en ECDHE los parámetros del servidor cambian en cada conexión. TLS 1.3 ya no permite DHE, solo ECDHE.
+
+#### Autenticación
+
+Normalmente se realiza algún tipo de criptografía de clave pública para la autenticación (RSA o ECDSA):
+1. El cliente obtiene y valida el certificado del servidor.
+2.  - RSA: El cliente cifra el premaster secret con la clave pública del servidor, este se autentica si el mensaje "Finished" recibido por el cliente es correcto.
+    - ECDSA: El servidor comunica parámetros usando su propia clave privada, los parámetros se concatenan con valores aleatorios para evitar ataques de repetición. 
+
+### Tipos de cifrado en TLS
+
+- Flujo (obsoleto en TLS 1.3): Se genera un flujo de claves que se mezclan con los datos usando XOR.
+- Bloque: Divide los datos en bloques de tamaño fijo y se realizan operaciones de cifrado usando los bloques como entrada de los siguientes. Se usa CBC o EMAC.
+- Cifrado AEAD (Authenticated Encryption with Associated Data): Integra cifrado y autenticación en una sola operación, evita la necesidad de utilizar una clave MAC separada. Usa CBC-MAC y Galois Counter Mode, es el único en TLS 1.3.
+
+#### Cierre de conexión
+
+Cuando una sesión termina, TLS usa el subprotocolo de alertas para cerrarla de forma segura.
+
+Alertas TLS:
+- Warning: Lleva una descripción. "Close Notify" se envía antes de cerrar la sesión para evitar ataques de truncado.
+- Fatal: Si ocurre un error grave, la conexión se cierra de inmediato.
+
+#### Operaciones criptográficas
+
+Una función pseudoaleatoria (PRF SINF) genera cantidades arbitrarias de datos pseudoaleatorios. En TLS 1.2 se utiliza Hash-based MAC (HMAC) y en TLS 1.3 se utiliza HKDF.
+
+#### Master Secret
+
+Se deriva del *premaster secret* mediante una PRF, se utilizan campos aleatorios para asegurar la aleatoriedad, tiene una longitud de 48 bytes.
+
+### Generación de claves
+
+Para la generación de la master key se utilizan los siguientes parámetros PRF( pre_master_key, "master secret", client random, server random), esta salida se utiliza pasando por un XOR con ("key expansion", client random, server random) y como parámetro de otra PRF para generar un Key Block que contiene: encrypt key 1 y 2, mac key 1 y 2 y IV 1 y 2. 
+
+### Cipher Suite
+
+
+
