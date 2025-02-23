@@ -65,12 +65,103 @@ El problema es que la seguridad está vista como un gasto, muchas empresas invie
 
 #### Problemas
 
-####
-
 ## Infraestructura de un SOC
+
+- Infraestructura de seguridad en la organización:
+- Infraestructura de seguridad en el SOC:
+
+### Fuentes de datos
+
+
+
+#### Logs
+
+
+
+### Ticketing Systems
+
+
+
+#### Implementación de un Ticketing System
 
 ## Estructura organizativa de un SOC
 
+
+
+#### CIO
+
+
+
+#### CISO
+
+
+
+#### CEO
+
+
+
+#### Analista de seguridad
+
+
+
+#### Ingenieros de seguridad
+
+
+
+#### Arquitectos de seguridad
+
+
+
 ## Operación de un SOC
 
+### Respuesta a incidentes
+
+
+
+### Métricas
+
+
+
+#### Clasificación de vulnerabilidades
+
+
+
+#### Clasificación de activos
+
+
+
+#### Histórico de parches
+
+
+
+### Inteligencia
+
+
+
+#### Blacklist
+
+
+
+#### Bases de datos externas
+
+
+
+#### Organizaciones y partners industriales
+
 ## Outsourcing del SOC
+
+
+
+### Tipos de MSSPs
+
+
+
+### Ventajas y desventajas
+
+
+
+### Requisitos
+
+
+
+### Prestación de servicios
