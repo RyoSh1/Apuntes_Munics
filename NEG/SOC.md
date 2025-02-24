@@ -127,82 +127,156 @@ Muchas veces el timestamp de un ticket es muy posterior al evento o amenaza y es
 
 ## Estructura organizativa de un SOC
 
-
+La ubicación del SOC dentro de la organización debe proporcionar la capacidad de influir en las decisiones de la organización que permitan mitigar y recuperar de forma óptima la actividad en una organicación. Es importante la velocidad de la respuesta y la posibilidad de toma de decisiones, para ello es fundamental los meedios, la formación y formar parte de la estrategia de la organización.
 
 #### CIO
 
-
+Director de sistemas de información: Es el máximo responsable del departamente IT y en algunos casos, del SOC. Muchas veces sus decisiones y planes añaden amenazas de seguridad y pueden introducir grandes riesgos en la organización. En ocasiones prima la reducción de costes y tiempo, frente a las necesidades de seguridad.
 
 #### CISO
 
-
+Director de seguridad de la información: Es el máximo responsable de la seguridad y por tanto del SOC. Responsable por las decisiones de seguridad corporativa, tanto de seguridad física como de las instalaciones, cumplimiento normativo y la continuidad del negocio. Mantiene la dirección informada delos riesgos y decisiones de seguridad que se toman.
 
 #### CEO
 
-
+Director ejecutivo: Se coordina, informa y planifica directamente con el CISO.
 
 #### Analista de seguridad
 
-
+- Forma la primera línea de staff.
+- Responde a las fuentes de datos (teléfono, mail...).
+- Revisa los eventos y alertas y realiza el primer triage.
+- Dos niveles:
+    - Analistas de primer nivel o junior, encargados de abrir los tickets y analizar que está ocurriendo siguiendo un procedimiento estricto.
+    - Analistas de segundo nivel o senior, tratamiento de tickets escalados que necesitan un análisis más detallado o experimentado.
 
 #### Ingenieros de seguridad
 
-
+- Normalmente especializados en necesidades específicas de la organización, como IDS, proxy, Data Loss Prevention...
+- Encargados de crear las reglas en el SIEM y en otros sistemas que permitan generar alertas. Ajuste de estas reglas para evitar falsos positivos.
+- Revisión de los tickets cerrados por los analistas para verificar su calidad y mejorar el proceso.
+- Formar a los analistas para favorecer el triage y cierre de casos "normales".
 
 #### Arquitectos de seguridad
 
-
+- Determinación de los requerimientos, planificación y seguimiento de los sistemas de seguridad con vistas a alcanzar los objetivos de la organización. Visión de alto nivel. 
+- Asegurar que las incorporaciones tecnológicas van a ser bien gestionadas por el SOC, que están bien integradas con las herramientas y que ha recibido el correcto soporte y formación. 
+- Responsable del análisis de riesgos, pruebas de vulnerabilidad, evaluación de seguridad e implantación de arquitecturas y plataformas de seguridad. 
 
 ## Operación de un SOC
 
 ### Respuesta a incidentes
 
-
+La respuesta a incidentes debe seguir un proceso repetible, eficiente y lógico, que se basa normalmente en los siguientes pasos:  => Detección => Confirmación <=> Análisis <=> Contención => Recuperación <=> Revisión <=
 
 ### Métricas
 
+Alguna métricas sobre el día a día del SOC, facilitan información sobre posibles problemas:
+- Métricas sobre cumplimiento de SLA u objetivos.
+- Estado de los tickets con prioridad alta.
+- La duración de resolución de un determinado tipo de tickets puede denotar falta de formación o necesidades especiales en ese ámbito.
 
+Gestión y monitorización de las colas de tickets. Falacia de la evidencia completa o "cherry picking" al seleccionar ciertos tickets más amigables o conocidos.
 
 #### Clasificación de vulnerabilidades
 
+Es necesario clasificar las vulnerabilidades para poder medir su posible impacto/riesgo (Simple, PCI, Severidad, CVSS).
 
+CVSS es un sistema de clasificación público que permite valorar la gravedad de una vulnerabilidad de 0 a 10 (minor update 3.1 17/6/19).
+
+La base de datos de vulnerabilidad nacional (NVD) es un repositorio de vulnerabilidades del gobierno USA, proporciona puntuaciones CVSS para casi todas las vulnerabilidades conocidas.
 
 #### Clasificación de activos
 
+Para dar respuesta eficaz a un posible ataque es necesario tener clasificados todos los activos y priorizarlos en base a unos criterios. Es necesario llevar un control  de las estadísticas de esos activos pues van a marcar la eficiencia de las contramedidas. Es un paso fundamental en los mecanismos de *disaster recovery* y planes de continuidad de negocio.
 
+El punto de vista de los ingenieros puede ser muy diferente al del resto de departamentos como p.e los financieros. Es recomendable tener en cuenta la ISO 27001 y/o otros estándares internacionales específicos, como NERC CIP (industria de la energía eléctrica), IEC 62443 (control industrial) o NIST 800-82 (control industrial). Herramientas como Cyber Integrity pueden ayudar a gestionar y clasificar los activos. 
+
+- Criterios de clasificación:
+    - Impacto en los clientes o en el negocio
+    - Impacto financiero de la caída o pérdida de servicio
+    - Requisitos de alta disponibilidad (24x7)
+    - Impacto en la seguridad
+    - Tiempo medio entre fallos y probabilidad de fallo
+    - Tiempo de sustitución de piezas o partes
+    - Valor de reemplazo
+    - Número de usuarios
+    - Almacenamiento de información crítica
+    - Impacto en la reputación de la organización.
 
 #### Histórico de parches
 
-
+Es necesario llevar a cabo una monitorización del historial de parches aplicados. Podremos saber el porcentaje de parches no aplicados en activos críticos.
 
 ### Inteligencia
 
-
+La inteligencia se basa en el análisis de una gran colección de información externa (conoce al enemigo) e interna (conócete a ti mismo). El SOC puede tomar decisiones de protección como:
+- Limitar el espacio de IPs que no pueden acceder a los servicios de la organización. En otros casos, es una buena política clasificar las IP exteras que acceden a la VPN, proxy, etc.
+- Incorporar listas de IPs desde donde se hace spam o botnet, usar mecanismos de reputación, detectar actividad P2P, etc.
+- Usar colecciones de información acerca de ataques, para detectar comportamiento o tráfico anómalo.
 
 #### Blacklist
 
+Los blacklist facilitan el reconocimiento de orígenes problemáticos en cuanto a spam, malware, etc.
 
+También se puede incluir en la lista URIs que contienen tipicamente lugares de phising, pharming, etc. Sitios que capturan información personal o comprometida.
+
+Otra opción es analizar el patrón y contenido p.e de los emails para detectar ataques que han ido modificando su dirección de mail, nombre e IPs, por lo que pueden no ser detectables por las blacklist. 
+
+El estudio de ataques previos también puede facilitar la creación de blacklist propias.
 
 #### Bases de datos externas
 
-
+Muchas organizaciones y fabricantes comparten su información sobre ataques y amenazas para promocionar sus productos o informar a sus clientes. Por ejemplo:
+- https://atlas.arbor.net: recursos públicos sobre vulnerabilidades 
+detectadas por los productos de Netscout.
+- http://www.securityfocus.com: Vulnerabilidades publicadas por Symantec.
+- http://senderbase.org: reputación en tráfico de email (Cisco).
+- http://spamhaus.org: Bases de datos en tiempo real de direcciones IP de PC secuestrados por exploits (XBL list).También listas para email (SBL list) o reputación de dominio (DBL list).
 
 #### Organizaciones y partners industriales
 
+En ocasiones pagar por información sobre seguridad puede ser necesario para tener un conocimiento más exacto de ciertos tipos o grupos de ataques. En esta línea están los Advanced Persistent Threat (APT), ataques muy elaborados, sofisticados y persistentes en el tiempo para el espionaje, afección de cadenas de suministro, ingeniería social, etc...
+
+También es interesante participar en organizaciones que proporcionan recursos comunes y comparten información sobre seguridad como las Information Sharing and Analysis Center (ISAC) en distintos sectores industriales.
+
 ## Outsourcing del SOC
 
-
+En primer lugar hay que definir que tipo de operaciones se van a externalizar y verificar que las funciones externalizadas no se van a solapar con las internas. Los servicioes de seguridad gestionada (MSS) pueden tener diferentes niveles de prestación: Analistas de seguridad, ingenieros especialistas de seguridad para IDS, gestión remota del perímetro, respuesta a incidentes, gestión de vulnerabilidades y parches...
 
 ### Tipos de MSSPs
 
-
+La elección de un tipo u otro depende de la estrategia tecnológica, situación financiera y tolerancia al riesgo. Tipos:
+- Strategic partners: Con experiencia previa y relaciones en el mundo de IT. La seguridad puede no ser su punto fuerte o no disponer de lo que se necesita.
+- Pure play providers: Específicamente dedicados al negocio de la seguridad. Formación, competencia y precio en consecuencia.
+- Boutique providers: Pequeños MSSPs orientados a un área específica de la seguridad (vulnerabilidades, gestión de red, gestión de email, DNS...)
 
 ### Ventajas y desventajas
 
+#### Ventajas
 
+- Un MSSP está diseñado para tratar con muchos tipos de eventos, está entrenado y formado para dar respuesta rápida en situaciones de estrés y cuenta con gran experiencia en la gestión de eventos de todo tipo de forma efectiva y eficiente. Cuentan con especialización vertical en muchos casos.
+- El coste, en la mayoría de los casos, es mucho menor a tener un SOC propio (recursos humanos, tecnológicos, licencias, configuración y mantenimiento, formación, etc) además del dinamismo de este tipo de actividades (formación continua, certificaciones, etc…). Gestión 24/7.
+- Supresión de los "reinos de taifas" en la monitorización y gestión del equipamiento. Coordinación de diversos departamentos involucrados.
+- SLAs: El tiempo es un factor diferencial entre un sistema salvaguardado y otro atacado. Los MSSPs trabajan en función del nivel y tipo de servicio, garantizando los SLAs como factor fundamental.
+- Documentación: Los procedimientos de un MSSP suelen estar bien documentados, las políticas bien definidas y los procesos internos bien documentados. Además genera reportes periódicos sobre su actividad que son revisados y actualizados constantemente.
+
+#### Desventajas
+
+- El MSSP puede tener un elevado número de clientes, esto dificulta el conocimiento de cada uno de ellos en particular, aunque facilita el general.
+- Falta de recursos dedicados: En caso de una crisis con múltiples empresas, sectores, clientes afectados, tu organización es una más y pueden no ser suficientes los recursos involucrados para atender a todos los clientes simultáneamente.
+- Problemas de almacenamiento de datos: capacidad, privacidad, problemas regulatorios del almacenamiento de datos, persistencia de los datos...
 
 ### Requisitos
 
-
+- Antes de contratar un outsourcing es conveniente indagar que recursos técnicos, humanos y documentales va a ser necesario involucrar. Que cambios en mi red, sistemas y hosts son necesarios llevar a cabo. Entrega de documentación, automatizaciones, etc...
+- Asegurar la certificación y formación del personal que va a suministrar el servicio.
+- Asegurar que cuente con un adecuado balanceo entre tamaño y experiencia. A mayor tamaño más estabilidad pero menor personalización.
+- Definir cómo se va a llevar a cabo la ejecución del servicio, cómo serán los canales de comunicación y que se va a comunicar.
+- Que herramientas y portales de información o autoservicio va a poner a disposición del cliente y que se puede obtener en ellos.
 
 ### Prestación de servicios
+
+Otro de los procesos importantes a tener en cuenta es cómo será el proceso de Disaster Recovery y cual es el plan que ejecutará el MSSP en los diversos escenarios que pueden suceder.
+
+Del mismo modo es importante tener claro como va a ser la estrategia de salida o cambio de MSSP. Determinar el procedimiento de fin de contrato.
