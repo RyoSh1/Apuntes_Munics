@@ -1111,3 +1111,15 @@ Detalles: Ni v1 ni v2 ofrecen características de seguridad como autenticación 
 4. Configurar usuarios.
 5. Configurar receptores de traps.
 6. Configurar la persistencia de ifindex para evitar los cambios del mismo.
+
+# Extras
+
+### Tabla de puertos
+
+|                    | Access | Trunk | Dynamic Auto | Dynamic Desirable | No negociate |
+| :----------------: | ------ | ----- | ------------ | ----------------- | ------------ |
+|     **Access**     |   A     |   E    |       A       |        A           |        E      |
+|     **Trunk**      |   E     |   T    |       T       |        T           |        T      |
+| **Dyna Automatic** |   A     |   T    |       A       |        T           |        E      |
+| **Dyna Desirable** |   A     |   T    |       T       |        T           |        E      |
+|  **No negociate**  |   E     |   T    |       E       |        E           |        T      |
