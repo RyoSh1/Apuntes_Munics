@@ -178,5 +178,89 @@ Para la generación de la master key se utilizan los siguientes parámetros PRF(
 
 ### Cipher Suite
 
+Una Cipher Suite es una selección de primitivas criptográficas y parámetros para "crear" protocolos criptográficos.
 
+# Tema 2 : Infraestructura de clave pública (PKI)
 
+El objetivo de PKI es permitir que personas que nunca se han conocido puedan comunicarse de forma segura a través de internet, para ello es necesario acceso a claves públicas, información sobre su validez y escalabilidad.
+
+#### PKI en internet
+
+Se basa en entidades de confianza denominadas Autoridades de Certificación (CA). Estas emiten certificados digitales que contienen claves públicas. La Web PKI es una especialización de la PKI enfocada al uso por navegadores.
+
+## Estándar X.509
+
+El estándar X.509 es el marco adoptado internacionalmente oara su uso en internet. Podemos destacar varias fases:
+
+- PKIX(Public Key Infraestructure for X.509): Grupo encargado de adaptar X.509, dio lugar al RFC 5280 (finalizado en 2013, incluye CRLs).
+- CA/Browser Forum (CAB Forum): Desde 2007, establece requisitos para la emisión y procesado de certificados (Baseline Requirements).
+- IETF Web PKI: Define cómo deben comportarse CRLs, OCSP y extensiones (Desde 2012).
+
+#### Campos de los certificados
+
+- Versión: 1,2 o 3. La mayoría de los certificados actuales son versión 3.
+- Número de serie: ID único y aleatorio de al menos 20 bits de entropía.
+- Algoritmo de firma: Usado para firmar el certificado, es parte del mismo por protección.
+- Emisor: Nombre distinguible (DN) de la CA que emite el certificado.
+- Validez: Fechas de inicio y expiración del certificado.
+- Sujeto¿?: Nombre del propietario del certificado (ahora se usa Subject Alternative Name en lugar del CN).
+- Clave pública: Incluye el ID del algoritmo, la clave pública en sí y los parámetros asociados.
+
+#### Extensiones del certificado
+
+Las extensiones marcadas como críticas deben ser entendidas y procesadas para que el certificado no sea rechazado.Extensiones principales:
+
+- Subject Alternative Name: Sustituye el campo Subject, permite múltiples identidades en un certificado mediante nombre DNS, IP o URIs.
+- Name Constraints: Limita los nombres que una CA puede certificar. ?¿
+- Basic Constraints: Limita la profundidad dentro de la jerarquía de confianza.
+- Key Usage y Extended Key Usage: Definen los propósitos de uso del certificado dentro de un set conocido, mediante el extendido se pueden específicar usos más detallados.
+- Certificate Policies: Lista de links donde se puede encontrar el texto completo de las políticas.
+- CRL Distribution Points: Localización de la lista de verificación de revocación.
+- Authority Information Access: Varias URIs, entre ellas el OCSP responder.
+- Subject Key Identifier: Identificación única de la clave pública (hash normalmente).
+- Authority Key Identifier: Identificación única de la clave firmada por el certificado. Puede coincidir con el SKI del certificado de firma.
+
+### Ciclo de vida del certificado
+
+1. Un suscriptor crea una solicitud de firma de certificado (CSR, Certificate SIgning Request) con su PK y otra info y se lo envía a la Autoridad de Registro. La RA bah ya seguiré
+
+1️⃣ Solicitud de Certificado (Request Certificate)
+Entidad involucrada: Suscriptor (una persona o empresa que necesita el certificado).
+Acción:
+El suscriptor genera un par de claves (privada y pública).
+Crea una Solicitud de Firma de Certificado (CSR, Certificate Signing Request) con su clave pública y otra información (nombre del dominio, organización, etc.).
+La CSR se envía a la Autoridad de Registro (RA, Registration Authority) o directamente a la Autoridad de Certificación (CA, Certification Authority).
+2️⃣ Validación del Solicitante (Validate Subscriber's Identity)
+Entidad involucrada: Autoridad de Registro (RA)
+Acción:
+La RA verifica la identidad del solicitante antes de que la CA emita el certificado.
+Métodos de validación:
+Validación de Dominio (DV): Prueba de control sobre un dominio mediante correos electrónicos o registros DNS.
+Validación Organizativa (OV): Verificación de documentos oficiales de la empresa.
+Validación Extendida (EV): Proceso más estricto con auditoría manual.
+Una vez validado, la RA aprueba la emisión del certificado y lo reenvía a la CA.
+3️⃣ Emisión del Certificado (Issue Certificate)
+Entidad involucrada: Autoridad de Certificación (CA)
+Acción:
+La CA revisa la CSR y la información validada por la RA.
+Firma digitalmente la clave pública con su propia clave privada, generando un certificado digital.
+Publica el certificado en sus directorios o lo envía al suscriptor.
+4️⃣ Publicación del Certificado (Publish Certificate)
+Entidad involucrada: Servidor Web
+Acción:
+El suscriptor instala el certificado en su servidor web.
+Puede almacenarse en repositorios públicos para que otros sistemas lo consulten.
+5️⃣ Uso del Certificado (Verify Signature)
+Entidad involucrada: Parte Confiable (Relying Party) (ej. un usuario que accede al sitio web).
+Acción:
+Cuando un usuario accede a un sitio web seguro (HTTPS), su navegador recibe el certificado del servidor.
+Verifica su autenticidad comprobando la firma digital de la CA.
+6️⃣ Verificación de Revocación (Check for Revocation)
+Entidades involucradas:
+Servidor de Listas de Revocación de Certificados (CRL Server)
+Servidor OCSP (Online Certificate Status Protocol Responder)
+Acción:
+Si el certificado es revocado (ej. la clave privada se compromete), la CA lo incluye en la CRL o lo reporta a un servidor OCSP.
+El navegador consulta estos servidores para verificar si el certificado sigue siendo válido.
+
+## Infraestructura PKI
