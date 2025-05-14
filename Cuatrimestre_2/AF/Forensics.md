@@ -202,7 +202,7 @@ Volatility es un framework forense de memoria RAM, realiza análisis de dumps de
 ### Perfiles de memoria y Symbol Tables
 
 - Volatility2: Los perfiles de memoria permiten interpretar correctamente la estructura interna de un volcado de memoria (Varian entre SO o versiones).
-- Volatility3: Las Symbol Tabler se encargan de representar las estructuras de memoria del SO.
+- Volatility3: Las Symbol Table se encargan de representar las estructuras de memoria del SO.
 
 ## Guía Volatility 2
 
@@ -210,6 +210,9 @@ Volatility es un framework forense de memoria RAM, realiza análisis de dumps de
 2. **--profile=Win7SP1x64**: Para indicar el perfil.
 3. **Comandos**: pslist (procesos), netscan (conexiones activas), cmdscan (historial de comandos), filescan (archivos cargados en memoria), clipboard (contenidos del portapapeles), hivelist (hives de registro en memoria), hashdump (hashes de usuarios para recuperar contraseñas).
 4. **Comandos complejos**: dumpfiles -Q < offset > -D < carpeta > : fichero concreto de memoria, procdump -p <PID> -D <carpeta> : memoria correspondiente a un proceso, hivedump -o < offset > : sub-claves de un hive de registro.
+
+**consoles** : Comando pro para el cmd.
+**timeliner**: Todo el historial de comandos y cosas.
 
 ## Guía Volatility 3
 
