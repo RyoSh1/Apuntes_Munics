@@ -213,6 +213,20 @@ Volatility es un framework forense de memoria RAM, realiza análisis de dumps de
 
 **consoles** : Comando pro para el cmd.
 **timeliner**: Todo el historial de comandos y cosas.
+**getsids**: Obtener los SID de los procesos.
+
+### Hashcat 
+
+```
+hashcat -m 1000 \
+-a 3 3bf8787c73729d592047a8ff57f181bd \
+-1 /usr/share/hashcat/charsets/standard/Castilian/es-ES_ISO-8859-1.hcchr \
+-2 ?l?d?u?s -3 ?1?2 ?3?3?3?3?3?3 --potfile-disable
+```
+
+```
+john --format=nt --mask= ?l?l?s?d?d?d?d?s hashes.txt
+```
 
 ## Guía Volatility 3
 

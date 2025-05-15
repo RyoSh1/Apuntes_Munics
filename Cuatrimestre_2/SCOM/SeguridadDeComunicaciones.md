@@ -184,10 +184,134 @@ Para la generación de la master key se utilizan los siguientes parámetros PRF(
 
 ### Cipher Suite
 
+...
 
+# Tema 2 : Public Key Infraestructure
+
+
+
+## Internet PKI Infraestructure
+
+
+
+## Issues with the current PKI Infraestructure
+
+
+
+## Infraestructure Improvements
+
+
+
+# Tema 3 : Port-Based Network Access Control
+
+El estándar para el control de acceso a redes basado en puertos es IEEE 802.1X y proporciona mecanismos de autenticación para equipos que se conectan a redes LAN o WLAN. 802.1X implica a 3 partes Suplicante, Autenticador y Servidor de autenticación.
+
+Los puertos de un switch tienen que estar bloqueados por defecto hasta que el dispositivo conectado es autenticado por una entidad de seguridad en la infraestructura. Solo se permite el flujo de paquetes especiales para la autenticación, en WiFi el equivalente es la asociación inicial con el punto de acceso (puerto lógico).
+
+## RADIUS
+
+
+
+## MACsec
+
+
+
+# Tema 4 : Wireless LAN Security
+
+
+
+## IEEE 802.11 WLAN standards
+
+
+
+
+## IEEE 802.11 architecture
+
+
+
+## WiFi Alliance
+
+
+## Wi-Fi Security
+
+
+
+## Robust Security Network Association
+
+
+
+## 4-Way Handshake
+
+
+
+## Ataques sobre WLANs
+
+
+
+# Tema 4.2 : WPA3
+
+...
 
 # Tema 5 : IPSec
 
 ## Introducción a IPSec
 
-I need to highlight these ==very important words==.
+
+
+## AH
+
+
+
+## ESP
+
+
+
+## Security Policies and Selectors
+
+
+
+## IKE
+
+
+
+## IPsec
+
+
+
+# Tema 6 : Securizando protolos de transporte en internet
+
+
+
+## Fiabilidad
+
+
+
+## Autenticación
+
+
+
+# Tema 7 : Protección del DNS
+
+
+
+## Domain Name System
+
+
+
+## Vulnerabilidades de DNS
+
+
+
+## Securizar DNS
+
+
+# Tema 8 : Protocolos de enrutamieto
+
+
+
+## Interior Gateway Protocol (IGP) Security Issues
+
+
+
+## Exterior Gateway Protocol (EGP) Security Issues
+
