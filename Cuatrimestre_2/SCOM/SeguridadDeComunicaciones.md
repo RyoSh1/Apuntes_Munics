@@ -208,13 +208,86 @@ El estándar para el control de acceso a redes basado en puertos es IEEE 802.1X 
 
 Los puertos de un switch tienen que estar bloqueados por defecto hasta que el dispositivo conectado es autenticado por una entidad de seguridad en la infraestructura. Solo se permite el flujo de paquetes especiales para la autenticación, en WiFi el equivalente es la asociación inicial con el punto de acceso (puerto lógico).
 
+### EAP (Extensible Authentication Protocol)
+
+EAP es un framework de autenticación L2 no el mecanismo en sí, pero si proporciona funciones y métodos de autenticación estándar llamados EAP Methods. La autenticación la realiza el protocolo interno a EAP.
+
+Inciso: L2 significa antes de asignar una IP y L3 que recibe una IP y luego se autentica.
+
+EAP define unos formatos de mensaje de autenticación genéricos: Request, Response, Success y Failure. El campo "EAP Authentication Type" especifica el mecanismo de autenticación concreto, el tipo de credenciales y cómo utilizarlas para realizar autenticación segura.
+
+802.1X Define el encapsulamiento de EAP sobre cable, es decir EAP over LAN o EAPOL. Si el autenticador y el servidor no están ubicados conjuntamente, los mensajes EAP deben ser encapsulados en otro protocolo
+
 ## RADIUS
 
+Remote Access Dial-In User Service define su propio protocolo de transporte para comunicación entre el autenticador y el servidor RADIUS AAA. Originalmente creado para la autenticación centralizada de usuarios de acceso telefónico en grupos de módems distribuidos.
 
+Define mensajes entre el Network Access Server y el servidor de autenticación: El NAS envía Access-Request y el AS responde con Access-Challenge, Access-Accept o Access-Reject.
+
+EAP se encapsula en los paquetes AR y AC en las rondas necesarias, contiene el EAP-message attribute y el Message-Authenticator attribute que es obligatorio en RADIUS para transportar atributos EAP (ICV y MAC) .RADIUS tiene su propio protocolo de seguridad basado en una clave compartida entre endpoints.
+
+### Seguridad de RADIUS
+
+Las respuestas del AS contienen un campo authenticator MD5 de Code,ID,Longitud, RequestAuth,Attributes y Shared Secret, RequestAuth es un nonce generado en una Request.
+
+Si un mensaje RADIUS transporta un mensaje EAP debe llevar el atributo Message-Authenticator que es un HMAC-MD5 de Secreto compartido, Código, ID, Longitud, RequestAuth y Atributos. También presenta su propia función para ocultar atributos usando la clave compartida.
+
+Si un método EAP genera claves (MSK), el PMK derivado del MSK se envía en el Access-Accept desde el servidor al NAS cifrado con la clave precompartida. El suplicante recuperará MSK y PMK con el método EAP equivalente. 
+
+### Vulnerabilidades de RADIUS
+
+RADIUS es vulnerable a ataques de diccionario ya que no se actualiza la clave precompartida, los mensajes se envían en claro y MD5.Otras vulnerabilidades estan relacionadas con privacidad, spoofing, replay, negoaciación, etc.
+
+RADIUS recomienda usar un mecanismo de autenticación bidireccional e IPsec para la comunicación con el NAS.
+
+### Métodos de autenticación EAP basados en TLS
+
+- EAP-TLS (EAP Transport Layer Security): Autenticación mútua en el handshake inicial que establece el túnel TLS, necesita certificados X509 en ambos lados.
+- EAP-TTLS (EAP Tunneled Transport Layer Security): Solo el servidor lleva certificado, el cliente se autentica dentro del túnel TLS usando otros métodos.
+- PEAP (Protected EAP): Similar al anterior, el cliente se autentica usando EAP dentro del túnel TLS.
+- EAP-FAST (EAP Flexible Authentication via Secure Tunneling): No necesita usar certificados, utiliza una Protected Access Credential para establecer el túnel TLS. 3 Fases: PAC provisioning (tunnel), TLS tunnel establishment, Authentication.
+
+
+### Secure Association Protocol
+
+El protocolo de asociación segura es aquel que una vez un cliente se autentique con éxito, se encarga de establecer una relación de confianza adicional para asegurar que los datos transmitidos están cifrados y protegidos. Algunos métodos EAP generan claves que se usan para verificar que tanto cliente como autenticador conocen una clave derivada y para establecer claves simétricas.
 
 ## MACsec
 
+MACsec es un protocolo de seguridad en redes Ethernet cableadas en capa 2. Interesante para proveedores de red, para despliegue local y naturalmente para links punto a punto.
 
+Garantiza: Integridad, Autenticidad, Confidencialidad, protección contra Replay, Control del retardo de recepción y algo de protección contra DOS. Logra todo esto cifrando los datos directamente en el hardware de red.
+
+### Definiciones MACsec
+
+- Secure Connectivity Association (CA): Relación de seguridad entre dos o más dispositivos (puntos de acceso) conectados a la misma LAN, mantenida por protocolos de acuerdo de claves.
+    - Secure Connectivity Association Key (CAK): Secreto poseido por miembros de la CA.
+    - Secure Connectivity Association Key Name (CKN): Texto que identifica al CAK. Ambos se derivan del material de claves del método EAP.
+    - Las CA tienen 2 miembros iniciales (suplicante y autenticador) y eligen dinamicamente un servidor de claves (mínimo ID).
+    - Un servidor que pertenece a varias CA puede crear un grupo CA y unirlas.
+- Secure Associantion (SA): Una relación de seguridad que garantiza las tramas transmitidas entre miembros. Es unidireccional y soportada por una clave o conjunto de 1 uso.
+- Secure Association Key (SAK): El secreto usado, se deriva en el servidor y se distribuye usando MKA
+- Secure Channel (SC): Un SC está respaldado por una secuencia de SA, lo que permite usar periódicamente nuevas claves.
+
+### Acuerdo de clave MACsec
+
+MKA es el protocolo de gestión de claves que:
+- Identifica dispositivos ya autenticados a una CA o una potencial CA en la misma LAN.
+- Confirma la mútua posesion de una CAK y a su vez que ya se ha pasado la autenticación.
+- Acuerda y distribuye las claves SAK que se usarán para cifrar tráfico MACsec.
+- Se asegura de que el tráfico cifrado no se haya retrasado ni manipulado.
+
+Usa tramas EAPOL-MKA para el intercambio de información, securiza topologías multipunto distribuido (ICK y KEK por cada CA). Cada CA tiene un servidor de claves dinámico (switch de acceso).
+
+Si MKA no está disponible, MACsec aún puede utilizarse configurando manualmente las claves en extremos.
+
+### Jerarquía de claves
+
+AES Cipher-based Message Authentication Code (CMAC).
+
+La clave CAK usada por MACsec es en realidad la PMK que el AS entrega al Authenticator en Access-Accept. El cliente (supplicant) obtiene esa misma PMK derivada del MSK como resultado del intercambio EAP.
+
+El estandar considera la posibilidad de configurar manualmente CAK y CKN en los extremos.
 
 # Tema 4 : Wireless LAN Security
 
@@ -256,27 +329,88 @@ Los puertos de un switch tienen que estar bloqueados por defecto hasta que el di
 
 ## Introducción a IPSec
 
+IPsec propone un framework de estándares abiertos para comunicaciones seguras sobre IP. Es transparente ( Capa Transporte), no requiere que las aplicaciones sean conscientes de la seguridad y ofrece soporte para IPv4 y IPv6, en IPv6 es obligatorio mejorando la seguridad.
 
+Es util en FW y routers, ya que proporciona seguridad sin afectar a las estaciones, pero puede dar conflictos ya que requiere los protocolos 50/51 y los puertos UDP 500/4500.
 
-## AH
+Usos: Establecimiento VPN, Acceso remoto Low-Cost y conectividad con extranet.
 
+RFCs: 4301, 4302, 4303, 7296
 
+### Componentes de IPsec
 
-## ESP
+- Dos protocolos de seguridad: AH y ESP.
+- Algoritmos de cifrado.
+- Dos modos de encapsulamiento: Transporte y Tunel.
+- Protocolo de gestión y distribución de claves (IKE).
+- Security Police Database (SPD): Qué paquetes.
+- Security Association Database: Cómo van a ser protegidos.
 
+### Modos IPsec
 
+- Modo Transporte: Protege la comunicación extremo a extremo, el encabezado IP original permanece.
+- Modo Túnel: Se encapsula el paquete IP en uno nuevo, se usa en VPN y entre routers.
+
+### AH Authentication Header
+
+No cifra los datos, solo proporciona autenticación e integridad. Los campos más importantes serían el Next Header que tiene el tipo de protocolo, el SPI (Security Parameters Index) y el número de secuencia.
+
+### ESP Encapsulation Security Payload
+
+Ofrece confidencialidad y autenticación opcionales, cuando no se usa se utiliza el algoritmo NULL. Campos: ESP Header, Datos cifrados, Trailer, y Autenticación (opcional)
 
 ## Security Policies and Selectors
 
+El SPD contiene una lista ordenada de políticas de seguridad, asignación de un subconjunto de tráfico IP a la SA pertinente. Cada entrada tiene como clave uno o varios selectores que definen el conjunto de tráfico que abarcan, basado en direcciones IP, protocolo, rango, lista, etc.
 
+Cada enclada también incluye si el tráfico debe ser omitido, descartado o procesado (SA o SA bundle con protocolos que deben emplearse).
+
+### Procesado de paquetes salientes
+
+1. Comparar el paquete con las políticas del SPD.
+2. Si requiere IPsec: Se busca una SA en el SAD, si no existe se inicia IKE y la SA se guarda en el SAD.
+
+En cada SA se especifica el módo de IPsec, los algoritmos y parámetros, TL, parámetros antireplay y su SA o SA bundle.
+
+### Procesado de paquetes entrantes
+
+- Si no contiene encabezado IPsec debe sonsultar el SPD.
+- Si contiene encabezado utiliza la dirección de destino, protocolo y SPI para buscar la SA, si no se encuenta se descarta, si se encuentra se procesa y se entrega a la capa superior o se procesa.
+
+Se pueden combinar asociaciones de seguridad o AH + ESP combinando SA.
 
 ## IKE
 
+El objetivo de IKE es crear una asociación de seguridad entre 3 equipos, incluyeno el establecimiento dinámico de claves compartidas temporales para cifrado y autentciación.
 
+Presenta dos fases:
+1. Establece la asociación de seguridad (IKE-SA).
+2. Utiliza IKE-SA para crear la asociación real que utilizarán AH y ESP.
+
+### Intercambios de IKEv2
+
+- IKE_SA_INIT: Negociación de algoritmos de cifrado para la gestión de la SA, Set de transforms (proposal) en la carga SA, derivación de claves maestras y es bidireccional.
+- IKE_AUTH: Protección de integridad, autenticación mutua (firma, clave, EAP). Establecimiento de las primeras SAs de datos (unidireccionales).
+- CREATE_CHILD_SA: Para establecer otros SA y componer un bundle SA y renovar SA existentes. Cuando se reinicia el proceso cambia el Oro
+- INFORMATIONAL: Eliminar SAs, detectar peers muertos, mantener NAT.
 
 ## IPsec
 
+### Protección contra DOS
 
+Responder puede gastar recursos on IPs falsas, la solución es utilizar cookies que hacen que el estado no se guarde hasta recibir una respuesta válida del iniciador, esto aumenta la robustez a costo de dos mensajes extra.
+
+### Auth Exchange
+
+Para evitar ataques MITM AUTH se construye con un resumen criptográfico de los datos IKE_SA_INIT, None y la identidad. Es un mecanismo asimétrico, los extremos no necesitan usar el mismo mecanismo.
+
+Peer Authorization Database (PAD): Vinculo SPD con IKE. Define la lista de pares IPsec identificados con su identidad IKE.
+
+### NAT e IPsec
+
+IPsec y NAT tienen problemas de compatibilidad: AH es imcompatible ya que NAT cambia la IP, ESP en modo transporte también tiene problemas por los checksum.
+
+La solución es encapsular paquetes IPsec en UDP puerto 4500 y utilizar la detección intrínseca de NAT en IPsec para cambiar dinámicamente el tiempo del 500 a 4500 (NAT Transversal).
 
 # Tema 6 : Securizando protolos de transporte en internet
 
