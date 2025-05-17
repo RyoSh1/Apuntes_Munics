@@ -261,31 +261,61 @@ Se pueden configurar listas negras para indicar dispositivos que tengan acceso r
 
 ## Identificando y eliminando aplicaciones no utilizadas
 
-
+Las aplicaciones pueden tener agujeros de seguridad que ya conocemos o que aún no conocemos, se deben eliminar las aplicaciones que no sean necesarias en el sistema. Esto puede ser complicado debido a las dependencias, pero existe software que detecta paquetes no utilizados.
 
 ## Limitando los recursos de las aplicaciones
 
+Se pueden establecer límites en /etyc/security/limits.conf que afectan a la sesión del usuario, controla el número de procesos, memoria, sesiones o uso de CPU. Para que sea efectivo se debe configurar el módulo pam_limits. Existen límites hard que no pueden modificarse y límites soft que son modificables por el usuario de la sesión.
 
+Para limitar el uso de CPU en porcentaje de un programa se puede utilizar cpulimit (utiliza signals), para limitar los recursos se utiliza prlimit, lo cual nos permite limitar el impacto mediante un máximo de tamaño de pila, número de ficheros abiertos, etc.
+
+cgroup es una característica que nos permite limitar el uso de recursos para un set de procesos, permite limitar el espacio demoria, procesadores o dispositivos de un grupo, establecer una prioridad, monitorizar el uso o controlar los procesos.
+
+Los cgroups son jerárquicos, puedes crear subgrupos dentro de otros cgroups, las restricciones se heredan tanto entre grupos como los procesos hijo de un proceso.
+
+Para configurar un cgroup se crea una carpeta dentro de /sys/fs/cgroups, se añade el PID al procs y se añaden los límites.
 
 ## Ejecutando en jaulas chroot
 
-
+Los procesos en linux solo conocen el directorio actual y el raíz, chdir permite cambiar el directorio de trabajo y chroot el directorio raíz. Los programas no pueden acceder a ficheros fuera de su chroot, por lo que es posible configurar entornos chrooted, para ello en linux debemos montar los diferentes directorios que necesitemos como proc, sys o dev para permitir que el programa acceda a ellos dentro de su nueva raíz.
 
 ## Entornos virtualizados
 
+El siguiente paso es aislar el sistema operativo de la aplicación, para ello se pueden usar los entornos virtualizados (que no máquinas virtuales), también llamado virtualización basada en contenedores.
 
+A diferencia de las VM los contenedores no proporcionan tanto aislamiento, debido a que comparten parte de la instancia del kernel y del sistema operativo. Linux tiene su propia virtualización basada en contenedores llamada lxc, la cual permite crear a partir de una plantilla. Para su control se utilizan los subcomandos de lxc y los containers se encuentran en /var/lib/lxc/name/rootfs.
+
+En la configuración del contenedor se puede decidir la conexión de red, el arranque automático y otros ajustes. También se puede configurar para poder ejecutar lxc como un usuario normal.
 
 ## M.A.C
 
+D.A.C viene de Control de Acceso Discrecional, lo que significa que el dueño decida quien puede hacer qué con sus archivos. M.A.C viene de Control de Acceso Mandatorio, lo que significa que el sistema impone una política sobre quien puede acceder a qué independientemente de los permisos del usuario.
 
+En MAC se usa la aproximación del mínimo privilegio, primero se comprueba DAC y luego se comprueba MAC, siempre denegando el acceso si uno de los dos lo aplica. 
+
+Las soluciones presentes en Linux para MAC son SELinux y apparmor.
 
 ### AppArmor
 
+En apparmor el kernel impone restricciones a las rutas, puertos y mecanismos de entrada y salida, este viene instalado por defecto desde debian 10. Para comprobar si está habilitado se accede a su fichero y se usan el comando aa-status para los perfiles y ps -Z para ver el estado de procesos en confinamiento.
 
+Por cada aplicación bajo apparmor tenemos un perfil en /etc/apparmor.d, este tiene 2 modos de operación: enforce que impone las restricciones y complain que hace que se haga log en las violaciones de restricciones.
+
+Comandos: apparmor_parser -r, aa-disable, aa-enforce, aa-complain.
+
+Se puede crear un perfil vacío con aa-easyprof y tras editarlo se puede cargar (preferible usar plantilla).
 
 ### SELinux
 
+Security Enhanced Linux es una serie de parches para el kernel de Linux que permiten implementar MAC. En SELinux cada aplicación, fichero... está etiquetado y el acceso solo se permite si hay una regla específica en la política.
 
+Una política es una colección de reglas y cada regla describe una interacción entre proceso y fichero.
+
+Como en apparmor hay dos modos: refuerzo, el cual bloquea el acceso y permisivo, que genera un log; los comandos getenforce y setenforce nos permiten ver y aplicar el modo.
+
+Para aplicar SELinux en Debian se debe tener Debian instalado en ext, descargar los paquetes, ejecutar selinux-activate para que el sistema se etiquete en el siguiente arranque y configruarlo en /etc/selinux/config.
+
+Una vez en ejecución se crea lo que llamamos selinux context, este se puede administrar con chcon, restorecon, secon y runcon.
 
 # Tema 4 : Protección de cuentas de usuario
 
@@ -369,14 +399,40 @@ Se pueden configurar listas negras para indicar dispositivos que tengan acceso r
 
 ## Introducción
 
+El mantenimiento de un sistema se basa en el proceso contínuo de aplicación de parches, información sobre vulnerabilidades y monitorización de la actividad del sistema.
 
+La principal fuente de información de un sistema es el log, los logs de autenticación y de sistemas críticos siempre se deberían enviar a otras máquinas.
 
 ## Logs, logfiles y syslogd
 
+En su proceso de control del sistema, systemd guarda los logs en el systemd-journald, esto guarda los datos en forma binaria y se puede consultar con journalctl.
 
+Aún así en sistemas con systemd se pueden instalar programas de log tradicionales, que son más sencillos de configurar y revisar.
+
+### Logs
+
+Un log es una descripción de un evento que ha ocurrido sobre un proceso del sistema, normalmente un demonio del sistema centraliza su control. Normalmente se guardan en /var/log y el demonio es el syslogd o rsyslog, estos leen su fichero de configuración al iniciar para decidir que hacer con los mensajes.
+
+### Configuración de logs
+
+La configuración de los logs se hace en /var/syslog.conf y estos se clasifican según el servicio que lo ha generado y la severidad de la alerta.
+
+Los servicios se dividen en : auth, authpriv, cron, daemon, ftp, kernel, lpr, mail, news, syslog, user, uucp.
+
+Los niveles de severidad son: emerg, alert, crit, err, warning, notice, info, debug.
+
+El formato de configuración es selector tabulador action y se define el selector como facility.severidad, pudiendo configurar una lista o usando el comodín asterisco. La acción puede ser escribir en un fichero, enviar a otra máquina o notificar usuarios, estas opciones son combinables.
+
+#### Extensiones
+
+Para recibir logs de otras máquinas es necesario aceptarlos, normalmente en /etc/default/syslog. En los sistemas Linux existen muchas funcionalidades distintas que permiten hacer diferentes configuraciones de log, pasar el log hacia la salida por pantalla, etc.
 
 ## Rotación de logs
 
+El problema de los logs es que crecen con el tiempo y ocupan demasiado espacio, la solución es rotar los logs creando nuevos ficheros cuando se alcanza cierto tamaño o antigüedad (logrotate).
 
+Logrotate se encarga de rotar, comprimir o eliminar archivos de log y normalmente se ejecuta con el cron a diario. En /etc/logrotate.conf se realiza su configuración permitiendo especificar opciones según el fichero.
 
 ## Lynis
+
+Lynis es una herramienta de auditoría del sistema que normalmente viene incluida en los paquetes de distribución de Linux. Se encarga de escanear la configuración del sistema y se ejecuta desde línea de comandos, la salida es un resumen de lo que se ha comprobado.
