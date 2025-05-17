@@ -321,23 +321,76 @@ Una vez en ejecución se crea lo que llamamos selinux context, este se puede adm
 
 ## Introducción a usuarios y grupos
 
+Un usuario es una entidad del sistema que puede crear sus propios ficheros, procesos y ejecutar programas. Los usuarios se identifican con un UID (0 root), todos los ficheros pertenecen a un usuario y las credenciales de los procesos indican quien está detrás. Los usuarios tienen un UID, un nombre para mappear y un grupo.
 
+Existen pseudousuarios que existen para ejecutar servicios específicos y poseer esos ficheros. 
+
+Los grupos son un conjunto de usuarios y se identifican con un GID, los usuarios pueden estar en varios grupos, aunque uno es el primario.
 
 ### Ficheros de definición de usuarios y grupos
 
-
+La información se guarda en los ficheros passwd que contiene los usuarios y su shell y shadow que contiene las contraseñas en hash. Los grupos por su parte tienen los ficheros group y gshadow.
 
 ## Módulos PAM
 
+Los módulos de autenticación enchufables aportan una forma de cambiar los mecanismos de autenticación sin modificar las aplicaciones, es una API generalizada para servicios de autenticación. Si borras un módulo te quedas fuera.
 
+Los módulos PAM pueden realizar las siguientes tareas:
+- Gestión de la autenticación.
+- Gestión de cuentas (horarios, máquinas, etc.).
+- Gestión de sesión (contabilidad, límites).
+- Gestión de contraseñas.
 
-## Vulnerbailidades relacionadas con las cuentas de usuario
+Un módulo PAM es una pieza de código que implementa primitivas para un mecanismo en particular, las opciones son:
+- sufficient: Si este módulo da acceso ya hay acceso y no se comprueba el resto.
+- requisite: Si este módulo deniega acceso este se deniega y no se comprueba más.
+- required: Este módulo es necesario y se comprueban el resto.
+- optional: Solo se usa si el resultado del resto de módulos no es determinista.
 
+### Configuración de los módulos PAM. Nueva sintaxis ¿?
 
+Las acciones a tomar pueden ser:
+- ignore: El estado del módulo no contribuye al código de retorno de la aplicación.
+- bad: Debe considerarse como retorno negativo.
+- die: Termina inmediatamente la pila y el módulo PAM y vuelve a la aplicación.
+- ok: Debe considerarse como código de retorno positivo.
+- done: Igual que OK pero termina la pila y el módulo.
+- reset: Limpia la memoria del stack y empieza con el siguiente módulo.
+
+Los módulos suelen estar localizados en lib/security y su configuración se lleva a cabo en /etc/pam.d o en el pam.conf.
+
+En el pam.conf la sintaxis viene precedida del servicio.
+
+### Módulos PAM comunes
+
+- pam_deny: Bloquea autenticaciones.
+- pam_getenv: Recupera variables de entorno definidas en PAM.
+- pam_rhosts: Autenticación basada en archivos .rhosts.
+- pam_unix: Autenticación mediante passwd y shadow.
+- pam_winbind: Autenticación de AD a través de Samba/Winbind
+- pam_permit: Permite acceso.
+- pam_access: Control de acceso basado en reglas definidas en security/access.conf.
+- pam_cracklib: Reglas de seguridad para contraseñas.
+- pam_env: Carga variables de entorno.
+- pam_debug: Registro de depuración detallado.
+- pam_echo: Mensajes por pantalla.
+- pam_exec: Ejecuta programas o scripts.
+- pam_ftp: Autenticación anónima.
+- pam_localuser: Autenticación con usuarios locales.
 
 ## Protección de la autenticación
 
+La autenticación es el proceso de verificar si una entidad es quien dice ser, esto se puede comprobar con dispositivos físicos, medidas biométricas, certificados digitales o contraseñas.
 
+### Refuerzo de contraseñas
+
+Los refuerzos básicos de la contraseña es restringir el acceso al fichero shadow, guardar un bloque de texto cifrado con la contraseña y no la propia contraseña, usar un salt para producir diferentes hashes, utilizar algoritmos lentos y complejos y poner condiciones en la creación de la contraseña.
+
+La configuración se realiza en los ficheros login, common-auth y common-password, los principales módulos serían: pam_unix, pam_pwquality, pam_pwhistory, pam_securetty, pam_faildelay, pam_google_authenticator.
+
+### Doble factor
+
+Explicación del google authenticator.
 
 ## Limitando privilegios. Shells restringidas
 
