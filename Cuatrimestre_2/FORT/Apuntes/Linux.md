@@ -394,15 +394,21 @@ Explicación del google authenticator.
 
 ## Limitando privilegios. Shells restringidas
 
-
+ParaUna shell restringida es aquella que no permite el uso de cd ni de ejecutar nada con /, no permite modificar variables de entorno ni redirigir la entrada o salida, se le puede asignar a un usuario en el passwd. Para ello se le asigna como shell de login, se crea un directorio bin en su home y se crean links simbólicos para los programas permitidos, su configuración se sitúa en el fichero .bashrc.
 
 ## Convirtiendose en Root
 
+Las tres formas de convertirse en root son con el inicio de sesión, con el comando su y con el comando sudo.
 
+El acceso por inicio de sesión debe deshabilitarse y el acceso mediante comando debe filtrarse solo para usuarios definidos y utilizar el módulo pam_wheel. Para descativar el login se puede utilizar el módulo securetty.
 
 ## sudo y sudoers
 
+El comando sudo permite a los usuarios ejecutar comandos en nombre de root. En el fichero /etc/sudoers se puede configurar los permisos de los usuarios explícitamente, para su edición es mejor utilizar el comando visudo.
 
+El formato es el siguiente: Usuario (id, grupo, etc), Hostname, (Usuario a impresionar) y Acción.
+
+También es posible definir alias para los comandos y para los usuarios dentro del archivo.
 
 # Tema 5 : Protección de la red
 
@@ -410,43 +416,109 @@ Explicación del google authenticator.
 
 ### Configuración básica de la red
 
+Para configurar una tarjeta de red se necesita una ip, una máscara y una dirección de broadcast. Hay dos formas de configurarla: Manualmente especificando los parámetros desde linea de comandos o usando dhcp recibiendo la configuración desde un servidor.
 
+El comando ifconfig e ip son los comandos que permiten revisar y configurar interfaces de red.
+
+La resolución del DNS se realiza en el resolv.conf, este fichero permite introducir nameserver para la dirección y domain para el dominio local.
+
+El fichero /etc/hosts permite configurar alias y hostnames a partir de IPs.
+
+El fichero nsswitch.conf permite definir las fuentes desde donde se obtendrá la información de servicio de nombres de distintas categorías y el orden de consulta de estas fuentes.
 
 ### Configuración NIC
 
+Las distribuciones Debian tienen varias estrategias de nombrado de las tarjetas, originalmente los nombres se definian según el orden de detección por parte del sistema, ahora se asignan los nombres a las interfaces la primera vez que se detectan y se guarda en las reglas udev y el nuevo esquema depende de como y cuando se conectan al sistema.
 
+Comandos a utilizar:
+- dhclient para usar dhcp.
+- ifconfig para la tarjeta.
+- ip igual que ifconfig.
+
+Ficheros importantes:
+- Networking: Para configurar la tarjeta en el arranque.
+- Interfaces: Para configurar la tarjeta manualmente se revisará aquí su configuración.
+- Hostname: Para nombrar el sistema.
 
 ### Network Manager
 
+El network manager es un paquete instalado en la mayoría de Linux, es un demonio que se ejecuta en segundo plano gestionando todas las NIC no declaradas. Su configuración está en el NetworkManager.conf y se puede comprobar con nmcli dev status.
 
+Para evitar que se controle con el NetworkManager se debe configurar manualmente en el interfaces.
 
-### ?
+### Interface Aliasing
 
-
+Se le llama aliasing al proceso de otorgar a una tarjeta de red más de una IP, esto se puede realizar con el comando ip o medinate el fichero interfaces.
 
 ## inetd
 
+Inetd es el internet superserver, es el encargado de iniciar los servicios de internet y gestionar las conexiones, esto permite que los programas solo se ejecuten cuando es necesario. 
 
+Los archivos de configuración de inetd son:
+- /etc/services: Realiza el mapeo entre el número de puerto y el protocolo con el nombre del servicio.
+- /etc/inetd.conf: Asocia el nombre del servicio con el programa en sí.
+
+En Debian no viene por defecto y debe instalarse, en Fedora está la alternativa xinetd.
 
 ## Control de Acceso: tcpwrappers
 
+Es una capa de seguridad que se sitúa entre el servicio inetd y los programas de servidor, permitiendo aplicar control de acceso basado en el nombre de host, dirección, etc. Cuanod un servicio se solicita a través de inetd, se llama a tcpd, que revisa sus archivos de configuración para determinar si el acceos debe ser permitido.
 
+La configuración se realiza en los ficheros hosts.allow y hosts.deny en ese orden, en caso de no restringirse se permite.
 
 ## Control de Acceso: Filtrado de paquetes
 
+El filtrado de paquetes es la acción de comprobar la cabecera de un paquete de red y decidir si se debe rechazar, tirar o aceptar. En Linux se utiliza Netfilter que tiene tablas con diferentes funciones y que se pierde al reiniciar el sistema, por lo que se deben preparar scripts.
 
+La tabla de filtrado de paquetes es la tabla filter, la cual opera sobre cadenas. Cada cadena tiene una serie de reglas que operan en los paquetes que pertenecen a esa cadena. Las reglas son comprobadas en orden y si una regla matchea un paquete esta se ejecuta y no se ven el resto.
 
 ### Iptables
 
+Iptables es el programa que nos permite modificar la tabla netfilter, iptables es también el comando que nos permite crear, borrar o modificar las políticas de la cadena.
 
+Aunque se pueden definir varias cadenas, existen 3 predefinidas:
+- Forward: Filtra los paquetes que llegan a nosotros pero no somos el destino.
+- Input: Paquetes cuyo destino es la máquina.
+- Output: Paquetes que se originan en la máquina.
+
+Para manipular las reglas es necesario utilizar el número indicado en las propias reglas al listar una cadena. Las reglas se forman por varios componetes: Selección de paquete, conformado por el protocolo, información de origen y destino, fragmentos, conexiones o estados y Acciones, que se indican con -j y son DROP, REJECT, ACCEPT o LOG.
+
+Para guardar la configuración actual de la tabla de filtros se usa el comando iptables-save para sacarlo por pantalla o redirigirlo a un fichero, el cual se puede usar para recuperar la configuración con iptables-restore.
 
 ### nftables
 
+Las nftables son la opción de clasificación de paquetes presente en los kernel modernos, los sets de reglas se disponen en forma de árbol para reducir el tiempo de inspección. Se puede acceder con el comando nft.
 
+Diferencias con iptables: La sintaxis es distinta, no tiene tablas o cadenas por defecto, múltiples acciones por regla en forma de expresiones, soporte a nuevos protocolos y existe un comando de traducción de iptables a nft.
+
+Si queremos tener configuración persistente se pueden incluir las reglas en nftables.conf y se cargaran al arrancar el sistema. Para listar las reglas se usa nft list ruleset.
+
+Cada tabla se aplica sobre una familia de direcciones: ip, ip6, inet, bridge y arp. Las tablas se crean con nft add table familia nombre y se listan con nft list tables.
+
+Para crear una cadena se utiliza nft add chain familia nombreTabla nombreCadena.
+
+Hay dos tipos de cadenas:
+- Cadenas normales: Se usan como objetivo de saltos.
+- Cadenas base: Se registra en uno de los Hooks de netfilter, en su creación se debe indicar el tipo (filter, route, nat), el hook (prerouting, input, forward, output, postrouting), la prioridad (numérico) y la política (accept o drop). La policy se establece por defecto si no cumple ninguna regla.
+
+Para añadir una regla se usa nft add rule family nombreTabla nombreCadena matches statements. Los matches nos permiten seleccionar los paquetes y los statements las acciones. Con insert podemos añadirla en la posición que queramos handle X.
+
+Los matches pueden ser el protocolo, direcciones origen y destino, puerto origen y destino, tipo de icmp, estado de conexión, etc.
+
+Los statements pueden ser:
+- Accept
+- Drop
+- Queue: Pone en cola en el espacio de usuario y detiene la evaluación.
+- Continue
+- Return
+- Jump chain: Permite indicar a que cadena debe saltar para su evaluación y vuelve.
+- Goto chain: Igual pero no vuelve.
+- Log
+- Reject: Para conexiones ICMP.
+- Limit rate.
+- Dnat, Snat, Masquerade, Redirect: Para acciones específicas de red.
 
 ## Ejemplo: Securizando el servidor sshd
-
-
 
 # Tema 6 : Mantenimiento
 
