@@ -301,3 +301,26 @@ Windows 11 está diseñado con una arquitectura de múltiples capas de protecci�
 
 
 ### Beneficios de cumplir con el ENS
+
+
+Obviando todo lo anterior...
+
+# Extra : Conceptos importantes
+
+- VBS: Virtualización de seguridad, utiliza tecnologías de virtualización del hardware para crear un entorno aislado que protege las operaciones críticas del sistema como credenciales o protección de memoria.
+- HVCI: Utiliza la virtualización para proteger la memoria del sistema operativo contra ataques de malware y explotación de vulnerabilidades.
+- TMP: Chip dedicado que gestiona claves criptográficas y protege datos sensibles. Asegura el arranque del sistema y proporciona una base para auntenticación segura. En Bitlocker sirve para guardar la clave de inicio.
+- Secure Boot: Garantiza que el sistema arranque solo con software firmado digitalmente y verificado.
+- BitLocker: Herramienta de cifrado de disco completo que utiliza AES para proteger los datos en una unidad.
+- EFS: Una característica integrada en el sistema de archivos NTFS que permite a los usuarios cifrar archivos y carpetas de manera transparente.
+- MFA: Autenticación multifactor.
+- Windows Hello: Tecnología de autenticación biométrica integrada en Windows 11 que permite a los usuarios iniciar sesión utilizando reconocimiento facial, huellas, PIN.
+- Firewall: Monitorea y filtra el tráfico de red basado en reglas predefinidas y 
+personalizadas, bloqueando conexiones no autorizadas mientras permite el tráfico 
+legítimo.
+- VPN: Red Virtual Privada.
+- AppLocker:
+- SRP: Políticas de restricciones del software, identifica los programas que se ejecutan en los equipos de un dominio y controla la capacidad de ejecución. Conjunto con AppLocker.
+- Principio del menor privilegio:
+- Windows Defender:
+- Backup:
