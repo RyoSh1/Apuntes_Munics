@@ -342,9 +342,9 @@ Los módulos PAM pueden realizar las siguientes tareas:
 - Gestión de contraseñas.
 
 Un módulo PAM es una pieza de código que implementa primitivas para un mecanismo en particular, las opciones son:
-- sufficient: Si este módulo da acceso ya hay acceso y no se comprueba el resto.
-- requisite: Si este módulo deniega acceso este se deniega y no se comprueba más.
-- required: Este módulo es necesario y se comprueban el resto.
+- sufficient: Si este módulo da acceso ya hay acceso y no se comprueba el resto, en caso de PAM_DENY se comprueba el resto porque no se hace nada.
+- requisite: Si este módulo deniega acceso este se deniega y no se comprueba más, igual que el anterior pero con PAM_SUCCESS.
+- required: Este módulo es necesario y se comprueban el resto, al final te echará sin dar información.
 - optional: Solo se usa si el resultado del resto de módulos no es determinista.
 
 ### Configuración de los módulos PAM. Nueva sintaxis ¿?

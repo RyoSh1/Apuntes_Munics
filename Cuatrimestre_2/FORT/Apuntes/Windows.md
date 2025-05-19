@@ -322,5 +322,25 @@ legítimo.
 - AppLocker:
 - SRP: Políticas de restricciones del software, identifica los programas que se ejecutan en los equipos de un dominio y controla la capacidad de ejecución. Conjunto con AppLocker.
 - Principio del menor privilegio:
-- Windows Defender:
+- Windows Defender: Monitorea constantemente el sistema 
+para detectar y neutralizar amenazas a medida que surgen. Esto incluye la vigilancia de 
+archivos descargados, programas ejecutados y conexiones de red.
 - Backup:
+- RBAC: Control de acceso basado en roles (En vez de a usuarios individuales).
+- FIDO: Un dispositivo FIDO2 es un método de autenticación seguro que permite a los usuarios iniciar sesión sin necesidad de contraseñas tradicionales. Se basa en estándares abiertos desarrollados por la FIDO Alliance y está diseñado para mejorar la seguridad y la facilidad de acceso a servicios en línea.
+- Azure Active Directory: servicio de gestión de identidades y accesos basado en la nube de Microsoft.
+- Capas de defensa: Perímetro, Red, Endpoint, Aplicación, Datos, Identidad y Acceso.
+- DRA: Agente de recuperación de datos cifrados.
+- IAM: Gestor de identidades y accesos.
+- Tipos de registros de eventos: Sistema, Seguridad, Aplicaciones y Personalizados.
+- Eventos clave: Inicio de sesión o cierre, Intentos fallidos de inicio, Campios en políticas, Acceso a objetos auditados.
+- GPMC: Consola de administración de directivas de grupo.
+- Fases de la respuesta a incidentes: Preparación, Identificación, Contención, Erradicación, Recuperación, Lecciones aprendidas.
+- SOAR: Plataformas de Orquestación, Automatización y Respuesta de Seguridad.
+- Regla 3-2-1: Mantener al menos tres copias de los datos, en dos tipos diferentes de 
+almacenamiento, y una copia fuera del sitio (offsite).También Diarias incrementales, Semanales Diferenciales y Mensuales completas.
+- Opciones de restauración en Windows 11: Restaurar sistema, Restablecer el PC, Recovery Drive, Historial de archivos.
+- Windows Recovery Environment (WinRE): Entorno de recuperación avanzado que incluye herramientas para solucionar problemas, restaurar el sistema y acceder a copias de seguridad.
+- WSUS: Windows Server Update Services,  solución de Microsoft para gestionar la distribución de actualizaciones y parches en entornos empresariales.
+- MECM: Microsoft Endpoint Configuration Manager,  herramienta de Microsoft para la gestión de sistemas y dispositivos en entornos empresariales. 
+- Windows Update for Business: Permite crear anillos de despliegue.
