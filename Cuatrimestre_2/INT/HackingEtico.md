@@ -213,45 +213,124 @@ SpamHAUS Project.
 
 # Tema 3 : Análisis de Vulnerbailidades
 
+Identificar y analizar las vulnerabilidades en los sitemas de la red objetivo.
 
+Vulnerabilidad local = Acceso local.
+Vulnerabilidad remota = Acceso remoto.
 
 ## OpenVAS
 
+Suite de software que ofrece un marco de trabajo para integrar servicios y herramientas para el escaneo y gestión de vulnerabilidades. El escaner utiliza la base de datos Network Vulnerability Test que se actualzia diariamente mediante OpenVAS NVT Feed.
 
+3 niveles de alerta, los dos primeros informan sobre la vulnerabilidad y el riesgo bajo da recomendaciones.
 
 ## Nessus Vulnerability Scanner
 
-
+Plataforma más confiable para el escaneo de vulnerabilidades, permite utilizar diversos escaners, asistentes para políticas y programas de escaneo y envía los resultados por correo.
 
 ## Nikto
 
+Para test de intrusion sobre servidores web, el Scan Tuning permite especificar los tipos de test contra el objetivo. Upload, Interesting, Misconfig, Info Disclosure, Injection, File retrieval, DOS, Remote File, Command, SQL Injection.
 
+libwhisker para sigilo. Macros para combinar plugins. Mutate para algo así.
 
 # Tema 4 : Explotación de Vulnerabilidades
 
 ## SearchSploit
 
-
+Herramienta de búsqueda en línea de comandos para Exploit-DB. Opción t para buscar por título, X para visionado básico del exploit, M para guardarlo, XML para nmap.
 
 ## Metassploit
 
-
+Proyecto Open Source para el desarrollo y ejecución de exploits contra máquinas remotas.
 
 ### Módulos
 
+- Auxiliares: Permiten obtener información sobre el objetivo.
+- Exploit: Programas que explotan una o varias vulnerabilidades para gannar acceso.
+- Payload: Acompaña a un exploit para realizar funciones específicas en el sistema objetivo.
 
+Tipos de Payload:
+- Singles: Payloads autónomos que realizan una tarea concreta en el sistema.
+- Stagers: Encargados de crear conexión entre cliente y víctima.
+- Stageds: Descargados y ejecutados por los Payloads del tipo Stagers.
+
+Otros:
+- Encoders: Para cifrado y evasión.
+- Nops: Interrumpen la memoria para poder insertar payloads correctamente.
+- Post: Para post explotación.
 
 ### Comandos más usados
 
-
+- help
+- back
+- cheack
+- connect
+- exploit
+- run
+- irb
+- jobs
+- unload
+- loadpath
+- resource
+- route
+- info
+- set
+- unset
+- sessions
+- show
+- setg
+- save
+- use
+- use
 
 ### Meterpreter
 
-
+Comandos principales:
+- background
+- bgrun
+- channel
+- close
+- help
+- irb
+- migrate
+- quit
+- run
+- use
+- cat
+- cd
+- del
+- download
+- edit
+- getlwd
+- getwd
+- lcd
+- lpwd
+- ls
+- mkdir
+- pwd
+- rm
+- rmdir
+- upload
+- execute
+- getpid
+- getprivs
+- kill
+- reboot
+- reg
+- shell
+- shutdown
+- sysinfo
+- ipconfig
+- portfwd
+- route
+- getsystem
+- hashdump
+- timestomp
 
 # Tema 5 : Explotación o escalado de privilegios
 
-
+Formas básicas de ganar privilegios: SetUID, archivos como root, etc.
 
 ## Escalado de privilegios con Metasploit
 
