@@ -264,22 +264,22 @@ Otros:
 
 - help
 - back
-- cheack
-- connect
+- check
+- connect: Conectar a un host remoto y enviar ficheros.
 - exploit
 - run
-- irb
-- jobs
+- irb: interprete Ruby.
+- jobs: Módulos en ejecución.
 - unload
 - loadpath
 - resource
-- route
+- route: Tablas de enrutamiento para las sesiones.
 - info
-- set
+- set: Módulo o variable del exploit.
 - unset
 - sessions
 - show
-- setg
+- setg: Variables globales.
 - save
 - use
 - use
@@ -302,7 +302,7 @@ Comandos principales:
 - del
 - download
 - edit
-- getlwd
+- getlwd: Print del directorio local.
 - getwd
 - lcd
 - lpwd
@@ -325,90 +325,104 @@ Comandos principales:
 - portfwd
 - route
 - getsystem
-- hashdump
-- timestomp
+- hashdump: Passwords SAM.
+- timestomp: Modificar atributos de un fichero.
 
 # Tema 5 : Explotación o escalado de privilegios
 
-Formas básicas de ganar privilegios: SetUID, archivos como root, etc.
-
 ## Escalado de privilegios con Metasploit
 
-
+Getsystem
 
 ### getsystem con Linux
 
-
+Formas básicas de ganar privilegios: SetUID, archivos como root, credenciales expuestas, adivinación de contraseñas, pivoting.
 
 ### UAC de Windows
 
-
+Control de cuentas de usuario: Las aplicaciones y tareas se ejecutan en un contexto de seguridad de una cuenta que no es la de admin. Impide también la instalación de aplicaciones no autorizadas.
 
 ### getsystem con Windows
 
-
+- namedpipe: Crea un servicio para conectarse a un pipe e impersonar.
+- namedpipe2: Crea una dll y la ejecuta como servicio.
+- tokenup: Inyectar una dll en uno de los servicios corrediendo como SYSTEM, si funciona duplica el token.
 
 ## Escalado de privilegios en Linux - Automático
 
 
 ### LinPEAS
 
-
+Script en bash de escaneo general.
 
 ### LinEnum
 
-
+Script en bash de escaneo general.
 
 ### Linuxprivchecker.py
 
-
+Vextores de escalada más comunes en local.
 
 ### Unix-privesc-check
 
-
+Script en sistemas Unix para buscar configuraciones erróneas.
 
 ### SUDO_KILLER
 
-
+Abusa SUDO mediante explotado de malas reglas o versiones.
 
 ## Escalado de privilegios en Linux - Manual
 
-
 ### SUID
 
-
+Set user ID upon execution. Si se ejecuta un archivo con ese bit el uid se cambia por el root. Luego GTFOBins.
 
 ### Capabilities
 
-
+Permisos específicos sin ser completamente de administrador, se aplican a binarios y procesos. Se listan con getcap, las más importantes son CAP_SETUID, CAP_SETGID.
 
 ### LD_PRELOAD y NOPASSWD
 
+Sudo -l te saca los comandos que el usuario puede ejecutar como root.
 
+LD_PRELOAD es una variable de entorno que se carga en runtime para librerías compartidas.
 
 ### sudo_inject
 
-
+Inyección de procesos que poseen tokens sudo.
 
 ### Wildcard
 
-
+Asterisco que nos permite insertar scripts maliciosos. Checkpoint-action.
 
 ### Buscando passwords
 
-
+/etc/security/opasswd o ficheros modificados hace poco.
 
 ### TT Updating
 
+```
+script /dev/null-c bash
+ # Pulsamos Ctrl- z 
+stty raw–echo; fg
+reset xterm
+
+export TERM=xterm
+export SHELL=bash
+
+stty rows 50 columns 150
+```
 
 
 ## Escalado en sistemas Windows
 
-
+Watson (Herramienta .NET), Windows-Exploit-Suggester (compara niveles de parches con la base de datos de Microsoft), JAWS (escrito en PowerShell 2.0), WinPEAS.
 
 ## Buscando passwords en Windows
 
+Mimikatz: Extracción de contraseñas de texto sin formato de la memoria de Windows, también tickets. Permite hacer ataques y se encuentra en metasploit.
 
+Con debug y wdigest obtienes contraseñas de gente que inicie sesión.
 
 # Tema 6 : Enumeración WEB
 
@@ -494,31 +508,31 @@ Formas básicas de ganar privilegios: SetUID, archivos como root, etc.
 
 ### Kerberoasting
 
-
+Con un TGT (tgtdeleg) Solicitar un ticket Kerberos TGS para una cuenta de servicio y se extrae el hash de la contraseña par descifrarlo offline.
 
 ### Pass-The-Ticket
 
-
+Robar un ticket de un usuario autenticado y se reutiliza en otra máquina para obtener acceso sin ingresar la contraseña. Mimikatz sekurlsa::tickets y kertberos:ptt.
 
 ### Pass-The-Hash
 
-
+Igual que el anterior pero con hashes de las contraseñas, utiliza el hash para intentar autenticarse. mimikatz sekurlsa::logonpasswords.
 
 ### Golden Ticket Attacks
 
-
+Robar un TGT de unn administrador para generar tickets válidos para cualquier servicio.
 
 ### Silver Ticket Attacks
 
-
+A partir de credenciales user-passwd o hashes NTLM generar un ticket TGS específico para un servicio.
 
 ### DCSync Attack
 
-
+Extracción de datos del controlador de dominio (Hashes de NTML y LM). Mimikatz isadump::dsync
 
 ### Overpass-The-Hash
 
-
+Establecer una sesión con un TGT robado utilizando el hash. La diferencia es que este roba el hash de una cuenta para crear un TGT y el pass the ticket usa un ticket válido y lo usa.
 
 ### Elevación de privilegios
 
