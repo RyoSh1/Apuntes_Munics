@@ -67,25 +67,49 @@ Información completa, actualizada y contrastada sobre la totalidad de las infra
 
 # Tema 2 : Introducción a los sistemas ciberfísicos e IOT
 
+Sistema Ciber-Físico: Sistema controlado y monitorizado mediante algoritmos computacionales y que se encuentra completamente integrado con internet y usuarios remotos.
 
+IIoT: IoT en industria, conectar hardware industrial para mejorar eficiencia y automatización.
+
+Cobots: Robots colaborativos.
 
 ## Hardware y Firmware
 
 ### Sensórica
 
+Los sensores son sistemas de adquisición de datos mediante interfaces y multiplexores.
 
+Tipos de sensores:
+- Naturales: Responden con señales electro químicas basandose en el transporte de Iones.
+- Artificiales: Señal eléctrico o fotónico.
+
+Estímulo: Propiedad física convertida en señal, puede ser un voltaje/corriente/carga o una amplitud/frecuencia/código.
+
+Transductor: Convierte un tipo de energía en otro, mientras que un sensor siempre a eléctrica.
+
+Actuador: Cualquier elemento que actúe en respuesta a señales.
 
 ### Sensores y actuadores comunes
 
+Tipos de sensores más comunes:
+- Movimiento: aceleración y rotación en 3 ejes.
+- Posición
+- Ambientales: Temperatura, presión, humedad.
+- Fisiológicos: Parámetros corporales.
 
+Acelerómetro MEMS: Sensor basado en sistemas microelectromecánicos que detecta cambios en la velocidad usando micro-sensores y un microprocesador. Para vehículos.
+
+Giroscopio: Se usa cuando no hay campo geomagnético y permite detectar la orientación actual o sus cambios a partir de la velocidad angular.
+
+Magnetómetro: Sensor sensible al campo magnético de la tierra, también llamado compas. Mide en Teslas y permite navegación y realidad aumentada.
 
 ### Cloud
 
-
+Los datos industriales se mandan a servidores con servicioes de automatización industrial en la nube
 
 ### Seguridad de CPS y sistemas IoT/IIoT
 
-
+Los equipos IoT típicos tienen poca potencia computacional y suelen ser muy inseguros (sistemas sin parchear, poco cifrado...), por lo que son presa de ataques cibernéticos.
 
 # Tema 3 : Ciberseguridad de Sistemas de Control y Comunicaciones Industriales
 
