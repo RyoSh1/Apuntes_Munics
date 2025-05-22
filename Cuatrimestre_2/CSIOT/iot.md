@@ -113,43 +113,78 @@ Los equipos IoT típicos tienen poca potencia computacional y suelen ser muy ins
 
 # Tema 3 : Ciberseguridad de Sistemas de Control y Comunicaciones Industriales
 
+Un ICS (Sistema de Control Industrial) o IACS (Sistema de Control de Automatización Industrial) es un sistema formado por equipos interconectados que controlan, monitorizan y administran grandes sistemas de producción industrial. Suelen controlar infraestructuras críticas.
 
+Sinónimos no correctos y áreas:
+- PCS (Sistema de Control de Procesos) o PLC (Controlador Lógico Programable). Una unidad de proceso.
+- DCS (Sistema de Control Distribuido). Localización individual.
+- SCADA (Control de Supervisión y Adquisición de Datos). Área Grande Geográfica.
 
 ## PLC
 
+Dispositivo electrónico que permite a los operarios tomar decisiones de control sobre elementos hardware. Creados en 1968 por General Motors para reemplazar los circuitos lógicos basados en relés.
 
+Requisitos: Fáciles de programar, mantener y reparar, Pequeños, Más baratos que los relés y capaces de comunicarse con los dispositivos.
+
+Evolución: Más potencia de procesado, Soporte para I/O digital y analógico, Distintas variantes de lazos de control y sporte para nuevos protocolos de comunicación.
 
 ### Componentes
 
-
+Entradas, CPU, Salidas...Sistema I/O, Controlador, Módulo de comunicación, Fuente de poder.
 
 ### Desarrollo y Funcionalidades
 
+Lo habitual es usar sobre los PLC software especializado basado en una interfaz WYSIWYG en la que se interconectan entradas y salidas.
 
+## SCADA
+
+Capa de software por encima de los PLC que funciona como interfaz de supervisión, aunque algunos permiten enviar comandos de alto nivel.
+
+Funcionalidades: Adquisición de datos, Presentación de los mismos a través de un HMI (Interfaz Persona-Maquina) y control de sistemas dispersos geográficamente
 
 ### RTU
 
-
+Remote Terminal Unit: Hardware de control que se comunica con un sistema SCADA a través de un nodo maestro (MTU). Un RTU suele ser un PLC, por su ubicación remota y conectividad los SCADA suelen mostrar solo los cambios de estado y no un flujo contínuo.
 
 ## DCS
 
-
+Similar a un SCADA pero este sí muestra los datos en tiempo real, esto se debe a que se sitúa en lugares con alta conectividad.
 
 ## Protocolos de comunicación
 
-
+Los protocolos de comunicación suelen ser muy específicos, optimizados para ser fiables y permiten operaciones en tiempo real y muy precisas. No suelen ofrecer funcionalidades básicas como la autenticación y el cifrado. Protocolos SCADA son los de comunicación de sistemas de supervisión y protocolos fieldbus los de control, actualmente ofrecen ambas.
 
 ### Modbus
 
+Modicon Communication Bus, es el protocolo de control más antiguo y extendido (1979 Modicon). Estándar abierto y gratuito, transmite en plano, capa aplicación, sigue un modelo request/reply y es muy sencillo y con muchas variantes.
 
+Problemas de seguridad:
+- Ausencia e autenticación y cifrado: solo necesita una dirección y un código de función válidos.
+- Modbus TCP no hace validación de integridad.
+- Ciertas variantes usan un puerto serie, no se suprimen los broadcast y es muy facil hacer un DoS.
 
 ### OPC
 
+Object Linking and Embedding for Process Control es un framework para comunicar sistemas basados en Windows que usan el protocolo OLE de Microsoft (normalmente sobre TCP/IP). Usan la API DCOM (distributed Component Object Model) por lo que no tienen que usar drivers específicos.
 
+Fundamentalmente es como SCADA, actualmente se implementa la arquitectura OPC-UA.
+
+Problemas de seguridad:
+- Al usar DCOM y RPC es muy vulnerable a ataques.
+- Al depender de Windows es vulnerable a exploits del sistema operativo o vulnerabilidades típicas de un Host Windows.
+- Dificiles de parchear.
 
 ## Diferencias con Redes de Comunicaciones Comerciales
 
+Las principales diferencias es que se utilizan para control de equipos físicos, tienen muchos estándares distintos, alta severidad en los fallos y fiabilidad requerida, eficientes, suelen estar formados por paquetes pequeños de tráfico periódico o asíncrono, requieren consistencia temporal y operan en entornos hostiles con altos niveles de polvo, calor, ruido o vibraciones.
 
+### Seguridad
+
+El impacto es mucho mayor porque conlleva consecuencias físicas, los errores suelen ser difíciles de diagnosticar y reparar porque se manifiestan como fallos de mantenimiento o parones.
+
+Es complicado administrar los ICSs debido que hay mucho software desfasado, no hay entornos amigables de pruebas, los dispositivos pueden estar muy dispersos físicamente y normalmente no se pueden usar firewall o antivirus.
+
+Los vectores de ataque suelen ser muy específicos debido al uso de protocolos variados o comandos no bloqueables.
 
 # Tema 4 : Ciberseguridad de Tecnologías de la industria 4.0/5.0
 
