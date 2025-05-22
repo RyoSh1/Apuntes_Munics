@@ -188,15 +188,117 @@ Los vectores de ataque suelen ser muy específicos debido al uso de protocolos v
 
 # Tema 4 : Ciberseguridad de Tecnologías de la industria 4.0/5.0
 
+- Industria 4.0: Evolución de las fábricas tradicionales hacia fábricas inteligentes diseñadas para ser más eficientes y tener una alta flexibilidad ante cambios.
+- Industria 5.0: Busca personalizar productos a escala masiva, cooperación entre humanos y máquinas y utiliza Cognitive Computing.
 
-
+Cognitive Computing: Paradigma computaciones que imita como los humanos tomamos decisiones utilizando IA y procesado de señal.
 
 ## Tecnologías de la Industria 4.0
 
+Pilares: Simulación, Integración de sistemas, IoT, Ciberseguridad, Computación en la nube, Fabricación aditiva, Realidad aumentada y Big Data.
+
+### Robótica y Autómatas
+
+Permiten automatizar tareas industriales sistemáticas y los cobots pueden ayudar a los operarios en tareas puntuales.
+
+#### Aplicaciones
+
+Cadenas de montaje, carga pesada, exoesqueletos, soldadura remota, pintado automático, recogida de productos.
+
+#### Ciberseguridad en Robótica
+
+Arquitecturas y programación muy simples, Gran exposición a Shodan. los ataques pueden basarse en inducción de errores de precisión o calibrado atentando contra la seguridad del personal.
+
+### UAVs, AGVs y AUVs
+
+Conceptos:
+- Unmanned Aerial Vehicle: Automatiza tareas desde el aire y en ubicaciones poco accesibles.
+- Automatic Guided Vehicle: Robot para tareas de transporte, logística, inventariado o "picking".
+- Autonomous Underwater Vehicle: Robot para tareas de reconocimiento y actuación remota.
+
+#### Aplicaciones
+
+Agricultura inteligente, Supervisión de infraestructuras críticas.
+
+#### Ciberseguridad en UAVs
+
+- Ataques Hardware: Adulteración de hardware o firmware durante la fabricación, entrega o mantenimiento.
+- Ataques a las comunicaciones inalámbricas mediante Jamming o interceptación.
+- Sensor spoofing (GPS, visión o LiDAR).
+
+# Tema 5 : Ciberseguridad de dispositivos IIoT hardware, firmware y middleware.
 
 
-### Aplicaciones
+
+## IoTSF
 
 
 
-### Seguridad
+## PSA
+
+
+# Tema 6 : Panorama de amenazas y enfoque sistemático
+
+# Tema 7 : Cloud Xiaomi
+
+# Tema 8 : Hackeando dispositivos de aspirado
+
+# Tema 9 : Hackeando una smart home, bombillas y leds
+
+# Tema 10 : Bluetooth LE
+
+Bluetooth Low Energy es una solución de baja potencia y coste, robusta y segura, con perfiles estandarizados para cubrir casos de uso, permite desarrollar perfiles en aplicaciones y permite alta conectividad.
+
+Arquitectura: GATT, ATT, SMP, GAP, L2CAP, HCI, Link Layer y Radio.
+
+### Radio
+
+
+
+## Topología
+
+
+
+### Publicidad y descubrimiento de dispositivos
+
+
+
+### Conexiones
+
+
+### Versiones
+
+
+
+## Transmisión del ATT y datos guardados en GATT DB
+
+## Seguridad
+
+## Ataques
+
+### MITM
+
+# Tema 11 : GPS Spoofing + SDR
+
+## GPS
+
+
+
+### ¿Cómo funciona?
+
+### Transmisión de información
+
+
+### Suplantación de identidad
+
+
+
+## Software Defined Radio (SDR)
+
+
+
+### Uso de SDR para aplicar ingeniería inversa sobre un protocolo inalámbrico
+
+
+
+# Tema 12 : Seguridad en consolas

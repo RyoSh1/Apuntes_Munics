@@ -426,18 +426,111 @@ La solución es encapsular paquetes IPsec en UDP puerto 4500 y utilizar la detec
 
 # Tema 7 : Protección del DNS
 
-
+El Servicio DNS es una base de datos distribuida que contiene el mapeo de nombres a IPs. Sigue una estructura jerárquica Top-Level Domain, Second-Level Domain... Los princiales elementos son los resolvers, el protocolo y los servidores.
 
 ## Domain Name System
 
+Los ordenadores tienen una rutina de resolución de nombres, esta conoce el nombre de los servidores DNS locales. El servidor DNS local recibe una petición recursiva, esta petición se reenvía a otro DNS. Los servidores DNS pueden responder la petición, forwardear la petición o referirla a otro servidor.
 
+Los servidores DNS locales deben conocer la dirección de los servidores DNS de zona raíz. Los servidores autorizados deben ser replicados, un servidor primario y varios secundarios. 
+
+Las BD tienen un tiempo de vida, usado para almacenamiento de cache por parte de los servidores intermedios.
+
+Información guardada:
+- A y AAAA: Ipv4 e Ipv6
+- CNAME: Nombre canónico (alias)
+- NS: Name Server.
+- MX: Intercambio de correo (nombre y prioridad de servidores SMTP).
+- PTR: Puntero a un nombre para resolución inversa.
+- SOA: Define la autoridad de una zona.
+- TXT: Texto arbitrario (info adicional).
+
+### Flujo de datos
+
+Componentes del sistema:
+- Archivo de zona: Contiene la información DNS.
+- Servidor Maestro: Recibe los archivos de zona y distribuye actualizaciones.
+- Esclavos: Replicas del maestro que responden a consultas.
+- Caching Forwarder: Servidor intermedio que guarda en caché respuestas.
+- Resolver: Cliente final que hace consultas DNS.
+
+Flujo y amenazas:
+1. Suplantación del maestro.
+2. Corrupción de datos.
+3. Actualizaciones no autorizadas.
+4. Contaminación de caché.
+5. Suplantación de caché.
 
 ## Vulnerabilidades de DNS
 
+Se trata de un servicio anticuado, transmite la información en claro, no tiene autenticación ni comprobación de integridad. 
 
+La identificación de la respuesta se basa en:
+- TCP: Trivial la conexión identifica la sesión.
+- UDP: La respuesta se acepta si el puerto origen y el ID de transacción son correctos.
+
+### Contaminación de caché
+
+Engañar a un DNS para que haga caché de un mapeo falso. Se puede solucionar usando puertos aleatorios e IDs en las peticiones. 
+
+Hoy en día los navegadores tienen una caché DNS interna que guarda el dominio de las páginas. 
+
+La solución es el DNS Pining (pin de la primera respuesta), filtrado de IP privadas y revisión de cabeceras de Host HTTP.
+
+### Reflejo DNS y ataques de amplificación
+
+Un atacante envía peticiones en nombre de la víctima y el servidor DNS le responde. Es un ataque de amplificación porque se envían paquetes pequeños con argumentos genéricos para que la respuesta del servidor DNS hacia la vícutima sean paquetes de gran tamaño.
+
+La solución es que los servidores recursivos estén restringidos a IP de empresa/cliente, configurar Response Rate Limiting principalmente en los autoritativos y que los equipos CPE no deben escuchar paquetes DNS en su interfaz WAN.
+
+### DNS Cache Snooping
+
+La caché puede filtrar información sobre consultas resueltas.
+
+1. Consulta no recursiva: Se consulta por un nombre de dominio a un DNS que solo responderá si lo tiene en caché. Solución: Consulta recursiva si no está en caché.
+2. Si el valor TTL es cercano al autoritativo significa que no pasó por caché. Solución variabilidad el TTL.
+3. Medición del tiempo de respuesta.
+
+Soluciones: Desactivar el caché en autoritativos y hacer que los servidores DNS locales sean inaccesibles.
 
 ## Securizar DNS
 
+### DNSSEC: Autenticación e integridad
+
+Autenticación de origen e integridad de los datos. Asocia firmas digitales con Resource Record Sets (registros de un tipo dado para un dominio dado).
+
+Nuevos tipos de RR:
+- RRSIG:
+- DNSKEY:
+- DS:
+- NSEC/NSEC3:
+- CDNSKEY y CDS:
+
+Proceso de validación:
+1. Validar la respuesta:
+2. Validar la firma:
+
+Dos claves de firma: La ZSK, clave corta gestionada por el administrador de zona y la KSK, larga y guardada offline.
+
+Para la autenticidad de la KSK el DS guarda un fingerprint de la misma, el DS se guarda en la zona padre. Un resolver valida el RRsig del DS en el padre (confianza en el KSK).
+
+Las claves públicas de la zona raíz deben ser conocidas y confiables (Ceremonia de firmado raíz).
+
+### Autenticación de entidades con nombre basado en DNS (DANE)
+
+DNSSec permite la distribución en confianza de claves públicas asociadas a un dominio dado. DANE ofrece la opción de utilizar la infraestructura de DNSSEC para guardar y firmar claves y certificados usados por TLS.
+
+### Autorización de autoridad de certificación
+
+Una capa de seguridad sobre PKI, permite especificar que CA pueden proporcionar certificados para mi dominio o subdominio. Se pueden añadir métdoos de notificación.
+
+### Transportes alternativos
+
+Los ISP pueden ver las peticiones resultas por sus clientes, por lo que pueden modificar los resultados de los DNS (excepto si usa DNSSEC).
+
+Opciones:
+- DNS over TLS o DTLS: Mismo formato que plano, pero sobre una sesión TLS/TCP o DTLS/UDP.
+- DNS over HTTPS (DoH): Formato DNS plano o en JSON sobre una conexión HTTPS.
 
 # Tema 8 : Protocolos de enrutamieto
 
