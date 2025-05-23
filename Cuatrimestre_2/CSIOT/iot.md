@@ -302,3 +302,40 @@ Arquitectura: GATT, ATT, SMP, GAP, L2CAP, HCI, Link Layer y Radio.
 
 
 # Tema 12 : Seguridad en consolas
+
+Las consolas incluyen múltiples vias de protección como Secure Boot, Hipervisor, cifrados, etc.
+
+La principal medida de protección es realizar actualizaciones de firmware que fuerzan a los usuario a elegir si quieren una consola desactualizada y explotable o la experiencia gaming completa.
+
+### Estrategias de ataque
+
+Los ataques software se basan en desbordamientos de memoria o parámetros sin comprobar y los ataques hardware en timing o glitches.
+
+Normalmente se combinan, otro vector a añadir es hacer downgrade cuando una vulnerabilidad es parcheada.
+
+## XBOX 360
+
+Tiene varias medidas de seguridad destacadas:
+- Secure Boot: Verifica la autenticidad del firmware durante el arranque.
+- Hypervisor: Ejecuta código en modo privilegiado aislando el sistema.
+- eFuses: Fusibles físicos que se queman en cada actualización para evitar downgrade.
+- Firmware: Actualizaciones obligatorias.
+- Cifrado: Cifrado y descifrado en la lectura RAM.
+
+### Ataque King Kong
+
+Se trata en un error en el hypervisor que permitía ejecutar código no firmado, descubierto con el juego King King que escribía en memoria a través de shaders.
+
+Un error en la instrucción cmphw ignoraba los 32 bits superiores permitiendo saltar verificaciones.
+
+Se usaban los datos escritos en memoria para manipular el flujo de ejecución y llamar a syscalls con parámetros maliciosos.
+
+### Timing Attack
+
+El objetivo era hacer un bypass de los eFuses para hacer downgrade del firmware. Durante el arranque, el 2BL verifica el HMAC con una función CheckHMAC que compara los hashes byte a byte. Esta funcion no era constante en el tiempo y si un byte era incorrecto el bucle se detenía antes, ante esto se puede comprobar que si el byte era correcto tarda 0.22ms, sino tarda 0.21ms, por lo que era posible generar un HMAC válido.
+
+### Glitch Attack
+
+El objetivo era saltar la integridad del firmware durante el arranque, 2BL verifica el hash del 4BL antes de cargarlo y si falla no arranca.
+
+Se usa un chip para enviar un pulso de voltaje anómalo a la CPU en el momento exacto que interrumpe la instrucción memcmp que compara hashes. Al entrar en estado inestable la CPU devuelve un TRUE. Esto debe ocurrir durante la ejecución de "IsHashValid".
