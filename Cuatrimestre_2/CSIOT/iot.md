@@ -282,24 +282,41 @@ Arquitectura: GATT, ATT, SMP, GAP, L2CAP, HCI, Link Layer y Radio.
 
 ## GPS
 
+La tecnología GPS funciona a través de una red de satélites en órbita. La red estadounidense tiene 24 satélites en constelación que orbitan cada 12 horas a 20000km de altitud. Son 4 satélites equipados con relojes atómicos, en cada uno de los 6 planos orbitales que transmiten señales de radio codificadas de manera única.
 
+Desde tierra hay una estación de control principal la cual calcula y carga datos orbitales precisos y correcciones en los satélites cada 24 horas.
+
+Tipos de estaciones: Control maestro, antena terrestre, estación de monitoreso de la Fuerza Aérea, control maestro alterna, rastreo remoto AFSCN y monitoreo NGA.
 
 ### ¿Cómo funciona?
 
-### Transmisión de información
+Los satélites envían datos a la tierra en frecuencias específicas que tardan un tiempo variable según la distancia. El receptor calcula la distancia a 4 satélites para determinar su posición tridimensional.
 
+La distancia se calcula mediante la velocidad de la luz y el tiempo, el receptor sincroniza su reloj con el tiempo UTC usando las señales de los satélites.
+
+Cada satélite transmite un código pseudo aleatorio único en intervalos precisos, el receptor compara estos códigos con los esperados para calcular el retraso y determinar la distancia.
+
+La posición se calcula basado en los retardos de las señales.
 
 ### Suplantación de identidad
 
+Se basa en la grabación y retransmisión de señales GPS para engañar al receptor, estas contienen información horaria falsa o retardos falsos para alterar la ubicación calculada.
 
+Desafíos: Cálculo preciso de las cordenadas efemérides (no facil), Movimiento de los satélites y rotación de la tierra y el efecto doppler: Cambios en la frecuencia debido al movimiento relativo entre satélite y receptor.
+
+Aplicaciones: Secuestro de sistemas mediante localización o engaño a personas o sistemas de seguridad.
 
 ## Software Defined Radio (SDR)
 
+Es una tecnología que implementa funciones de radio mediante software en hardware genérico. Utiliza receptores de conversión directa para traducir la señal RF directamente a banda base y elimina frecuencias intermedias.
 
+Un dispositivo USRP tiene un rago de frecuencia entre 50Mhz y 4.4GHz, se utiliza para Radio, TV, etc. y tiene conexión ethernet gigabit a PC de hasta 25Ms.
 
 ### Uso de SDR para aplicar ingeniería inversa sobre un protocolo inalámbrico
 
+Se puede utilizar SDR para analizar el espectro y descubrir la domudlación de alarmas.
 
+GNU Radio es una herramienta de código abierto para procesamiento de señales que utiliza filtrado paso bajo para demodular señales FSK.
 
 # Tema 12 : Seguridad en consolas
 
