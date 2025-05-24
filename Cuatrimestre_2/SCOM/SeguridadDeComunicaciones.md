@@ -541,11 +541,100 @@ Opciones:
 
 # Tema 8 : Protocolos de enrutamieto
 
-
-
 ## Interior Gateway Protocol (IGP) Security Issues
 
+### OSPF
 
+Es el protocolo más usado en empresas e ISPs, estandarizado por la IETF. Se trata de un IGP basado en estado de links, la topología se guarda como una colección de LSAs, cada router guarda una copia idéntica de la topología AS (Sistema Autónomo). Cuando cambia la topología los routers hacen sus cálculos SPF individuales.
+
+Funcionamiento:
+1. Los routers vecinos (comparten un L2) forman adyacencias, una ver formada intercambian LSA conocidos. 
+2. Cuando la topología cambia, los routers afectados envían LSA por broadcast.
+3. Las rutas internas se calculan por SPF y las externas se reciben desde un router frontera OSPF.
+
+Consecuencias de los ataques:
+- Starvation:
+- Congestión de la red:
+- Agujero Negro:
+- Delay:
+- Looping:
+- Eavesdrop:
+- Partition:
+- Cut:
+- Instability:
+- Churn:
+- Overload:
+- Resource Exhaustion:
+
+Técnicas de ataque genéricas:
+- Eavesdropping:
+- Message Replay:
+- Message Insertion:
+- Message Deletion:
+- Message Modification:
+- Man in the Middle:
+- Denial of Service:
+
+Defensas integradas:
+- Per-link authentication:
+- Flooding:
+- Fight-Back:
+- LSA:
+- Bidirectional transit links:
+
+Autenticación de mensajes:
+- Null:
+- Contraseña:
+- Cifrados:
+
+#### Ataques típicos
+
+- MaxAge LSA:
+- Seq++:
+- Disguised LSA:
+- Remote false adjacency:
+- Persistent poisoning
+
+#### Buenas prácticas
+
+- Transit-Only Networks:
+- Interfaces no numeradas:
+- Autenticación criptográfica:
+- Mecanismo de seguridad TTL generalizado
+- Reverse Path Forwarding:
+- Fight back traps/notification:
+- Herramientas de comprobación de consistencia:
 
 ## Exterior Gateway Protocol (EGP) Security Issues
 
+
+
+### BGP 
+
+
+
+#### Peer Spoofing and TCP Resets
+
+
+
+#### TCP Resets with ICMP
+
+
+
+#### Route Flapping
+
+
+
+#### Malicious Route Injection
+
+
+
+#### BGP TCP Session
+
+
+
+#### Filtrado de Prefijos
+
+
+
+#### AS Path Filtering
