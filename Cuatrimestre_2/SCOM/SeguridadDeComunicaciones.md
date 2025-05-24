@@ -500,15 +500,22 @@ Soluciones: Desactivar el caché en autoritativos y hacer que los servidores DNS
 Autenticación de origen e integridad de los datos. Asocia firmas digitales con Resource Record Sets (registros de un tipo dado para un dominio dado).
 
 Nuevos tipos de RR:
-- RRSIG:
-- DNSKEY:
-- DS:
-- NSEC/NSEC3:
-- CDNSKEY y CDS:
+- RRSIG: Contiene la firma criptográfica (de un RRset)
+- DNSKEY: Contiene la clave pública.
+- DS: Contiene el hash de un registro DNSKEY vinculandolo con la clave de su zona superior.
+- NSEC/NSEC3: Demuestra la ausencia de un registro dentro de una zona, sirve para prevenir ataques como el "zone enumeration".
+- CDNSKEY y CDS: Similar a DNSKEY pero usado en la comunicación entre registros secundarios y primarios.
 
 Proceso de validación:
-1. Validar la respuesta:
-2. Validar la firma:
+1. Validar la respuesta: Cuando un resolver recibe una respuesta DNS debe asegurar que los datos no han sido alterados.
+    1. El resolver obtiene un RRset y su firma RRSIG.
+    2. Obtiene el DNSKEY correspondiente.
+    3. Extrae la Zone Signing Key del DNSKEY.
+    4. Usa el ZSK para verificar el RRset con la RRSIG (el resultado de hacer hash sobre el registro con ZSK debe ser RRSIG).
+2. Validar la firma: Para que un resolver confíe en una ZSK debe asegurarse de que proviene de una cadena de confianza.
+    1. El registro DNSKEY también contiene una o más Key Signing Keys (KSK).
+    2. El DNSKEY RRset es firmado con la KSK.
+    3. El resolver valida el DNSKEY RRset con la clave pública KSK (se usa otra DNSKEY, en este caso la KSK para verificar otro RRSIG, no es un campo único, hay uno por cada clave).
 
 Dos claves de firma: La ZSK, clave corta gestionada por el administrador de zona y la KSK, larga y guardada offline.
 
