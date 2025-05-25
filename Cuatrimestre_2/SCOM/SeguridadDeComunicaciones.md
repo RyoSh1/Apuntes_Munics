@@ -567,57 +567,57 @@ Funcionamiento:
 3. Las rutas internas se calculan por SPF y las externas se reciben desde un router frontera OSPF.
 
 Consecuencias de los ataques:
-- Starvation:
-- Congestión de la red:
-- Agujero Negro:
-- Delay:
-- Looping:
-- Eavesdrop:
-- Partition:
-- Cut:
-- Instability:
-- Churn:
-- Overload:
-- Resource Exhaustion:
+- Starvation: El tráfico destinado a un nodo se envía a una parte de la red que no puede entregarlo.
+- Congestión de la red: Se reenvía más tráfico de datos a través de una parte de la red de lo que debería.
+- Agujero Negro: Gran gantidad de tráfico se dirige hacia un anerutador que no puede manejar ese nivel y deja caer muchos paquetes.
+- Delay: El tráfico hacia un nodo se envía por una peor ruta.
+- Looping: El tráfico se envía por una ruta que termina haciendo bucles, por lo que nunca llega.
+- Eavesdrop: El tráfico se reenvía a través de un router que no debería ver el tráfico, creando una oportunidad de espiarlo.
+- Partition: Una parte de la red cree que está particionada del resto de la red.
+- Cut: Hacer creer que una parte de la red no tiene conexión.
+- Instability: OSPF se vuelve inestable si no se logra convergencia en estado de reenvío global.
+- Churn: Se aceleera el envío en la red, resultando en una larga variedad de patrones de envío de paquetes.
+- Overload: Convertir los paquetes OSPF en una gran parte dle tráfico.
+- Resource Exhaustion: Si hay muchos paquetes se provoca el agotamiento de recursos críticos del router como espacio de tablas y colas.
 
 Técnicas de ataque genéricas:
-- Eavesdropping:
-- Message Replay:
-- Message Insertion:
-- Message Deletion:
-- Message Modification:
-- Man in the Middle:
-- Denial of Service:
+- Eavesdropping: Información de enrutamiento transmitida en texto claro.
+- Message Replay: Normalmente evitado ocn autenticación criptográfica.
+- Message Insertion: Solo funciona desde un nodo interno o con la autenticación desactivada.
+- Message Deletion: Se detecta mediante los LSU y caida de adyacencia.
+- Message Modification: Solo funciona desde un nodo interno o con la autenticación desactivada.
+- Man in the Middle: Solo funciona desde un nodo interno o con la autenticación desactivada.
+- Denial of Service: Durante la fase de intercambio de LSDs se puede llenar la tabla mediante LSAs o cabeceras bogus LSA (no se que es).
 
 Defensas integradas:
-- Per-link authentication:
-- Flooding:
-- Fight-Back:
-- LSA:
-- Bidirectional transit links:
+- Per-link authentication: Secreto compartido entre los routers de cada link (distinto en cada link). No existe una función de gestión de claves.
+- Flooding: Las LSUs se envían por inundación, por lo que no se puede prevenir al existir múltiples caminos.
+- Fight-Back: Si un router recibe un LSU con LSA que solo él debería enviar, vuelve a enviar con su información correcta.
+- LSA: Un LSA tiene los links de un solo router, para causar daño un atacante tendría que falsificar el envío de muchos.
+- Bidirectional transit links: Un link solo se considera válido si se recibe un aviso de ambos extremos.
 
 Autenticación de mensajes:
-- Null:
-- Contraseña:
-- Cifrados:
+- Null: Mensaje sin autenticación.
+- Contraseña: Añade una contraseña en claro a cada LSU.
+- Cifrados: MD5 o HMAC-SHA, no provee de confidencialidad ni defensa ante ataques de repetición. Estos solo funcionan cuando se reusan números de secuencia y se pueden forzar tirando una adyacencia.
 
 #### Ataques típicos
 
-- MaxAge LSA:
-- Seq++:
-- Disguised LSA:
-- Remote false adjacency:
-- Persistent poisoning
+- MaxAge LSA: Se envían los LSU con los LSA con la validez ya cumplida, lo que hace que desaparezcan del router. Esto provoca churn, agujeros negros, aumento de uso de CPU y inundación de LSAs. El router original puede hacer fight-back.
+- Seq++: Sustituir LSAs mandando unos con un número de secuencia superior, lo que hace que sustituyan los verídicos provocando modificaciones en las tablas. MaxAge y Seq++ se combaten con respuestas de los routeres origen, pero si el atacante envía por debajo de la restricción MinLSInterval los cambios permanecen en la red, por lo los fight-back deben notificarse a los administradores.
+- Disguised LSA: Envío de un LSA falso con checksum y número de secuencia idéntico antes del siguiente LSA. Provoca que no haya fight-back porque los LSA son "idénticos". La mitigación es randomizar los números de secuencia. 
+- Remote false adjacency: Un atacante envía paquetes Hello a un router usando una dirección IP falsa, necesita conocer las claves criptográficas o que la red use Null. Esto crea un router fantasma al creer que hay un nuevo vecino, el atacante puede inyectar LSAs para controlar la red. La mitogación consiste en autenticación criptográfica y GTSM.
+- Persistent poisoning: Envío de tramas LSA con el ID de la LSA coincidente, pero cambiando el ID del router origen. Esto provoca que se actualice esa LSA, es un fallo de diseño arreglado en versiones modernas.
 
 #### Buenas prácticas
 
-- Transit-Only Networks:
-- Interfaces no numeradas:
-- Autenticación criptográfica:
+- Transit-Only Networks: Ocultar prefijos de enrutamiento de redes de tránsito (internas) de las tablas de enrutamiento. Evita ataques remotos, en Cisco se le llama supresión de prefijos.
+- Interfaces no numeradas: Interfaces que comparten la IP de otra en el mismo host, no se genera ruta para ellas.
+- Autenticación criptográfica: Usar diferentes claves en cada link.
 - Mecanismo de seguridad TTL generalizado
-- Reverse Path Forwarding:
-- Fight back traps/notification:
-- Herramientas de comprobación de consistencia:
+- Reverse Path Forwarding: Se suele utilizar a la entrada de la red cuando se utiliza enrutamiento simétrico, comprueba que el paquete IP llega a través de una interfaz utilizada para enviar tráfico. Se configura en los routeres frontera.
+- Fight back traps/notification: Notificar a los administradores que un router está usando fight-back. Indica entidades maliciosas, malas configuraciones o partición.
+- Herramientas de comprobación de consistencia: Los LSA deben ser idénticos en todos los routeres.
 
 ## Exterior Gateway Protocol (EGP) Security Issues
 
