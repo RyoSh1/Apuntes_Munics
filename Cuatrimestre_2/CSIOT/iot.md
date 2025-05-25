@@ -253,11 +253,13 @@ Arquitectura: GATT, ATT, SMP, GAP, L2CAP, HCI, Link Layer y Radio.
 
 ### Radio
 
-
+Presenta 40 canales (3 para publicidady 37 para datos), con un ancho de banda de 1Mbps (rendimiento menor debido a paquetes pequeños) y un alcance de 500m.
 
 ## Topología
 
-
+- Advertiser: Solo envía paquetes de publicidad (broadcast).
+- Scanner: Escucha anuncios y puede iniciar conexiones.
+- Master/Slave: Un esclavo puede conectarse a múltiples maestros en BT 4.1+.
 
 ### Publicidad y descubrimiento de dispositivos
 

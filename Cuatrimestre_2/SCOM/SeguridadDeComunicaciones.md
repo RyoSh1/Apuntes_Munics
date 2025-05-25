@@ -539,6 +539,20 @@ Opciones:
 - DNS over TLS o DTLS: Mismo formato que plano, pero sobre una sesión TLS/TCP o DTLS/UDP.
 - DNS over HTTPS (DoH): Formato DNS plano o en JSON sobre una conexión HTTPS.
 
+## Resumen explicativo DNSSEC
+
+DNS security se usa para asegurar autenticación de origen, integridad de los datos y autenticación en la denegación de existencia.
+
+Las respuestas DNS tienen un nuevo campo llamado DNSKEY que contiene dos sub-entradas: KSK, que se encarga de firmar la ZSK y ZSK, que se usa para firmarse a si mismo.
+
+DNSSEC también crea una nueva entrada RRsig que es una firma digital del RRset (hash de todo firmado con la privada), la ZSK se utiliza para comprobar que el RRsig es verídico y por tanto se logra autenticación e integridad.
+
+Como extra hay que verificar que la ZSK es válida, para ello se usa la cadena de confianza, la respuesta DNS anterior contiene un campo DS que tiene el hash de la KSK del siguiente nivel (hijo). El resolver comprueba que ese DS y el KSK coinciden para comprobar que un registro RRsig(DNSKEY) coincide a su vez con la ZSK, quedando todo así autenticado.
+
+La cadena de KSK y DS sigue entre hijos y padres hasta que llega a la raíz donde se encuentra un fichero que se debe descargar offline cuando montas un resolver el cual verifica la raíz.
+
+Por último, el registro creado es el NSEC, el cual se utiliza para validad que "lo siento no tenemos ese nombre que estás buscando", que es la autenticación de denegación de existencia.
+
 # Tema 8 : Protocolos de enrutamieto
 
 
