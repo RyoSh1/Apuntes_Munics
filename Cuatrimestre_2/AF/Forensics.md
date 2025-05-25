@@ -113,75 +113,251 @@ Los expertos en informática forense pueden ser llamados a testificar en juicios
 
 ### El perito
 
+El punto de referencia de creación del título de Perito es el real decreto de Romanones, 1901. Actualmente se exige que los peritos tengan titulación oficial para la materia nombrada.
+
+- Perito informático: Profesional experto en tecnologías de la información y sistemas informáticos que posee conocimientos especializados y experiencia en el ámbito de la informática.
+- Perito forense: Experto en ciencias forenses que puede especializarse en disciplinas como medicina, psicología, química, biología u odontología.
+- Perito informático forense: Experto en informática forense especializado en la identificación, preservación, análisis y presentación de pruebas digitales en investigaciones y casos legales.
+- Perito judicial: Profesional ditado de conocimientos especializados y reconocidos, a través de sus estudios superiores, que suminstra información u opinión fundada a los tribunales de justicia. Perito de oficio es el elegido por un juez o tribunal y perito de parte es el elegido por una de las partes y aceptado por la parte judicial.
+
 #### Responsabilidades del perito, ética y privacidad
+
+Los profesionales deben seguir estrictos códigos de conducta y ser conscientes de las leyes y regulaciones de privacidad aplicables.
 
 #### Código deontológico
 
+Código de ética profesional que recoge un conjunto de criterios, normas y valores. El conjunto de obligaciones morales del profesional y hace referencia a la ética (Obligado a guardar el secreto profesional), "Obrar según ciencia y conciencia".
+
+Si hay alguna evidencia de comisión delictiva, aunque no sea objeto o mandato de la investigación, se debe informar del delito a las autoridades competentes (mandato civil).
+
 #### Órdenes Jurisdiccionales
+
+El perito judicial puede intervenir en: Civil, Penal, Contencioso administrativo y social (no militar).
 
 #### Responsabilidades
 
+El perito está sujeto a varios tipos de responsabilidades, dependiendo de la norma o legislación:
+- Civil: Obligado a reparar el daño a un particular.
+- Penal: Obligado a reparar el daño a la sociedad.
+- Disciplinaria: Por no comparecer en juicio o vista cuando sea requerido judicialmente para ello.
+- Profesional: Por no cumplir el código deontológio o el procedimiento disciplinario colegial.
+
 #### Cuerpo Oficial de Peritos
+
+Conformado por el conjunto de peritos colegiados, su creación y gestión es tarea de los Colegios profesionales. La lista de peritos se renueva anualmente y, se pone a la libre disposición de las autoridades judiciales, juntas de arbitraje, empresas, instituciones y cualquier persona interesada.
+
+- Colexio Profesional de Enxeñaría Técnica en Informática de Galicia (CPETIG).
+- Colexio Profesional de Enxeñaría en Informática de Galicia (CPEIG).
 
 ## Normativa 
 
 ### Normativa en España
 
+- Ley Orgánica de Protección de Datos Personales y Garantía de los Derechos Digitales (LOPDGDD): Regula la protección de datos personales en España y garantiza los derechos digitales de los ciudadanos.
+- Código Penal: Disposiciones específicas relacionadas con los delitos informáticos, como el acceso no autorizado a sistemas informáticos, interceptación ilegal de comunicaciones, distribución de malware y suplantación de identidad.
+- Ley de Enjuiciamiento Civil (LEC): Regula los procedimientos y procesos en casos civiles en España, incluidos aspectos relacionados con la recopilación, presentación y valoración de pruebas, como las pruebas electrónicas.
+- Ley de Enjuiciamiento Criminal (LECr): Establece las reglas y procedimientos para la investigación y enjuiciamiento de delitos en España.
+- Ley de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI): Regula diversos aspectos del comercio electrónico y los servicios en líea en España, incluida la responsabilidad de los prestadores de servicios de Internet y la retención de datos.
+- Ley Orgánica de Protección de la Seguridad Ciudadana: Contiene disposiciones relacionadas con la vigilancia y la interceptación de comunicaciones en el contexto de la seguridad nacional y la lucha con el terrorismo.
+- Ley de conservación de Datos relativos a las comunicaciones electrónicas y a las redes públicas de comunicaciones: Establece las obligaciones de los proveedores de servicios de comunicaciones electrónicas y las redes públicas de comunicaciones en relación con la conservación de ciertos tipos de datos (12 meses).
+
 ### Normativa en Europa
+
+- Directiva 2006/24/CE (Directiva de Conservación de Datos): Trata las obligaciones de los proveedores de servicios de comunicaciones electrónicas de acceso público o de una red pública de comunicaciones en relación con la ocnservación de determinados datos generados, para garantizar que estén disponibles con fines de investigación de delitos. 
+- Directiva 2013/40/UE: Orientada a combatir los ciberataques a nivel UE, establece las normas mínimas relativas a la definición de las infracciones penales y las sanciones aplicables en el ámbito de los ataques contra los sistemas de información.
 
 # Tema 2 : Análisis Forense en Windows
 
 ## Introducción
 
+Cada SO tiene sus peculiaridades, desde el punto de vista forense, pero algunos procedimientos son aplicables de manera legal. Windows representa el 71,47% de la cuota de mercado.
+
+El proceso de análisis forense en Windows implica la identificación y extracción de datos relevantes de diversas fuentes, para reconstruir las actividades realizadas en el sistema y determinar posibles evidencias.
+
 ### Artefactos
+
+Cualquier objeto, dato o elemento almacenado en un sistema informático que pueda proporcionar información valiosa para una investigación (ficheros, cadenas de registro, configuraciones, etc.).
+
+Diferenciamos entre artefactos de aplicación y artefactos del sistema operativo.
 
 ## Archivos de registro (Logs)
 
+Son artefactos que contienen información sobre eventos específicos, aplicaciones y servicios. En Windows, los logs se encuentran en distintas ubicaciones y formatos, se verán Event Logs, registros de aplicaciones, registros varios.
+
 ### Registros de eventos
+
+Se encuentran en el visor de eventos, divididos en 4 categorías: Aplicación, Seguridad, Configuración y Sistema.
+
+En versiones antiguas se encuentran como binarios (.evt) en \System32\config, en versiones modernas también son archivos binarios (.evtx) en \System32\winevt\Logs.
+
+Evidencias: Inicios de sesión, cambios de configuración, programas, equipos, etc.
+
+Nota: %WinDir% y %SystemRoot% son variables de entorno que en la mayoria de casos hacen referenia al directorio donde está instalado Windows. Pre NT se usaba WinDir y Post NT se usa SystemRoot, actualmente ambas.
 
 ### Registros de aplicaciones
 
+Muchas aplicaciones tambié generan sus propios archivos de registro que pueden estar en la instalación de la aplicación, en la carpeta AppData (específicos del usuario) y en ProgramData (global).
+
 ### Registros varios sobre la instalación
+
+En SystemRoot hay varios registros:
+- setupact.log: acciones de instalación.
+- setuperr.log: Errores de instalación.
+- WindowsUpdate.log: Actualización del sistema y aplicaciones.
+- \Debug\mrt.log: Eliminación de software malintencionado.
+- \security\logs\scecomp.old: Componentes de Windows que no han podido ser instalados.
+- \SoftwareDistribution\ReportingEvents.log: Eventos relacionados con la actualización.
+- \Logs\CBS\CBS.log: Component-Based Servicing, el mecanismo utilizado por Windows para administrar actualizaciones, paquetes de características y componentes del SO.
+- \INF\setupapi.dev.log: Acciones al detectar un nuevo dispositivo o al actualizar/reinstalar un driver existente.
+- \INF\setupapi.app.log: Instalación de componentes o aplicaciones.
+- \INF\setupapi.setup.log: Operaciones de instalación/configuración de Windows.
+- \INF\setupapi.offline.log: Procesos o reparaciones hechas en modo offline.
+- \PANTHER\*.log,xml: Acciones, errores y SID de cuando se actualiza desde una versión anterior de Windows.
+- \$Windows.~BT\Sources\Panther\*.log,xml: Similar a la anterior pero oculta, protegida y de uso temporal.
+- \Performance\Winsat\winsat.log: Utilización de la aplicación Windows System Assessment Tool (WINSAT),
 
 ## Papelera de reciclaje
 
+Introducida por primera vez en Windows 95, almacena archivos borrados e información sobre la fecha y hora en la que fueron eliminados y la ubicación original.
+
+El directorio originalmente estaba en C:\RECYCLER y en los nuevos es C:\$Recycle.Bin.
+
+Es posible comprobar su contenido mediante comandos, los archivos que comienzan por $I contienen el nombre, ruta original y datos del archivo, los que empiezan por $R tienen el contenido del archivo original.
+
 ## Registro de Windows
+
+Es una base de datos jerárquica que contiene información y configuracioes para el SO, el HW, las aplicaciones instaladas y preferencias del usuario. Funciona como un repositorio centralizado que facilita la administración del sistema, permitiendo que tanto las aplicaciones como los componentes accedan a configuraciones unificadas.
+
+Contiene información importante desde el punto de vista forense.
+
+- Frecuencia y tiempo de uso de aplicaciones: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist
+- Dispositivos USB conectados: HKEY_LOCAL_MACHINE\System\CurrentControlSet\Enum\USBStore
+- Asociaciones de tipos de archivos y programas: \HKEY_CLASSES_ROOT\.pdf y \HKEY_CLASSES_ROOT\Acrobat.Document.2020\shell\Open\command
+
 
 ### HKEYS
 
+El registro se divide en varias secciones principales llamadas Handle to Registry Key.
+
+- HKEY_CLASSES_ROOT: Información sobre tipos de archivos, extenisones, asociaciones de programas y detalles de integración y comunicación entre aplicaciones mediante tecnologías OLE y COM.
+- HKEY_CURRENT_USER: Almacena configuraciones y preferencias específicas del usuario que ha iniciado sesión actualmente.
+- HKEY_LOCAL_MACHINE: guarda configuraciones y datos relacionados con el HW, el SW y los controladores del sistema en el equipo.
+- HKEY_USERS: Almacena configruaciones y preferencias de todos los usuarios en el sistemas, identificados por sus respectivos identificadores de seguridad (SIDs).
+- HKEY_CURRENT_CONFIG: Información sobre el perfil de hardware activo.
+
 ### Hives
+
+El registro se agrupa en secciones lógicas conocidas como hives. Estas son un grupo de claves, subclaves y valores relacionados con una parte específica del SO o con configuraciones del usuario.
+
+Los hives permiten organizar y estructurar la información del registro, facilitando su administración y mantenimiento. Este se respalda con archivos auxiliares, conocidos como Hive Files, que contienen copias de seguridad de los datos (Recuperación del sistema).
 
 ### Hive Files
 
+Son los archivos de respaldo para todos los Hives, se encuentran en \System32\Config y los HKEY_CURRENT_USER en %UserProfile%.
+
+...
+
 ## Listas MRU
+
+Las listas MRU almacenan información sobre los elementos utilizados más recientemente en un SO o aplicaciones específicas. Permiten un acceso rápido a archivos, carpetas o elementos que el usuario ha utilizado recientemente, mejorando la eficiencia.
+
+Fuente valiosa de información para determinar qué archivos o elementos ha accedido un usuario. Se encuentrar en diferentes partes del SO y Registro.
+
+- OpenSavePidlMRU: Información sobre archivos abiertos o guardados a través de cuadros de diálogo comunes.
+- RunMRU: Comandos ejecutados en el cuadro "Ejecutar" en orden de ejecución. 
 
 ## Shellbags
 
+Lugares donde el SO almacena información relacionada con las preferencias de visualización de contenidos, estos se generan automáticamente cuando un usuario abre una carpeta del sistema usando el explorador de Windows y personaliza la vista de esa carpeta.
+
+Proporcionan información sobre las carpetas a las que un usuario ha accedido, incluso si ya no existen.
+
+- Bags: Información de las shellbags, cómo un usuario ha personalizado la vista y la disposición.
+- BagMRU: Información sobre el historial de carpetas visitadas por un usuario.
+
 ## Herramientas
+
+- MiTec Windows Registry Recovery: Permite leer archivos de registro hasta W10, los archivos se pueden exportar al formato REGEDIT4.
+- ShellBags Explorer.
 
 ## Prefetch y Superfetch
 
 ### Prefetch
 
+Es un componente de plataformas Windows, aparecido originalmente en Windows XP, que tiene como objetivo mejorar el rendimiento y la eficiencia de la carga de aplicaciones.
+
+Realiza un seguimiento de las aplicaciones y archivos que se utilizan con frecuencia y almacena información sobre como se carga en memoria, esto se utiliza para optimizar la carga en futuras ejecuciones.
+
+Para cada archivo o proceso sometido a prefetching se genera un fichero .pf que inlcuye las referencias a los ficheros y directorios que dicha aplicación utilizó en la carga y la huella temporal de la última ejecución.
+
+Para el analista es una fuente valiosa de trazas de uso y eliminación de aplicaciones por parte de los usuarios y reconstrucción de la línea temporal. Aunque es importante tener en cuenta que entre la ejecución de un fichero y el correspondiente prefetch modificado hay una diferencia de varios segundos.
+
 #### Inspección de prefetch
 
+Para inspeccionar los prefetch se comprueba el registro PrefetchParameters (0 a 3) y después su ubicación por defecto, que es  %SystemRoot%\Prefetch. Esta información se actualiza constantemente con cada ejecución, por lo que es muy volatil.
+
 ### Superfetch
+
+Aparece con Windows Vista y su funcionamiento se basa en la monitorización de forma continua del uso de los programas y en la optimización de la asignación de memoria, precargando en RAM los elementos que se utilizan con mayor frecuencia. 
+
+Superfetch trabaja continuamente en tiempo real, a partir de Windows 1 se denomina SysMain.
 
 ## Sistemas de ficheros en Windows 
 
 ### Organización del almacenamiento de datos
 
+Jerarquía de almacenamiento: Bit, Byte, Sector (unidad de almacenamiento direccionable más pequeña), Cluster (grupo de sectores contiguos).
+
+El tamaño de los sectores y clusters se define en el encabezado del sistema de archivos, los sistemas asignan espacio a los archivos en clusters completos (aunque no lo llenen).
+
+- Partición: división de bajo nivel de un disco físico en regiones separadas y contiguas sin incluir un sistema de arhcivos por sí misma.
+- Volumen: Área de almacenamiento formateada con un sistema de archivos, es reconocido por el SO como área de almacenamiento utilizable (letras C:, D:). En Windows una partición puede contener un volumen y un volumen puede abarcar varias particiones o discos.
+
 ### Sistemas de archivos FAT
+
+File Allocation Table, desarrollado en 1977 por Microsoft (variantes: FAT12, 16, 32 Y exFAT).
+
+Componentes clave:
+- El sector de arranque se ubica al inicio del volumen, contiene la información esencial sobre el sistema de archivos e incluye el BIOS Parameter Block (BPB), que proporciona detalles necesarios para acceder correctamente al volumen, como el tamaño del cluster.
+- La Tabla de Asignación de Archivos actúa como un mapa del dispositivo de almacenamiento, donde cada entrada se corresponde a un cluster en el disco (Libre, Asignado, EOF y defectuoso).
+- La región del directorio raíz se sitúa en FAT12 y FAT16 inmediatamente después de la región FAT y tiene un tamaño fijo, contiene entradas para archivos y subdirectorios, con metadatos como nombres, atributos, entradas de tiempo y número de cluster inicial. En FAT 32 se almacena en la región de datos, permitiendo que se expanda.
+- La región de datos ocupa la mayor parte del volumen, está dividida en clusters los cuales almacenan los datos reales de archivos y directorios. La FAT se encarga de rastrear la secuancia de clusters que componen cada archivo.
 
 #### Forense FAT
 
+- Comportamiento de eliminación de archivos: en el sistema de archivos FAT, la eliminación de un fichero hace que su entrada de directorio se marque con un carácter especial (0xE5), pero el resto de información com tamaño y cluster de inicio, permanece intacto. Los datos reales no se modifican hasta ser sobreescritos.
+- Retos de fragmentación: FAT es propenso a la fragmentación, donde los datos de un archivo se dispersan en clusters no contiguos. Al eliminar un archivo los punteros a sus cluster se cambian a 0.
+- Espacio residual: Como los tamaños de los cluster son fijos, archivos pequeños o lo sobrante, no ocupa el espacio asignado, dejando sectores residuales.
+- Artefactos de Timestamps: Resolución de tiempo con precisión limitada en la creación, modificación y acceso. Ambiguedad en la zona horaria porque se guardan en local.
+- Almacenamiento de nombres de archivos: Convención de nombres 8.3, los nombres largos se almacenan mediante entradas de directorio especiales.
+- Recuperación de entradas FAT: Para proteger contra la corrupción de datos se alamacena dos FATs, FAT1 es la principal y FAT2 funciona como copia de seguridad, los cambios se reflejan simultáneamente. Se puede deshabilitar en FAT32
+
 ### Sistemas de archivos NTFS
+
+Desarrollado por Microsoft en 1993 con Windows NT, surge como reemplazo del sistema FAT. A diferencia de FAT está optimizado para discos duros y soporta volúmenes y archivos de mayor tamaño. 
 
 #### Componentes clave NTFS
 
+Componentes clave:
+- Sector de arranque de partición: Ubicado al inicio de un volumen NTFS y almacenado en el registro $Boot. Contiene información esencial para iniciar el sistema operativo y detalles sobre eldiseño del sistema de archivos, incluido el BPB que especifica parámetros como bytes por sector, sectores por clúster y la ubicación de la MFT.
+- Área de datos: Región del volumen que contiene los archivos de usuario y directorios. Se gestiona en clústeres y su asignación se controla mediante el fichero $Bitmap.
+- Master File Table (MFT): El archivo $MFT reside en la zona MFT del área de datos y actúa como la base de datos central de NFTS, registrando la información de cada archivo y directorio del volumen. El archivo $MFTMirr es una copia de respaldo de los primeros cuatro registros.
+- Tamaño de sector: El tamaño estándar es de 512b, que es la unidad de almacenamiento más pequeña en un disco.
+- Tamaño de clúster: Varía según el tamaño del volumen, oscila entre 512b y 64KB.
+
 #### MFT
 
+El fichero $MFT contiene registros de cada archivo del sistema, incluido a si mismo. Almacena toda la información del archivo, ya sea en las entradas de la MFT o en áreas externas referenciadas.
+
+La MFT reserva una cierta cantidad de espacio para cada registro (1024b), los atributos de un archivo se guardan en ese espacio.
+
+NTFS reserva un área específica denominada zona MFT, para evitar fragmentación a medida que la MFT crece. Puede utilizarse para ficheros, pero solo después de que el resto se haya agotado.
+
 #### Forense NTFS
+
+- Eliminación Lógica: Al eliminar un archivo, la entrada MFT se marca como no usada, pero permanece intacta. Los clústeres de datos no se borran inmediatamente, solo si se sobreescriben.
+- Espacio residual: Pueden quedar restos de archivos si el archivo nuevo no llena completamente el cluster. NTFS almacena archivos pequeños en la MFT, reduciendo el espacio residual en comparación con FAT.
+- Análisis de Volume Shadow Copy: Función específica de NTFS que crea copias instantáneas de archivos o volúmenes. Permite recuperar versiones anteriores de arhcivos o datos eliminados o modificados.
 
 # Tema 3 : Análisis forense de WhatsApp en Android
 
