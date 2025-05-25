@@ -48,25 +48,66 @@ UNE 197010:2015: Criterios generales para la elaboración de informes y dictáme
 
 ### Preparación
 
+Preparación previa para poder adquirir las evidencias correctamente y que el proceso sea correcto a nivel legal. Permisos, Autorización por escrito, Contrato...
+
+Asegurar la escena para evitar modificación o destrucción de las evidencias.
+
 ### Identificación
+
+Detectar y localizar posibles fuentes de evidencia digital, su ubicación y su relación con el incidente. Incluye la evaluación preliminar de los dispositivos y medios para evitar la alteración.
 
 #### Revisión del entorno legal que protege el bien
 
+Se debe revisar el entorno legal que protege el bien, que consiste en analizar las normativas y regulaciones aplicables a la evidencia digital y al bien protegido, asegurando la recolección, adquisición y análisis de los datos de manera legal y admisibles judicialmente.
+
 #### Cadena de custodia
+
+Inicio de la cadena de custodia, procedimiento el cual garantiza la autenticidad de la prueba digital desde su obtención hasta que se aporta como hecho probatorio en un procedimiento judicial.
+
+Es necesario documentar:
+- Dónde, cuándo y quién descubrió y recolectó la evidencia.
+- Dónde, cuándo y quién manejó la evidencia.
+- Quién ha custodiado la evidencia, durante cuánto tiempo y cómo se ha almacenado.
+-  Si existe un cambio de custodia, indicar cuándo y cómo se ha realizado, indicando número de caso y demás información.
 
 ### Adquisición
 
+Recopilación de pruebas digitales de dispositivos electrónicos, utilizando técnicas y herramientas especializadas para garantizar la integridad y autenticidad de los datos. Puede incluir copias forenses, extracción lógica de datos o incluso captura en vivo de memoria. Debe documentarse completamente.
+
+El orden de volatidad establece que se debe recolectar la información según el tiempo que permanece accesible. Ej. Respaldo < topología < registro < disco < archivos temporales < enrutamiento,caché arp, procesos < registros y caché.
+
 #### Modos de adquisición
+
+- Modo Live: Obtención de datos volátiles del equipo a analizar. Es un proceso complejo que puede invalidad pruebas dependiendo de los comandos, debe ser muy documentado.
+- Modo Dead: Modo recomendado, tirar del cable y clonado.
 
 #### Clonado
 
+Copia exacta bit a bit de un disco incluyendo errores y sectores defectuosos. El objetivo es disponer de una copia sobre la que realizar el análisis sin alterar la prueba.
+
+Existen múltiples herramientas software (importante asegurarse de no montar el disco desactivando el modo automático) y hardware (múltiples herramientas con variadas funcionalidades y precios).
+
 #### Integridad
+
+Es preciso asegurar que los datos clonados son copia exacta de los originales. MD5 o SHA-1 no se consideran seguros porque son vulnerables a ataques de colisión, si no es posible usar otros la alternativa es usar ambos.
 
 ### Preservación
 
+Adecuado tratamiento y documentación de las evidencias garantizando la cadena de custodia. Documentar detalladamente los procesos realizados, almacenamiento seguro y control de acceso.
+
 ### Análisis
 
+Herramientas: Autopsy (solución completa para el análisis de evidencias), Volatility (Análisis de memoria), SIFT (Distribución basada en Ubuntu con multitud de herramientas orientadas a forense), CAINE (entorno seguro con bloqueo de escritura).
+
+SANS Institute: Compañia privada EEUU especializada en formación en ciberseguridad y formaciones, con reconocido prestigio y de gran tamaño. SysAdmin, Audit, Network y Security.
+
+Otros: Paladin Forensic Suite, Parrot OS, Cellebrite, MOBILedit, EnCase.
+
 ### Presentación de los resultados
+
+Recopilación y documentación de toda la información obtenida, generando si es el caso un informe pericial.
+
+Los expertos en informática forense pueden ser llamados a testificar en juicios para presentar sus hallazgos. Deben comunicar de manera clara y efectiva información compleja a personal no técnico.
 
 ## La figura del perito
 
@@ -148,33 +189,90 @@ UNE 197010:2015: Criterios generales para la elaboración de informes y dictáme
 
 #### Directorios
 
+- Almacenamiento externo (público): Cualquier usuario puede acceder, el ADB accede si el debugging está activo. /Android/media/com.whatsapp/WhatsApp (>11), /Whatsapp (antiguos).
+- Almacenamiento interno (privado): Hay que ser root para acceder. /data/data/com.whatsapp/. 
+
 #### Ficheros
+
+Dentro del directorio privado:
+- files: key (clave de cifrado).
+- databases: BD contactos (wa.db) y BD chats (msgstore.db).
+
+Dentro del público:
+- Databases: Backups cifrados con AES256.
 
 #### Chats cifrados
 
+Los chats están en la zona privada y los backups en la pública pero cifrados. Nos permite extraerlos con un adb pull.
+
 #### Claves de cifrado
+
+Para descifrar las bases de datos se necesita la key, pero es necesario ser root para acceder.
+
+Es posible hacer downgrade de WhatsApp (2.11.431) y acceder al contenido de todo.
 
 ## Preparación de la adquisición
 
 #### Entorno de prueba
 
+Cosas
+
 ### Activación del debugging con ADB
+
+Igual que en Telegram
+
+Otras opciones: recomendado que la plantalla no se bloquee y que no se apague mientras está conectado.
 
 ### Creación de backup
 
+Si WhatsApp está recién instalado puede que no se disponga de todos los directorios, por lo que es recomendable conversar y hacer una copia de seguridad para forzar su inicialización.
+
 ## Adquisición
+
+Ejemplo con Avilla Forensics.
+
+### Creando un pack de ficheros de WhatsApp
+
+Si somos root, se pueden utilizar los siguientes comandos para empaquetar toda la evidencia sin herramientas extra:
+```
+adb exec-out "su -c 'tar c /data/data/com.whatsapp/'" > 
+wasap_ejemplo_basico.tar
+
+adb exec-out "su -c 'am force-stop com.whatsapp;tar c /data/data/com.whatsapp/'" | tail -n +2 > whatsapp_practicas.tar 
+```
 
 ## Análisis
 
 ### Acceso a base de datos
 
+Las BD se pueden abrir con SQLiteBrowser (aunque permite solo lectura). En el menú "hoja de datos" se puede acceder a los valores de las tuplas de cada tabla.
+
 #### BD.wa.db - Tabla wa_contacts
+
+Datos de la libreta de contactos, como id, foto, estado, fechas, etc.
 
 #### BD.msgstore.db - Tabla messages
 
+Datos sobre atributos de los mensajes y sobre contenidos, como ID, estado, origen (from_me), timestamp, recipiente, etc.
+
+Muchos de ellos ahora han cambiado de ubicación a message_media, message_location, etc. y han cambiado de nombre.
+
 ### Consultas para ver conversaciones
 
+Para hacer consultas SQL elaboradas se pueden combinar wa-db y msgstore.db (ignorar el error: near line XXX...already exists). Acto seguido se puede crer una consulta SQÑ cuyo resultado visualice mejor los datos.
+
 ### Ficheros de la carpeta interna de Whatsapp
+
+Me, Key, Status, Avatars y logs.
+
+Para ver logs:
+```
+adb shell cat /data/data/com.whatsapp/files/Logs/whatsapp.log | 
+grep "register"
+
+adb shell cat /data/data/com.whatsapp/files/Logs/whatsapp.log | 
+grep "status" 
+```
 
 # Tema 4 : Análisis forense de Telegram en Android
 
