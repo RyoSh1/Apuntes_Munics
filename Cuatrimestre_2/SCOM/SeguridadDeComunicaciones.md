@@ -188,19 +188,147 @@ Para la generación de la master key se utilizan los siguientes parámetros PRF(
 
 # Tema 2 : Public Key Infraestructure
 
+El objetivo de PKI es acceder a claves públicas, información sobre la validez de esas claves y ser escalable.
 
+PKI se utiliza en internet basandose en terceras entidades, las CA, estas crean certificados con claves públicas.
+
+### X.509
+
+Es un estándar internacional para PKI adaptado para el uso de internet.
+
+Timeline:
+- PKI para X.509:
+- CAB Forum:
+- IETF Web PKI:
+
+### Campos del certificado
+
+- Version: 1, 2 o 3.
+- Número de serie: Número único no secuencial e impredecible con al menos 20 bits de entropía.
+- Algoritmo de firma: Usado para firmar el certificado.
+- Emisor: Distinguished Name del emisero.
+- Validez: Inicio y fin de validez.
+- Subject: El DN de la entidad propietaria de la clave pública certificada.
+- Clave Pública: ID del algoritmo, parámetros opcionales y la pública en sí.
+
+Extensiones principales:
+- Nombre alternativo del Subject: Sustituye el campo de Subject, admite múltiples identidades especificadas por nombre DNS, IP o URI.
+- Límites de nombre: Limita las identidades que la CA puede emitir.
+- Limites básicos: Limita la profundidad de la cadena.
+- Usos de clave: Set limitado.
+- Usos de clave extendido: Más específico.
+- Políticas del certificado: Lista de links para la policy.
+- Puntos de distribución CRL: Ubicación de la lista de revocación.
+- Información de acceso de autoridad: Varias URIs, entre ellas la ubicación del OSCP responder.
+- Clave de identificación de subject: Hash de la pública.
+- Clave de identificación de la autoridad: Hash de la clave que firmó el certificado.
+
+### Ciclo de vida de certificados
+
+1. Solicitud de emisión del Certificado (CSR)
+    - Subscriber: El solicitante genera una solicitud de firma de certificado que contiene su información y clave pública.
+    - Registration Authority: Recibe el CSR y realiza la validación inicial de la entidad del solicitante.
+    - Certification Authority: La autoridad que emite el certificado.
+2. Validación y Emisión
+    - Validate subscriber's identity: La RA y o la CA verifican la identidad del solicitante según sus políticas.
+    - Issue certificate: Una vez validado, la CA firma digitalmente el certificado con su clave privada.
+3. Publicación del certificado
+    - El certificado se publica en varios lugares:
+        - Web Server: Donde se utiliza para autenticación SSL o TLS.
+        - CRL Server: Para listas de revocación.
+        - OCSP Responder: Servicio de verificación de estado en línea.
+4. Proceso de verificación
+    1. Request certificate: Solicia al servidor web el certificado.
+    2. Verify signature: Verifica que la firma de la CA sea válida.
+    3. Check revocation: Consulta CRL u OCSP para asegurarse de que no esté revocado.
+    4. Relying Party: Confía si pasa todas las verificaciones.
 
 ## Internet PKI Infraestructure
 
+### Solicitud de firma de certificado
 
+Lleva la clave pública del solicitante y su objetivo es demostrar la veracidad de la clave privada correspondiente.
+
+### Validación de la identidad del suscriptor
+
+Estrategias de validación:
+- Validación de dominio: Prueba de control de un dominio determinado, enviando un correo a una dirección conocida o un registro de la zona de dominio.
+- Validación de organización: Requiere una identidad y autenticidad
+- Validación ampliada: Requiere identidad y autenticidad con requisitos muy estrictos.
+
+### Revocación
+
+Se lleva a cabo cuando se sospecha que la clave ha sido comprometida.
+
+Se puede comprobar en la lista de revocación o mediante OCSP (Online Certificate Status Protocol) que permite a las partes interesadas comprobar el estado.
+
+### Cadena de certificados
+
+El Root CA va embebido en el SO o navegador, los intermedios y finales se proveen por el servidor.
+
+### Justificación
+
+- Seguridad de la clave raíz de la CA: Es crítica, si esta se revoca todas sus dependientes deben re-emitirse. La clave debe mantenerse siempre offline.
+- Certificación cruzada: Una nueva raíz es firmada por la antigua raíz mientras se despliega en SO y navegadores.
+- Compartimentación: Dividir una raíz entre múltiples CA subordinadas reduce riesgos.
+- Delegación: Una gran empresa puede querer crear sus certificados, para ello la CA crea una subordinada.
+
+### Partes de confianza
+
+Se debe confiar en una colección de certificados CA raíz:
+- Microsoft y Apple: Las CAs deben pasar una auditoría anual.
+- Mozilla: Usa un prorgama transparente de certificados raíz.
+- Chrome: Usa Mozilla más lo del sistema operativo, sumado a listas blancas y negras.
 
 ## Issues with the current PKI Infraestructure
 
+### Control de la emisión de certificados por los propietarios de dominios
 
+Cualquier CA puede emitir un certificado para un dominio sin permiso o notificación del propietario, esto puede ser negligencia o malicia.
+
+Existen cientos de CA, una sola podría comprometer la seguridad.
+
+### Dificultad en la actualización de los almacenes de confianza
+
+La mayoría de CAs son demasiado grandes para quebrar, la eliminación de una CA tiene consecuencias a gran escala, por lo que normalmente no es posible.
+
+Las CA raíz o son confiadas o no, otras opciones son confiar en ellas según su fecha.
+
+### Revocación fallida
+
+Razones:
+- Retardo en la propagación de la información en CRL y OCSP (hasta 10 días).
+- Los navegadores ignoran fallos en CRL o OCSP, por lo que un atacante puede suprimir ese tráfico.
+- Proveedores de navegación que no realizan revocación por no tardar más.
+
+Como medida provisional la mayoría de navegadores disponen de mecanismos basados en listas negras de certificados revocados e intermediarios.
+
+### Otras debilidades
+
+- Validación débil de dominio: llevado a cabo por emails inseguros o utilizando datos whois inseguros.
+- Advertencia de certificado: Muchas aplicaciones y librerías se saltan la validación del certificado y los navegadores permiten aceptarlos.
 
 ## Infraestructure Improvements
 
+### Notaries
 
+Repositorios públicos de certificados conocidos, puede impedir ataques basados en intermediarios maliciosos.
+
+DNS info: DANE (DNS-Based Authentication of Named Entities) y CAA (Certification Authority Authorization).
+
+### Fijación de claves públicas: HPKP
+
+Permite a los dueños restringir que CAs pueden emitir certificados para sus páginas.
+
+Mecanismos:
+- Cabecera especial en HTTP: Usado por firefox, en próximas visitas el navegador rechacza certificados de otras CAs.
+- Mecanismos propietarios (chrome).
+
+HPKP está obsoleto hoy en día, tiene un alto riesgo de inutilizar un sitio.
+
+### Transparencia de certificados
+
+Un framework que permite verificar la emisión de certificados, bajo CT todas las CA participantes deben aplicar todos los certificados emitidos a un log público. Cualquiera puede monitorizar la emisión de certificados, las CA obtienen una prueba de que han aplicado una emisión al log.
 
 # Tema 3 : Port-Based Network Access Control
 
@@ -672,6 +800,21 @@ Recomendaciones: Usar TCP-AO o TCP-MD5, implementar GTSM y considerar el uso de 
 
 #### Filtrado de Prefijos
 
+Una empresa de tier 2 tiene varias relaciones de enrutamiento:
+- Peering con otros proveedores Tier 2.
+- Cliente de proveedores Tier 1.
+- Proveedor para clientes downstream.
+
+Filtrado a los clientes:
+- Entrada: Solo aceptar los prefijos asignados al cliente, configurados manualmente.
+- Salida: La mayoría solo necesita la ruta por defecto, si necesita la tabla entera se debe filtrar prefijos no enrutables, rutas demasiado específicas y la por defecto.
+
+Filtrado con proveedores upstream:
+- Entrada: La ruta por defecto, prefijos no enrutables globalmente, prefijos no signados por la IANA, rutas demasiado específicas, prefijos del AS local, prefijos LAN IXP.
+- Salida: Permitir solo prefijos del AS local y downstreams y bloquear prefijos no enrutables globalmente, rutas muy específicas, prefijos LAN IXP, ruta por defecto.
+
+- Upstream: Entidad que proporciona acceso a internet (ISP).
+- Downstream: Entidad que recibe conectividad.
 
 
 #### AS Path Filtering
