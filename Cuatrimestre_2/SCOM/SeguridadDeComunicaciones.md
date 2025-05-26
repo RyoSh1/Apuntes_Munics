@@ -621,34 +621,64 @@ Autenticación de mensajes:
 
 ## Exterior Gateway Protocol (EGP) Security Issues
 
+Internet es una colección de AS, siendo un AS (Sistema Autónomo) con un prefijo IP común con una política de enrutamiento propia.
 
+Dos variantes: Transit (Conecta múltiples AS para reenviar el tráfico) y Non-Transit (Se conecta a uno o varios AS para reenviar su propio tráfico).
 
 ### BGP 
 
+Es el único EGP en uso en internet, mantiene una lista de caminos eficientes entre prefijos de red. Un camino es una lista de números de AS ordenadas.
 
+e-BGP se usa para intercambiar rutas entre diferentes AS y el i-BGP se usa dentro de un AS para compartir las rutas aprendidas por e-BGP.
+
+Los pares BGP intercambian datos mediante conexión TCP al puerto 179.
+
+Preocupaciones de seguridad:
+- DoS: Starvation, Blackhole, Delay, Churn...
+- Wedgies: BGP no es determinista, un atacante puede forzar un estado no deseado interrumpiendo una sesión BGP.
+- Eavesdropping: BGP se transmite en plano.
 
 #### Peer Spoofing and TCP Resets
 
+Inyectar tráfico en la sesión TCP entre dos peers con una dirección IP falsa (Reset como caso especial). Para realizarlo es necesario averiguar la dirección IP y enviar paquetes formados explícitamente.
 
+Mitigación: Aleatorización del número de secuencia TCP inicial, número de puerto aleatorio, usar autenticación TCP, usar GTSM, usar IPsec.
 
 #### TCP Resets with ICMP
 
+Los mensajes de error pueden romper una conexión TCP. Enviar un mensaje de error ICMP falsificado al servidor BGP, solo es necesario el puerto destino y la dirección IP.
 
+Mitigación: Igual que el anterior y filtrar los ICMP tipo 3.
 
 #### Route Flapping
 
+El route flapping es un problema de red en el que una ruta cambia repetidamente su disponibilidad. El atacante desactiva un router BGP repetidamente para que sus vecinos anuncien cambios continuos en sus rutas anunciadas, las rutas son purgadas de la red y causan cortes o degradación del tráfico.
 
+Mitigación: Route Flap Damping y Graceful Restart.
 
 #### Malicious Route Injection
 
+Los prefijos de BGP no suelen estar autenticados, es posible anunciar un prefijo más específico que el que anuncia el AS real. Esto produce que el tráfico hacia ese prefijo vaya hacia el otro AS, el atacante puede robar ese tráfico o hacer MITM.
 
+Mitigación: Filtrado de rutas y BGPsec (?).
 
-#### BGP TCP Session
+### BGP TCP Session
 
+La sesión TCP entre dos pares BGP debe protegerse para evitar inyección de tráfico y ataques reset.
 
+Recomendaciones: Usar TCP-AO o TCP-MD5, implementar GTSM y considerar el uso de IPsec.
+
+*IXP: Internet Exchange Point: Punto donde se comunican distintos ISP, operadores, etc.
 
 #### Filtrado de Prefijos
 
 
 
 #### AS Path Filtering
+
+- Solo aceptar las rutas que contienen ASN que pertenecen al cliente o viajan a través.
+- Solo aceptar rutas con longitud apropiada al tipo de cliente.
+- Rechazar rutas que incluyan ASN de proveedores ascendentes (?).
+- Rechazar prefijos con números ASN privados, salvo excepciones.
+- Rechazar prefijos si el primer ASN no es par.
+- No anunciar prefijos si el servicio de tránsito no está previsto.
