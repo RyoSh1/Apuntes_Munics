@@ -255,7 +255,11 @@ Los hives permiten organizar y estructurar la información del registro, facilit
 
 Son los archivos de respaldo para todos los Hives, se encuentran en \System32\Config y los HKEY_CURRENT_USER en %UserProfile%.
 
-...
+- SAM: Security Account Manager, contiene información sobre cuentas de usuario, incluido nombres, ID y hash de contraseñas. No accesible en funcionamiento.
+- SECURITY: Configuraciones de políticas locales, políticas de contraseñas, bloqueo de cuentas, privilegios y control de acceso.
+- SOFTWARE: Detalles sobre las aplicaciones instaladas.
+- SYSTEM: Hardware del sistema, configuraciones de servicios, información de arranque y otros aspectos del SO. Contiene la clave de cifrado de las contraseñas de SAM.
+- DEFAULT: Configuración de usuario predeterminada.
 
 ## Listas MRU
 
@@ -294,7 +298,7 @@ Para el analista es una fuente valiosa de trazas de uso y eliminación de aplica
 
 #### Inspección de prefetch
 
-Para inspeccionar los prefetch se comprueba el registro PrefetchParameters (0 a 3) y después su ubicación por defecto, que es  %SystemRoot%\Prefetch. Esta información se actualiza constantemente con cada ejecución, por lo que es muy volatil.
+Para inspeccionar los prefetch se comprueba el registro PrefetchParameters (0 a 3 = deshabilitado, apps, boot, apps  boot) y después su ubicación por defecto, que es  %SystemRoot%\Prefetch. Esta información se actualiza constantemente con cada ejecución, por lo que es muy volatil.
 
 ### Superfetch
 
