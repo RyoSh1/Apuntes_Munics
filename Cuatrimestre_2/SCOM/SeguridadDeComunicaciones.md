@@ -542,9 +542,74 @@ La solución es encapsular paquetes IPsec en UDP puerto 4500 y utilizar la detec
 
 # Tema 6 : Securizando protolos de transporte en internet
 
-
-
 ## Fiabilidad
+
+### Ataque de Reset TCP
+
+El flag reset hace que la conexión se corte, su uso normalmente es para una recuperación rápida de errores.
+
+Resumen del ataque:
+1. Dos usuarios A y B mantienen una comunicación.
+2. Un atacante envía un paquete Reset a uno de los pares.
+3. Cuando se realice el siguiente envío, ese par corta la conexión con un reset.
+
+Requisito:
+- Excepción: En estado SYN-SENT el RST se acepta si el campo ACK hace referencia al SYN
+- Todos los segmentos RST son validados comprobando si el número de secuencia se encuentra en la ventana válida. Debe estar entre RCV.NXT y RCV.NXT más RCV.WND.
+- También debe coincidir cuatro valores de la comunicación: IP servidor, puerto, IP cliente y puerto.
+
+*Una ventana historica ayuda a manejar paquetes con cierto retraso, en RST 64KB.
+
+#### Posición no limitada
+
+El ataque se puede realizar desde la red del emisor y desde la red del receptor. En el primer caso al observar el envío de datos del emisor, se envían datos más reset con el número de secuencia n + longitud del paquete anterior. En el segundo caso al observar la respuesta ACK con valor n del servidor se le envía datos con reset y secuencia n.
+
+Dificultades del atque:
+- Las direcciones y puerto del servidor son anunciadas para el servicio, pero el lado del cliente suelen ser valores no conocidos.
+- El espacio de números de secuencia no se conoce, las conexiones duran poco y el espacio de números de secuencia varía, por lo que es dificil de predecir.
+
+#### Posición limitada: Inyección ciega de datos/RST
+
+Para adivinar un número de secuencia correcto se necesitan 2^31/wnd intentos en promedio, con ventanas históricas menores a 64 KB. Hoy en día las ventanas pueden superar los 6MB en redes de alta velocidad.
+
+### Defensas
+
+- Solo aceptar segmentos RST si el número de secuencia es el primero de la ventana (SO).
+- Filtrar paquetes falsificados a nivel IP (bordes del AS).
+- Utilizar la opción timestamp como defensa adicional.
+- Autenticar paquetes TCP, es decir, TCP-AO (más adelante).
+
+### Inundación SYN: Agotamiento de recursos
+
+Se basa en enviar una gran cantidad de solicitudes SUN a un servidor sin completar el handshake TCP. Esto hace que el servidor recuerde los SYN reservando recursos y llenando la tabla de conexiones.
+
+Si se hace con la IP real estas conexiones son filtradas en el servidor. Si se hace con IP suplantadas y el suplantado recibe la conexión , la cortará con un RST. Si se hace con IP que no contesten esto produce una denegación de servicio.
+
+#### Defensas
+
+Se podría cortar conexiones, pero no sabemos cuales, se podría no guardar nada, pero entonces no se establecen conexiones. Una opción es reducir la memoria para conexiones no establecidas.
+
+### SYN Cookies
+
+Una opción de defensa contra inundación SYN son las SYN cookies. En lugar de asignar recursos al recibir una solicitud SYN, se genera un número de secuencia inicial (ISN) que codifica información sobre la conexión:
+- Los primeros 5 bits representan un número que aumenta lentamente con el tiempo.
+- Los siguientes 3 bits contienen el tamaño máximo de segmento anunciado por el cliente.
+- Los últimos 24 bits son un hash secreto basado en la IP y puerto, más los 5 primeros bits.
+
+Al recibir un ACK sin conexión establecida, se le resta 1 y se compara su hash con los últimos 24 bits.
+
+#### Inconvenientes
+
+Las SYN cookies tienen limitaciones de espacio para almacenar información:
+- MSS limitado a 65000.
+- No hay espacio para SACK ni para ventanas grandes.
+
+Soluciones a las limitaciones:
+- Aumentar la cantidad de bits para la codificación.
+- Usar SYN cookies solo en caso de ataque.
+- Usar el timestamp que se devuelve en el ACK para codificar información adicional (9 bits escala de ventana y SACK).
+
+### Anexo : SlowLoris
 
 
 
