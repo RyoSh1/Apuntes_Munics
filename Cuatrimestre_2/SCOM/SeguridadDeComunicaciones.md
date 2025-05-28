@@ -611,10 +611,59 @@ Soluciones a las limitaciones:
 
 ### Anexo : SlowLoris
 
+Otro ataque de agotamiento, se basa en hacer un montón de peticiones http incompletas, mandar cabeceras periódicamente para mantener las conexiones activas y nunca cerrarlas.
 
+Mitigación: Aumentar el número de hilos (ineficiente), crear límites (ineficiente), proxy inverso en la nube.
+
+QUIC: No explica nada.
 
 ## Autenticación
 
+Como se ha mencionado anteriormente, la IP y puerto destino se conocen, el puerto origen se puede adivinar y la IP se puede falsificar. Ante falta de autenticación se pueden realizar ataques DoS (RST y SYN) e inyección de datos.
+
+### Autenticación basada en posición
+
+Uso:
+- Control de conexiones entre hosts o enrutadores adyacentes.
+- Cuando ambas partes residen en la misma LAN.
+- Cuando se conocen la distancia de saltos.
+
+### GTSM : El mecanismo de seguridad TTL generalizado
+
+GTSM es una técnica de seguridad para proteger sesiones de comunicación mediante el uso del Time To Live en los paquetes IP. Se establece el TTL en 255 para saber que los paquetes realizan n saltos (entiendo que es para hacer siempre 255 menos n).
+
+Se clasifican los paquetes recibidos en:
+- Desconocido: Cualquier datagrama que no esté relacionado con una sesión GTSM.
+- Confiable: Datagrama de la sesión GTSM con valor correcto de TTL (normalmente 254).
+- Peligroso: Datagramas de una sesión GTSM con valor TTL incorrecto.
+
+### TCP-AO : TCP Authentication Option
+
+Una solución diseñada para mejorar la seguridad y flexibilidad en la autenticación de sesiones TCP. Permite el uso de algoritmos de seguridad más fuertes que MD5, como HMAC-SHA.
+
+Se complementa con IKE, permitiendo el intercambio seguro de las claves. Y se complementa con TLS porque TLS protege los datos y TCP-AO la información del protocolo.
+
+#### TCP-MD5
+
+Opción de seguridad que añade una firma MD5 a los paquetes TCP, la autenticación se logra mediante una clave compartida entre los dispositivos que establecen la conexión.
+
+TCP-Ao tiene algoritmos más fuertes, seguridad doble al generar las claves de tráfico a partir de la clave configurada por el usuario (como TLS ¿?), mejor gestión de claves y agilidad con cambios sobre la marcha sincronizando el cambio y más adecuado para conexiones de larga duración.
+
+### TCP-AO : Claves y sus propiedades.
+
+TCP-AO utiliza un esquema de claves para proteger las sesiones TCP:
+1. Master Key Tuples (MKT): Define los atributos de autenticación de la conexión.
+    - ID.
+    - Identificador de conexión TCP: IPs y puertos.
+    - TCP Option Flag: Las opciones TCP a autenticar.
+    - Clave maestra: Secuencia aleatoria para generar las claves de tráfico.
+    - Función de derivación de claves (KDF).
+    - Algoritmo MAC: Método de autenticación.
+2. Traffic Keys: Se generan a partir del MKT, direcciones IP, puertos e ISN (para asegurar la integridad), cuatro claves:
+    - Send_SYN_traffic_key: No usa ISN.
+    - Receive_SYN_traffic_key: Raro uso, excepto conexiones con apertura simultánea.
+    - Send_other_traffic_key.
+    - Receive_other_traffic_key.
 
 
 # Tema 7 : Protección del DNS
