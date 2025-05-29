@@ -417,6 +417,12 @@ La clave CAK usada por MACsec es en realidad la PMK que el AS entrega al Authent
 
 El estandar considera la posibilidad de configurar manualmente CAK y CKN en los extremos.
 
+## Resumen explicativo del tema
+
+Al conectar un equipo a un switch con 802.1x activado los switches están bloqueados por defecto hasta que se realiza autenticación. Ahí entra EAP, que es un marco que establece unos mensajes genéricos y permite negociar métodos de autenticación. En un escenario con pc, switch y RADIUS, el cliente primero se conecta con el switch enviando un Eapol-Start y este le contesta con un request-identity, la respuesta es un response el cual el switch enviará en un paquete access-request al servidor RADIUS. Aquí se sucede una serie de mensajes Response-> Access-Request, con respuesta Access-Challenge->Request hasta llegar al último Access-Accept y EAP-Success. En esta serie de mensajes se envía en su interior el handshake TLS, el cual al terminar se ha establecido un túnel dentro de EAP y se ha logrado autenticar ambos extremos, por lo que sucede ese mensaje Accept desde RADIUS.
+El mensaje Accept contiene la PMK que ha sido derivada de la MSK (presumiblemente del intercambio TLS), esta se renombra a CAK y se le asigna un identificador (CKN) y comienza MACsec. Se envía un mensaje EAPOL-MKA el cual verifica que ambos extremos conocen el mismo CAK, se decide un Key Server (switch) y se derivan del CAK la KEK (encriptación) y la ICK (integridad). El Key Server genera la SAK (Secure Association Key) y la distribuye cifrada con la KEK que ya tiene los extremos. 
+Una vez instalada la SAK, se activa MACsec.
+
 # Tema 4 : Wireless LAN Security
 
 El objetivo de las redes WLAN es otorgar conexión a internet de forma rápida y flexible sin necesidad de conexión directa, es una tecnología extendida en el ambito público y en residencias privadas.
@@ -566,14 +572,21 @@ Métodos de acceso y problemas
 - PIN: 8 dígitos, es estático y conocido, es sencillo hacer fuerza bruta.
 
 
-### TKIP
+### TKIP y AES-CTR
 
+TKIP es introducido con WPA como mejora a WEP y está diseñadi para ser compatible con hardware antigua. Utiliza RC4, pero con mejoras. 
+- Per-Packet Key Mixing: Cada paquete se cifra con una clave única derivada de la clave temporal (TK) y el IV.
+- MIC: Algoritmo de integridad que protege contra la modificación de paquetes.
+- IV más grande de 48 bits.
+- Rekeying automático.
 
+AES-CTR se utiliza en WPA2 como parte del protocolo CCMP, basado en AES y mucho más seguro que TKIP. Se utilzia AES convertido en un cifrador de flujo y AES-CBC-MAC para verificar la integridad y autenticicdad del mensaje (un MAC).
 
 ### Robust Management Frames
 
+El proceso de robust management frames es una mejora introducida en 802.11w en la que los marchos de desautenticación y desasociación ahora son cifrados y protegidos con integridad mediante la clave temporal TK específica de cada dispositivo, negociada con el AP al conectarse.
 
-
+Se establece también una Integrity Group Temporal Key durante el proceso del 4 way handshake, que se usa para proteger la integridad de transmisiones multicast/broadcast del AP.
 
 ## Robust Security Network Association
 
