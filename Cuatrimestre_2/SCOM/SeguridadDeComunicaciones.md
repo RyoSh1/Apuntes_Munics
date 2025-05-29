@@ -372,7 +372,7 @@ RADIUS recomienda usar un mecanismo de autenticación bidireccional e IPsec para
 
 - EAP-TLS (EAP Transport Layer Security): Autenticación mútua en el handshake inicial que establece el túnel TLS, necesita certificados X509 en ambos lados.
 - EAP-TTLS (EAP Tunneled Transport Layer Security): Solo el servidor lleva certificado, el cliente se autentica dentro del túnel TLS usando otros métodos.
-- PEAP (Protected EAP): Similar al anterior, el cliente se autentica usando EAP dentro del túnel TLS.
+- PEAP (Protected EAP): Similar al anterior, el cliente se autentica usando EAP dentro del túnel TLS. La diferencia es PEAP.
 - EAP-FAST (EAP Flexible Authentication via Secure Tunneling): No necesita usar certificados, utiliza una Protected Access Credential para establecer el túnel TLS. 3 Fases: PAC provisioning (tunnel), TLS tunnel establishment, Authentication.
 
 
@@ -501,11 +501,83 @@ Ataques (vista genérica):
 - Offline cracking of keys: Fuerza bruta o diccionarios.
 - Man in the Middle: Introducción de una estación en el medio de otras dos, que intercepta el tráfico pero sin interrumpir la comunicación, actuando como relé.
 
+## WLAN Man in the Middle
+
+MitM es un ataque en el que un tercero se interpone de forma silenciosa entre dos partes que creen estar comunicándose directamente, interceptando o modificando los datos. Esto permite eavesdropping, phishing y problemas de seguridad.
+
+Estrategias
+- En la misma red: Suplantación de servicios (ARP, DHCP o DNS).
+- Conectado por ethernet detrás del AP: Manipular tráfico si el AP descifra antes de enviarlos.
+- Suplantación del AP: Crear un rogue AP con mejor señal o realizar un DoS al legítimo y suplantarlo (Evil Twin).
+
+Mitigaciones:
+- Evitar redes abiertas o sin cifrado fuerte (AES CCMP).
+- Evitar conexiones automáticas.
+- Usar sistemas de seguridad.
+- Detectar anomalías.
+
+## WLAN Security protocols
+
+- WEP.
+- WPA.
+- WPA2.
+- WPA3.
+
+### WEP
+
+Primer sistema de seguridad bajo 802.11, utilica RC4 como algoritmo de cirado y tiene una clave e IV inseguros por ser muy cortos (24 bits IV). Se permitía reutilizar IVs, al usar XOR se puede recuperar el flujo de cifrado, la autenticación se hacía por challengue, por lo que era sencillo recuperar el flujo meidante el texto plano y el cifrado.
+
+### Captive portals
+
+Sistema de autenticación Web usado comúnmente en hotspots públicos. El cliente se conecta a una red abierta y obtiene una IP, todo su tráfico es bloqueado, salvo el que lo redirige a una página web. La web es un portal en el que el usuario introduce credenciales, si son correctas se habilita el acceso completo.
+
+Presenta varias vulnerabilidades: El tráfico no es cifrado, es posible hacer spoofing de usuarios ya autenticados y se puede saltar el portal mediante túneles.
+
+### 4-Way Handshake
+
+0. Previamente tiene que haber una solicitud de acceso, presumiblemente se pudo haber realizado con EAP (WPA-Enterprise).
+1. El AP responde con un ANonce (aleatorio).
+2. El cliente genera una clave de sesión (PTK) con su PMK,ANonce,SNonce y MACs y responde con su propio SNonce y un MIC (integridad).
+3. El AP realiza las comprobaciones y envía una GTK cifrada con la PTK (realmente con el KEK que es parte de la PTK) y un MIC para la integridad.
+4. El cliente confirma con un MIC final que todo se ha realizado correctamente.
+
+### Vulnerabilidades del 4-way handshake
+
+Muchos elementos se transmiten en plano, si un atacante conoce la PMK (está dentro de la red), puede derivar las claves y descencriptar el tráfico o suplantar a un STA.
+
+Ataques
+- Ataques de diccionario Offline o crackeos.
+- KRACK:
+- PMKID:
+
+EN WPA-Enterprise la PMK se deriva del intercambio EAP, por lo que es dificil el ataque de fuerza bruta, aunque vulnerable a MitM.
+
+### Wireless Protected Setup
+
+Diseñado para facilitar la conexión de dispositivos WiFi sin conocimientos o sin pantalla. 
+
+Entidades
+- Registrar: Una autoridad con permisos de emisión y revocación de credenciales de dominio (AP u otro).
+- AP: Punto de acceso.
+- Enrollee: Dispositivo que se quiere unir.
+
+Métodos de acceso y problemas
+- Push button Configuration, NFC o QR.
+- PIN: 8 dígitos, es estático y conocido, es sencillo hacer fuerza bruta.
+
+
+### TKIP
+
+
+
+### Robust Management Frames
+
+
+
+
 ## Robust Security Network Association
 
-
-
-## 4-Way Handshake
+Concepto que nace con IEEE 802.11i el cual define el tipo de asociación entre un cliente (STA) y un AP cuando se realiza mediante el 4-Way Handshake. La idea es que ambos lados prueban que conocen la clave maestra común, la pairwise Master Key (PMK), que es la base para derivar las temporales de cifrados e integridad.
 
 ## WPA3
 
