@@ -184,7 +184,7 @@ Para la generación de la master key se utilizan los siguientes parámetros PRF(
 
 ### Cipher Suite
 
-...
+Conjunto de primitivas criptográficas y parámetros que definen como se protegerá la conexión segura a establecer entre cliente y servidor.
 
 # Tema 2 : Public Key Infraestructure
 
@@ -321,7 +321,7 @@ DNS info: DANE (DNS-Based Authentication of Named Entities) y CAA (Certification
 Permite a los dueños restringir que CAs pueden emitir certificados para sus páginas.
 
 Mecanismos:
-- Cabecera especial en HTTP: Usado por firefox, en próximas visitas el navegador rechacza certificados de otras CAs.
+- Cabecera especial en HTTP: Usado por firefox, en próximas visitas el navegador rechaza certificados de otras CAs.
 - Mecanismos propietarios (chrome).
 
 HPKP está obsoleto hoy en día, tiene un alto riesgo de inutilizar un sitio.
@@ -419,23 +419,87 @@ El estandar considera la posibilidad de configurar manualmente CAK y CKN en los 
 
 # Tema 4 : Wireless LAN Security
 
+El objetivo de las redes WLAN es otorgar conexión a internet de forma rápida y flexible sin necesidad de conexión directa, es una tecnología extendida en el ambito público y en residencias privadas.
 
+Ventajas:
+- Ubicación y simpleza en la instalación.
+- Movilidad y resiliencia a catástrofes o desconexiones.
+- Coste de despliegue frente a ubicaciones difíciles de cablear-
+- Coste general en entornos dinámicos.
+- Polivalencia: Otorga conectividad de alta velocidad tanto en edificios como en zonas rurales.
+
+Desventajas:
+- Interfecencia entre sistemas debido a la transmisión simultanea en la frecuencia compartdia.
+- Seguridad: Al enviarse paquetes por medio inaámbrico se facilita la posibilidad de captura de tráfico e interferencias.
+- Consumo de potencia: Las WLans se asocian a dispositivos móviles con limitaciones de energía.
+- Calidad: Menos ancho de banda, mayor tasa de error y delay, alcance limitado.
+- Se debe acordar una banda de frecuencia común a nivel nacional.
+- La estandarización lleva tiempo debido a las restricciones de los paises.
 
 ## IEEE 802.11 WLAN standards
 
+Creado en 1997 y revisado por última vez en 2016, describe las funciones y servicios que un dispositivo debe implementar para integrarse en una red 802.11.
 
+Las bandas de 2.4 y 5Ghz pertenecen a la ISM (No como pone en los apuntes), que es un conjunto de frecuencias reservadas internacionalmente para aplicaciones industriales, científicas y médicas, que no requiere licencia para su uso. La potencia de transmisión está regulada para evitar interferencias con otros dispositivos.
 
+Servicios:
+- Soportar transferencia de datos asíncrosas que no son sensibles a retrasos temporales (correo).
+- Soportar tráfico si dependiente del retardo con una calidad aceptable (voz, vídeo).
+- Procedimientos de autenticación y cifrado de comunicaciones para garantizar privacidad.
+
+Se definen dos arquitecturas de red: Infraestructura y punto a punto (ad hoc).
+
+Las aplicaciones no deberían de conocer que la conexión es por medio inalámbrico.
 
 ## IEEE 802.11 architecture
 
+### Infraestructura (Punto de acceso)
 
+Permite que un dispositivo cliente inalámbrico se comunique con cualquier otro dispositivo cableado o inalámbrico en la red mediante un punto de acceso sobre una red cableada o una columna inalámbrica.
+
+Cada AP gestiona las comunicaciones de su rango y realiza funciones clave como: Control de acceso al medio, Gesión de movilidad y autenticación. Gracias a esto los dispositivos inalámbricos funcionan con una configuración mínima.
+
+Infraestructura:
+- Estación (STA): Dispositivo que tiene un mecanismo para acceder al medio inalámbrico y establecer una conexión por radio con el AP.
+- Punto de acceso (AP): Un nodo que está integrado tanto en la red inalámbrica como en la red cableada (distribución).
+- Conjunto de servicio básico (BSS): Grupo de estaciones, incluyendo e AP, dentro del área de cobertura de transmisión del AP.
+- Portal: Punto de acceso a otra red.
+- Sistema de distribución: Conexión de múltiples áreas de AP en una única red lógica denominada Conjunto de Servicio Extendido (ESS).
+
+Características:
+- Un AP tiene un rango de cobertura entre 20 y 500 metros y puede soportar entre 15 y 250 usuarios, dependiendo de la tecnología y configuración.
+- Múltiples AP pueden permitir la transferencia de conexión cuando el usuario se mueve de un área a otra.
+- Un AP puede monitorizar o bloquear tráfico de un cliente.
+- La topología basada en AP es la más extendida, esto no reemplaza LAN sino que lo extiende.
+
+Puentes LAN para exteriores:
+- Puente punto a multipunto, conectando redes LAN en distintos edificios.
+- Alternativa económica a montar fibra si existen barreras físicas.
+- Llega a ofrecen altas tasas de transmisión de datos y alcances de varios kilómetros, utilizando antenas direccionales de línea de vista.
+
+### Ad Hoc
+
+En este caso no existe un punto de acceso, los nodos deben estar dentro del mismo rango de transmición para comunicarse. Para alcanzar distancias mayores se requiere reenvio de datos, actuando los dispositivos como intermediarios (Multihop Wireless Networks).
+
+Tipos de redes Multihop:
+- MANET: Arquitectura plana en la que todos los dispositivos pueden actuar como routers. Se realiza enrutamiento en capa de red extendiendo el rango de cada nodo.
+- Mesh: Estructura jerárquica dentro de la arquitectura inalámbrica, se incorporan nodos malla que actúian como columna vertebral compuesta por routers inalámbricos, que operan como puentes dentro de una LAN con un solo dominio de difusión. El enrutamiento es en capa de enlace.
 
 ## WiFi Alliance
 
+Se encarga de los programas de certificación.
 
 ## Wi-Fi Security
 
+Peligros: Interferencias, DoS, Engaño, Robo de credenciales y Redes sin seguridad.
 
+Ataques (vista genérica):
+- Ataques con tramas de gestión: las tramas de gestión se envían sin encriptar ni proteger, por lo que se pueden forjar fácilmente.
+- Ataques de repetición: Captura y reenvío de paquetes.
+- MAC Spoofing: Reconfigurar la MAC de un atacante para hacerse pasar como AP o estación.
+- DoS: Conseguir que usuarios autenticados no puedan acceder a los recursos.
+- Offline cracking of keys: Fuerza bruta o diccionarios.
+- Man in the Middle: Introducción de una estación en el medio de otras dos, que intercepta el tráfico pero sin interrumpir la comunicación, actuando como relé.
 
 ## Robust Security Network Association
 
@@ -443,13 +507,77 @@ El estandar considera la posibilidad de configurar manualmente CAK y CKN en los 
 
 ## 4-Way Handshake
 
+## WPA3
 
+Introduce la autenticación simultánea de iguales (SAE) en sustitución de PSK.
+- Autenticación SAE en vez de Open authentication.
+- Diferente PMK para cada asociación entre AP y STA, que se establece con privacidad mediante Ephimeral Diffie-Hellman Handshake.
+- Autenticación conocimiento cero, lo que lo hace resistente a ataques de diccionario.
+- La contraseña no se usa para la derivación de claves, por lo que las de sesión son seguras.
+- Usa el modo transición (Porque esto viene aquí?).
+
+### Cómo funciona WPA3
+
+WPA3 utiliza SAE, pero eso no significa que desaparezca la autenticación de la red, primero es necesario una contraseña de acceso, igual que WPA2. Una vez se ha accedido, comienza SAE:
+1. SAE es como diffie Hellman, generas un número privado y uno público, se comparte el público (y nonce aleatorio que se usa más adelante) y cada uno genera una clave compartida en privado. Esto es bastante más complejo, porque la contraseña de la red se utiliza como mapping sobre un punto de la curva elíptica.
+2. Se aplica un hash sobre la contraseña y se comparte entre AP y Cliente para verificar que ambos tienen la misma.
+3. Se deriva la PMK con otros valores como la MAC y nonce aleatorios con HMAC para obtener la PTK (Pairwise Transient Key).
+4. La PTK se divide en;
+    - KEK: Para cifrar la distribución de claves.
+    - KCK Para verificar la integridad de los mensajes de sesión.
+    - TK: Para cifrar los datos transmitidos.
+
+### Otras aportaciones de WPA3
+
+- Opportunistic Wireless Encryption (OWE): Permite cifrado en redes abiertas, protege la comunicación aunque no haya contraseña.
+- WPA3-Enterprise: Usa AES-GCMP-256 para cifrado autenticado, permite cálculos en paralelo para mejorar el rendimiento. Varias Suites que no me voy a aprender.
+- WiFi Devise Provisioning Protocol (DPP): Reemplazo de WPS, facilita la configuración rápida de equipos sin pantalla.
 
 ## Ataques sobre WLANs
 
+**Ataques de control de acceso**
+- War Driving:
+- Rogue Access Points:
+- Ad Hoc Associations:
+- MAC Spoofing:
+- 802.1X RADIUS Cracking:
 
+**Ataques de confidencialida**
+- Eavesdropping:
+- WEP Key Cracking:
+- Evil Twin AP:
+- AP Phishing:
+- Man in the Middle:
 
-# Tema 4.2 : WPA3
+**Ataques de integridad**
+- 802.11 Frame Injection:
+- 802.11 Data Replay:
+- 802.1X EAP Replay:
+- 802.1X RADIUS Replay:
+
+**Ataques de autenticación**
+- Shared Key Guessing:
+- PSK Cracking:
+- Domain Login Cracking:
+- VPN Login Cracking:
+- 802.1X Identity Theft:
+- 802.1X Password Guessing:
+- 802.1X LEAP Cracking:
+- 802.1X EAP Downgrade:
+
+**Ataques de disponibilidad**
+- AP Theft:
+- Queensland DoS:
+- 802.11 Beacon Flood:
+- 802.11 Associate / Authenticate Flood:
+- 802.11 TKIP MIC Exploit:
+- 802.11 Deauthenticate Flood:
+- 802.11 EAP-Start Flood:
+- 802.1X EAP-Failure:
+- 802.1X EAP-of-Death:
+- 802.1X EAP Length Attacks:
+
+# Tema 4.2 : Evil Twin
 
 ...
 
