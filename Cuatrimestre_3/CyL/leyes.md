@@ -16,6 +16,8 @@ Rellenar al repasar los casos.
 
 **Atenuación** : 
 
+**Persona jurídica**:
+
 **Error de prohibición** : La persona cree que lo que está llevando a cabo no está prohibido. Hay que tener en cuenta si es invencible (que la persona no tenia vías de información para averiguar que eso no era legal) o vencible, si es invencible se atenúa.
 
 **Error de tipo** : La persona no sabe que está cometiendo el delito concreto, por ejemplo si una persona cree que tiene 16 años cuando no los tiene. Ambos errores buscan atenuar o incluso eximir la culpa.
@@ -101,6 +103,228 @@ a) Cuando la víctima se halle en una situación de especial vulnerabilidad por 
 4. El que solicite, acepte u obtenga, a cambio de una remuneración o promesa, una relación sexual con una persona menor de edad o una persona con discapacidad necesitada de especial protección, será castigado con una pena de uno a cuatro años de prisión. Si el menor no hubiera cumplido dieciséis años de edad, se impondrá una pena de dos a seis años de prisión. 
 5. Las penas señaladas se impondrán en sus respectivos casos sin perjuicio de las que correspondan por las infracciones contra la libertad o indemnidad sexual cometidas sobre los menores y personas con discapacidad necesitadas de especial protección.
 
-HUECO PARA EL 189
+Artículo 189
+
+Pornografía infantil en todas sus facetas.
+
+Artículo 189 bis
+
+Difusión pública de contenidos para promover, fomentar o incitar el delito anterior.
+
+Artículo 189 ter
+
+Lo anterior ante persona jurídica.
+
+Artículo 197
+
+Revelación de secretos.
+
+Artículo 197 bis
+
+Facilitar a otro el acceso a secretos o interceptar transmisiones.
+
+Artículo 197 ter
+
+Producir, adquirir o facilitar herramientras para cometer los anteriores.
+
+Artículo 197 quater
+
+Lo anterior pero en grupo criminal
+
+Artículo 197 quinquies
+
+Lo anterior pero persona jurídica.
+
+Artículo 198 
+
+Lo anterior pero un funcionario público.
+
+Artículo 202
+
+Allanamiento de morada.
+
+Artículo 205
+
+Delitos de calumnias.
+
+Artículo 206
+
+Calumnias con publicidad.
+
+Artículo 207
+
+Exección si se prueba cierta una calumnia.
+
+Artículo 208
+
+Injurias (lesionar la diginidad de otra persona)
+
+Artículo 209
+
+Injurias con publicidad.
+
+Artículo 210
+
+Si prueba verdad, quedará exento de injuria.
+
+Artículo 248
+
+Delitos de estafa mediante el uso del engaño.
+
+Artículo 249
+
+Delitos de estafa utilizando manipulación informática. REVISAR.
+
+Artículo 250
+
+Condiciones de castigo en el caso de estafa.
+
+Artículo 255
+
+Defraudación utilizando energía o telecomunicaciones.
+
+Artículo 256
+
+Utilizar un terminal de telecomunicación sin consentimiento del titular causando perjuicio económico.
+
+Artículo 264
+
+Dañar, borrar o hacer inaccesibles datos informáticos.
+
+Artículo 264 bis
+
+Interrumpir o obstaculizar el funcionamiento de un sistema ajeno.
+
+Artículo 264 ter
+
+Adquisición de elementos para cometer los delitos anteriores.
+
+Artículo 264 quater
+
+Castigos en el caso de delitos de persona jurídica.
+
+Artículo 270
+
+Todo lo relacionado con delitos a la propiedad intelectual.
+
+Artículo 278
+
+Apoderamiento de medio de datos para descubrir un secreto de empresa.
+
+Artículo 279
+
+Difusión de secreto de empresa con obligación contractual de mantenerlo.
+
+Artículo 280
+
+Castigo en caso de conocer el origen ilícito.
+
+Artículo 286
+
+Facilitar el acceso a servicios de radiodifusión.
+
+Artículo 286 quater
+
+Especial gravedad.
+
+Artículo 390
+
+Falsificación de documentos siendo una autoridad pública (o religiosa).
+
+Artículo 391
+
+Aplicación del anterior en caso de imprudencia grave.
+
+Artículo 392
+
+Falsificación de datos en documentos oficiales siendo un particular.
+
+Artículo 393
+
+A sabiendas de falsedad usa un documento falso en juicio.
+
+Artículo 395
+
+Para perjudicar a otro, en documento privado sobre el 390.
+
+Artículo 396
+
+Quien use el anterior en juicio.
+
+Artículo 397
+
+Facultativo que libre certificados falsos.
+
+Artículo 398
+
+Funcionario que certifique falso.
+
+Artículo 399
+
+Particular que falsifique una certificación aplicable a los 3 artículos anteriores.
+
+Artículo 399 bis
+
+Alteración o reproducción de métodos de pago distintos al efectivo.
+
+Artículo 399 ter
+
+Definición instrumento de pago distinto a efectivo.
+
+Artículo 400
+
+Aplicación de los delitos anteriores.
+
+Artículo 400 bis
+
+Definición de uso de los delitos anteriores
+
+Artículo 570 bis
+
+Organización o promoción de organizaciones criminales.
+
+Artículo 570 ter
+
+Constitución o financiación de un grupo criminal.
+
+Artículo 570 quater
+
+Decisiones posteriores a la aplicación sobre grupos criminales.
+
+Artículo 571
+
+Definición grupos terroristas.
+
+Artículo 573
+
+Delitos de terrorismo.
+
+Artículo 573 bis
+
+Castigos para los delitos de terrorismo.
+
+Artículo 575
+
+Recibir adoctrinamiento militar (servicios en línea).
+
+Artículo 577
+
+Facilitar adiestramiento militar a los del 575.
+
+Artículo 578
+
+Enaltecimiento o justificación pública de delitos terroristas.
+
+Artículo 584
+
+Información de seguridad nacional con propósito de favorecer una potencia extranjera.
+
+Artículo 598
+
+Información de seguridad nacional sin propósito de favorecer una potencia extranjera.
+
+Artículo 601
+
+Información de seguridad nacional revelada o divulgada por persona con poder.
 
 Lista Simple Ordenada: 143, 172, 173, 182, 183, 187, 188, 189, 197, 198, 202, 205, 206, 207, 208, 209, 210, 248, 249, 250, 255, 256, 264, 270, 278, 279, 280, 286, 390, 391, 392, 393, 395, 396, 397, 398, 399, 400, 570, 571, 573, 575, 577, 578, 584, 598, 601.
