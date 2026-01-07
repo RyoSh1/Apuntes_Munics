@@ -4,6 +4,42 @@
 
 ### Fundamentos
 
+
+
+#### Preguntas del Tema 1
+
+En una compañía un trabajador copia ficheros confidenciales sin autorización a un USB. ¿Que objetivos de seguridad son violados?
+
+A. Confidencialidad
+
+Un usuario comparte su contraseña con un compañero para que acceda a unos ficheros en su ausencia.¿Que objetivos de seguridad son violados?
+
+D. Autenticidad
+
+Un hacker hace un DoS sobre un servidor web para hacerlo innaccesible. ¿Que objetivos de seguridad son violados?
+
+C. Disponibilidad
+
+Un empleado borra accidentalmente una base de datos crítica en la empresa. ¿Que objetivos de seguridad son violados?
+
+C. Disponibilidad y presumiblemente D. Autenticidad
+
+En una compañía se detecta que un usuario accede a una base de datos con tus credenciales, pero no se sabe si ha hecho cambios. ¿Que objetivos de seguridad son violados?
+
+A. Confidencialidad, pero supongo que Autenticidad e Integridad.
+
+Durante una auditoría se descubre que los logs han sido manipulados para ocultar actividad de unos usuarios. ¿Que objetivos de seguridad son violados?
+
+B. Integridad. Pero también Confidencialidad.
+
+Una empresa sufre ataque ransomware dejando todos los datos cifrados e inaccesibles. ¿Que objetivos de seguridad son violados?
+
+C. Disponibilidad.
+
+Una empresa tiene datos de empleados, clientes y productos. Cuales deben ser protegidos?
+
+D. Todos.
+
 ## Tema 2: Análisis de Riesgos
 
 ### MAGERIT
@@ -13,6 +49,59 @@
 ## Tema 3: ISMS
 
 ### SGSI
+
+Un Sistema de Gestión de la Seguridad de la Información se encarga de prevenir o reducir el nivel de riesgo de seguridad de información mediante controles, preparación ante incidentes y soporte de la continuidad de negocio.
+
+#### Familia ISO
+
+- 27000:
+- 27001:
+- 27002:
+- 27003:
+- 27004:
+- 27005:
+- 27006:
+- 27007:
+- 27011:
+- 27031:
+- 27032:
+- 27033:
+- 27034:
+- 27035:
+- 27036:
+- 27037:
+- 27038:
+- 27039:
+- 27040:
+- 27041:
+- 27042:
+- 27043:
+- 27044:
+- 27799:
+
+### ISO 27001
+
+
+
+#### Preguntas del Tema 3 Parte 1
+
+La actividad de aprobar y asegurar los recursos necesarios es una responsabilidad de...
+
+
+
+La necesiadd de que se asegure que en las sucesivas evaluaciones de riesgo se generen resultados consistentes, válidos y comparables ¿es?
+
+
+
+¿Qué requiere la ISO 27001 para el control de la información documentada?
+
+
+
+### ISO 27002
+
+La ISO 27002 es la que proporciona una guía detallada práctica para la aplicación de los controles enunciados en la ISO 27001.
+
+Los controles se dividen en: Controles organizativos (Políticas, gestión, inventario, clasificación, etiquetado...), controles sobre las personas (Personas individuales: Selección, formación, responsabilidad, etc.), Controles físicos (Perímetros de seguridad, instalaciones, monitorización, etc.), Controles tecnológicos (Acceso a la información, autenticación segura, malware, etc.)
 
 ### Esquema Nacional de Seguridad
 
