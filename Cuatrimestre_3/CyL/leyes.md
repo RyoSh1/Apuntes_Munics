@@ -18,20 +18,29 @@ Temas 1-13 y el BOE.
         4. Pena: Conclusión de la Pena mencionando la pena y la multa.
     3. Texto extendido en el que se da la explicación completa de todo lo anterior, hay que decorarlo y hacerlo complejo de leer.
 - Solo se debe considerar un delito de la misma rama aunque se cometan varios (el más grave) debido a que aplica solo una demanda (excepto si afecta a dimensiones/artículos distintas), en estos casos se debe mencionar el porque y explicar el proceso de análisis de la gravedad de los hechos.
-
+- IMPORTANTE: Frase a poner en el examen -> "La cantidad de pago se calculará según los ingresos considerados del delincuente."
+- DONDE¿?
 ### Conceptos
 
 **Desistimiento** : Dejar de cometer un delito, no habría pena, pero hace falta que no se hubiera consumado el delito.
 
 **Efectos personales** : Móvil, bolso, maleta y otros elementos que descubran la intimidad. Aplica al 197.1.
 
-**Atenuación** : 
+**Atenuación** : Si no hay intención o no sabe que es delito, se podría atenuar o incluso eximir de culpa.
 
 **Persona jurídica**:
 
 **Error de prohibición** : La persona cree que lo que está llevando a cabo no está prohibido. Hay que tener en cuenta si es invencible (que la persona no tenia vías de información para averiguar que eso no era legal) o vencible, si es invencible se atenúa.
 
 **Error de tipo** : La persona no sabe que está cometiendo el delito concreto, por ejemplo si una persona cree que tiene 16 años cuando no los tiene. Ambos errores buscan atenuar o incluso eximir la culpa.
+
+**Reo** : El inputado a delito.
+
+**Tipificar** : Que delito concreto está sucediendo.
+
+**Doloso** : Intencionado.
+
+**Jurisprudencia** : Conjunto de resultados del juicio.
 
 ## Artículos del Código Penal
 
