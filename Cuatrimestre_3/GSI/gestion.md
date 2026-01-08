@@ -4,7 +4,59 @@
 
 ### Fundamentos
 
+- Ciberseguridad : Disciplina basada en computadores que incluye tecnología, personas, información y procesos para asegurar operaciones en un contexto con adversarios.
+- Seguridad de la información : Se encarga de la información sin tener en cuenta el formato (papel, digital, intelectual, etc.). Se trata de un contexto muy importante por su relevancia económica, técnica y socialmente, para empresas, govierno o formación.
 
+Conceptos de la seguridad de la información:
+- Identificar: Usar el conocimiento sobre la organización para minimizar el riesgo.
+- Proteger: Diseñar controles para limitar el impacto de los posibles incidentes.
+- Detectar: Implementar procesos para detectar eventos de ciberseguridad.
+- Respuesta: Proceder con las acciones necesarias ante incidentes de seguridad.
+- Recuperación: Planear ser resilientes y ser capaces de recuperar servicios comprometidos.
+
+El objetivo de la seguridad de la información es minimizar la suma de dos costes: El coste causado por incidentes y el coste de los controles de seguridad. Por ello es necesario entender los riesgos de la información, identificar mejoras, situar recursos adecuadamente y cumplir con los requisitos.
+
+#### GRC: Governanza, Riesgo y Cumplimiento
+
+- Governanza es responsabilidad del consejo de administración y de la alta dirección.
+- La gestión del riesgo es la coordinación de actividades que dirigen y controlan la empresa en el contexto del riesgo.
+- Cumplimiento es el acto de mostrar adherencia a los requisitos definidos por leyes y regulaciones.
+
+### Principales organizaciones
+
+- INCIBE: Foco en personas y empresas privadas.
+- CCN: Foco en el sector público.
+- OSI (Oficina de Seguridad del Internauta): Problemas relacionados con operaciones en internet.
+- ENISA (European Network and Information Security Agency): Busca garantizar un alto nivel de ciberseguridad en Europa, funciona como un cuerpo de certificación y busca la cooperación de la UE en respuesta a incidentes. CSIRT.
+- NIST (National Institute of Standars and Technology): Guías varias en aspectos de ciberseguridad.
+- ISO.
+- ISACA: Establece y desarrolla guías y controles para la governanza de la información, el control, seguridad y auditorías profesionales. Crea el COBIT framework, similar a ITIL y muy usado en Estados Unidos.
+
+#### Confidencialidad
+
+Proteger la información de ser revelada a entidades no autorizadas.
+
+La confidencialidad debe cubrir la información en guardado, procesado y en tránsito. Explicación inutil de personal y empresa.
+
+#### Integridad
+
+Proteger la información de ser modificada por entidades no autorizadas.
+
+Integridad de datos es la propiedad de que la información no ha sido alterada de una manera no autorizada, la integridad de un sistema es la cualidad que determina si un sistema funciona como es debido libre de modificaciones no autorizadas.
+
+#### Disponibilidad
+
+La capacidad de acceder a la información para entidades autorizadas cuando sea necesario.
+
+Debe cubrir dos aspectos: El posible borrado o cifrado de datos por parte no autorizada y el caso de denegaciones de servicio que hagan la información no accesible.
+
+#### Otras definiciones
+
+- Autenticidad: Una entidad es quien dice ser.
+- No Repudio: Habilidad de probar que un hecho o acción ha sucedido.
+- Fiabilidad: Comportamiento y resultado consistente.
+- Responsabilidad (Accountability): Objetivo de seguridad que genera el requisito de trazabilidad de las acciones de una entidad.
+- Garantía (Assurance):  Medidas que protegen y defienden la información y los sistemas de información garantizando su disponibilidad, integridad, autenticación, confidencialidad y no repudio.
 
 #### Preguntas del Tema 1
 
@@ -39,6 +91,10 @@ C. Disponibilidad.
 Una empresa tiene datos de empleados, clientes y productos. Cuales deben ser protegidos?
 
 D. Todos.
+
+#### Glosario
+
+Expandir si es necesario.
 
 ## Tema 2: Análisis de Riesgos
 
