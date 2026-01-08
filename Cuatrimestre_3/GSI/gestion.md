@@ -98,9 +98,63 @@ Expandir si es necesario.
 
 ## Tema 2: Análisis de Riesgos
 
+### Introducción
+
+El riesgo depende del impacto y su probabilidad (impacto por probabilidad). Para determinar estos valores es necesario comparar valores de distintas dimensiones y decidir si el daño producido en una dimensión es mayor al daño en otra (Valores relativos).
+
+- Evaluación cuantitativa:
+- Evaluación semi-cualitativa:
+
+La probabilidad se valora entre 0 y 5 según la posible ocurrencia en los próximos 12 meses (0%, 5, 10, 25, 50 y 100).
+
+Factores de amenaza de OWASP:
+- Habilidad:
+- Motivación:
+- Oportunidad:
+- Tamaño:
+
+Factores de vulnerabilidad OWASP:
+- Facilidad de descubrimiento:
+- Facilidad de explotación:
+- Conocimiento:
+- Detección:
+
+Si se unen.
+
+CVE es un estandar que identifica y documenta las vulnerabilidades conocidas de software y firmware, una vulnerabilidad explotable es aquella para la que existe un exploit, dichas vulnerabilidades pueden ser buscadas automaticamente.
+
+El impacto se valora según el porcentaje del presupuesto de la organización a la que afecta, con valores del 1 al 5 (0,5%, 1, 2, 6 y más que 6)
+
+Factores de impacto técnico de OWASP:
+- Pérdida de confidencialidad:
+- Pérdida de integridad:
+- Pérdida de disponibilidad:
+
+Factores de impacto empresarial OWASP:
+- Daño financiero:
+- Daño reputacional:
+- No cumplimiento:
+- Violación de la privacidad:
+
+No se unen.
+
+Formas de tratar el riesgo: Evitar el riesgo (cancelando la actividad por ejemplo), Reducir el riesgo (minimizar), transferir el riesgo, Aceptar el riesgo.
+
+#### Tipos de controles
+
+A nivel operacional:
+
+A nivel temporal:
+
 ### MAGERIT
 
+Metodología de Análisis y Gestión de Riesgos para Tecnologías de la Información, preparado por el Consejo Superiro de Administración Electrónica, provee de unos métodos que no dejan espacio a la improvisación para cumplir el cometido.
+
+TOCHO DEL TEMA
+
 ### ISO 27005
+
+
 
 ## Tema 3: ISMS
 
@@ -246,6 +300,46 @@ La ISO 27002 es la que proporciona una guía detallada práctica para la aplicac
 Los controles se dividen en: Controles organizativos (Políticas, gestión, inventario, clasificación, etiquetado...), controles sobre las personas (Personas individuales: Selección, formación, responsabilidad, etc.), Controles físicos (Perímetros de seguridad, instalaciones, monitorización, etc.), Controles tecnológicos (Acceso a la información, autenticación segura, malware, etc.)
 
 ### Esquema Nacional de Seguridad
+
+El ENS pasa por 4 evoluciones: 
+- En 2007 reconoce el derecho de los ciudadanos a relacionarse con las Administraciones Públicas por medios electrónicos y regula aspectos básicos de las tecnologías de la información.
+- En 2010 busca determinar mediante principios básicos la política de seguridad ante los medios electrónicos.
+- En 2015 aparece recodigo en términos similares (artículo 156)
+- Mismo año es modificado en evolución del entorno regulatorio de la UE.
+
+La estrategia nacional de ciberseguridad (diciembre 2013) tiene como objetivo la prevención, defensa, detección y respuesta ante ciberamenazas. Se estructura en 5 capítulos: Ciberespacio y su seguridad, Próposito y principales rectores en España, Objetivos, Líneas de actuación (incluye la implantación del ENS) y la ciberseguridad en el Sistema de Seguridad Nacional.
+
+Viene recogido o guiado por las Guías STIC del CCN, destacando la 802 (Auditoría), 804 (implementación), 808 (Verificación del cumplimiento de las medidas) y 809 (Declaración y certificación de conformidad).
+
+#### Objetivo
+
+El objetivo del ENS es garantizar la confianza y la seguridad de los sistemas, los datos, las comunicaciones y los servicios electrónicos, y establece principios comunes para que las Administraciones Públicas actúen de forma coherente en materia de seguridad de la información.
+
+#### Alcance
+
+El ENS se aplica a todas las administraciones públicas (Estado, CCAA, Entidades locales y organismos públicos), así como a los ciudadanos en sus relaciones con ellas o las interacciones entre las mismas. Es de aplicación en sedes electrónicas, registros y sistemas de información utilizados para acceso ciudadano, ejercicio de derechos, cumplimiento de deberes y consulta de estado de procedimientos o información.
+
+#### Plan de adecuación
+
+El plan de adecuación debe contener:
+- Política de seguridad de la información.
+- Categorización de los sistemas.
+- Análisis de riesgos.
+- Declaración de aplicabilidad.
+- Insuficiencias del sistema.
+- Plan de mejora de seguridad.
+
+#### Política de seguridad de la información.
+#### Categorización de los sistemas.
+#### Análisis de riesgos.
+#### Declaración de aplicabilidad.
+#### Insuficiencias del sistema.
+#### Plan de mejora de seguridad.
+#### Otros
+
+- Implantación del ENS
+- Auditoría del ENS
+- Conformidad con el ENS
 
 ## Tema 4: Evaluación, Auditoría y Certificación
 
