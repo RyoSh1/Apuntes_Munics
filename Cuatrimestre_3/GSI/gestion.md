@@ -54,34 +54,104 @@ Un Sistema de Gestión de la Seguridad de la Información se encarga de prevenir
 
 #### Familia ISO
 
-- 27000:
-- 27001:
-- 27002:
-- 27003:
-- 27004:
-- 27005:
-- 27006:
-- 27007:
-- 27011:
-- 27031:
-- 27032:
-- 27033:
-- 27034:
-- 27035:
-- 27036:
-- 27037:
-- 27038:
-- 27039:
-- 27040:
-- 27041:
-- 27042:
-- 27043:
-- 27044:
-- 27799:
+- 27000: Vocabulario.
+- 27001: Requisitos para implantar un SGSI certificable.
+- 27002: Buenas prácticas de gestión de la seguridad y recomendaciones a controles que implantar.
+- 27003: Implementación de SGSI.
+- 27004: Métricas y técnicas de medida.
+- 27005: Gestión de riesgos.
+- 27006: Acreditación de entidades.
+- 27007: Auditar SGSI según 27000.
+- 27011: Telecomunicaciones.
+- 27031: Continuidad de negocio.
+- 27032: Ciberseguridad.
+- 27033: Seguridad en redes.
+- 27034: Seguridad en aplicaciones.
+- 27035: Gestión de incidentes.
+- 27036: Relaciones con proveedores.
+- 27037: Identificación, recolección, consolidación y preservación de evidencias digitales.
+- 27038: Redacción digital.
+- 27039: Selección, despliegue y operativa de IDS/IPS
+- 27040: Seguridad de medios de almacenamiento.
+- 27041: Idoneidad y adecuación de métodos de investigación.
+- 27042: Guía para analizar e interpretar evidencias digitales.
+- 27043: Principios y procesos de investigación.
+- 27044: SIEM.
+- 27799: Interpretación y aplicación en el sector sanitario.
 
 ### ISO 27001
 
+Norma creada por la Organización Internacional de Estandarización y la Comisión Electrotécnica Internacional que especifica los requistos para establecer, implementar, mantener y mejorar de forma continua un SGSI. Provee un modelo de como proceder con un SGSI, además es una norma certificable, lo que significa que demuestra a partes interesadas que la organización está comprometida con la seguridad de la información.
 
+Algo más¿?
+
+### Ciclo de Deming (PDCA)
+
+Se divide en 4 etapas:
+1. Planificar (establecer el SGSI): Establecer políticas, objetivos, procesos y procedimientos relevantes para gestionar el riesgo de acuerdo con las políticas generales de una organización. 
+2. Hacer (implementar y operar el SGSI): Implementar y operar la política, los controles, los procesos y procedimientos del SGSI.
+3. Comprobar (monitorizar y revisar el SGSI): Evaluar y medir el desempeño del proceso en relación con la política e informar de resultados.
+4. Actuar (mantener y mejorar el SGSI): Tomar medidas correctivas y preventivas basados en las auditoriar y revisiones realizadas.
+
+El Ciclo de Deming específico de la ISO 27001 se divide en los siguientes bloques:
+1. Sección 1: Alcance; Sección 2: Referencias Normativas; 3: Términos y definiciones.
+2. PLAN
+    - 4: Contexto de la organización.
+    - 5: Liderazgo.
+    - 6: Planificación.
+    - 7: Soporte.
+3. DO
+   - 8: Operación.
+4. CHECK
+    - 9: Evaluación de rendimiento.
+5. ACT
+    - 10: Mejoras y acciones correctivas.
+
+#### Alcance
+
+Se especifican los requisitos para establecer, implementar, mantener y mejorar un SGSI en el contexto de la organización; también incluye los rquisitos de evaluación y tratamiento de riesgos. Cuando la organización acepta la conformidad con el documento, los requistos no pueden excluirse.
+
+#### Referencias de normativa y Términos y Definiciones
+
+Lo que dice el título.
+
+#### Contexto de la organización
+
+Organización interna (estructura, flujos, etc.) y externa (mercado, clientes, regulaciones), necesidades y expectativas de las partes interesadas (empleados, accionistas, clientes, etc.), Alcance de la seguridad sobre las actividades y base de procesos del SGSI.
+
+#### Liderazgo
+
+La alta dirección debe comprometerse con respecto al SGSI, para ello establece lo siguiente:
+- Política de Seguridad de la información: Documento disponible como información documentada dentro de la organización que sirve como consulta para partes interesadas, debe mostrar el compromiso con los requisitos y la mejora contínua del SGSI.
+- Funciones, responsabilidades y autoridades: Se deben establecer la delegación de funciones y responsabilidades según los requisitos de la ISO.
+
+#### Planificación
+
+
+
+#### Soporte
+
+Se deben establecer los recursos necesarios para la implementación, mantenimiento y mejora del SGSI:
+- Determinar las competencias necesarias y proporcionar recursos para obtenerla.
+- Asegurar que la conciencia de la organización sobre la política de seguridad de la información.
+- Determinar las necesidades de comunicación del SGSI.
+- Incluir y mantener toda la documentación necesaria para la norma ISO 27001 y el propio SGSI.
+
+#### Operación
+
+- Implementación y control de los procesos necesarios para satisfacer los requisitos de la planificación.
+- Evaluación de los riesgos en intervalos planificados.
+- Implementación del RTP.
+
+#### Evaluación de rendimiento
+
+- Determinar qué monitorizar, cómo y quien debe evaluar los resultados.
+- Realizar auditorías internas en intervalos planeados para proporcionar información sobre si el SGSI es conforme a los requisitos de la organización.
+- Revisión por parte de la dirección.
+
+#### Mejoras
+
+Mejora contínua y aplicación de acciones correctivas en el caso de que se produzcan no conformidades.
 
 #### Preguntas del Tema 3 Parte 1
 
