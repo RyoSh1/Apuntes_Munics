@@ -127,7 +127,23 @@ La alta dirección debe comprometerse con respecto al SGSI, para ello establece 
 
 #### Planificación
 
+Se deben planear las acciones para abordar riesgos y oportunidades, definiendo cómo integrar e implementar dichas acciones en procesos del SGSI y evaluando su eficacia.
 
+- Evaluación de riesgos: Definir y aplicar un proceso de evaluación de riesgos de SI que establezca y mantega criterios de riesgos (incluyendo aceptación del riesgo y evaluación), Asegurar la reproducibilidad de las evaluaciones con resultados válidos y consistentes, identificación de los riesgos y sus propietarios, analisis de riesgos considerando consecuencias y probabilidad de ocurrencia (nivel de riesgo) y evaluación de riesgos según su prioridad para el tratamiento.
+- Tratamiento de riesgos: Definir y aplicar un proceso de tratamiento de riesgo para determinar los controles necesarios, comparar los controles determinados, producir el SOA, formular el RTP y obtener la aprobación del propietario del riesgo.
+
+*Conceptos*
+-Propietario del activo: Responsables de la protección de la confidencialidad, integridad y disponibilidad del activo, requieren comprensión de las amenazas potenciales, realizan la evaluación de riesgos, implementan controles y establecen procedimientos de recuperación y respuesta.
+-Propietario del riesgo: Persona o grupo con conocimiento en gestión de riesgo, que se responsabiliza de asegurar la implementación efectiva de las actividades de gestión de riesgo.
+- Ambos colaboran entre sí, pero los propietarios de riesgo se centran en el proceso de gestión de riesgo en su conjunto y los propietarios de activos tienen una responsabilidad más específica en proteger activos específicos.
+
+Declaración de aplicabilidad (SoA): Es la relación entre la evaluación y tratamiento de riesgos y la aplicación del SGSI. Se trata de definir cuál de los 93 controles sugeridos a partir de la ISO 27001 se aplican y cuales no, de forma jusificada incluyendo aquellos que ya estén implementados.
+
+Plan de Tratamiento de Riesgos (RTP): Documenta el método seleccionado para tratar cada riesgo, controles ya en marcha, controles adicionales propuestos (y su plazo de aplicación).
+
+Se deben establecer los objetivos de seguridad de la información en funciones y niveles relevantes y también se deben planificar los cambios, cuando se realicen, deberán llevarse a cabo tal y como fueron planeados.
+
+En resumen, la organización debe mostrar el plan que describa cómo va a lograr sus objetivos de seguridad de la información, definiendo: Lo que hay que hacer, los recursos que se requieren, quién será el responsable de cada acción, cronograma para cuándo se completará cada acción y cómo se evaluarán los resultados del plan junto a su adecuación.
 
 #### Soporte
 
