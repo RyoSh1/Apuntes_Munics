@@ -6,7 +6,18 @@ Temas 1-13 y el BOE.
 
 ## Anotaciones personales
 
-Rellenar al repasar los casos.
+- Se debe indentificar el artículo que define el delito **y después** mencionar el artículo que identifica el agravante.
+- Importante matizar la diferencia en los casos en los que exista un delito básico y un delito específico (por ejemplo estafa y estafa informática), por supuesto indicar el artículo específico X.Y.Z.
+- Mencionar siempre cuándo y porqué se aplica un agravante ( cuantía excedida, etc.) y también una explicación de porqué se llega a una conclusión.
+- Estructura planteada:
+    1. Enunciado
+    2. Resumen esquemático de elementos:
+        1. Delincuente: Entidad y breve descripción.
+        2. Víctima. Entidad y breve descripción.
+        3. Delito: Explicación breve del delito.
+        4. Pena: Conclusión de la Pena mencionando la pena y la multa.
+    3. Texto extendido en el que se da la explicación completa de todo lo anterior, hay que decorarlo y hacerlo complejo de leer.
+- Solo se debe considerar un delito de la misma rama aunque se cometan varios (el más grave) debido a que aplica solo una demanda (excepto si afecta a dimensiones/artículos distintas), en estos casos se debe mencionar el porque y explicar el proceso de análisis de la gravedad de los hechos.
 
 ### Conceptos
 
