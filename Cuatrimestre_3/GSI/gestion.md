@@ -102,57 +102,152 @@ Expandir si es necesario.
 
 El riesgo depende del impacto y su probabilidad (impacto por probabilidad). Para determinar estos valores es necesario comparar valores de distintas dimensiones y decidir si el daño producido en una dimensión es mayor al daño en otra (Valores relativos).
 
-- Evaluación cuantitativa:
-- Evaluación semi-cualitativa:
+- Evaluación cuantitativa: Requieren mayor esfuerzo, pero permiten la suma clara de valores.
+- Evaluación semi-cualitativa: Permiten establecer un orden relativo de cada activo mediante estimaciones de magnitud del riesgo, pero no permiten comparar valores.
 
 La probabilidad se valora entre 0 y 5 según la posible ocurrencia en los próximos 12 meses (0%, 5, 10, 25, 50 y 100).
 
 Factores de amenaza de OWASP:
-- Habilidad:
-- Motivación:
-- Oportunidad:
-- Tamaño:
+- Habilidad: Nivel técnico del grupo de amenazas. Sin habilidades (1), Algunas habilidades (3), Usuario avanzado (5), Habilidades de programación y redes (6).
+- Motivación: Que motivación tienen para encontrar y explotar la vulnerabilidad. Baja o ninguna (1), Posible recompensa (4), Alta recompensa (9)
+- Oportunidad: Que recursos hacen falta para encontrar y aprovechar la vulnerabilidad. Acceso completo o muy costoso (0), Acceso especial o recursos (4), cierto acceso (7), Ni acceso ni recursos (9)
+- Tamaño: Tamaño del grupo de agentes de amenazas. Desarrolladores (2), Administradores TI (2), Usuarios de internet (4), Socios (5), Usuarios autenticados (6), Usuarios anónimos de internet (9).
 
 Factores de vulnerabilidad OWASP:
-- Facilidad de descubrimiento:
-- Facilidad de explotación:
-- Conocimiento:
-- Detección:
+- Facilidad de descubrimiento.
+- Facilidad de explotación.
+- Conocimiento.
+- Detección.
 
-Si se unen.
+Los índices de probabilidad si se unen.
 
 CVE es un estandar que identifica y documenta las vulnerabilidades conocidas de software y firmware, una vulnerabilidad explotable es aquella para la que existe un exploit, dichas vulnerabilidades pueden ser buscadas automaticamente.
 
 El impacto se valora según el porcentaje del presupuesto de la organización a la que afecta, con valores del 1 al 5 (0,5%, 1, 2, 6 y más que 6)
 
 Factores de impacto técnico de OWASP:
-- Pérdida de confidencialidad:
-- Pérdida de integridad:
-- Pérdida de disponibilidad:
+- Pérdida de confidencialidad.
+- Pérdida de integridad.
+- Pérdida de disponibilidad.
 
 Factores de impacto empresarial OWASP:
-- Daño financiero:
-- Daño reputacional:
-- No cumplimiento:
-- Violación de la privacidad:
+- Daño financiero.
+- Daño reputacional.
+- No cumplimiento.
+- Violación de la privacidad.
 
-No se unen.
+Los índices de impacto no se suman.
 
 Formas de tratar el riesgo: Evitar el riesgo (cancelando la actividad por ejemplo), Reducir el riesgo (minimizar), transferir el riesgo, Aceptar el riesgo.
 
 #### Tipos de controles
 
 A nivel operacional:
+- Controles físicos: Mitigaciones del mundo real.
+- Controles de procedimiento: Políticas y procesos que controlan el comportamiento del personal.
+- Controles técnicos: Controles tradicionales como firewall.
 
 A nivel temporal:
+- Controles preventivos: Protección directa mediante bloqueo de amenazas o vulnerabilidades.
+- Controles directivos: Control de las acciones a tomar para proteger información.
+- Controles detectivos: Detección y reporte de eventos no deseados
+- Controles correctivos: En respuesta y arreglo de incidentes de seguridad.
 
 ### MAGERIT
 
-Metodología de Análisis y Gestión de Riesgos para Tecnologías de la Información, preparado por el Consejo Superiro de Administración Electrónica, provee de unos métodos que no dejan espacio a la improvisación para cumplir el cometido.
+Metodología de Análisis y Gestión de Riesgos para Tecnologías de la Información, preparado por el Consejo Superior de Administración Electrónica, provee de unos métodos que no dejan espacio a la improvisación para cumplir el cometido.
 
-TOCHO DEL TEMA
+#### Objetivos
+
+El objetivo directo de MAGERIT es dar conciencia de la existencia de riesgos y la necesidad de tratarlos, ofrecer unos métodos sistemáticos para analizar estos riesgos y ayudar en la descripción y planificación de medidas de control. Indirectamente busca preparar la organización para los procesos de evaluación, auditoría y certificación.
+
+#### Libros
+
+1. El método.
+2. Catálogo de elementos: Tipos de activos, Dimensiones, Criterios, amenazas y salvaguardias.
+3. Guía de técnicas: Compilación de técnicas para aplicar los métodos.
+
+#### Dimensiones de seguridad
+
+- Confidencialidad, Integridad y Disponibilidad (canónicas).
+- Autenticidad: Una entidad es quien dice ser o su origen es garantizado. Como contras tenemos la manipulación de origen y el spoofing.
+- Responsabilidad: Garatía de que siempre se puede determinar quién hizo qué y cuándo lo hizo.
+
+#### Método de análisis de riesgos
+
+1. Determinar los activos importante en la organización, sus relaciones y su valor.
+2. Determinar las amenazas a las que los activos están expuestos.
+3. Determinar las salvaguardas disponibles y su efectividad.
+4. Estimar el impacto, definido como el daño al activo si aparece la amenaza.
+5. Estimar el riesgo, definido como el impacto por la probabilidad.
+
+#### Paso 1: Activos
+
+Los activos principales son de dos tipos especiales: La información manipulada y los servicios provistos.
+
+Los activos subordinados son: El equipamiento de ordenador (Software, Hardware, Comunicaciones, Media), el entorno (Equipamiento y muebles), los servicios de terceras partes, la localización física y los operarios.
+
+Los activos se pueden agrupar o individualizar según los requisitos u objetivos de seguridad.
+
+#### Paso 1.2: Dependencias
+
+Los activos se organizan en árboles o grafos de dependencias, los activos de las capas superiores dependen de aquellos en las capas inferiores, es decir, los de la capa superior dependen de la inferior y los de la inferior tienen un impacto en la superior.
+
+Modelado de dependencias: 
+
+#### Paso 1.3: Valoración de los activos
+
+
+
+#### Paso 2: Amenazas
+
+
+
+#### Impacto
+
+
+
+#### Riesgo
+
+
+
+#### Paso 3: Salvaguardas
+
+
+
+#### Paso 3: Riesgo restante
+
+
+
+#### Documentación
+
+
+
+#### Roles
+
+
 
 ### ISO 27005
+
+
+
+#### 1. Contexto
+
+
+
+#### 2. Evaluación de riesgos
+
+
+
+#### 3. Tratamiento del riesgo
+
+
+
+#### 4. Comunicación del riesgo y consulta
+
+
+
+#### 5. Monitorización y revisión
 
 
 
@@ -408,9 +503,134 @@ El último paso para la planificación de la adecuación al ENS es elaborar un p
 
 ## Tema 4: Evaluación, Auditoría y Certificación
 
+Beneficios de la certificación:
+
+- Cumplimiento:
+- Certificación:
+- Acreditación:
+
+ENAC:
+
+Para el ENS...
+
 ### ISO
 
+#### Ciclo de certificación
+
+
+
+#### Requisitos: Documentos y problemas
+
+
+
 ### ENS
+
+
+
+#### Adecuación
+
+
+
+#### CoCENS
+
+
+
+#### µCeENS
+
+
+
+### Auditoría
+
+
+
+#### Tipos de auditorías
+
+- Interna:
+- Externa:
+- Combinada:
+- Unión:
+
+#### Conceptos de auditoría
+
+
+
+#### Principios de auditoría
+
+
+
+#### Encuesta de alcance y preauditoría
+
+
+
+#### Planificación y preparación
+
+
+
+#### Trabajo de campo
+
+
+
+#### Análisis
+
+
+
+#### Reporting
+
+
+
+#### Hallazgos
+
+
+
+#### Cierre
+
+
+
+#### Preparaciones en una auditoría
+
+
+
+### ISO 19001: 6.5 Realización de actividades de auditoría in situ
+
+#### Reunión inicial
+
+
+
+#### Recolección de información
+
+
+
+#### Generar los hallazgos
+
+
+
+#### Preparar las conclusiones
+
+
+
+#### Reunión de clausura
+
+
+
+### ISO 19001: 6.6 Preparación, aprobación y distribución del informe de auditoría.
+
+
+
+#### Preparación del reporte
+
+
+
+#### Aprobación y distribución
+
+
+
+#### Completar la auditoría
+
+
+
+#### Seguimiento
+
+
 
 ## Tema 5: Gestión de la Continuidad de Negocio
 
