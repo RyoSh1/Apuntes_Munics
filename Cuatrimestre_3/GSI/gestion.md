@@ -330,16 +330,81 @@ El plan de adecuación debe contener:
 - Plan de mejora de seguridad.
 
 #### Política de seguridad de la información.
-#### Categorización de los sistemas.
+
+El primer paso es la elaboración de la PSI, que deberá ser aprobada por el titular del órgano superior competente. Esta desarrollará los principios mínimos establecidos por el ENS.
+1. Organización e implantación del proceso de seguridad.
+2. Análisis y gestión de los riesgos.
+3. Gestión de personal.
+4. Profesionalidad.
+5. Autorización y control de los accesos.
+6. Protección de las instalaciones
+7. Adquisición de productos.
+8. Seguridad por defecto
+9. Integridad y actualización del sistema
+10. Protección de la información almacenada y en tránsito
+11. Prevención ante otros sistemas de información interconectados
+12. Registro de actividad
+13. Incidentes de seguridad
+14. Continuidad de la actividad
+15. Mejora continua del proceso de seguridad
+
+Roles del marco organizativo:
+- Responsable de la Información: Establece los requisitos de seguridad de la información gestionada. Ocupa el cargo maś alto.
+- Responsable del Servicio: Decide sobre los requisitos de seguridad del servicio, en especial la disponibilidad.
+- Responsable de la Seguridad: Chief Information Security Officer (CISO). Gestiona la seguridad de la información y los servicios.
+- Responsable del Sistema: Encargado de desarrollar, operar y mantener el sistema de información.
+- Administradores de la Seguridad del Sistema: Se encarga de la parte técnica de la implementación, gestión y mantenimiento de medidas de seguridad a aplicar.
+
+Para el desarrollo de la política y definición del marco normativo se deben seguir las guías 801 y 805.
+
 #### Análisis de riesgos.
+
+EL artículo 13 establece la necesidad de llevar a cabo un proceso de análisis y gestión de riesgos en base a una metodología reconocida internacionalmente. MAGERIT como metofología, Pilar como herramienta.
+
+#### Categorización de los sistemas.
+
+1. Identificación de los servicios y de la información.
+2. Valoración de cada uno de los servicios e información en función del impacto, en función del impacto en las dimensiones de seguridad (D.A.I.C.T).
+
+Pueden verse afectados en una o más dimensiones y cada dimensión se valorará en los niveles BAJO, MEDIO o ALTO. Siguiendo la guía 803.
+
+- Nivel BAJO: Se utiliza cuando se produce un perjuicio limitado, como la reducción apreciable de la capacidad (sigue desempeñándose), un daño menor a los activos, incumplimiento de ley subsanable o perjuicios menores a individuos.
+- Nivel MEDIO: Se utiliza cuando las consecuencias supongan un perjuicio grave, es decir la reducción significativa de la capacidad de la organización (sigue desempeñándose, pero afectada), un daño significativo a los activos, el inclumplimiento material de alguna ley o un perjuicio de dificil reparación sobre individuos.
+- Nivel ALTO: Se utiliza cuando las consecuencias de un incidente suponga un perjuicio muy grave sobre las funciones de la organización (anulación), un daño grave o irreparable sobre los activos, inclumplimiento de alguna ley o perjuicio grave sobre los individuos afectados.
+
+Los sistemas de información reciben una determinación de categoría (Básica, Media y Alta), según si alguna de las dimensiones alcanza el nivel bajo, medio o alto.
+
 #### Declaración de aplicabilidad.
+
+Se trata de una relación de las 75 medidas de seguridad (controles) indicando para cada una si debe aplicarse o no (justificado). Las medidas se seleccionan en base a la categoría del sistema y las dimensiones a las que afecta.
+
+Pasos a seguir:
+1. Identificar tipos de activos.
+2. Determinar dimensiones relevantes.
+3. Determinar niveles.
+4. Determinar categoría.
+5. Seleccionar las medidas apropiadas entre las contenidas en el Anexo 1.
+
+La guía 825 relaciona la ISO 27001 y controles de la 27002 con el ENS.
+
 #### Insuficiencias del sistema.
+
+Evaluación del grado de cumplimiento de las medidas previstas para identificar los puntos a corregir o mejorar.
+
 #### Plan de mejora de seguridad.
+
+El último paso para la planificación de la adecuación al ENS es elaborar un plan de mejora que busca subsanar las insuficiencias detectadas, debe indicarse:
+- Descripción de la acción.
+- Responsable de ejecución.
+- Responsable de supervisión.
+- Plazos previstos.
+- Coste estimado.
+
 #### Otros
 
-- Implantación del ENS
-- Auditoría del ENS
-- Conformidad con el ENS
+- Implantación del ENS: Siguiendo las guías 821 y 822.
+- Auditoría del ENS : Se deben realizar auditorias cada 2 años o cuando cambie considerablemente el sistema, siguienod las guías 802 y 808. Son objeto de auditar los roles y funciones del sistema de información, análisis de riesgos con revisión y aprobación anual, medidas de seguridad y que existe un SGSI documentado y aprobado.
+- Conformidad con el ENS: En el art. 41 se señala que las entidades públicas mostraran los distintivos de seguridad de los que son acreedores. La categoría básica proporcionará una Declaración de Conformidad generada por la entidad responsable y la categoría media o alta obtendrá una Certificación de Conformidad proporcionada en una Auditoría por una entidad acreditada.
 
 ## Tema 4: Evaluación, Auditoría y Certificación
 
