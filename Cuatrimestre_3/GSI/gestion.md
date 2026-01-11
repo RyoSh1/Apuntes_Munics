@@ -833,42 +833,42 @@ Elementos clave: Mantener el plan al día, asegurar que los procesos reflejan la
 
 ### Backup
 
-- Backup:
-- Backup software:
-- Estrategia de backup:
+- Backup: Copia de los datos de un ordenador guardados en otra localización para restaurar los originales en caso de pérdida.
+- Backup software: Programas usados para crear backups, producen copias exactas de los ficheros, bases de datos o discos completos.
+- Estrategia de backup: Requiere un repositorio de información, un espacio donde guardar las copias de seguridad para su trato posterior.
 
 #### Replicación
 
-- Replication:
-- Shadowing:
-- Electronic Vaulting:
+- Replication: Es el proceso de mantener una copia de los datos mediante shadow o en caché.
+- Shadowing: Es una estrategia de seguridad en la que se guarda una copia completa en una instalación alternativa de procesamiento.
+- Electronic Vaulting: Transmisión electrónica de los datos copiados.
 
 #### Esquema de rotación de backup
 
-
+Un esquema de rotación de backup limita el número de backup de cada fecha, reescribiendo archivos que ya no son necesarios. Determina cuando cada pieza de restauración ya no es necesario su mantenimiento. La regla 3-2-1 determina que debe haber 3 copias, en 2 almacenamientos distintos, 1 de ellas en una localización remota.
 
 #### Métodos de backup
 
-1. Full backup:
-2. Mirror backup:
-3. Incremental backup:
-4. Differential backup:
-5. Near CPD:
-6. Intent-logs:
+1. Full backup: Captura todos los ficheros del disco o de cierta carpeta, es lento y ocupa mucho espacio por lo que se reserva solo a configuraciones completas seguras.
+2. Mirror backup: Copia exacta de todos los datos, pero que no se encuentra comprimida por lo que no se protege con contraseña.
+3. Incremental backup: Solo captura ficheros creados desde el último backup, se trata del método más económico. Es complicado restaurar todo porque habría que ir versión a versión.
+4. Differential backup: Guarda los ficheros que han cambiado desde el último full backup en un fichero aparte, lo que produce que solo hagan falta 2 ficheros para la recuperación completa. 
+5. Near CPD: Protección contínua de los datos. Backups incrementales automáticos en intervalos, permiten la restauración según el RTO.
+6. Intent-logs: Es un mecanismo utilizado para que las operaciones informáticas sean más resistentes en caso de fallos. Antes de realizar una operación, se escribe un registro de la intención de realizarla (normalmente en un disco permanente), una vez realizada se escribe otro. Esto se usa en el caso de producirse un fallo para detectar qué operaciones estaban aún en proceso.
 
 #### Medios de guardado de backup
 
-RAID:
+RAID: Tecnología de almacenamiento virtual que combina múltiples discos físicos en una o más unidades lógicas para lograr redundancia o rendimiento. 0 = striping, 1 = mirroring, 5 = striping y paridad, 10 = 0 y 1.
 
-1. Cinta magética:
-2. HDD:
-3. Almacenamiento óptico:
-4. SDD:
-5. Cloud backup:
+1. Cinta magética: Fue durante mucho tiempo el medio para guardad datos a granel.
+2. HDD: Progresivamente más barato por lo que su uso se ha extendido.
+3. Almacenamiento óptico: Usan láseres para guardar y recuperar los datos, su principal desventaja es la degradación con el tiempo.
+4. SDD: Utilizan circuitos integrados ensamblados.
+5. Cloud backup: Utilizando proveedores de servicio.
 
 ### Recuperación
 
-- Plan de recuperación de desastres:
+- Plan de recuperación de desastres: Su misión es restaurar los sistemas críticos de negocio a una condición normal o casi normal después de un incidente.
 
 #### Instalaciones de procesamiento alternativas
 
