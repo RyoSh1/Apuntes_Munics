@@ -724,10 +724,165 @@ Para el ENS...
 - Sistema de gestión de la continuidad de negocio (BCMS):
 - Plan de continuidad de negocio (BCP):
 - Plan de recuperación de desastres (DRP):
+- Gestión de incidentes:
+- BC/DR:
 
 ### Planificación de la continuidad de negocio
 
-### Backup, Recuperación y Virtualización
+#### Etapas
+
+
+
+#### Elementos principales de BCM
+
+1. Plan de continuidad de negocio:
+2. Equipos de recuperación:
+3. Evaluación de riesgos e impacto:
+4. Procedimiento de respuesta a desastres:
+5. Tecnología:
+6. Activos físicos y ubicaciones de backup:
+7. Lineas de comunicación:
+8. Pruebas y simulacros de recuperación:
+9. Plan de actualización:
+
+- Estándares:
+
+#### Fase 1: Inicio de proyecto
+
+
+
+#### Fase 2: Análisis del impacto y análisis de riesgos
+
+
+
+#### Fase 3: Estrategias de recuperación
+
+
+
+#### Fase 4: Desarrollo del plan
+
+
+
+#### Fase 5: Evaluación y entrenamiento
+
+
+
+#### Fase 6: Mantenimiento y Testing
+
+
+
+### Análisis del impacto en el negocio
+
+
+
+#### Entradas y Salidas
+
+
+
+#### Pasos del BIA
+
+
+
+### BCP Testing
+
+
+
+- Walkthrough test:
+- Desktop test:
+- Functional test:
+- Full-scale test:
+
+### Mejores prácticas de un BCM
+
+
+
+### Backup
+
+- Backup:
+- Backup software:
+- Estrategia de backup:
+
+#### Replicación
+
+- Replication:
+- Shadowing:
+- Electronic Vaulting:
+
+#### Esquema de rotación de backup
+
+
+
+#### Métodos de backup
+
+1. Full backup:
+2. Mirror backup:
+3. Incremental backup:
+4. Differential backup:
+5. Near CPD:
+6. Intent-logs:
+
+#### Medios de guardado de backup
+
+RAID:
+
+1. Cinta magética:
+2. HDD:
+3. Almacenamiento óptico:
+4. SDD:
+5. Cloud backup:
+
+### Recuperación
+
+- Plan de recuperación de desastres:
+
+#### Instalaciones de procesamiento alternativas
+
+1. Cold site:
+2. Warm site:
+3. Hot site:
+
+### Virtualización
+
+
+
+#### Capacidades y problemas
+
+
+
+#### Ciclo de vida
+
+
+
+#### Migración
+
+- Servicio de migración:
+- Live migration:
+
+Pasos:
+1. Pre-Migration:
+2. Reservation:
+3. Iterative Pre-Copy:
+4. Stop-and-Copy:
+5. Commitment:
+6. Activation:
+
+### Computación en la nube
+
+
+
+Tipos de cloud: SaaS, PaaS, IaaS.
+
+#### Modelos de despliegue
+
+
+
+#### BCM en Cloud privada
+
+
+
+#### BCM en Cloud híbrida o pública
+
+
 
 ### Notas extra
 
