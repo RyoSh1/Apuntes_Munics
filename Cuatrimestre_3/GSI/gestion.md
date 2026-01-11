@@ -709,92 +709,127 @@ Para el ENS...
 
 ## Tema 5: Gestión de la Continuidad de Negocio
 
-
+Es el proceso de planear una continuación de las operaciones ante la ocurrencia de un incidente disruptivo. Se debe planear previamente y forma parte de la gestión general del riesgo, superponiendo partes con la seguridad de la información y la gestión TI.
 
 #### Conceptos básicos
 
-- Recovery Point Objetive (RTO):
-- Recovery Time Objetive (RTO):
-- Work Recuperation Time (WRT):
-- Maximum Tolerable Downtime (MTD):
-- Disrupción:
-- Desastre:
-- Continuidad de negocio:
-- Gestión de la continuidad de negocio (BCM):
-- Sistema de gestión de la continuidad de negocio (BCMS):
-- Plan de continuidad de negocio (BCP):
-- Plan de recuperación de desastres (DRP):
-- Gestión de incidentes:
-- BC/DR:
+- Recovery Point Objetive (RTO): Define la pérdida de datos máxima tolerable que se acepta ante un desastre. Si no hay pérdida aceptable, debe ser 0.
+- Recovery Time Objetive (RTO): Tiempo de recuperación objetivo para tener la infraestructura disponible. Determina el tiempo tolerable para recuperar los sistemas críticos.
+- Work Recuperation Time (WRT): Determina el tiempo máximo tolerable para verificar el sistema, integridad de datos, comprobar las BD y asegurarse de que todo funciona bien.
+- Maximum Tolerable Downtime (MTD): Determina la cantidad total de tiempo que un proceso de negocio puede ser interrumpido sin causar consecuencias aceptables. RTO + WRT.
+- Disrupción: Una avería que tiene consecenciasen términos de tiempo y negocio, pero que no incluye fallos operativosq ue tengan que ser gestionados mediante procedimientos estándar.
+- Desastre: Acontecimiento repentino e imprevisto que provoca la imposibilidad de llevar a cabo funciones críticas del negocio y provoca grandes daños. Una interrupción puede ser una disrupción o desastre dependiendo del tiempo.
+- Continuidad de negocio (BC): Capacidad de una organización de continuar los servicios o productos a niveles aceptables tras un incidente disruptivo. Relación entre desastre y recuperación.
+- Gestión de la continuidad de negocio (BCM): Proceso de obtención de BC, se basa en preparar la organización ante incidentes.
+- Sistema de gestión de la continuidad de negocio (BCMS): Es un sistema gestor que permite controlar, evaluar y mejorar la gestión de la continuidad de negocio.
+- Plan de continuidad de negocio (BCP): Es un documento guía que ayuda asegurar que se continúa con los procesos de negocio durante una emergencia o desastre, describe todos los pasos que deben seguirse durante un evento crítico y los aspectos de preparación, respuesta y recuperación. Se prepara según un análisis de impacto de negocio, el cual evalúa los riesgos y prioriza los sistemas en uso con fines de recuperación.
+- Plan de recuperación de desastres (DRP): Es un plan para reestablecer las funciones de negocio en caso de desastre, paso a paso.
+- Gestión de incidentes: Se trata de la porción de recuperación táctica de un BCP, es la primera respuesta para contener la propagación del incidente.
+- BC/DR: Se trata de recuperar el negocio, una vez se contiene el incidente se inicia con el plan de continuidad o la recuperación de desastres.
 
 ### Planificación de la continuidad de negocio
 
 #### Etapas
 
-
+1. Prevención: Reducir la posibilidad de que esa amenaza ocurra.
+2. Respuesta: Respuesta inicial a la interrupción.
+3. Reanudación: Restaurar las operaciones a un nivel similar al normal.
+4. Recuperación: Todos los pasos tomados para continuar las actividades principales de la organización.  
+5. Restauración: Volver a la fase normal.
 
 #### Elementos principales de BCM
 
-1. Plan de continuidad de negocio:
-2. Equipos de recuperación:
-3. Evaluación de riesgos e impacto:
-4. Procedimiento de respuesta a desastres:
-5. Tecnología:
-6. Activos físicos y ubicaciones de backup:
-7. Lineas de comunicación:
-8. Pruebas y simulacros de recuperación:
-9. Plan de actualización:
+1. Plan de continuidad de negocio (BCP). 
+2. Equipos de recuperación: Son el personal que desempeñará las funciones más importantes tanto en la planificación como en la ejecución de los procedimientos de emergencia. Redactan y actualizan el BCP, Identifican nuevos riesgos, forman al personal, coordinan la comunicación entre departamentos y activan el BCP cuando se requiere.
+3. Evaluación de riesgos e impacto: Propios de cada organización.
+4. Procedimientosw de respuesta a desastres: Incluye cosas como notificar al equipo de recuperación, Diagnosticar servicios y equipos afectados, Contactar a los vendedores, Obtener fondos de emergencia, transpotar personal, etc.
+5. Tecnología: Identificar e implementar las tecnologías que hacen posible la continuidad de negocio. Backups, cloud, ant-malware, etc.
+6. Activos físicos y ubicaciones de backup: Disponer y securizar localizaciones y activos secundarios.
+7. Lineas de comunicación: Es necesario tener medios de comunicación disponibles en caso de incidente para actuar con la mayor brevedad posible.
+8. Pruebas y simulacros de recuperación: Se deben mantener pruebas sobre los BCP para identificar fortalezas y debilidades en el plan de continuidad.
+9. Plan de actualización: Todos los componentes listados anteriormente sufren cambios constantes, por lo que es necesario evaluar y actualizar dichos planes. Periodicidad.
 
-- Estándares:
+- Estándares: Modelo PDCA, ISO 22301:2012, ISO 22313:2012, ISO 22317:2015, NIST SP800-34, ITIL Service Continuity Management.
 
 #### Fase 1: Inicio de proyecto
 
-
+- Obtener apoyo de la alta dirección.
+- Definir términos, objetivos y supuestos.
+- Asignar responsabilidades.
+- Familiarizar a los jefes de equipo y participantes con el proceso y los recursos necesarios.
+- Proporcionar una hoja de ruta del proyecto con proyecciones.
+- Definir el alcance.
+- Identificar procesos y requisitos empresariales críticos.
 
 #### Fase 2: Análisis del impacto y análisis de riesgos
 
+- Análisis de impacto: Análisis detallado de todas las funcions y procesos determinando su impacto cuantitativo (monetario) y cualitativo (intangible). Se prioriza la recuperación de procesos críticos y de negocio.
+- Análisis de riesgos: Identifica amenazas a la institución, estimando la probabilidad de ocurriencia, otorgando un rating, identificando controles y tomando decisiones de mitigación.
 
+Normalmente el impacto se analiza antes que el riesgo, primero se mira las consecuencias de una interrupción y aquellas partes que causarían mayores pérdidas financiera u operativas y después se desarrolla una estrategia de mitigación para reducir la probabilidad de que un peligro tenga un impacto significativo.
 
 #### Fase 3: Estrategias de recuperación
 
-
+Desarrollo de estrategias basadas en el impacto y riesgo, mediante cálculos de coste/beneficio. El objetivo es lograr una respuesta controlada y efectiva, en el menor tiempo posible y efectivas en coste (o recursos) y Recuperar los procesos más críticos en el mínimo RTO.
 
 #### Fase 4: Desarrollo del plan
 
-
+Tareas de desarrollo del plan:
+- Identificar los miembros del equipo de recuperación.
+- Desarrollar roles y responsabilidades en el equipo.
+- Determinar RTO de cada area funcional.
+- Desarrollar tareas y procesos para cada función de negocio.
+- Identificar requisitos de recursos.
+- Planear notificaciones, mobilizaciones y activaciones.
 
 #### Fase 5: Evaluación y entrenamiento
 
-
+Es un programa contínuo en el que se tratan los componentes, los roles, la información del BCP y cómo se activa.
 
 #### Fase 6: Mantenimiento y Testing
 
+El BCP es un documento en constante cambio según las evoluciones que tenga el negocio que soporta.
 
+Se recomienda realizar pruebas anualmente, demostrando el correcto funcionamiento del equipamiento, procedimientos, procesos y sistemas. Debe enfocarse en las capacidades, lagunas y deficiencias.
 
 ### Análisis del impacto en el negocio
 
-
+El BIA es un proceso sistemático que determina y evalúa los potenciales efectos de una interrupción de las operaciones críticas de la empresa, resultado de un desastre o emergencia. El propósito es entender los productos clave de la organización y las actividades que los producen, determinar las prioridades para su recuperación, identificar recursos necesarios para la continuidad o recuperación y identificar las dependencias.
 
 #### Entradas y Salidas
 
-
+- Entradas: Una lista de las actividades de continuidad de negocio, mediante entrevistas, cuestionarios, talleres.
+- Salidas: Se debe documentar e incluir identificación de productos, servicios, actividades, prioridades de recuperación y depenencias.
 
 #### Pasos del BIA
 
-
+1. Determinar los procesos empresariales y la criticidad de la recuperación. Se identifican los procesos empresariales soportados por el sistema y el impacto que produce una disrupción en ellos, además de el daño a elementos externos y el tiempo de inactividad estimado.
+2. Identificar los recursos necesarios. Recursos necesarioas para reanudar los procesos de negocio de la forma más rápida posible.
+3. Identificar las prioridades de recuperación de los recursos del sistema. Basándose en los resultados de las actividades previas, se pueden vincular los recursos de forma más precisa a los procesos y funciones de negocio, también se puede establecer unos niveles de prioridad para mantener un orden secuencial.
 
 ### BCP Testing
 
+Permite el mantenimiento mediante acciones correctivas previas, permite probar elementos con mínimo coste, una atmósfera de baja presión para el aprendizaje y estimula la continuidad y recuperación a todos los niveles. Tipos: Lista de verificación (distribución de copias del BCP), estructurada paso a paso, simulaciones, paralela, interrupción del negocio.
 
-
-- Walkthrough test:
-- Desktop test:
-- Functional test:
-- Full-scale test:
+- Walkthrough test: Discusión de los pasos a seguir en el plan de forma verbal, el objetivo es valorar la viabilidad, detectar fallos de diseño y mejorar el plan. Logra que todos los miembros del equipo lo conozcan.
+- Desktop test: Funciona como un test y como entrenamiento, sirve para demostrar el conocimiento en el tema.
+- Functional test: Movilización de personal a otros sitios, sirve como demostración de capacidades y sirve para usar las capacidades de comunicación necesarias.
+- Full-scale test: Implementa todo o partes del BCP, procesar datos o transacciones con el backup, verifica que la respuesta ante crisis es válida, es ejecución real y requiere participación del equipo y de agentes externos.
 
 ### Mejores prácticas de un BCM
 
+- Automatizar todos los aspectos del plan de continuidad de negocio.
+- Incorporar tecnologías cloud.
+- No asumir que la infraestructura virtualizada está plenamente protegida.
+- Hacer pruebas es muy importante.
+- Considerar la estrategia para la ubicación del centro de datos.
+- Priorizar las funciones de continuidad para evitar gastos.
+- Pensar en la recuperación ante desastres y la continuidad como servicios gestionados.
+- Integrar la movilidad en el BCP.
+- Involucrar al personal.
+- Recurrir a ayuda de expertos is es necesario.
 
+Elementos clave: Mantener el plan al día, asegurar que los procesos reflejan las necesidades de negocio, mantener un entrenamiento contínuo, tener al equipo de recuperación entrenado.
 
 ### Backup
 
