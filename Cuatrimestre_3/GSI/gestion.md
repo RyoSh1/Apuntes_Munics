@@ -193,63 +193,138 @@ Los activos se pueden agrupar o individualizar según los requisitos u objetivos
 
 Los activos se organizan en árboles o grafos de dependencias, los activos de las capas superiores dependen de aquellos en las capas inferiores, es decir, los de la capa superior dependen de la inferior y los de la inferior tienen un impacto en la superior.
 
-Modelado de dependencias: 
+Modelado de dependencias: La información y los servicios deben colocarse en lo más alto, normalmente la información sobre los servicios(aunque depende del contexto). La aplicación depende de los datos que transporta.
+
+Establecer dependencias es una tarea delicada.
 
 #### Paso 1.3: Valoración de los activos
 
+No confundir valor con coste, valor es la necesidad de protección de un activo, a más valor mayor protección debe tener. El valor principal suele estar en la información que maneja el sistema y en los servicios que presta, el resto pueden ir sin valor porque lo más importante es que soportan los activos principales.
 
+- Replacement cost: Coste de repuesto de elementos defectuosos.
+- Valor de personal: El valor del periodo de entrenamiento incrementa el coste de repuesto de un trabajador.
+- Valor de datos personales: Debido a su control por parte de las leyes, los datos personales necesitan una serie de medidas de seguridad especiales. Es necesario clasificarlos con un nivel apropiado.
+- Valores intangibles: Elementos con valor para la organización como la reputación, el conocimiento, independencia de criterio, privacidad personal o salud del personal.
+
+Para valorar los activos es necesario disponer de distintos puntos de vista para lograr una vista general de cada activo, además de disponer de la persona directamente responsable de cada uno.
 
 #### Paso 2: Amenazas
 
+Elementos que causan un incidente en la organización, provocando daño en una propiedad o pérdidas intangibles en los activos.
 
+- Catálogo de amenazas: Según su naturaleza, medioambiental, fallo de aplicaciones, accidentes humanos o daño deliberado.
+- Una amenaza no afecta a todas las dimensiones de un activo, hay que valorar dos aspectos: Degradación (cantidad de daño producido) y probabilidad de que ocurra.
 
 #### Impacto
 
+El impacto es la pérdida de valor de un activo producida por un incidente. Factores a considerar: Coste de repuesto, coste de recuperación del valor, pérdida de ganancias, pérdida de operabilidad, sanciones provocadas, daño a otros activos, lesión de personal y daño medioambiental.
 
+Valor de la interrupción del servicio: La disponibilidad no se valora con un valor simple, es necesario usar una estructura compleja de valoración.
 
 #### Riesgo
 
+El riesgo es la medida del daño probable que puede sufrir el sistema, impacto por su probabilidad de ocurrencia.
 
+- Riesgo acumulado:
+- Riesgo desviado:
+DUDAS
 
 #### Paso 3: Salvaguardas
 
+Las salvaguardas o controles son procedimientos o mecanismos que reducen el riesgo, siendo seguridad, políticas de empresa u otras medidas.
 
+Para la selección de controles, se debe argumentar la razón por la que no es necesario tomar cada control, sea porque no aplica o porque no es proporcional al riesgo (injustificada). Esto conforma un SOA.
+
+Las salvaguardas pueden reducir la probabilidad de amenazas o limitar el impacto. Existen los siguientes tipos:  Prevención (PR), Disuasión (DR), Eliminación(EL), Minimización del impacto (IM), Corrección (CR), Recuperación (RC), Monitorización (MN), Detección (DC), Concienciación (AW) y Adminstración (AD).
+
+Las salvaguardas se valoran en un porcentaje de efectividad real entre 0% y 100%.
 
 #### Paso 3: Riesgo restante
 
+El impacto residual es aquel que se calcula una vez aplicadas las salvaguardas, también se calcula la degradación residual.
 
+El apetito del riesgo es el valor de riesgo que la empresa está dispuesta o decide permitir, es un nivel de aceptación acordado por la gestión de la empresa.
+
+Tratamiento de riesgo: Eliminación, Mitigación, Compartición (Riesgos cuantitativos o cualitativos) y aceptación.
+
+Aquí hay unas gráficas sin mucho sentido de impacto x probabilidad y el riesgo.
 
 #### Documentación
 
-
+- Documentación intermedia:
+- Documentación final:
 
 #### Roles
 
+Se definen los siguientes roles:
+- Órganos de gobierno.
+- Consejo ejecutivo.
+- Dirección corporativa.
+- En el ENS:
+    - RINFO: Responsable de información.
+    - RSERV: Responsable de servicio.
+    - CISO: Chief Information Security Officer.
+    - RSIS: Responsable del sistema.
+    - ASS: Administradores de sistemas.
 
+Tabla RACI: Los roles anteriores reciben una calificación de las siguientes.
+- Responsible: Los que realizan el trabajo.
+- Accountable: Los que revisan el trabajo.
+- Consulted: Los consultados.
+- Informed: A los que se les informa.
 
 ### ISO 27005
 
-
+- Gestión de riesgos: Actividades coordinadas para dirigir y controlar una organización respecto al riesgo.
+    - Valoración del riesgo: Identificación, análisis y evaluación.
+    - Tratamiento de riesgo.
+    - Comunicación y consulta del riesgo.
+    - Monitorización y revisión del riesgo.
 
 #### 1. Contexto
 
-
+1. Propósito:
+2. Criterios básicos:
+3. Alcance y límites:
+4. Organización operativa:
 
 #### 2. Evaluación de riesgos
 
+Realizar una evaluación de los riesgos cibernéticos a los que se enfrenta una empresa u organización. Se utilizan para identificar, analizar y priorizar los riesgos para las operaciones de la organización , los activos, las personas y otras organizaciones derivadas.
 
+- Activo de información:
+- Dueño del activo:
+- Inventario de activos:
+
+1. Identificación de activos:
+2. Identificación de amenazas:
+3. Identificación de vulnerabilidades:
+4. Identificación de controles existentes:
+
+#### 2.2 Análisis de riesgo
+
+1. Análisis de riesgo:
+2. Evaluación de las consecuencias:
+3. Evaluación de la probabilidad del incidente:
+4. Evaluación del riesgo:
+
+El "Responsable del riesgo" es una persona o entidad con la responsabilidad y la autoridad para gestionar un riesgo.
 
 #### 3. Tratamiento del riesgo
 
-
+El proceso de elegir e implementar medidas para modificar el riesgo.
+- Identificación de opciones.
+- Desarrollo de un plan de acción.
+- Implementación del plan de acción.
+- Identificación de riesgos residuales.
 
 #### 4. Comunicación del riesgo y consulta
 
-
+Se trata de la actividad de manejar riesgos mediante el intercambio de información con el personal de toma de decisiones.
 
 #### 5. Monitorización y revisión
 
-
+Los riesgos no son estáticos, es necesario detectar cambios y mantener soporto mediante sisteams externos.
 
 ## Tema 3: ISMS
 
@@ -634,7 +709,23 @@ Para el ENS...
 
 ## Tema 5: Gestión de la Continuidad de Negocio
 
-### BCP
+
+
+#### Conceptos básicos
+
+- Recovery Point Objetive (RTO):
+- Recovery Time Objetive (RTO):
+- Work Recuperation Time (WRT):
+- Maximum Tolerable Downtime (MTD):
+- Disrupción:
+- Desastre:
+- Continuidad de negocio:
+- Gestión de la continuidad de negocio (BCM):
+- Sistema de gestión de la continuidad de negocio (BCMS):
+- Plan de continuidad de negocio (BCP):
+- Plan de recuperación de desastres (DRP):
+
+### Planificación de la continuidad de negocio
 
 ### Backup, Recuperación y Virtualización
 
