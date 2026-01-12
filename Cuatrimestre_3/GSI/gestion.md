@@ -5,7 +5,7 @@
 ### Fundamentos
 
 - Ciberseguridad : Disciplina basada en computadores que incluye tecnología, personas, información y procesos para asegurar operaciones en un contexto con adversarios.
-- Seguridad de la información : Se encarga de la información sin tener en cuenta el formato (papel, digital, intelectual, etc.). Se trata de un contexto muy importante por su relevancia económica, técnica y socialmente, para empresas, govierno o formación.
+- Seguridad de la información : Se encarga de la información sin tener en cuenta el formato (papel, digital, intelectual, etc.). Se trata de un contexto muy importante por su relevancia económica, técnica y social, para empresas, gobierno o formación.
 
 Conceptos de la seguridad de la información:
 - Identificar: Usar el conocimiento sobre la organización para minimizar el riesgo.
@@ -14,7 +14,7 @@ Conceptos de la seguridad de la información:
 - Respuesta: Proceder con las acciones necesarias ante incidentes de seguridad.
 - Recuperación: Planear ser resilientes y ser capaces de recuperar servicios comprometidos.
 
-El objetivo de la seguridad de la información es minimizar la suma de dos costes: El coste causado por incidentes y el coste de los controles de seguridad. Por ello es necesario entender los riesgos de la información, identificar mejoras, situar recursos adecuadamente y cumplir con los requisitos.
+El objetivo de la seguridad de la información es minimizar la suma de dos costes: El coste causado por incidentes y el coste de los controles de seguridad. Por ello es necesario entender los riesgos de la información, identificar mejoras, situar recursos adecuadamente y cumplir con los requisitos. La "gestión" conlleva objetivos, planes, roles, recursos, operación, evaluación y mejoras.
 
 #### GRC: Governanza, Riesgo y Cumplimiento
 
@@ -42,7 +42,7 @@ La confidencialidad debe cubrir la información en guardado, procesado y en trá
 
 Proteger la información de ser modificada por entidades no autorizadas.
 
-Integridad de datos es la propiedad de que la información no ha sido alterada de una manera no autorizada, la integridad de un sistema es la cualidad que determina si un sistema funciona como es debido libre de modificaciones no autorizadas.
+Integridad de datos es la propiedad que define que la información no ha sido alterada de una manera no autorizada, la integridad de un sistema es la cualidad que determina si un sistema funciona como es debido libre de modificaciones no autorizadas.
 
 #### Disponibilidad
 
@@ -116,8 +116,8 @@ Factores de amenaza de OWASP:
 Factores de vulnerabilidad OWASP:
 - Facilidad de descubrimiento.
 - Facilidad de explotación.
-- Conocimiento.
-- Detección.
+- Conocimiento necesario.
+- Detección de intrusiones.
 
 Los índices de probabilidad si se unen.
 
@@ -136,7 +136,7 @@ Factores de impacto empresarial OWASP:
 - No cumplimiento.
 - Violación de la privacidad.
 
-Los índices de impacto no se suman.
+Los índices de impacto no se suman, se calcula por separado el impacto técnico y el impacto de negocio.
 
 Formas de tratar el riesgo: Evitar el riesgo (cancelando la actividad por ejemplo), Reducir el riesgo (minimizar), transferir el riesgo, Aceptar el riesgo.
 
@@ -171,7 +171,7 @@ El objetivo directo de MAGERIT es dar conciencia de la existencia de riesgos y l
 
 - Confidencialidad, Integridad y Disponibilidad (canónicas).
 - Autenticidad: Una entidad es quien dice ser o su origen es garantizado. Como contras tenemos la manipulación de origen y el spoofing.
-- Responsabilidad: Garatía de que siempre se puede determinar quién hizo qué y cuándo lo hizo.
+- Responsabilidad: Garantía de que siempre se puede determinar quién hizo qué y cuándo lo hizo.
 
 #### Método de análisis de riesgos
 
@@ -183,7 +183,7 @@ El objetivo directo de MAGERIT es dar conciencia de la existencia de riesgos y l
 
 #### Paso 1: Activos
 
-Los activos principales son de dos tipos especiales: La información manipulada y los servicios provistos.
+Los activos **principales** son de dos tipos especiales: La información manipulada y los servicios provistos.
 
 Los activos subordinados son: El equipamiento de ordenador (Software, Hardware, Comunicaciones, Media), el entorno (Equipamiento y muebles), los servicios de terceras partes, la localización física y los operarios.
 
@@ -251,8 +251,14 @@ Aquí hay unas gráficas sin mucho sentido de impacto x probabilidad y el riesgo
 
 #### Documentación
 
-- Documentación intermedia:
+- Documentación intermedia: Resultados de las entrevistas, Documentación de otras fuentes, Información ya existente y reportes de defectos encontrados.
 - Documentación final:
+    - Modelo de valor: Documento con activos, interdependencias y valor.
+    - Mapa de riesgos: Informe que detalla las principales amenazas para cada activo, caracterizasas por su probabilidad y degradación causada.
+    - Declaración de Aplicabilidad: Informe de contramedidas consideradas adecuadas para el sistema.
+    - Evaluación de salvaguardias: Informe de salvaguardas existentes, clasificadas según su eficacia para reducir el riesgo enfrentado.
+    - Informe de deficiencias o vulnerabilidades: Informe de salvaguardas necesarias, pero que son insuficientemente eficaces o ausentes.
+    - Estado del riesgo: Informe que detalla para cada activo el impacto y riesgo residual potencial según la amenaza.
 
 #### Roles
 
@@ -283,18 +289,18 @@ Tabla RACI: Los roles anteriores reciben una calificación de las siguientes.
 
 #### 1. Contexto
 
-1. Propósito:
-2. Criterios básicos:
-3. Alcance y límites:
-4. Organización operativa:
+1. Propósito: Ayudar a informar a los responsables de la toma de decisiones y respaldar respuestas adecuadas a los riesgos.
+2. Criterios básicos: Enfoque de gestión de riesgos, criterios de evaluación, criterio de impacto, criterio de probabilidad o apetito al riesgo.
+3. Alcance y límites: Evaluación de la organización, su propósito, su negocio, su mision, sus valores y la estructura.
+4. Organización operativa: Desarrollar los procesos, identificar las partes interesadas, definir los roles y responsabilidades, relaciones y caminos de desarrollo.
 
 #### 2. Evaluación de riesgos
 
 Realizar una evaluación de los riesgos cibernéticos a los que se enfrenta una empresa u organización. Se utilizan para identificar, analizar y priorizar los riesgos para las operaciones de la organización , los activos, las personas y otras organizaciones derivadas.
 
-- Activo de información:
-- Dueño del activo:
-- Inventario de activos:
+- Activo de información: Es cualquier información, tangible o intangible, que tiene valor, un ciclo de vida y debe ser protegida y gestionada.
+- Dueño del activo: La persona responsable de controlar la producción, desarrollo, mantenimiento y seguridad de un activo. Propietario del activo de información es aquel responsable de que dicho información en específico es gestionada correctamente.
+- Inventario de activos: Es una estructura de información que contiene los activos y sus características.
 
 1. Identificación de activos:
 2. Identificación de amenazas:
@@ -325,6 +331,8 @@ Se trata de la actividad de manejar riesgos mediante el intercambio de informaci
 #### 5. Monitorización y revisión
 
 Los riesgos no son estáticos, es necesario detectar cambios y mantener soporto mediante sisteams externos.
+
+REVISAR DE NUEVO 27005, solo repite ideas.
 
 ## Tema 3: ISMS
 
@@ -361,9 +369,9 @@ Un Sistema de Gestión de la Seguridad de la Información se encarga de prevenir
 
 ### ISO 27001
 
-Norma creada por la Organización Internacional de Estandarización y la Comisión Electrotécnica Internacional que especifica los requistos para establecer, implementar, mantener y mejorar de forma continua un SGSI. Provee un modelo de como proceder con un SGSI, además es una norma certificable, lo que significa que demuestra a partes interesadas que la organización está comprometida con la seguridad de la información.
+Norma creada por la Organización Internacional de Estandarización y la Comisión Electrotécnica Internacional que especifica los requistos para establecer, implementar, mantener y mejorar de forma continua un SGSI. Provee un modelo de cómo proceder con un SGSI, además es una norma certificable, lo que significa que demuestra a partes interesadas que la organización está comprometida con la seguridad de la información.
 
-Algo más¿?
+La Seguridad deja de ser solo una cuestión técnica para ser parte del plan de negocio.
 
 ### Ciclo de Deming (PDCA)
 
@@ -371,7 +379,7 @@ Se divide en 4 etapas:
 1. Planificar (establecer el SGSI): Establecer políticas, objetivos, procesos y procedimientos relevantes para gestionar el riesgo de acuerdo con las políticas generales de una organización. 
 2. Hacer (implementar y operar el SGSI): Implementar y operar la política, los controles, los procesos y procedimientos del SGSI.
 3. Comprobar (monitorizar y revisar el SGSI): Evaluar y medir el desempeño del proceso en relación con la política e informar de resultados.
-4. Actuar (mantener y mejorar el SGSI): Tomar medidas correctivas y preventivas basados en las auditoriar y revisiones realizadas.
+4. Actuar (mantener y mejorar el SGSI): Tomar medidas correctivas y preventivas basados en las auditorías y revisiones realizadas.
 
 El Ciclo de Deming específico de la ISO 27001 se divide en los siguientes bloques:
 1. Sección 1: Alcance; Sección 2: Referencias Normativas; 3: Términos y definiciones.
