@@ -872,54 +872,78 @@ RAID: Tecnología de almacenamiento virtual que combina múltiples discos físic
 
 #### Instalaciones de procesamiento alternativas
 
-1. Cold site:
-2. Warm site:
-3. Hot site:
+Esto se perdió en un commit, pongo un resumen temporal.
+
+1. Cold site: Tiene toda la infraestructura física (espacio, ventilación, etc.), pero no dispone del hardware, por lo que el RTO y RPO son muy altos.
+2. Warm site: Punto intermedio, tiene la infraestructura física y algunos elementos del hardware, pero sin configurar, por lo que en caso de desastre es necesario llegar e instalar. El RPO y RTO puede ser de unas horas.
+3. Hot site: Una copia exacta de la configuración utilizada en la sede original, lista para utilizarse en el instante de un desastre. Es costosa de mantener y a veces se comparte.
+4. Acuerdo recíproco: Algunas empresas acuerdan mantener infraestructura extra entre ellas para en caso de desastre compartir los recursos temporalmente.
 
 ### Virtualización
 
+Un problema de la recuperación de hardware es que a lo mejor esos equipos no tienen garantía de estar disponible o siquiera ser posible duplicar dicho hardware y que desplegar una copia en un hardware diferente puede llegar a ser muy complicado.
 
+La virtualización establece una estandarización de recursos sin importar el hardware real sobre el que se montan. Permite una operabilidad más rápida, flexibilidad de hardware y es más sencilla de operar.
 
-#### Capacidades y problemas
+Como problemas, la integridad y confidencialidad aumentan en importancia, es necesario disponer de un ancho de banda amplio para el flujo de datos de replicación y requiere unas capacidades de gestión mayores.
 
+#### Ciclo de vida típico
 
+1. Se hace una solicitud de nuevo servidor al departamento TI.
+2. De la pool de recursos se reserva y provisiona la máquina virtual.
+3. Una vez iniciada se proveee el servicio solicitado en la VM.
+4. Un tiempo más tarde se liberan los recursos.
 
-#### Ciclo de vida
-
-
+Para provisionar una máquina virtual existen dos formas:
+- Instalando el sistema directamente, clonando una VM o importando un servidor físico.
+- Creando una plantilla preconfigurada.
 
 #### Migración
 
-- Servicio de migración:
-- Live migration:
+- Servicio de migración: Es el proceso de mover una máquina virtual entre localizaciones, en este proceso todas las características de la máquina son completamente virtualizadas.
+- Live migration: Migración en tiempo real, se trata de desplazar una VM entre distintos equipos físicos mientras se mantiene encendida. Usado para el balanceo de carga y el mantenimiento proactivo.
 
 Pasos:
-1. Pre-Migration:
-2. Reservation:
-3. Iterative Pre-Copy:
-4. Stop-and-Copy:
-5. Commitment:
-6. Activation:
+1. Pre-Migration: Existencia de la máquina.
+2. Reservation: Se hace una solicitud de reserva de recursos desde la máquina A a la máquina B.
+3. Iterative Pre-Copy: Durante la primera iteración se transfieren todas las páginas, en las siguientes iteraciones se copian aquellas corruptas en la transferencia.
+4. Stop-and-Copy: La instancia A se suspende y el tráfico se redirecciona a la máquina B. El estado de CPU y cualquier inconsistencia se transfieren.
+5. Commitment: B le transmite a A que la imagen es consistente, A confirma el commit, A descarta la VM y B se convierte en el host primario.
+6. Activation: Código post migración se lanza para fijar drivers a la nueva máquina y anunciar el movimiento de la IP.
 
 ### Computación en la nube
 
+Utilizan las ideas de migración y máquinas virtuales de forma dinámica adaptando los recursos a través de la red según los requisitos.
 
+La computación en la nube se construye sobre un Service-Oriented Architecture (SOA), malla y tecnología de virtualización. Se trata de un servicio web desplegado en sedes especializadas.
 
-Tipos de cloud: SaaS, PaaS, IaaS.
+Tipos de cloud: SaaS (Web, aplicaciones), PaaS (Desarrollo, frameworks), IaaS (Gestión de infraestructura virtual, servicio de infraestructura, servidores).
 
 #### Modelos de despliegue
 
+- Cloud Pública: Proporcionado por una tercera empresa, no se gestiona nada los datos se guardan y procesan en sus datacenters.
+- Cloud Privada: Reside en la propia intranet de la compañia, normalmente se trata de un entorno virtualizado y se encuentra protegido por un firewall. Permite una mayor seguridad, mejora el balanceo de carga y mayor control de los datos que el resto de modelos.
+- Cloud Híbrida: Cuando recursos de una cloud pública se utilizan desde una cloud privada o se usan en conjunto. Los recursos críticos se guardan en privado y los no esenciales en la nube pública.
 
+- Amazon Elastic Compute Cloud (EC2): MUCHO TEXTO
 
 #### BCM en Cloud privada
 
+La organización mantiene el control de la seguridad, configuración y operación del sistema, tiene acceso limitado y gestión interna.
 
+La virtualización es la base de la nube privada, aporta flexibilidad, continuidad operativa y aprovechamiento del hardware al estandarizar los recursos LÓGICA Y YA ESTÁ EXPLICADO.
+
+Para prevenir contingencias se usan dos o más servidores de virtualización operando en Cold standby (copia idéntica apagada), Warm standby (Listo para encenderse pero sin uso) o Hot standby (Sincronizado en tiempo real). También existe la alta disponibilidad, el hipervisor replica continuamente la memoria en otro host, pero es costosa.
+
+Replicar los datos entre sedes mejora la continuidad, pero requiere buena conectividad tanto para el proceso de backup como para la restauración. Esto puede dar conflicto con el negocio en empresas pequeñas.
 
 #### BCM en Cloud híbrida o pública
 
+La nube híbrida o pública permite externalizar servidores completos o servicios específicos, gracias a esto se pueden lograr altos niveles de disponibilidad y mínimos tiempos de pérdida. Es esencial mantener una conexión cifrada y segura desde la sede privada.
 
+Opciones: Infraestructura como Servicio (IaaS), Plataforma como Servicio (PaaS), Software como servicio (SaaS), Seguridad como Servicio, Backup remoto (BaaS) o Recuperación de desastres como servicio (DRaaS).
 
-### Notas extra
+Si los sistemas alquilados son virtuales se trata de IaaS, pudiendose usar como respaldo u operaciones diarias. Aunque mejora la protección, redundancia y las copias de seguridad, incluye una mayor latencia e introduce retos de seguridad de la información. Una variante utilizada es usar el proveedor como nodo central para replicar datos entre sedes.
 
 ## Tema 6: Gestión de Incidentes
 
