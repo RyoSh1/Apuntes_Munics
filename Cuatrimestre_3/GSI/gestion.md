@@ -586,15 +586,15 @@ El último paso para la planificación de la adecuación al ENS es elaborar un p
 
 ## Tema 4: Evaluación, Auditoría y Certificación
 
-Beneficios de la certificación:
+Beneficios de la certificación: Mejor seguridad a un menor coste, credibilidad y confianza pública, cumplimiento de leyes y regulación, cumplimiento de responsabilidades fiduciarias.
 
-- Cumplimiento:
-- Certificación:
-- Acreditación:
+Cualquier organización puede crear un estándar y decir que cumple, no hay evidencia. Por eso existe:
+- Certificación: Forma de demostrar que efectivamente una organización cumple con un estándar.
+- Acreditación: Provista a las organizaciones que realizan certificaciones, los cuerpos de certificación necesitan ser validados por una autoridad acreditadora. Normalmente existe una autoridad acreditadora nacional.
 
-ENAC:
+ENAC: Entidad Nacional de ACreditación, realiza acreditación de la ISO 27001 (Confidencialidad, integridad y disponibilidad de los Sistemas de Información) y el ENS (Principios básicos y requisitos a implantar en los sistemas de administración pública).
 
-Para el ENS...
+Para el ENS existen empresas acreditadas en certificación de conformidad (AENOR, AAS, BDO, etc.)
 
 ### ISO
 
@@ -602,7 +602,7 @@ Para el ENS...
 
 
 
-#### Requisitos: Documentos y problemas
+#### Requisitos: Documentos y problemas típicos
 
 
 
