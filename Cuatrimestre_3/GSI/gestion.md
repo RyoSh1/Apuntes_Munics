@@ -1095,7 +1095,71 @@ Si los sistemas alquilados son virtuales se trata de IaaS, pudiendose usar como 
 
 ### Linea Temporal
 
+Puntos clave en la respuesta a incidentes: Elaboración de una línea temporal, seguimiento de las evidencias y presentación de los resultados de manera continua o al final del incidente con un informe final.
+
+#### Elaboración de la línea del tiempo
+
+Es un documento donde se recogen todos los eventos que se creen relevantes para el análisis del incidente, siendo de obligada inclusión los timestamps de cada uno. Busca formar un relato de lo ocurrido en el incidente, correlación de datos y colaboración de equipo.
+
+#### Datos relevantes por cada evento
+
+- Timestamp: Representa el momento temporal de ocurrencia.
+- Relevancia: Importancia del evento según su criticidad.
+- Hostname/IP.
+- Tipo de artefacto: Artefacto forense del cual se extrajo la información (eventos, logs, etc.)
+- Detalles del artefacto: Datos específicos sobre el tipo de evento.
+- Usuario: Usuario relacionado.
+- Detalles: Datos relevantes pero no son recogidos por el resto de columnas.
+- Comentario: Cualquier comentario considerado relevante.
+- Evidencia: La evidencia de la cual se extrajo, incluyendo path completo si es posible.
+- Analista: Nombre o iniciales de quien agregó el evento.
+- Fecha agregado: Cuando fue agregado el evento a la timeline.
+
+#### Presentación de resultados
+
+Es importante generar documentación para comunicar los resultados. Existen varios tipos de presentación: Continuo, Parcial (informes regulares) y Final (todos los pasos)
+
+La timeline es una herramienta interna que no se suele presentar en crudo.
+
+#### Presentación de informe final
+
+Informe escrito por el equipo de respuesta que recoge todos los detalles del mismo. Habitualmente incluye contexto del incidente, sumario ejecutivo con detalles relevantes y un apartado técnico.
+
 ### SIEM (Seguridad de la Información y Gestión de Eventos)
+
+- SIM:
+- SLM/SEM:
+- SIEM:
+
+#### Funcionamiento de un SIEM
+
+
+
+#### Correlación de eventos
+
+
+
+#### Integraciones
+
+- Con fuente de inteligencia:
+- Con un EDR:
+- Con SOAR:
+
+#### Desafíos tecnológicos de un SIEM
+
+
+
+#### Securización de un SIEM
+
+
+
+#### Herramientas de un SIEM
+
+
+
+#### Extras
+
+
 
 ## Revisión Prácticas
 
