@@ -600,42 +600,86 @@ Para el ENS existen empresas acreditadas en certificación de conformidad (AENOR
 
 #### Ciclo de certificación
 
-
+1. Revisión de la preparación.
+2. Certificación.
+3. Comienza el ciclo de auditorías de vigilancia: Se examinan los elementos fundamentales, interno, revisión de la gestión, acciones correctivas, etc.
+4. Auditoría de recertificación: Se revisa todo el sistema, pero en menor profundidad que la original y con más enfoque en las mejoras.
 
 #### Requisitos: Documentos y problemas típicos
 
+No hay un listado de documentos requeridos, pero sí una información documentada requerida:
+1. Alcance del ISMS.
+2. Política de Seguridad de la información.
+3. Proceso de evaluación de riesgos.
+4. Proceso de tratamiento de riesgos.
+5. Objetivos de seguridad de la información.
+6. Evidencia de las competencias del personal TI.
+7. Otros documentso relacionados con el SGSI necesarios.
+8. Documentos de planificación y control operacional.
+9. Resultados de las evaluaciones de riesgos.
+10. Decisiones sobre el tratamiento de riesgos.
+11. Evidencia del seguimiento y medición de la seguridad de la información.
+12. Programa de auditoría interna sobre el SGSI.
+13. Evidencias de las principales revisiones a la gestión del SGSI.
+14. Evidencia de las no conformidades identificadas y acciones correctivas que surgan.
+15. Otra información documentada.
 
+Problemas típicos: Registro de activos incompleto, personal no incluido, método muy complejo, no aprovado por la gestión, localización o seguridad de servidores, incidentes no reportados, BCP sin testear, etc.
 
 ### ENS
 
+Artículo 34 dice que se debe realizar una auditoría ordinaria cada al menos 2 años. Deberá realizarse dicha auditoría siempre que se produzcan modificaciones sustanciales en el sistema de información.
 
+El plazo de adecuación es de 24 meses.
 
 #### Adecuación
 
+- Preparar y aprobar la política de seguridad, incluyendo definición de roles y asignación de responsabilidades.
+- Categorizar los sistemas.
+- Realizar análisis de riesgos y valoración de medidas de seguridad.
+- Aprobar la declaración de aplicabilidad.
+- Plan de adecuación para mejoras de la seguridad.
+- Implementar, operar y monitorizar las medidas de seguridad.
+- Auditar la seguridad.
+- Informar sobre el estado de la seguridad.
 
+#### CoCENS. Proceso de adecuación.
 
-#### CoCENS
+Consejo de Certificación del ENS, es un órgano colegiado por Ley y por la guía 809 creado para ayudar a la adecuada implantación del ENS.
+1.
+2.
+3.
+4.
+5.
+6.
 
-
+#### CoCENS. Proceso de adecuación.
 
 #### µCeENS
 
-
+Es una metodología innovadora que se beneficia de las novedades del Real Decreto para facilitar la Certificación de Conformidad en el ENS en base a un Perfil de Cumplimiento Específico (PCE). Esta metodología proporciona asistencia hasta después de su obtención, automatizado con las herramientas de governanza INES-AMPARO.
 
 ### Auditoría
 
+Es un proceso sistemático, independiente y documentado para obtener evidencia y evaluarla objetivamente con el fin de determinar en qué medida se cumplen los criterios establecidos.
 
+Referencias: ISO 27007 Orientación para organismos de certificación o ISO 27008 Técnicas de seguridad.
 
 #### Tipos de auditorías
 
-- Interna:
-- Externa:
-- Combinada:
-- Unión:
+- Interna: Realizada por la propia organización para revisar la gestión o razones internas, forma la base de la propia declaración de conformidad. En empresas pequeñas se puede afirmar la responsabilidad sin bias de la auditoría.
+- Externa: Pueden ser realizadas por una organización independiente que provee certificación o por una organización seecundaria que tiene cierto interes en la empresa.
+- Combinada: Cuando dos o más sistemas de gestión de distintas disciplinas son auditados en conjunto.
+- Unión: Cuando dos o mar organizaciones cooperan para auditar en conjunto a una tercera.
 
 #### Conceptos de auditoría
 
-
+- Evidencia: Registros verificados, resultados de información relevante para la auditoría.
+- Hallazgos: Resultados de la evaluación de la evidencia recogida, puede indicar el resultado (conformidad).
+- Conclusiones: Resultados de una auditoría, teniendo en cuenta los objetivos y los hallazgos.
+- Cliente de auditoría: Organización que solicita una auditoría.
+- Auditado: Organización auditada.
+- Auditor: Aquellos que realizan la auditoría.
 
 #### Principios de auditoría
 
