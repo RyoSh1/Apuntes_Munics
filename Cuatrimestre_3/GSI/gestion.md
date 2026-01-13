@@ -459,17 +459,17 @@ Mejora contínua y aplicación de acciones correctivas en el caso de que se prod
 
 #### Preguntas del Tema 3 Parte 1
 
-La actividad de aprobar y asegurar los recursos necesarios es una responsabilidad de...
+La actividad de aprobar y asegurar los recursos necesarios es una responsabilidad de... 
 
+Alta dirección supongo.
 
+La necesidad de que se asegure que en las sucesivas evaluaciones de riesgo se generen resultados consistentes, válidos y comparables ¿es?
 
-La necesiadd de que se asegure que en las sucesivas evaluaciones de riesgo se generen resultados consistentes, válidos y comparables ¿es?
-
-
+Un requisito.
 
 ¿Qué requiere la ISO 27001 para el control de la información documentada?
 
-
+C
 
 ### ISO 27002
 
@@ -725,45 +725,102 @@ Referencias: ISO 27007 Orientación para organismos de certificación o ISO 2700
 
 #### Análisis
 
-
+- La evidencia acumulada es ordenada, completada, revisada y examinada en relación a los riesgos de información, los objetivos y los requisitos.
+- Se generan hallazgos iniciales, con conclusiones y recomendaciones respecto a problemas encontrados.
+- Es posible encontrar huecos en la evidencia, requiriendo unas nuevas pruebas de auditoría.
 
 #### Reporting
 
-
+Un reporte de auditoría contiene los siguientes elementos:
+- Título e introducción, incluye el alcance, objetivos y contexto.
+- Resumen ejecutivo con hallazgos clave.
+- Listas de los recipientes específicos, con la clasificación de los documentos e instrucciones de circulación.
+- Credenciales y métodos de auditoría utilizados.
+- Análisis y hallazgos detallados.
+- Conclusiones y recomendaciones.
+- Declaración formal de los auditores sobre cualquier reserva.
 
 #### Hallazgos
 
-
+Se categorizan según su importancia o severidad:
+- Reportes de no conformidades mayores: Afectan substancialmente a la capacidad del ISMS de lograr sus objetivos.
+- Menores: Lo contrario.
+- Observaciones o oportunidades de mejora.
 
 #### Cierre
 
-
+Además de cerrar los archivos de auditoría, el cierre implica atar cabos sueltos; es decir, preparar notas para futuras auditorías, realizar un seguimiento de acciones acordadas, etc.
 
 #### Preparaciones en una auditoría
 
+El líder del equipo auditor debe preparar un plan de auditoría que sirva como acuerdo entre el cliente, el equipo auditor y el auditado sobre cómo se desarrollará la auditoría. 
 
+Este plan debe facilitar la coordinación y programación de actividades, adaptando su nivel de detalle al alcance y complejidad de la auditoría, y manteniendo suficiente flexibilidad para permitir cambios durante el proceso. 
+
+El plan debe incluir los objetivos, criterios, alcance, unidades y procesos a auditar, fechas y lugares de las actividades, duración prevista, reuniones con la dirección, roles y responsabilidades del equipo, asignación de recursos, representante del auditado, idioma de trabajo, temas del informe, logística, confidencialidad y acciones de seguimiento. 
+
+Antes de iniciar la auditoría el plan debe ser revisado y aceptado por el cliente y presentado al auditado; cualquier objeción debe resolverse entre las partes, y cualquier versión revisada debe ser aprobada antes de continuar.
+
+El líder del equipo debe:
+- Asignar a cada auditor las áreas, procesos o actividades que auditará, considerando independencia, competencia y uso eficiente de recursos, pudiendo ajustar estas asignaciones según avance la auditoría. 
+- Preparar documentos de trabajo como listas de verificación, planes de muestreo y formularios para registrar evidencia, hallazgos y reuniones, sin que estos limiten el alcance de la auditoría. 
+
+Todos los documentos deben conservarse hasta finalizar la auditoría y protegerse adecuadamente cuando contengan información confidencial.
 
 ### ISO 19001: 6.5 Realización de actividades de auditoría in situ
 
 #### Reunión inicial
 
+Debe mantenerse una reunión inicial con la gestión de la entidad auditada para confirmar el plan de auditoría, proveer de un resumen de los procesos a realizar y confirmar los canales de comunicación.
 
+El jefe del equipo de auditoría debe comunicar:
+- Participantes y su rol.
+- Objetivos, alcance y criterios.
+- Tiempos de acción.
+- Métodos y procedimientos que se van a llevar a cabo.
+- Confirmación de los canales de comunicación.
+- Lenguaje a utilizar.
+- Informes de progreso.
+- Recursos necesarios.
+- Temas de confidencialidad y seguridad de trabajo.
+- Guías y métodos de reporte.
+- Condiciones de terminación de la auditoría y sistemas de apelación.
 
 #### Recolección de información
 
+- Entrevistas: Son una de las principales fuentes de información y deben realizarse de forma que se adapte a la situación y personal entrevistado.
+- Observación de actividades y del entorno.
+- Revisión de documentos: Políticas, objetivos, procedimientos, instrucciones, registros generales, indicadores de rendimiento, bases de datos, etc.
 
+La evidencia se genera a partir de ejemplos de la información disponible, por lo que siempre existe un elemento de incertidumbre en las auditorías.
 
 #### Generar los hallazgos
 
-
+- Evaluar la evidencia frente a los criterios de auditoría.
+- Los hallazgos pueden indicar conformidad o no conformidad, pero también oportunidades de mejora.
+- El equipo auditor debe reunirse periódicamente para revisar hallazgos, para registrar conformidades de areas/procesos, conformidades individuales con evidencia y no conformidades con su evidencia.
+- Las no conformidades pueden clasificarse por gravedad, deben revisarse con el auditado para confirmar su exactitud y la comprensión de las mismas.
+- Se deben resolver discrepancias; si no se resuelven, dejarlas registradas.
 
 #### Preparar las conclusiones
 
+El equipo auditor debe reunirse antes de la reunión final para:
+- Revisar hallazgos y demás información frente a los objetivos.
+- Acordar conclusiones, considerando la incertidumbre del proceso.
+- Preparar recomendaciones y revisar el seguimiento posterior.
 
+Las conclusiones pueden tratar:
+- Grado de conformidad del sistema con los criterios.
+- Eficacia de la implementación, mantenimiento y mejora del sistema.
+- Capacidad de la revisión por la dirección para asegurar adecuación y mejora continua.
+
+Las conclusiones pueden derivar en recomendaciones sobre mejoras, relaciones comperciales, futuras auditorías, etc.
 
 #### Reunión de clausura
 
+Dirigida por el líder del equipo auditor, el objetivo es presentar de forma clara los hallazgos y conclusiones para asegurar la comprensión y reconocimiento del auditado. Busca también acordar plazos para acciones correctivas o preventivas si son necesarias.
 
+En auditorías pequeñas puede ser una reunión simple, en auditorías formales es una reunión estructurada con actas y registro de asistencia.
 
 ### ISO 19001: 6.6 Preparación, aprobación y distribución del informe de auditoría.
 
