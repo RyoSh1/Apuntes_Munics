@@ -646,14 +646,27 @@ El plazo de adecuación es de 24 meses.
 #### CoCENS. Proceso de adecuación.
 
 Consejo de Certificación del ENS, es un órgano colegiado por Ley y por la guía 809 creado para ayudar a la adecuada implantación del ENS.
-1.
-2.
-3.
+1. Velar por la adecuada implantación del ENS.
+2. Alentar los procesos de certificación de conformidad con el ENS.
+3. Proponer para su análisis Normas, Criterios o Buenas Prácticas con el ENS.
 4.
 5.
 6.
 
 #### CoCENS. Proceso de adecuación.
+
+La certificación y conformidad con el ENS conlleva:
+1. Plan de Adecuación: Documento que debe incluir:
+    - Alcance.
+    - Categoría de los sistemas según las dimensiones.
+    - Declaración de Aplicabilidad Provisional.
+    - Análisis de Riesgos.
+    - Declaración de Aplicabilidad y Perfil de Cumplimiento Específico.
+    - Preparar y aprobar la Política de Seguridad.
+2. Implementación de la seguridad: Hoja de ruta de documentos y medidas a elaborar, elaborar el Marco Normativo e implantación de Seguridad y aprobar el SGSI.
+3. Declaración / Certificación de Conformidad: Auditoría formal cada 2 años en caso de categoría media o alta. Autoevaluación cada 2 años en el caso de categoría básica.
+4. Informar sobre el Estado de Seguridad: Utilizar el proyecto INES para métricas e indicadores.
+5. Vigilancia y mejora continua: Revisión de la Política de Seguridad, de la categorización de servicios e información, del SOA, del perfil de cumplimiento, de auditorías internas, del plan de mejora, etc. Actualización anual del análisis de riesgos.
 
 #### µCeENS
 
@@ -683,19 +696,32 @@ Referencias: ISO 27007 Orientación para organismos de certificación o ISO 2700
 
 #### Principios de auditoría
 
-
+- Integridad: En el sentido profesional, es decir honestidad, responsabilidad, aplicando legalidad y siendo imparcial.
+- Presentación fidedigna: La obligación de presentar los resultados de forma precisa y digna, reportando problemas encontrados entre las partes involucradas.
+- Cuidados personales: Aplicación de diligencia y juicio adecuados.
+- Confidencialidad.
+- Independencia: Para las auditorías internas, el auditor debe ser independiente de los operarios. En organizaciones pequeñas puede no ser posible y debe aplicarse la objetividad.
+- Aproximación basada en la evidencia: Es la forma racional de llegar a conclusiones de auditoría, la evidencia debe ser verificable con ejemplos.
 
 #### Encuesta de alcance y preauditoría
 
-
+- Los auditores deben determinar los focos principales de auditoría y las áreas fuera de alcance. Esta información se obtiene mediante búsqueda de información, otras auditorías, reportes, SOA y RTP.
+- Asegurar que el alcance tiene sentido en el contexto de la organización.
+- Prestar especial atención a riesgos y controles de seguridad asociados con conductos de información hacia otras entidades.
+- Identificar e intentar establecer contacto con los controladores del ISMS como el CISO, CEO y CIO.
 
 #### Planificación y preparación
 
-
+- El alcance del ISMS debe ser desgranado en detalles, generando una checklist de auditoría.
+- El calendario general y los recursos de la auditoría se negocian y acuerdan entre la dirección de la organización y los auditores del SGSI en forma de calendario de auditoría. Un GANTT, por ejemplo.
+- Los planes de auditoría suelen incluir puntos de control, para que los auditores proporcionesn actualizaciones provisionales, incluyendo la notificación preliminar de inconsistencias encontradas.
 
 #### Trabajo de campo
 
-
+- Revisión de documentación relacionada con el ISMS.
+- Realización de pruebas para determinar si el ISMS implementado sigue la documentación.
+- La evidencia de auditoría se recoge metódicamente usando la checklist, con elementos como entrevistas al personal, revisión de documentos y observación de los procesos en acción.
+- Pruebas de cumplimiento técnicas suelen ser necesarias para verificar que los sistemas están configurados de acuerdo con las políticas de seguridad y estándares de la organización.
 
 #### Análisis
 
@@ -741,23 +767,30 @@ Referencias: ISO 27007 Orientación para organismos de certificación o ISO 2700
 
 ### ISO 19001: 6.6 Preparación, aprobación y distribución del informe de auditoría.
 
-
-
 #### Preparación del reporte
 
+El lider del equipo de auditoría debe ser el responsable de preparar todos los contenidos del reporte de auditoría. Este documento debe proveer un registro conciso, preciso y claro de todos los objetivos y procedimientos seguidos en el proceso.
 
+Lista larga: objetivos, alcance, cliente, equipo de auditoría, criterios, hallazgos y conclusiones.
 
 #### Aprobación y distribución
 
+El informe de auditoría debe emitirse dentro del plazo acordado y avisar del retraso en caso necesario. Debe fecharse, revisarse y aprobarse de acuerdo con los procedimientos del programa.
 
+A continuación, el informe aprobado debe distribuirse a los destinatarios designados por el cliente de auditoría. Este informe es propiedad del cliente, los destinatarios y auditores deben respetar y mantener la confidencialidad.
 
 #### Completar la auditoría
 
-
+- Se completa cuando todas las actividades descritas en el plan de auditoría han sido realizadas.
+- Los documentos generados se deben guardar o destruir según se haya acordado, siguiendo los procedimientos necesarios.
+- Salvo que lo requiera la Ley, los auditores no deben revelar ningún tipo de información sobre el proceso, es privado.
+- Todo procedimiento adicional de información sobre el proceso debe informar a todas las partes involucradas.
 
 #### Seguimiento
 
-
+- Las conclusiones pueden indicar la necesidad de tomar medidas correctivas o preventivas, para esto se acuerda un margen de tiempo de ajuste que no entra dentro de la auditoría.
+- La efectividad y completitud de las acciones correctivas se debe verificar.
+- A veces se plantea un seguimiento por parte de miembros del equipo de auditoría.
 
 ## Tema 5: Gestión de la Continuidad de Negocio
 
