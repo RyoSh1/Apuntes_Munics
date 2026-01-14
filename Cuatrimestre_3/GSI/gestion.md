@@ -1151,7 +1151,13 @@ Clasificación de los incidentes: Los parámetros más usados son la gravedad, e
 
 #### Estado del arte de la ciber-resiliencia
 
-TEXTO TEXTO TEXTO
+Gobiernos y organismos supranacionales están incorporando la ciberseguridad en sus agendas para coordinar acciones comunes, la tendencia global es fortalecer la ciberresiliencia, especialmente en infraestructuras críticas y servicios esenciales.
+
+En España existe un acuerdo entre el ministerio de interior y el ministerio de Industria, Energía y Turismo para proteger las Infraestructuras críticas (IICC) a través del CNPIC. Busca reforzar la seguridad de los sistemas de información, proteger infraestructuras críticas y combatir ciberdelitos, alineándose con la Estrategia Nacional de Ciberseguridad. 
+
+Organismos de apoyo: INCIBE, CCN, FCSE (Fuerzas y Cuerpos de Seguridad del Estado).
+
+El CCN-CERR es el CERT regulador del ENS, gestiona incidentes y proporciona guías, herramientas y recomendaciones para proteger las Administraciones Públicas.
 
 #### Estrategia internacional en ciberseguridad
 
@@ -1160,66 +1166,153 @@ TEXTO TEXTO TEXTO
 
 #### Organismos de Seguridad en España
 
-
+- INCIBE: 
+- CNPIC: Centro Nacional para la Protección de Infraestructuras Críticas.
+- CCN:
+- Mando conjunto de ciberdefensa: Seguridad de las fuerzas armadas.
+- CERT Autonómicos:
+- Grupo de delitos Telemáticos de la Guardia Civil:
+- Brigada tecnológica de la Policia Nacional:
+- AEPD:
 
 #### Organismos de Gestión de incidentes
 
+- CCN-CERT: Centro de coordinación de incidencias de alerta y seguridad para administraciones públicas.
+- INTECTO CERT- INCIBE: Servicios de información, capacitación, protección, prevención, respuesta y apoyo.
+- IRIS-CERT: Servicio de seguridad de RedIRIS, dirigido a la detección temprana de incidentes de seguridad que afecten a las instituciones de RedIRIS así como el manejo de incidentes con ellos, también sirve como punto de contacto.
+- CERT-EU:  Equipo de respuesta a emergencias informáticas de las instituciones, órganos y organismos de la Unión Europea.
 
+#### Tratamientos de los incidentes ISO 
 
-#### Tratamientos de los incidentes
+- Gestionar los incidentes de seguridad basados en la ISO 27001 consta de estas medidas:
+    - Notificación de incidentes: Si una persona detecta un evento que pueda generar daño, debe comunicarlo según los procedimientos establecidos por la organización.
+    - Clasificación: Se deben agrupar los incidentes según su impacto y urgencia.
+    - Tratamiento: Tras clasificarlo, se debe acordar el tiempo necesario para su resolución.
+- Cerrar los incidentes: La persona que envió la notificación debe ser notificada.
+- Base de datos de conocimientos: La información generada durante la realización del tratamiento queda registrada para tener referencias futuras.
 
-
+Especialidades de la respuesta a incidentes:
+- Análisis forense digital.
+- Monitorización.
+- Threat Hunting.
+- Ciberinteligencia.
 
 #### Actividades contempladas en un PRI
 
-
+1. Constituación de un Equipo de Respuesta a Incidentes.
+2. Definiciaón de una Guía de Procedimientos.
+3. Detección de un incidente de seguridad.
+4. Análisis del incidente.
+5. Contención, erradicación y recuperación.
+6. Identificación del atacante y posibles actuaciones legales.
+7. Comunicación con terceros y relaciones públicas.
+8. Documentación del incidente de seguridad.
+9. Análisis y revisión a posteriori del incidente.
 
 #### 1. Constitución del equipo de respuesta
 
-
+Denominado habitualmente CSIRT (Computer Security Incident Response Team), formado por personas con experiencia y formación adecuada en desastres y ciberseguridad. Tienen los medios técnicos y materiales para cumplir el objetivo, llevan a cabo simulacros periódicos y solo suelen estar presentes en grandes organizaciones.
 
 #### Equipos de respuesta a incidentes de seguridad
 
-
+- SOC (Centro de Operaciones de Seguridad): Realizan la detección de comportamientos inseguros por parte de los usuarios de los sistemas estudiados, diagnóstico de vulnerabilidades y amenazas, bloqueo de ciberataques y prevención y administración de riesgos.
+- CSIRT o CERT: Buscan controlar y minimizar cualquier tipo de daño a la organización y su información, preservar la evidencia de lo ocurrido, coordinar una recuperación rápida y prevenir que puedan suceder eventos similares en el futuro. La diferencia es que CSIRT está asociado a una organización y CERT a alcance nacional.
 
 #### SOC y CSIRT
 
+Diferencias: El SOC se encarga de detectar y prevenir ciberataques y el CSIRT tiene una labor más reactiva ante una emergencia. El SOC se podría considerar un departamento adicional para el CSIRT, aunque en empresas pequeñas se suele tener un SOC con ambas funcionalidades.
 
+CSIRT.es  se reactiva para reforzar la protección del ciberespacio español mediante una respuesta rápida y coordinada frente a ataques que afecten a múltiples entidades. El grupo reúne a los principales equipos CSIRT/CERT públicos y privados del país, con el fin de intercambiar información relevante sobre incidentes, compartir inteligencia útil, coordinar acciones y recomendaciones cuando sea necesario, actuar como punto de referencia en materia de seguridad y colaborar con foros e iniciativas similares tanto a nivel nacional como internacional.
+
+#### Perfil de trabajadores en CSIRT o SOC
+
+- Lider del Equipo: Es quien dirige el CSIRT y es responsable de procedimientos de respuesta como el análisis y el manejo de referencias para futuros incidentes.
+- Lider de indidentes: Es quien coordina las respuestas individuales del área del incidente.
+- Especialista en Soporte TI: Es el miembro que asume la gestión, análisis y respuesta ante las amenazas que involucran la infraestructura TI.
+- Especialista Administrativo: Es el miembro encargado de la comunicación entre los directivos y el equipo de CSIRT.
+- Especialista en Relaciones Públicas: Es quien estructura las piezas de comunicación que influyen en la percepción de los clientes.
+- Especialista Legal: Es el miembro responsable de analizar las consecuencias legales.
 
 #### Responsabilidades en los incidentes
 
-
+- Técnico de nivel 1: Se encarga de recibir los incidentes detectados y clasificarlos.
+- Técnico de nivel 2: Toma las decisiones sobre las acciones a emprender para dar tratamiento a cada uno de los incidentes.
+- Responsable de los cambios: Realiza la aprobación.
+- Encargado de la base de conocimiento: Documenta todo el tratamiento dado.
 
 #### 2. Guía de procedimientos
 
+Debe ser definida por la organización, al usarse bajo estrés debe ser una guía clara y detallada.
 
+Objetivos:
+- Conseguir una respuesta sistemática ante los incidentes de seguridad, realizando los pasos necesarios y en el orden adecuado.
+- Restauración rápida, eficiente y segura de la capacidad de procesamiento informático y de comunicación..
+- Recuperación de datos dañados o destruidos.
+- Adquisición de información detalladad e cada incidente para reforzar la protección.
+- Cuidar las cuestiones legales derivadas y la reputación.
 
 #### 3. Detección de un incidente
 
-
+Analizar constantemente lso indicadores de un incidente de seguridad:
+- Precursores de un ataque (Escaneos de puertos).
+- Alarmas generadas.
+- Registro de actividad extraña en logs.
+- Aparición de nuevas carpetas o ficheros con nombres extraños.
+- Modificación de ficheros del sistema.
+- Caídas o mal funcionamiento.
+- Fluctuaciones en el rendimiento o demanda.
+- Detección de cambios de configuración.
+- Aparición de cuentas o herramientas no autorizadas.
+- Detección de procesos extraños en ejecución.
+- Tráfico de red extraño.
+- Desaparición de equipos.
+- Aparición de equipos extraños en la red.
 
 #### 4. Análisis de un incidente de seguridad
 
+Hay que definir como el CSIRT debería analizar la posible existencia de un incidente, determinar el calcance, las características del alcance y establecer un orden de prioridades en las actividades que debería llevar a cabo el CSIRT.
 
+Clasificación de incidentes basada en RFC 2196 (Prioridades):
+1. Proteger la vida humana y seguridad de las personas.
+2. Proteger datos informáticos e información sensible de la organización.
+3. Proteger otros datos e información de la organización.
+4. Prevenir daños en los sistemas informáticos.
+5. Minimizar la interrupción de los servicios ofrecidos a usuarios.
 
 #### 5. Contención, erradicación y recuperación
 
-
+- Fase de contención: Rápida actuación para evitar que el incidente tenga mayores consecuencias y retraso para poder estudiar el ataque.
+- Fase de erradicación: Actividades necesarias para eliminar los agentes causantes del incidente y de sus secuelas.
+- Fase de recuperación: Restaurar los sistemas para que vuelvan a su normal funcionamiento.
 
 #### 6. Identificación del atacante y posibles actuaciones legales
 
-
+Es necesaria su identficación para poder emprender acciones legales y así exigir responsabilidades e indemnizaciones. Tarea costosa por lo que debería ir en pararelo con la fase anterior.
 
 #### 7. Comunicación con terceros y relaciones públicas
 
-
+Se debe contemplar como la organización debería comunicar a terceros la causa y posibles consecuencias de un incidente de seguridad:
+- Contacto con organismos de respuesta a incidentes.
+- Contacto con fabricante de software y hardware involucrado.
+- Contactos con ISPs o proveedores de acceso a internet.
+- Lo que determine la normativa.
 
 #### 8. Documentación del incidente de seguridad
 
-
+Descripción del tipo de incidente, hechos registrados, daños producidos, decisiones y actuaciones del equipo de respuesta, comunicaciones que se hayan realizado con terceros, lista de evidencias obtenidas durante el análisis e investigación, comentarios e impresiones del personal involucrado y posibles recomendaciones a futuro.
 
 #### 9. Análisis y revisión a posteriori del incidente
 
+- Investigación de causas y consecuencias.
+- Estudio de la documentación generada por el equipo de respuesta a incidentes.
+- Revisión de registros de los equipos afectados.
+- Evaluación del coste.
+- Análisis de las consecuencias.
+- Revisión del intercambio de información.
+- Seguimiento de las posibles acciones legales.
+- Revisión de las decisiones y actuaciones del equipo de respuesta.
+- Composición y organización de equipo.
+- Revisión de las política de seguridad, nuevas directrices y nuevos recursos de refuerzo.
 
 ### Nist-ISO. Incidentes y su respuesta
 
