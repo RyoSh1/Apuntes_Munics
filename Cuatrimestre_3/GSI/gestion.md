@@ -1091,6 +1091,59 @@ Si los sistemas alquilados son virtuales se trata de IaaS, pudiendose usar como 
 
 ### Conceptos
 
+¿Qué es la gestión de incidentes?
+
+Es el proceso para detectar, reportar, valorar, responder a, tratar con y aprender de los incidentes de seguridad de la información. El objetivo es garantizar que los eventos de seguridad se comuniquen de forma que se apliquen las acciones correctivas en el tiempo oportuno. Aunque el foco debe serguir siendo la prevención, se debe contar con la capacidad de reacción.
+
+Vocabulario:
+- Amenaza: Causa potencial de un incidente no deseado que puede resultar en daño en los sistemas u organizaciones.
+- Evento: Ocurrencia o cambio de un conjunto particular de circunstancias, puede ocurrir una o varias veces y puede tener varias causas.
+- Evento de seguridad de la información: Ocurrencia identificada de un estado en un sistema, servicio o red que indica una posible brecha de seguridad de la información, de las políticas, una falla de los controles o una situación desconocida que puede ser relevante a la seguridad.
+- Incidente de seguridad de la información: Uno o varios eventos de seguridad de la información no deseados que comprometen las operaciones del negocio y por ende amenazan la seguridad de la información.
+- Vulnerabilidad: Debilidad de un activo o control que puede ser explotada por amenazas.
+- Equipo de respuesta a incidentes "IRT": Equipo de personas confiables y con habilidades apropiadas para manejar los incidentes durante su ciclo de vida. CERT (Equipo de respuesta a emergencias en computadores) y CSIRT (Equipo de respuesta a incidentes de seguridad en computadores) son términos comunes.
+- Punto de Contacto PoC: Función o rol organizacional definido que sirve como coordinación o punto focal de información en todo lo concerniente a las actividades de gestión de incidentes.
+
+#### Activos
+
+Son los recursos que usa un SGSI par que las organizaciones funcionen y consigan los objetivos que se han propuesto por la alta dirección. Representan algún valor para la organización y se encuentran interrelacionados.
+
+Clasificación de activos: De información pura (Datos digitales, activos intangibles y tangibles, software y SOs), Activos físicos (Infraestructura TI, Controles, Hardware y Activos de servicios TI), Activos humanos (Empleados y externos).
+
+Valoración de los activos:
+- Confidencialidad:
+- Integridad:
+- Disponibilidad:
+- Trazabilidad:
+
+#### Incidente de seguridad
+
+Se define como incidente de seguridad cualquier evento que se produzca de forma accidental o intencional, que afecte o ponga en peligro las tecnologías de la información o los procesos que con ellas se realizan (los activos).
+
+Los incidentes no ocurrirían si el presupuesto de seguridad fuera ilimitidad y el personal estuviera formado de forma perfecta. Aún así pueden cometerse errores, por lo que se desarrollan procedimientos estándares para responder a dichos incidentes.
+
+Tipos de incidentes:
+- Contenido abusivo:
+- Contenido malicioso o malware:
+- Obtención de información:
+- Acceos indebido o intrusión:
+- Disponibilidad:
+- Seguridad/Confidencialidad de la información:
+- Fraude:
+- Helpdesk:
+- Otros:
+
+Procedencia de las amenazas: Crimer organizados, Agentes gubernamentales, Hacktivismo, Amenaza interna.
+
+Clasificación de los incidentes: Los parámetros más usados son la gravedad, el daño originado a la organización y el carácter de urgencia que la misma considera para dar solución al daño. Para cada incidencia registrada y considerando ambos factores se establece un orden de prioridad para gestionar incidencias de seguridad.
+
+#### Respuesta a un incidente
+
+- Consiste en controlar y minimizar cualquier tipo de daño a la organización y su información, preservando evidencia de lo ocurrido y documentado. Esto permite conocer el contexto, determinar su origen y posibles consecuencias.
+- Coordinar las actividades para una recuperación rápida y eficiente de los procesos afectados, en conjunto con los equipos de TI, de manera que la organización pueda operar con normalidad en el menor tiempo posible y el menor impacto tolerable.
+- Prevenir que eventos similares puedan ocurrir en el futuro erradicando la raíz del incidente, junto con el mantenimiento de una base de conocimiento que permita registrar lecciones aprendidas.
+- Compartir información relacionada con incidentes de seguridad con otros CSIRT, con fines de difusión y prevención.
+
 ### Nist-ISO
 
 ### Linea Temporal
@@ -1127,17 +1180,32 @@ Informe escrito por el equipo de respuesta que recoge todos los detalles del mis
 
 ### SIEM (Seguridad de la Información y Gestión de Eventos)
 
-- SIM:
-- SLM/SEM:
-- SIEM:
+- SIM (Security Information Management): Sistema de gestión de recursos que incorpora toda la información, recolecta y almacena logs.
+- SLM/SEM (Security Log/Event Management): Sistema de monitorización en tiempo real, notificaciones y dashboards.
+    - SEC (Security Event Correlation): Busca patrones en los registros de seguridad de fomra que se detecten eventos que de otra forma serían independientes.
+- SIEM (Security Information and Event Management): Todo lo anterior unificado. 
 
 #### Funcionamiento de un SIEM
 
+Gestión de logs más correlación de eventos, más alertas y notificaciones, más respuesta activa, más seguridad a nivel endpoint, más chequeo de normativa, más informes y cumplimiento.
 
+Flujo de datos:
+1. Generación de eventos.
+2. Recolección de eventos.
+3. Transporte de eventos: Uso de protocolos seguros como TLS.
+4. Normalización y Enriquecimiento: Los eventos se transforman y enriquecen con datos adicionales.
+5. Correlación y análisis: Los datos se almacenan para análisis histórico y cumplimeinto.
+6. Alertas y Respuestas: Generación de alertas y posibles acciones automatizadas.
+
+- Recolección de logs: Los logs vienen de fuentes como Syslog (protocolo estándar para envío de mensajes de log en red IP), Windows Event Forwarding (WEF, tecnología nativa de windows para eventos de seguridad), Agentes propiertarios (Propios del SIEM), APIs y SDKs (integración entre aplicaciones y SIEM) y capturas del tráfico de red (Network TAPs, Switched Port Analyzer SPAN).
+- Normalización y enriquecimiento: Es esencial procesar los logs para su análisis y correlación, esto implica normalizarlos a un formato común mediante técnicas (regex). El resultado son esquemas comúnes de datos (ECS, CEF) los cuales se pueden enriquecer.
 
 #### Correlación de eventos
 
-
+- Reglas de correlación:
+- Análisis Estadístico:
+- Análisis de comportamiento:
+- Análisis de anomalías:
 
 #### Integraciones
 
@@ -1153,9 +1221,16 @@ Informe escrito por el equipo de respuesta que recoge todos los detalles del mis
 
 
 
-#### Herramientas de un SIEM
+#### Herramientas internas de un SIEM
 
-
+Internamente el SIEM utiliza:
+- Nmap:
+- PRADS:
+- Fprobe:
+- NFSen:
+- OSSec:
+- Suricata:
+- OpenVAS o Nessus:
 
 #### Extras
 
