@@ -1123,15 +1123,15 @@ Se define como incidente de seguridad cualquier evento que se produzca de forma 
 Los incidentes no ocurrirían si el presupuesto de seguridad fuera ilimitidad y el personal estuviera formado de forma perfecta. Aún así pueden cometerse errores, por lo que se desarrollan procedimientos estándares para responder a dichos incidentes.
 
 Tipos de incidentes:
-- Contenido abusivo:
-- Contenido malicioso o malware:
-- Obtención de información:
-- Acceos indebido o intrusión:
-- Disponibilidad:
-- Seguridad/Confidencialidad de la información:
-- Fraude:
-- Helpdesk:
-- Otros:
+- Contenido abusivo: Spam.
+- Contenido malicioso o malware: Software o firmware desarrollado para infiltrarse en un equipo o dañarlo sin conocimiento ni consentimiento del propietario.
+- Obtención de información.
+- Acceos indebido o intrusión.
+- Disponibilidad: Ataques que impiden el acceso a un sistema.
+- Seguridad/Confidencialidad de la información: Problemas relacionados con el acceso a información y/o modificación no autorizada.
+- Fraude: Usos no autorizados, phishing y suplantación.
+- Helpdesk: Consultas técnicas.
+- Otros: No contrastadas.
 
 Procedencia de las amenazas: Crimer organizados, Agentes gubernamentales, Hacktivismo, Amenaza interna.
 
@@ -1144,7 +1144,154 @@ Clasificación de los incidentes: Los parámetros más usados son la gravedad, e
 - Prevenir que eventos similares puedan ocurrir en el futuro erradicando la raíz del incidente, junto con el mantenimiento de una base de conocimiento que permita registrar lecciones aprendidas.
 - Compartir información relacionada con incidentes de seguridad con otros CSIRT, con fines de difusión y prevención.
 
-### Nist-ISO
+#### Resiliencia o ciber-resiliencia
+
+- Resiliencia: Cualidad intrínseca de una organización que le permite enfrentarse de forma exitosa a cambios y eventos.
+- Ciber-resiliencia: Capacidad de una empresa de adaptarse y continuar con sus funciones y su trabajo en situaciones de riesgo. Cómo gestionar la situación de forma eficiente.
+
+#### Estado del arte de la ciber-resiliencia
+
+TEXTO TEXTO TEXTO
+
+#### Estrategia internacional en ciberseguridad
+
+- Unión Europea: Establece cinco prioridades, la ciber-resiliencia, la reducción de la delincuencia en la red, el desarrollo de una política de ciberdefensa y capacidades correspondientes en el ámbito de la Política Común de Seguridad y Defensa (PCSD), el desarrollo de los recursos industriales y tecnológicos y el establecimiento de una política internacional coherente del ciberespacio en la UE.
+- España: Aprobada en 2013 y actualizada en 2019, tiene alcance global y busca la aplicabilidad en Administraciones públicas, Empresas y Ciudadanos. No afronta directamente la Gobernanza y un Sistema de indicadores de ciberseguridad, pero si existe una estandarización de indicadores basados en el ENS.
+
+#### Organismos de Seguridad en España
+
+
+
+#### Organismos de Gestión de incidentes
+
+
+
+#### Tratamientos de los incidentes
+
+
+
+#### Actividades contempladas en un PRI
+
+
+
+#### 1. Constitución del equipo de respuesta
+
+
+
+#### Equipos de respuesta a incidentes de seguridad
+
+
+
+#### SOC y CSIRT
+
+
+
+#### Responsabilidades en los incidentes
+
+
+
+#### 2. Guía de procedimientos
+
+
+
+#### 3. Detección de un incidente
+
+
+
+#### 4. Análisis de un incidente de seguridad
+
+
+
+#### 5. Contención, erradicación y recuperación
+
+
+
+#### 6. Identificación del atacante y posibles actuaciones legales
+
+
+
+#### 7. Comunicación con terceros y relaciones públicas
+
+
+
+#### 8. Documentación del incidente de seguridad
+
+
+
+#### 9. Análisis y revisión a posteriori del incidente
+
+
+### Nist-ISO. Incidentes y su respuesta
+
+
+
+Frameworks:
+- ISO 27035:
+- NIST 800-61:
+- SANS:
+- RFC 2350:
+- ENISA:
+- ISACA:
+
+#### NIST 800-61
+
+
+
+#### Plan de respuesta ante incidentes
+
+
+
+#### SOP
+
+
+
+#### Fase 1: Preparación
+
+
+
+#### Fase 2: Detección y análisis
+
+
+
+#### Fase 3: COntención, erradicación y recuperación
+
+
+
+#### Fase 4: Actividad post-morten
+
+
+
+#### Compartición de información y coordinación
+
+
+
+#### VERIS
+
+
+
+#### ISO 27035
+
+
+
+#### ISO 27035-2
+
+
+
+#### ISO 27035-3
+
+
+
+#### ISO 27035 vs NIST 800-61
+
+
+
+#### Compartición de información NIST e ISO
+
+
+
+#### Notifiación de un incidente en España
+
+
 
 ### Linea Temporal
 
@@ -1202,35 +1349,37 @@ Flujo de datos:
 
 #### Correlación de eventos
 
-- Reglas de correlación:
-- Análisis Estadístico:
-- Análisis de comportamiento:
-- Análisis de anomalías:
+- Reglas de correlación: COnjuntos de condiciones predefinidas basadas en eventos, requiere mantenimiento continuo.
+- Análisis Estadístico: Evaluación de desviaciones respecto a patrones normales, puede generar falsos positivos.
+- Análisis de comportamiento: Monitorización de actividades de usuarios y entidades (UEBA), requiere conjuntos de datos significativos y puede ser dificil de interpretar.
+- Análisis de anomalías: Detección de eventos inusuales o inesperados, igual que el anterior machine learning.
 
 #### Integraciones
 
-- Con fuente de inteligencia:
-- Con un EDR:
-- Con SOAR:
+- Con fuente de inteligencia: INdicadores de compromiso (IoCs, direcciones IP, hashes, URLs, etc.), Información contextual (Tácticas, técnicas y procedimientos, vulnerabilidades, etc.), Metadatos y contexto (Confianza y puntaje de riesgo, fecha y hora, etc.).
+- Con un EDR (Endpoint Detection Response): Monitoriza y analiza actividades en los dispositivos finales para detectar comportamientos y responder, proporciona información granular sobre procesos, conexiones, cambios en archivos y actividad. Permite acciones como aislamiento de dispositivos, terminación de procesos o remediación de amenazas en tiempo real. El SIEM puede enviarle instrucciones.
+- Con SOAR (Security Orchestration, Automation and Response): Orquesta tareas de seguridad para mejorar la eficiencia en la respuesta a incidentes, la integración se logra de manera directa, el SOAR consume datos y alertas del SIEM.
 
 #### Desafíos tecnológicos de un SIEM
 
-
+- Almacenamiento: Gran volumen de datos y alta velocidad en ingesta y consumo de información. Soluciones: Tecnología Big Data, Filtrado y agregación de datos, Almacenamiento jerarquizados, compresión y políticas de retención inteligentes.
+- Procesamiento: Solición en arquitecturas distribuidas y paralelas.
+- Dificultad en afinamiento de reglas: Puede dar falsos positivos, por lo que requiere afinación continua de reglas, uso de inteligencia artificial y machine learning y contextualización y enriquecimiento de datos.
 
 #### Securización de un SIEM
 
-
+Se trata de un objetivo atractivo debido a su sensibilidad y valor de información. Medidas: Autenticación fuerte, RBAC, Auditoría de accesos, cifrado de datos, integridad, etc.
 
 #### Herramientas internas de un SIEM
 
 Internamente el SIEM utiliza:
-- Nmap:
-- PRADS:
-- Fprobe:
-- NFSen:
-- OSSec:
-- Suricata:
-- OpenVAS o Nessus:
+- Nmap: Network mapper por excelencia.
+- PRADS: Sistema pasivo de detección.
+- Fprobe: Convierte tráfico en flujos netflow.
+- NFSen: Convierte NetFlow en representación gráfica.
+- OSSec: LIDS (Log-based Intrusion Detection System) o HIDS (Host Intrusion Detection System).
+- Suricata: IDS vs IPS.
+- OpenVAS o Nessus: Escaner de vulnerabilidades.
 
 #### Extras
 
