@@ -1531,9 +1531,32 @@ Internamente el SIEM utiliza:
 
 ### Práctica 1
 
+Revisar la app de PILAR.
+
 ### Práctica 2
 
+Revisar Plan Director de Seguridad, que incluye lo siguiente:
+- Descripción de la empresa.
+- Definición del alcance.
+- Registro de activos.
+- Descripción de metodología de análisis de riesgos.
+- Identificació de incidentes de seguridad plausibles.
+- Valoración del riesgo actual.
+- SOA. !!!
+- Política de Seguridad de la Información. !!!
+- Objetivos de seguridad.
+- Planificaciones de proyectos.
+
+
 ### Práctica 3
+
+- Elasticsearch : Motor de búsqueda y análisis distribuido, Almacena datos en índices optimizados para búsquedas rápidas, Permite consultas complejas en tiempo real, Escala horizontalmente mediante nodos y clústeres, Ideal para logs, métricas, análisis de texto y grandes volúmenes de datos.
+
+- Logstash: Pipeline de procesamiento de datos, Recibe datos desde múltiples fuentes, Los transforma mediante filtros (parseo, enriquecimiento, normalización), Los envía a destinos como Elasticsearch u otros sistemas, Muy flexible gracias a su arquitectura basada en plugins.
+
+- Kibana: Interfaz visual para explorar y analizar datos, Permite crear dashboards, gráficos y visualizaciones, Incluye herramientas para búsqueda avanzada, alertas y análisis interactivo, Se conecta directamente a Elasticsearch para mostrar la información en tiempo real.
+
+Beats: Agentes ligeros que envían datos, Se instalan en servidores, contenedores o dispositivos, Recogen logs, métricas, trazas o datos específicos y los envían a Logstash o Elasticsearch.
 
 ## Preguntas Foro
 
