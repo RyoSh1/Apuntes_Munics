@@ -1320,7 +1320,7 @@ Descripción del tipo de incidente, hechos registrados, daños producidos, decis
 
 Frameworks:
 - ISO 27035:
-- NIST 800-61:
+- NIST 800-61:  Incluyeuna lista de documentos tales como políticas y planes de respuesta a incidentes.
 - SANS:
 - RFC 2350:
 - ENISA:
@@ -1336,55 +1336,104 @@ Frameworks:
 
 #### SOP
 
-
+Procedimiento Operativo Estandar, es una colección de los procesos técnicos específicos, técnicas, listas de verificación y formularios utilizados por el equipo de respuesta a incidentes. Deben ser razonablemente completos y detallados para asegurar que las prioridades de la organización se reflejen en operaciones de respuesta.
 
 #### Fase 1: Preparación
 
-
+- Creación del equipo de respuesta.
+- Creación de las instalaciones del SOC.
+- Creación de capacidades de evaluación de riesgos.
+- Implementación de controles a partir del estudio de riesgos.
+- Creación de procesos estándar.
+- Despliegue de herramientas y recursos.
+- Asegurarse del nivel de la organización en análisis e implementaciones de seguridad.
+- Concienciación del usuario.
 
 #### Fase 2: Detección y análisis
 
+- Fase cambiante y más complicada.
+- Requiere implementar herramientas de análisis, reacción rápida y validación.
+- Recomendaciones del NIST:
+    - Obtener perfiles de redes y sistemas.
+    - Entender comportamientos normales.
+    - Crear políticas de retención de logs.
+    - ...
 
+#### Fase 3: Contención, erradicación y recuperación
 
-#### Fase 3: COntención, erradicación y recuperación
+Actividades contenidas:
+- Recopilación y manejo de evidencias.
+- Identificación de hosts atacantes.
+- Elegir una estrategia de contención, erradicación y recuperación.
 
-
+Seleccionar el criterio adecuado en funcion de: Daño potencial, necesidad de conservación de evidencia, Disponibilidad de servicio, Tiempo y recursos necesarios para la estrategia, efectividad y duración de la solución.
 
 #### Fase 4: Actividad post-morten
 
-
+Lecciones aprendidas, recoger datos del incidente y retención de las evidencias.
 
 #### Compartición de información y coordinación
 
-
+Debería estar incluido en el plan de respuesta con todos los contactos, involucra los departamentos de relaciones públicas, legal y dirección.
 
 #### VERIS
 
-
+Colección de esquemas y lenguaje común utilizado para describir los incidentes de seguridad de forma estándar, creado por VERIZON , incluye seguimiento, víctimas, descripción, descubrimiento e impacto.
 
 #### ISO 27035
 
+Dividido en 4 partes:
+1. Principios de la administración de incidentes.
+2. Guías para planear y preparar la respuesta de incidentes.
+3. Guías operativas en la respuesta de incidentes.
+4. Guías para la coordinación de múltiples IRT ( Equipo de respuesta a incidentes).
 
+#### Fases de la 27035
+
+1. Planificar y preparar: Creación de la política de gestión de incidentes y esquema o plan de respuesta.
+2. Detectar e informar: Fuentes de información, monitorización y seguimiento dedicados, vulnerabilidades detectadas.
+3. Evaluación y decisión: 2 Niveles, el PoC que realiza la primera evaluación y sigue un SOP y nivel 2 el IRT que recibe incidentes clasificados, reclasifica y decide acciones.
+4. Respuestas: Realización de acciones, estados de crisis según si lo puede manejar el IRT y se registran las respuestas aplicadas.
+5. Lecciones aprendidas.
 
 #### ISO 27035-2
 
+Proporciona directrices sobre el contenido de la política de gestión de incidentes. Hay que ajustarla a los objetivos de la organización, tamaño, características, etc.
 
+El plan se activa siempre que se dectecte un evento de seguridad de la información o una vulnerabilidad.
+
+El plan debe contener los procedimientos para informes de vulnerabilidad, reporte de eventos/incidentes, ciclo de gestión de incidentes.
 
 #### ISO 27035-3
 
-
+Se trata de una guía muy técnica para las operaciones en la respuesta de incidentes, cubre las fases Detectar e Informar, Evaluar y Decidir y Responder.
 
 #### ISO 27035 vs NIST 800-61
 
-
+- Aproximación cíclica: Ambos PDCA.
+- Diferencias en nombres de las fases: Análisis y detección (enfasis analizar NIST), Reporte y detección (Enfasis informar ISO).
+- Lecciones aprendidas: Ambos importantes.
+- Recomendaciones detalladas: Ambos equipo de respuesta y políticas y procedimientos.
+- Herramientas: No hablan.
+- Checklist para manejo de incidentes: En el NIST.
+- Categorización y clasificación de incidentes: En ISO.
+- Compartición de información: Más énfasis en NIST.
+- RESULTADO: NIST más técnica, ISO más procedimental
 
 #### Compartición de información NIST e ISO
 
-
+- ISO: EU NIS Directive, busca conseguir un nivel alto de seguridad en estados miembros de la UE, se reporta al CSIRT nacional.
+- NIST: CISA (Cibersecurity Information Sharing Act): Autoriza el intercambio de información específica, se reporta al Departamento de Seguridad Nacional.
 
 #### Notifiación de un incidente en España
 
+Dependiendo de la naturaleza y alcance de nuestro incidente tendremos la obligación de reportarlo a las autoridades correspondientes:
+- INCIBE para ciudadanía y sector privado.
+- CCN-CERT para sector público.
+- CNPIC para infraestructuras críticas.
+- ESP-DEF-CERT en las fuerzas armadas.
 
+Existe una guía nacional de notificación y gestión de incidentes que establece los criterios: Primario un nivel de peligrosidad (con notificación obligatoria si es crítico, muy alto o alto) y segundo el nivel de impacto.
 
 ### Linea Temporal
 
